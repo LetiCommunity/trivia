@@ -21,3 +21,22 @@ h2 {
   font-family: 'Staatliches', cursive;
   letter-spacing: 1px;
 }
+
+.thumbnail {
+  position: relative;
+}
+
+.title {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  width: 100%;
+}
+
+.search_trip {
+  position: absolute;
+  top: 80%;
+  left: 10%;
+  width: 80%;
+  border-radius: 5%;
+}
