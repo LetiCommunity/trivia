@@ -15,16 +15,16 @@ const UserNavbar = () => {
 
   return (
     <Fragment>
-      <Navbar className="fixed-top" color="white" light expand="md">
+      <Navbar className="fixed-top" color="light" light expand="md">
         <NavbarBrand href="/">Trivia</NavbarBrand>
         <NavbarToggler onClick={handleToggle} />
         <Collapse isOpen={collapseOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="">Iniciar Sesión</NavLink>
+              <NavLink href="login">Iniciar Sesión</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="">Registrarse</NavLink>
+              <NavLink href="registration">Registrarse</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

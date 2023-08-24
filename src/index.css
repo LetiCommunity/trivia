@@ -5,9 +5,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   min-height: 100%;
-  padding-bottom: 5rem;
 }
 
 h1,
@@ -15,10 +14,7 @@ h2 {
   color: white;
   padding: 3rem 0;
   text-align: center;
-
   text-transform: uppercase;
-
-  font-family: 'Staatliches', cursive;
   letter-spacing: 1px;
 }
 
@@ -35,8 +31,16 @@ h2 {
 
 .search_trip {
   position: absolute;
-  top: 80%;
+  top: 75%;
   left: 10%;
   width: 80%;
   border-radius: 5%;
+}
+
+.nav_link_color {
+  color: white;
+}
+
+a {
+  
 }
