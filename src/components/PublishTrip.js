@@ -10,33 +10,31 @@ import {
   Row,
 } from "reactstrap";
 
-const SendPackage = () => {
+const PublishTrip = () => {
   const [section, setSection] = useState(1);
-  const [shippingDetails, setShippingDetails] = useState({
+  const [showPlaceholderDate, setShowPlaceholderDate] = useState(true);
+  const [showPlaceholderBilling, setShowPlaceholderBilling] = useState(true);
+  const [travelData, setTravelData] = useState({
     user: {
       id: "",
     },
-    receiver: {
-      id: "",
-      name: "",
-      surname: "",
-      address: "",
-      phoneNumber: "",
-    },
-    package: {
-      id: "",
-      name: "",
-      description: "",
-      weight: "",
-      image: "",
+    travel: {
+      from: "",
+      to: "",
+      date: "",
+      airport: "",
+      terminal: "",
+      company: "",
+      billingDate: "",
+      availableWeight: "",
     },
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setShippingDetails((prevShippingDetails) => ({
-      ...prevShippingDetails,
+    setTravelData((prevTravelData) => ({
+      ...prevTravelData,
       [name]: value,
     }));
   };
@@ -78,17 +76,17 @@ const SendPackage = () => {
                 <Form onSubmit={handleSubmit}>
                   {section === 1 && (
                     <>
-                      <h2>Información de receptor</h2>
+                      <h2>Información de viaje</h2>
                       <Row>
                         <Col md="12">
                           <FormGroup>
                             <Input
                               type="text"
-                              id="name"
-                              name="name"
-                              value={shippingDetails.receiver.name}
+                              id="from"
+                              name="from"
+                              value={travelData.travel.from}
                               onChange={handleChange}
-                              placeholder="Nombre"
+                              placeholder="Lugar de origen"
                               className="bg-light"
                             />
                           </FormGroup>
@@ -97,11 +95,25 @@ const SendPackage = () => {
                           <FormGroup>
                             <Input
                               type="text"
-                              id="surname"
-                              name="surname"
-                              value={shippingDetails.receiver.surname}
+                              id="to"
+                              name="to"
+                              value={travelData.travel.to}
                               onChange={handleChange}
-                              placeholder="Apellidos"
+                              placeholder="Lugar de destino"
+                              className="bg-light"
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md="12">
+                          <FormGroup>
+                            <Input
+                              type={showPlaceholderDate ? "text" : "date"}
+                              id="date"
+                              name="date"
+                              value={travelData.travel.date}
+                              onChange={handleChange}
+                              onFocus={() => setShowPlaceholderDate(false)}
+                              placeholder="Fecha de viaje"
                               className="bg-light"
                             />
                           </FormGroup>
@@ -110,11 +122,11 @@ const SendPackage = () => {
                           <FormGroup>
                             <Input
                               type="text"
-                              id="address"
-                              name="address"
-                              value={shippingDetails.receiver.address}
+                              id="airport"
+                              name="airport"
+                              value={travelData.travel.airport}
                               onChange={handleChange}
-                              placeholder="Dirección"
+                              placeholder="Aeropuerto de destino"
                               className="bg-light"
                             />
                           </FormGroup>
@@ -123,11 +135,38 @@ const SendPackage = () => {
                           <FormGroup>
                             <Input
                               type="text"
-                              id="phoneNumber"
-                              name="phoneNumber"
-                              value={shippingDetails.receiver.phoneNumber}
+                              id="terminal"
+                              name="terminal"
+                              value={travelData.travel.terminal}
                               onChange={handleChange}
-                              placeholder="Teléfono"
+                              placeholder="Terminal de destino"
+                              className="bg-light"
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md="12">
+                          <FormGroup>
+                            <Input
+                              type="text"
+                              id="company"
+                              name="company"
+                              value={travelData.travel.company}
+                              onChange={handleChange}
+                              placeholder="Compañía con la que viaja"
+                              className="bg-light"
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md="12">
+                          <FormGroup>
+                            <Input
+                              type={showPlaceholderBilling ? "text" : "date"}
+                              id="billingDate"
+                              name="billingDate"
+                              value={travelData.travel.billingDate}
+                              onChange={handleChange}
+                              onFocus={() => setShowPlaceholderBilling(false)}
+                              placeholder="Fecha de facturación"
                               className="bg-light"
                             />
                           </FormGroup>
@@ -137,56 +176,17 @@ const SendPackage = () => {
                   )}
                   {section === 2 && (
                     <>
-                      <h2>Información de paquete</h2>
+                      <h2>Información de disponibilidad</h2>
                       <Row>
                         <Col md="12">
                           <FormGroup>
                             <Input
-                              type="text"
-                              id="name"
-                              name="name"
-                              value={shippingDetails.package.name}
-                              onChange={handleChange}
-                              placeholder="Nombre"
-                              className="bg-light"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col md="12">
-                          <FormGroup>
-                            <Input
-                              type="textarea"
-                              id="description"
-                              name="description"
-                              value={shippingDetails.package.description}
-                              onChange={handleChange}
-                              placeholder="Descripción"
-                              className="bg-light"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col md="12">
-                          <FormGroup>
-                            <Input
                               type="number"
-                              id="weight"
-                              name="weight"
-                              value={shippingDetails.package.weight}
+                              id="availableWeight"
+                              name="availableWeight"
+                              value={travelData.travel.availableWeight}
                               onChange={handleChange}
-                              placeholder="Peso"
-                              className="bg-light"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col md="12">
-                          <FormGroup>
-                            <Input
-                              type="file"
-                              id="image"
-                              name="image"
-                              value={shippingDetails.package.image}
-                              onChange={handleChange}
-                              className="bg-light"
+                              placeholder="Peso disponible"
                             />
                           </FormGroup>
                         </Col>
@@ -235,4 +235,4 @@ const SendPackage = () => {
   );
 };
 
-export default SendPackage;
+export default PublishTrip;

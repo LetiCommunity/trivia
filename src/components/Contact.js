@@ -4,11 +4,6 @@ import PropTypes from "prop-types";
 const Contact = () => {
   return (
     <Fragment>
-      <p>hola</p>
-      <p>hola</p>
-      <p>hola</p>
-      <p>hola</p>
-      <p>hola</p>
     </Fragment>
   );
 };

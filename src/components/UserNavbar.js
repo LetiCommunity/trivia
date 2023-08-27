@@ -15,8 +15,8 @@ const UserNavbar = () => {
 
   return (
     <Fragment>
-      <Navbar className="fixed-top" color="light" light expand="md">
-        <NavbarBrand href="/">Trivia</NavbarBrand>
+      <Navbar className="fixed-top" color="light" light>
+        <NavbarBrand href="/home">Trivia</NavbarBrand>
         <NavbarToggler onClick={handleToggle} />
         <Collapse isOpen={collapseOpen} navbar>
           <Nav className="ml-auto" navbar>
@@ -25,6 +25,18 @@ const UserNavbar = () => {
             </NavItem>
             <NavItem>
               <NavLink href="registration">Registrarse</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="send-package">Haz un envío</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="publish-trip">Publica un viaje</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="profile">Perfil</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="logout">Cerrar sesión</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

@@ -41,6 +41,17 @@ h2 {
   color: white;
 }
 
-a {
-  
+.text_decoration_a {
+  text-decoration-line: none;
+}
+
+.input_wrapper {
+  position: relative;
+}
+
+.input_icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
 }

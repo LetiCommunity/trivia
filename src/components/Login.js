@@ -49,29 +49,27 @@ const Login = () => {
                           value={user.username}
                           onChange={handleChange}
                           placeholder="Nombre de usuario"
+                          className="bg-light"
                         />
                       </FormGroup>
                     </Col>
                     <Col md="12">
-                      <FormGroup>
+                      <FormGroup className="input_wrapper">
                         <Input
                           type={showPassword ? "text" : "password"}
                           id="password"
                           name="password"
                           value={user.password}
                           onChange={handleChange}
-                          placeholder="Contraseña de usuario"
+                          placeholder="Contraseña"
+                          className="bg-light"
                         />
-                      </FormGroup>
-                    </Col>
-                    <Col md="12">
-                      <FormGroup className="ml-4">
-                        <Input
-                          type="checkbox"
-                          checked={showPassword}
-                          onChange={() => setShowPassword(!showPassword)}
-                        />{" "}
-                        Mostrar contaseña
+                        <a href="#showPassword" className="text-black">
+                          <i
+                            onClick={() => setShowPassword(!showPassword)}
+                            className={showPassword ? "bi bi-eye-slash-fill input_icon" : "bi bi-eye-fill input_icon"}
+                          ></i>
+                        </a>
                       </FormGroup>
                     </Col>
                     <Col md="12">
@@ -86,7 +84,15 @@ const Login = () => {
                     </Col>
                   </Row>
                 </Form>
-                <p>¿No tienes cuenta? <a href="registration" className="text-info">Regístrate</a></p>
+                <p>
+                  ¿No tienes cuenta?{" "}
+                  <a
+                    href="registration"
+                    className="text-info text_decoration_a"
+                  >
+                    Regístrate
+                  </a>
+                </p>
               </CardBody>
             </Card>
           </Col>

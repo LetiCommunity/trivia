@@ -1,38 +1,38 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Card, Col, Form, Input, Row } from "reactstrap";
-import Navbar from "./UserNavbar";
-import Footer from "./Footer";
 
 const Home = () => {
   return (
     <Fragment>
-      <header>
-        <Navbar />
-      </header>
       <div className="text-center">
         <Row>
           <Col md="12" sm="12">
             <div className="thumbnail mb-5">
-              <h1 className="title text-white">Envía fácil y rápido tu paquete</h1>
+              <h1 className="title text-white">
+                Envía fácil y rápido tu paquete
+              </h1>
               <img
                 className="img-fluid w-100"
                 alt="Trivia"
                 src={require("../assets/img/bg.jpg")}
               />
               <div className="search_trip">
-                <Card>
+                <Card className="">
                   <Form>
                     <div>
                       <Input
                         type="text"
-                        placeholder="¿Desde qué ciudad hace el envío?"
+                        placeholder="¿Desde qué ciudad hace el envío?"                        
+                        className="border-bottom"
+
                       />
                     </div>
                     <div>
                       <Input
                         type="text"
                         placeholder="¿Cuál es la ciudad de destino?"
+                        className="border-bottom"
                       />
                     </div>
                     <div className="d-grid gap-2">
@@ -100,9 +100,6 @@ const Home = () => {
           </Col>
         </Row>
       </div>
-      <footer className="footer bg-dark text-white fixed-button">
-        <Footer />
-      </footer>
     </Fragment>
   );
 };

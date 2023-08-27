@@ -18,7 +18,7 @@ const Footer = () => {
                 </NavItem>
                 <NavItem>
                   <p>
-                    <NavLink href="#" className="text-white">
+                    <NavLink href="contact" className="text-white">
                       Contáctanos
                     </NavLink>
                   </p>
@@ -26,11 +26,10 @@ const Footer = () => {
               </Nav>
             </div>
             <div className="copyright">
-              © {new Date().getFullYear()}{" "}
               <a href="#p" target="_blank">
                 Trivia
               </a>{" "}
-              Todos los derechos reservados.
+              © {new Date().getFullYear()} Todos los derechos reservados.
             </div>
             <div>
               <a href="#p">
