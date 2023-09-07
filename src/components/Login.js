@@ -12,6 +12,7 @@ import {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -26,7 +27,49 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const data = {
+      username: user.username,
+      password: user.password,
+    };
+
+    if (!data.username || !data.password) {
+      setError("Por favor, rellena todos los campos");
+      return;
+    }
+
+    if (data.username.trim() === "" || data.password.trim() === "") {
+      setError("Por favor, revisa los espacios al inicio de los textos");
+      return;
+    }
+
+    /**try {
+      const response = await fetch("http://localhost:8080/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const token = data.token;
+        localStorage.setItem("token", token);
+        window.location.href = "/admin/dashboard";
+      }
+    } catch (error) {
+      console.error("Error", error);
+    }*/
+
+    setUser({
+      username: "",
+      password: "",
+    });
+    setError("");
+  };
   return (
     <Fragment>
       <div className="content">
@@ -67,19 +110,28 @@ const Login = () => {
                         <a href="#showPassword" className="text-black">
                           <i
                             onClick={() => setShowPassword(!showPassword)}
-                            className={showPassword ? "bi bi-eye-slash-fill input_icon" : "bi bi-eye-fill input_icon"}
+                            className={
+                              showPassword
+                                ? "bi bi-eye-slash-fill input_icon"
+                                : "bi bi-eye-fill input_icon"
+                            }
                           ></i>
                         </a>
                       </FormGroup>
                     </Col>
                     <Col md="12">
+                      <p className="text-danger text-center">{error}</p>
+                    </Col>
+                    <Col md="12">
                       <FormGroup className="text-center">
-                        <Button
-                          type="submit"
-                          className="btn btn-info text-white"
-                        >
-                          Iniciar sesión
-                        </Button>
+                        <div className="d-grid gap-2 py-1">
+                          <Button
+                            type="submit"
+                            className="btn btn-info text-white"
+                          >
+                            Iniciar sesión
+                          </Button>
+                        </div>
                       </FormGroup>
                     </Col>
                   </Row>

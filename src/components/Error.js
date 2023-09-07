@@ -1,7 +1,7 @@
 import React from "react";
 
-const Error = ({ mensaje }) => {
-  <p className="alert alert-danger error">{mensaje}</p>;
+const Error = ({ message }) => {
+  <p className="text-danger">{message}</p>;
 };
 
 export default Error;

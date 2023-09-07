@@ -1,13 +1,13 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import {
+  Button,
   Collapse,
   Nav,
   NavItem,
   NavLink,
   Navbar,
   NavbarBrand,
-  NavbarToggler,
 } from "reactstrap";
 const UserNavbar = () => {
   const [collapseOpen, setCollapseOpen] = useState(false);
@@ -17,7 +17,13 @@ const UserNavbar = () => {
     <Fragment>
       <Navbar className="fixed-top" color="light" light>
         <NavbarBrand href="/home">Trivia</NavbarBrand>
-        <NavbarToggler onClick={handleToggle} />
+        <Button onClick={handleToggle} className="navbar-toggler border-0">
+          <img
+            className="rounded-circle"
+            alt="https://icons8.com/icon/85356/male-user"
+            src={require("../assets/img/user-bar.png")}
+          />
+        </Button>
         <Collapse isOpen={collapseOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
@@ -46,7 +52,7 @@ const UserNavbar = () => {
 };
 
 Navbar.PropTypes = {
-  expand: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  
 };
 
 export default UserNavbar;

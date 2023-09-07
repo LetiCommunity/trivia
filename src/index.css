@@ -45,6 +45,10 @@ h2 {
   text-decoration-line: none;
 }
 
+ul {
+  list-style: none;
+}
+
 .input_wrapper {
   position: relative;
 }
@@ -54,4 +58,14 @@ h2 {
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
+}
+
+@media(min-width:768px) {
+  .search_trip {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    width: 80%;
+    border-radius: 5%;
+  }
 }

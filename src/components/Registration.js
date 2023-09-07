@@ -14,6 +14,7 @@ const Registration = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false);
+  const [error, setError] = useState("");
   const [section, setSection] = useState(1);
   const [user, setUser] = useState({
     name: "",
@@ -36,7 +37,29 @@ const Registration = () => {
 
   const nextSection = () => {
     if (section < 2) {
+      const data = {
+        name: user.name,
+        surname: user.surname,
+        phoneNumber: user.phoneNumber,
+        email: user.email,
+      };
+
+      if (!data.name || !data.surname || !data.phoneNumber || !data.email) {
+        setError("Por favor, rellena todos los campos");
+        return;
+      }
+
+      if (
+        data.name.trim() === "" ||
+        data.surname.trim() === "" ||
+        data.phoneNumber.trim() === "" ||
+        data.email.trim() === ""
+      ) {
+        setError("Por favor, revisa los espacios al inicio de los textos");
+        return;
+      }
       setSection(section + 1);
+      setError("");
     }
   };
 
@@ -46,7 +69,70 @@ const Registration = () => {
     }
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const data = {
+      name: user.name,
+      surname: user.surname,
+      phoneNumber: user.phoneNumber,
+      email: user.email,
+      username: user.username,
+      password: user.password,
+      passwordConfirmation: user.passwordConfirmation,
+    };
+
+    if (!data.username || !data.password || !data.passwordConfirmation) {
+      setError("Por favor, rellena todos los campos");
+      return;
+    }
+
+    if (
+      data.username.trim() === "" ||
+      data.password.trim() === "" ||
+      data.passwordConfirmation.trim() === ""
+    ) {
+      setError("Por favor, revisa los espacios al inicio de los textos");
+      return;
+    }
+
+    // eslint-disable-next-line eqeqeq
+    if (!(data.password == data.passwordConfirmation)) {
+      setError(
+        "Por favor, revisa que la contraseña y la confirmación coincidan"
+      );
+      return;
+    }
+    /**try {
+      const response = await fetch("http://localhost:8080/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const token = data.token;
+        localStorage.setItem("token", token);
+        window.location.href = "/admin/dashboard";
+      }
+    } catch (error) {
+      console.error("Error", error);
+    }*/
+
+    setUser({
+      name: "",
+      surname: "",
+      phoneNumber: "",
+      email: "",
+      username: "",
+      password: "",
+      passwordConfirmation: "",
+    });
+    setError("");
+  };
   return (
     <Fragment>
       <div className="content">
@@ -125,6 +211,9 @@ const Registration = () => {
                             />
                           </FormGroup>
                         </Col>
+                        <Col md="12">
+                          <p className="text-danger text-center">{error}</p>
+                        </Col>
                       </Row>
                     </>
                   )}
@@ -159,7 +248,11 @@ const Registration = () => {
                             <a href="#showPassword" className="text-black">
                               <i
                                 onClick={() => setShowPassword(!showPassword)}
-                                className={showPassword ? "bi bi-eye-slash-fill input_icon" : "bi bi-eye-fill input_icon"}
+                                className={
+                                  showPassword
+                                    ? "bi bi-eye-slash-fill input_icon"
+                                    : "bi bi-eye-fill input_icon"
+                                }
                               ></i>
                             </a>
                           </FormGroup>
@@ -184,10 +277,17 @@ const Registration = () => {
                                     !showPasswordConfirmation
                                   )
                                 }
-                                className={showPasswordConfirmation ? "bi bi-eye-slash-fill input_icon" : "bi bi-eye-fill input_icon"}
+                                className={
+                                  showPasswordConfirmation
+                                    ? "bi bi-eye-slash-fill input_icon"
+                                    : "bi bi-eye-fill input_icon"
+                                }
                               ></i>
                             </a>
                           </FormGroup>
+                        </Col>
+                        <Col md="12">
+                          <p className="text-danger text-center">{error}</p>
                         </Col>
                       </Row>
                     </>
@@ -237,9 +337,13 @@ const Registration = () => {
             <div className="my-3">
               <p>
                 <small className="text-secondary">
-                  Al registrarse, acepta nuestra{" "}
-                  <a href="#p" className="text-info text_decoration_a">
-                    política de privacidad
+                  Al registrarse, acepta nuestros{" "}
+                  <a href="#terms" className="text-info text_decoration_a">
+                    Términos
+                  </a>
+                  {" "}y{" "}
+                  <a href="#privacy-policy" className="text-info text_decoration_a">
+                    Política de privacidad
                   </a>
                 </small>
               </p>
