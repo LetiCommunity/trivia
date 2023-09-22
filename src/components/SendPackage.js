@@ -71,9 +71,9 @@ const SendPackage = () => {
                         ? "bi bi-circle-fill text-success"
                         : "bi bi-circle-fill"
                     }
-                  ></i>
-                  <i className="bi bi-dash-lg"></i>
-                  <i className="bi bi-circle-fill"></i>
+                  ></i>{" "}
+                  Información de Receptor <i className="bi bi-dash-lg"></i>{" "}
+                  <i className="bi bi-circle-fill"></i> Información de paquete
                 </p>
                 <Form onSubmit={handleSubmit}>
                   {section === 1 && (

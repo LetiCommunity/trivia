@@ -37,7 +37,7 @@ const EditProfile = () => {
             <FormGroup>
               <label htmlFor="name">Nombre</label>
               <Input
-                placeholder="Nombre de turno"
+                placeholder="Nombre"
                 type="text"
                 id="name"
                 name="name"
@@ -47,15 +47,15 @@ const EditProfile = () => {
               />
             </FormGroup>
             <FormGroup>
-              <label htmlFor="description">Descripción</label>
+              <label htmlFor="surname">Apellidos</label>
               <Input
-                placeholder="Breve descripción del turno"
-                type="textarea"
-                id="description"
-                name="description"
+                placeholder="Apellidos"
+                type="text"
+                id="surname"
+                name="surname"
                 value={user.surname}
                 onChange={handleChange}
-                className="form-control px-2 bg-light"
+                className="form-control bg-light"
               />
             </FormGroup>
             <Col md="12">

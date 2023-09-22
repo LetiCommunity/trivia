@@ -16,7 +16,7 @@ import EditProfile from "./components/EditProfile";
 
 function App() {
   return (
-    <div className="container-fluid bg-light">
+    <div className="content bg-light">
       <header>
         <UserNavbar />
       </header>

@@ -62,16 +62,16 @@ const PublishTrip = () => {
           <Col md="5">
             <Card className="card-user">
               <CardBody>
-                <p className="text-center">
+              <p className="text-center">
                   <i
                     className={
                       section === 2
                         ? "bi bi-circle-fill text-success"
                         : "bi bi-circle-fill"
                     }
-                  ></i>
-                  <i className="bi bi-dash-lg"></i>
-                  <i className="bi bi-circle-fill"></i>
+                  ></i>{" "}
+                  Información de viaje <i className="bi bi-dash-lg"></i>{" "}
+                  <i className="bi bi-circle-fill"></i> Disponibilidad
                 </p>
                 <Form onSubmit={handleSubmit}>
                   {section === 1 && (

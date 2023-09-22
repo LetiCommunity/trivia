@@ -150,14 +150,14 @@ const Registration = () => {
                         ? "bi bi-circle-fill text-success"
                         : "bi bi-circle-fill"
                     }
-                  ></i>
-                  <i className="bi bi-dash-lg"></i>
-                  <i className="bi bi-circle-fill"></i>
+                  ></i>{" "}
+                  Información Personal <i className="bi bi-dash-lg"></i>{" "}
+                  <i className="bi bi-circle-fill"></i> Información de Cuenta
                 </p>
                 <Form onSubmit={handleSubmit}>
                   {section === 1 && (
                     <>
-                      <h2>Información personal</h2>
+                      <h2>Información Personal</h2>
                       <Row>
                         <Col md="12">
                           <FormGroup>
@@ -340,9 +340,12 @@ const Registration = () => {
                   Al registrarse, acepta nuestros{" "}
                   <a href="#terms" className="text-info text_decoration_a">
                     Términos
-                  </a>
-                  {" "}y{" "}
-                  <a href="#privacy-policy" className="text-info text_decoration_a">
+                  </a>{" "}
+                  y{" "}
+                  <a
+                    href="#privacy-policy"
+                    className="text-info text_decoration_a"
+                  >
                     Política de privacidad
                   </a>
                 </small>
