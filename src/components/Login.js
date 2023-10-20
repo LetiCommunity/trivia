@@ -77,7 +77,7 @@ const Login = () => {
           className="justify-content-center align-items-center"
           style={{ height: "100vh" }}
         >
-          <Col md="5">
+          <Col md="5" sm="10" xs="10">
             <Card className="card-user">
               <CardBody>
                 <h2 className="text-center">Inicio de sesión</h2>

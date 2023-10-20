@@ -43,9 +43,9 @@ const Home = () => {
           <Row>
             <Col md="12" sm="12">
               <div className="position-relative mb-5">
-                <h1 className="title">Envía fácil y rápido tu paquete</h1>
+                <h2 className="title">Envía fácil y rápido tu paquete</h2>
                 <img
-                  className="img-fluid w-100 "
+                  className="img-fluid w-100 margin-top"
                   alt="Trivia"
                   src={require("../assets/img/bg1.jpg")}
                 />
@@ -157,7 +157,7 @@ const Home = () => {
                   <div className="text-center">
                     <div className="">
                       <img
-                        className="img-fluid rounded"
+                        className="img-fluid shadow-lg bg-light"
                         alt="Trivia"
                         src={require("../assets/img/win.jpg")}
                       />
@@ -202,7 +202,7 @@ const Home = () => {
                   <div>
                     <div>
                       <img
-                        className="img-fluid rounded"
+                        className="img-fluid shadow-lg bg-light right"
                         alt="Trivia"
                         src={require("../assets/img/send3.jpg")}
                       />

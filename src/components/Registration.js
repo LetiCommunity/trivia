@@ -133,6 +133,7 @@ const Registration = () => {
     });
     setError("");
   };
+  
   return (
     <Fragment>
       <div className="content">
@@ -140,19 +141,19 @@ const Registration = () => {
           className="justify-content-center align-items-center"
           style={{ height: "100vh" }}
         >
-          <Col md="5">
+          <Col md="7" sm="10" xs="10" className="mt-5">
             <Card className="card-user">
               <CardBody>
                 <p className="text-center">
                   <i
                     className={
                       section === 2
-                        ? "bi bi-circle-fill text-success"
-                        : "bi bi-circle-fill"
+                        ? "bi bi-circle-fill text-info"
+                        : "bi bi-circle-fill text-light"
                     }
                   ></i>{" "}
                   Información Personal <i className="bi bi-dash-lg"></i>{" "}
-                  <i className="bi bi-circle-fill"></i> Información de Cuenta
+                  <i className="bi bi-circle-fill text-light"></i> Información de Cuenta
                 </p>
                 <Form onSubmit={handleSubmit}>
                   {section === 1 && (
@@ -304,12 +305,12 @@ const Registration = () => {
                         </Button>
                       )}
                     </Col>
-                    <Col md="6" xs="6" className="text-center">
+                    <Col md="6" sm="6" xs="6">
                       {section === 1 && (
                         <Button
                           type="button"
                           onClick={nextSection}
-                          className="btn btn-info text-white"
+                          className="btn btn-info text-white right"
                         >
                           Siguiente
                         </Button>
@@ -317,7 +318,7 @@ const Registration = () => {
                       {section === 2 && (
                         <Button
                           type="submit"
-                          className="btn btn-info text-white"
+                          className="btn btn-info text-white right"
                         >
                           Enviar
                         </Button>

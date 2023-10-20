@@ -19,6 +19,10 @@ h2 {
   letter-spacing: 1px;
 }
 
+.margin-top {
+  margin-top: 7%;
+}
+
 .title {
   position: absolute;
   top: 15%;
@@ -28,7 +32,7 @@ h2 {
 
 .search_trip {
   position: absolute;
-  top: 75%;
+  top: 70%;
   left: 10%;
   width: 80%;
   border-radius: 15%;
@@ -85,4 +89,24 @@ ul {
     width: 80%;
     border-radius: 5%;
   }
+}
+
+@media(max-width:500px) {
+  .margin-top {
+    margin-top: 10%;
+  }
+}
+
+.right {
+  float: right;
+}
+
+.profile {
+  width: 96px;
+  height: 96px;
+}
+
+.profile-bar {
+  width: 24px;
+  height: 24px;
 }

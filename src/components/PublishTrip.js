@@ -12,6 +12,7 @@ import {
 
 const PublishTrip = () => {
   const [section, setSection] = useState(1);
+  const [error, setError] = useState("");
   const [showPlaceholderDate, setShowPlaceholderDate] = useState(true);
   const [showPlaceholderBilling, setShowPlaceholderBilling] = useState(true);
   const [travelData, setTravelData] = useState({
@@ -30,18 +31,64 @@ const PublishTrip = () => {
     },
   });
 
-  const handleChange = (event) => {
+  const handleChange = (event, parentField) => {
     const { name, value } = event.target;
 
-    setTravelData((prevTravelData) => ({
-      ...prevTravelData,
-      [name]: value,
-    }));
+    setTravelData((prevTravelData) => {
+      if (parentField) {
+        return {
+          ...prevTravelData,
+          [parentField]: {
+            ...prevTravelData[parentField],
+            [name]: value,
+          },
+        };
+      } else {
+        return {
+          ...prevTravelData,
+          [name]: value,
+        };
+      }
+    });
   };
 
   const nextSection = () => {
     if (section < 2) {
+      const data = {
+        from: travelData.travel.from,
+        to: travelData.travel.to,
+        date: travelData.travel.date,
+        airport: travelData.travel.airport,
+        terminal: travelData.travel.terminal,
+        company: travelData.travel.company,
+        billingDate: travelData.travel.billingDate,
+      };
+
+      if (
+        !data.from ||
+        !data.to ||
+        !data.date ||
+        !data.airport ||
+        !data.terminal ||
+        !data.company ||
+        !data.billingDate
+      ) {
+        setError("Por favor, rellena todos los campos");
+        return;
+      }
+
+      if (
+        data.from.trim() === "" ||
+        data.to.trim() === "" ||
+        data.airport.trim() === "" ||
+        data.terminal.trim() === "" ||
+        data.company.trim() === ""
+      ) {
+        setError("Por favor, revisa los espacios al inicio de los textos");
+        return;
+      }
       setSection(section + 1);
+      setError("");
     }
   };
 
@@ -51,7 +98,75 @@ const PublishTrip = () => {
     }
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const data = {
+      user: {
+        id: travelData.user.id,
+      },
+      travel: {
+        from: travelData.travel.from,
+        to: travelData.travel.to,
+        date: travelData.travel.date,
+        airport: travelData.travel.airport,
+        terminal: travelData.travel.terminal,
+        company: travelData.travel.company,
+        billingDate: travelData.travel.billingDate,
+        availableWeight: travelData.travel.availableWeight,
+      },
+    };
+
+    if (!data.travel.availableWeight) {
+      setError("Por favor, rellena todos los campos");
+      return;
+    }
+
+    // if (
+    //   data.package.name.trim() === "" ||
+    //   data.package.description.trim() === ""
+    // ) {
+    //   setError("Por favor, revisa los espacios al inicio de los textos");
+    //   return;
+    // }
+
+    /**try {
+      const response = await fetch("http://localhost:8080/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const token = data.token;
+        localStorage.setItem("token", token);
+        window.location.href = "/admin/dashboard";
+      }
+    } catch (error) {
+      console.error("Error", error);
+    }*/
+
+    setTravelData({
+      user: {
+        id: "",
+      },
+      travel: {
+        from: "",
+        to: "",
+        date: "",
+        airport: "",
+        terminal: "",
+        company: "",
+        billingDate: "",
+        availableWeight: "",
+      },
+    });
+    setError("");
+  };
+
   return (
     <Fragment>
       <div className="content">
@@ -59,19 +174,19 @@ const PublishTrip = () => {
           className="justify-content-center align-items-center"
           style={{ height: "100vh" }}
         >
-          <Col md="5">
+          <Col md="7" sm="10" xs="10" className="mt-5">
             <Card className="card-user">
               <CardBody>
-              <p className="text-center">
+                <p className="text-center">
                   <i
                     className={
                       section === 2
-                        ? "bi bi-circle-fill text-success"
-                        : "bi bi-circle-fill"
+                        ? "bi bi-circle-fill text-info"
+                        : "bi bi-circle-fill text-light"
                     }
                   ></i>{" "}
                   Información de viaje <i className="bi bi-dash-lg"></i>{" "}
-                  <i className="bi bi-circle-fill"></i> Disponibilidad
+                  <i className="bi bi-circle-fill text-light"></i> Disponibilidad
                 </p>
                 <Form onSubmit={handleSubmit}>
                   {section === 1 && (
@@ -85,7 +200,7 @@ const PublishTrip = () => {
                               id="from"
                               name="from"
                               value={travelData.travel.from}
-                              onChange={handleChange}
+                              onChange={(e) => handleChange(e, "travel")}
                               placeholder="Lugar de origen"
                               className="bg-light"
                             />
@@ -98,7 +213,7 @@ const PublishTrip = () => {
                               id="to"
                               name="to"
                               value={travelData.travel.to}
-                              onChange={handleChange}
+                              onChange={(e) => handleChange(e, "travel")}
                               placeholder="Lugar de destino"
                               className="bg-light"
                             />
@@ -111,8 +226,9 @@ const PublishTrip = () => {
                               id="date"
                               name="date"
                               value={travelData.travel.date}
-                              onChange={handleChange}
+                              onChange={(e) => handleChange(e, "travel")}
                               onFocus={() => setShowPlaceholderDate(false)}
+                              onBlur={() => setShowPlaceholderDate(true)}
                               placeholder="Fecha de viaje"
                               className="bg-light"
                             />
@@ -125,7 +241,7 @@ const PublishTrip = () => {
                               id="airport"
                               name="airport"
                               value={travelData.travel.airport}
-                              onChange={handleChange}
+                              onChange={(e) => handleChange(e, "travel")}
                               placeholder="Aeropuerto de destino"
                               className="bg-light"
                             />
@@ -138,7 +254,7 @@ const PublishTrip = () => {
                               id="terminal"
                               name="terminal"
                               value={travelData.travel.terminal}
-                              onChange={handleChange}
+                              onChange={(e) => handleChange(e, "travel")}
                               placeholder="Terminal de destino"
                               className="bg-light"
                             />
@@ -151,7 +267,7 @@ const PublishTrip = () => {
                               id="company"
                               name="company"
                               value={travelData.travel.company}
-                              onChange={handleChange}
+                              onChange={(e) => handleChange(e, "travel")}
                               placeholder="Compañía con la que viaja"
                               className="bg-light"
                             />
@@ -164,12 +280,16 @@ const PublishTrip = () => {
                               id="billingDate"
                               name="billingDate"
                               value={travelData.travel.billingDate}
-                              onChange={handleChange}
+                              onChange={(e) => handleChange(e, "travel")}
                               onFocus={() => setShowPlaceholderBilling(false)}
+                              onBlur={() => setShowPlaceholderDate(true)}
                               placeholder="Fecha de facturación"
                               className="bg-light"
                             />
                           </FormGroup>
+                        </Col>
+                        <Col md="12">
+                          <p className="text-danger text-center">{error}</p>
                         </Col>
                       </Row>
                     </>
@@ -185,10 +305,13 @@ const PublishTrip = () => {
                               id="availableWeight"
                               name="availableWeight"
                               value={travelData.travel.availableWeight}
-                              onChange={handleChange}
+                              onChange={(e) => handleChange(e, "travel")}
                               placeholder="Peso disponible"
                             />
                           </FormGroup>
+                        </Col>
+                        <Col md="12">
+                          <p className="text-danger text-center">{error}</p>
                         </Col>
                       </Row>
                     </>
@@ -210,7 +333,7 @@ const PublishTrip = () => {
                         <Button
                           type="button"
                           onClick={nextSection}
-                          className="btn btn-info text-white"
+                          className="btn btn-info text-white right"
                         >
                           Siguiente
                         </Button>
@@ -218,7 +341,7 @@ const PublishTrip = () => {
                       {section === 2 && (
                         <Button
                           type="submit"
-                          className="btn btn-info text-white"
+                          className="btn btn-info text-white right"
                         >
                           Enviar
                         </Button>
