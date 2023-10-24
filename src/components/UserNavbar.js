@@ -15,7 +15,7 @@ const UserNavbar = () => {
 
   return (
     <Fragment>
-      <Navbar className="fixed-top" color="light" light>
+      <Navbar className="fixed-top position-relative" color="light" light>
         <NavbarBrand href="/home">Trivia</NavbarBrand>
         <Button onClick={handleToggle} className="navbar-toggler border-0">
           <img
@@ -51,8 +51,6 @@ const UserNavbar = () => {
   );
 };
 
-Navbar.PropTypes = {
-  
-};
+Navbar.PropTypes = {};
 
 export default UserNavbar;

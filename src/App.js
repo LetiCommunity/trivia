@@ -13,6 +13,7 @@ import Profile from "./components/Profile";
 import Contact from "./components/Contact";
 import NoPage from "./components/NoPage";
 import EditProfile from "./components/EditProfile";
+import SearchTrip from "./components/SearchTrip";
 
 function App() {
   return (
@@ -23,11 +24,13 @@ function App() {
       <section>
         <BrowserRouter>
           <Routes>
+            <Route index path="/" element={<Home />} />
             <Route index path="home" element={<Home />} />
             <Route path="registration" element={<Registration />} />
             <Route path="login" element={<Login />} />
             <Route path="send-package" element={<SendPackage />} />
             <Route path="publish-trip" element={<PublishTrip />} />
+            <Route path="search-trip" element={<SearchTrip />} />
             <Route path="profile" element={<Profile />}/>
             <Route path="edit-profile" element={<EditProfile/>}/>
             <Route path="logout" element={<PublishTrip />} />
@@ -36,9 +39,6 @@ function App() {
           </Routes>
         </BrowserRouter>
       </section>
-      <footer className="footer bg-dark text-white">
-        <Footer />
-      </footer>
     </div>
   );
 }

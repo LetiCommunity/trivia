@@ -1,8 +1,12 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Card, Col, Form, Input, Row } from "reactstrap";
+import Footer from "./Footer";
+import { useLocation } from "react-router-dom";
+import SearchTrip from "./SearchTrip";
 
 const Home = () => {
+  const location = useLocation();
   const [searchTrip, setSearchTrip] = useState({
     origin: "",
     destiny: "",
@@ -31,21 +35,19 @@ const Home = () => {
       return;
     }
 
-    setSearchTrip({
-      origin: "",
-      destiny: "",
-    });
+    return (window.location.href = `search-trip?origin=${data.origin}&destiny=${data.destiny}`);
   };
+
   return (
     <Fragment>
       <div className="content">
         <div className="position-relative">
           <Row>
             <Col md="12" sm="12">
-              <div className="position-relative mb-5">
+              <div className="">
                 <h2 className="title">Envía fácil y rápido tu paquete</h2>
                 <img
-                  className="img-fluid w-100 margin-top"
+                  className="img-fluid w-100"
                   alt="Trivia"
                   src={require("../assets/img/bg1.jpg")}
                 />
@@ -97,9 +99,9 @@ const Home = () => {
             </Col>
           </Row>
         </div>
-        <div md className="position-relative my-5">
-          <div className="center-element">
-            <div>
+        <div className="position-relative my-5">
+          <div className="center-element margin-services">
+            <div className="">
               <Row>
                 <Col md="4">
                   <div className="">
@@ -227,27 +229,21 @@ const Home = () => {
                 <Col md="4">
                   <a href="#p" className="text_decoration_a">
                     <Card className="mb-2">
-                      <p className="p-3 text-size">
-                        Malabo a Bata
-                      </p>
+                      <p className="p-3 text-size">Malabo a Bata</p>
                     </Card>
                   </a>
                 </Col>
                 <Col md="4">
                   <a href="#p" className="text_decoration_a">
                     <Card className="mb-2">
-                      <p className="p-3 text-size">
-                        Malabo a Madrid
-                      </p>
+                      <p className="p-3 text-size">Malabo a Madrid</p>
                     </Card>
                   </a>
                 </Col>
                 <Col md="4">
                   <a href="#p" className="text_decoration_a">
                     <Card className="mb-2">
-                      <p className="p-3 text-size">
-                        Malabo a Mongomeyen
-                      </p>
+                      <p className="p-3 text-size">Malabo a Mongomeyen</p>
                     </Card>
                   </a>
                 </Col>
@@ -263,6 +259,9 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <footer className="footer bg-dark text-white">
+        <Footer />
+      </footer>
     </Fragment>
   );
 };

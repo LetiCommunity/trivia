@@ -58,8 +58,7 @@ const Profile = () => {
       return;
     }
 
-    // eslint-disable-next-line eqeqeq
-    if (!(data.password == data.passwordConfirmation)) {
+    if (!(data.password === data.passwordConfirmation)) {
       setError(
         "Por favor, revisa que la contraseña y la confirmación coincidan"
       );
