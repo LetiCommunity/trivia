@@ -45,8 +45,9 @@ const Login = () => {
       return;
     }
 
-    /**try {
-      const response = await fetch("http://localhost:8080/api/login", {
+    try {
+      const response = await fetch("http://localhost:8989/trivia-api/v1/login", {
+        mode:"cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,11 +59,11 @@ const Login = () => {
         const data = await response.json();
         const token = data.token;
         localStorage.setItem("token", token);
-        window.location.href = "/admin/dashboard";
+        window.location.href = "/profile";
       }
     } catch (error) {
       console.error("Error", error);
-    }*/
+    }
 
     setUser({
       username: "",
@@ -77,8 +78,8 @@ const Login = () => {
           className="justify-content-center align-items-center"
           style={{ height: "100vh" }}
         >
-          <Col md="5" sm="10" xs="10">
-            <Card className="card-user">
+          <Col md="5" sm="10" xs="10" className="my-5 py-5">
+            <Card className="border-0 shadow-lg bg-white">
               <CardBody>
                 <h2 className="text-center">Inicio de sesión</h2>
                 <Form onSubmit={handleSubmit}>

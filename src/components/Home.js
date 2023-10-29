@@ -214,7 +214,7 @@ const Home = () => {
               </Row>
             </div>
           </div>
-          <div className="bg-secondary my-5 py-3 px-5">
+          <div className="bg-white my-5 py-3 px-5">
             <div className="my-3">
               <Row>
                 <Col md="12">
@@ -228,21 +228,21 @@ const Home = () => {
               <Row>
                 <Col md="4">
                   <a href="#p" className="text_decoration_a">
-                    <Card className="mb-2">
+                    <Card className="mb-2 bg-light">
                       <p className="p-3 text-size">Malabo a Bata</p>
                     </Card>
                   </a>
                 </Col>
                 <Col md="4">
                   <a href="#p" className="text_decoration_a">
-                    <Card className="mb-2">
+                    <Card className="mb-2 bg-light">
                       <p className="p-3 text-size">Malabo a Madrid</p>
                     </Card>
                   </a>
                 </Col>
                 <Col md="4">
-                  <a href="#p" className="text_decoration_a">
-                    <Card className="mb-2">
+                  <a href="#p" className="text_decoration_a ">
+                    <Card className="mb-2 bg-light">
                       <p className="p-3 text-size">Malabo a Mongomeyen</p>
                     </Card>
                   </a>

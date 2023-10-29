@@ -15,7 +15,7 @@ const UserNavbar = () => {
 
   return (
     <Fragment>
-      <Navbar className="fixed-top position-relative" color="light" light>
+      <Navbar className="fixed-top bg-light">
         <NavbarBrand href="/home">Trivia</NavbarBrand>
         <Button onClick={handleToggle} className="navbar-toggler border-0">
           <img
@@ -24,7 +24,7 @@ const UserNavbar = () => {
             src={require("../assets/img/user-bar.png")}
           />
         </Button>
-        <Collapse isOpen={collapseOpen} navbar>
+        <Collapse isOpen={collapseOpen} navbar className="">
           <Nav className="ml-auto" navbar>
             <NavItem>
               <NavLink href="login">Iniciar Sesión</NavLink>

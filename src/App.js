@@ -1,9 +1,8 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import UserNavbar from "./components/UserNavbar";
-import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
@@ -16,6 +15,14 @@ import EditProfile from "./components/EditProfile";
 import SearchTrip from "./components/SearchTrip";
 
 function App() {
+  const [token, setToken] = useState(null);
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    //It verify if the token exist and is  valid before set it in the state
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, [token]);
   return (
     <div className="content bg-light">
       <header>

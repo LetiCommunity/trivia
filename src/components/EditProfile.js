@@ -67,8 +67,8 @@ const EditProfile = () => {
         className="justify-content-center align-items-center"
         style={{ height: "100vh" }}
       >
-        <Col md="7" sm="10" xs="10">
-          <Card className="card-user">
+        <Col md="5" sm="10" xs="10" className="my-5 py-5">
+          <Card className="border-0 shadow-lg bg-white">
             <CardBody>
               <div className="text-center m-3">
                 {imageUrl.trim() ? (

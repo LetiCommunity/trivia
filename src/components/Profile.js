@@ -1,6 +1,15 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
-import { Col, Form, FormGroup, Input, Modal, Row } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  Col,
+  Form,
+  FormGroup,
+  Input,
+  Modal,
+  Row,
+} from "reactstrap";
 import inicialImage from "../assets/img/user.png";
 
 const Profile = () => {
@@ -111,82 +120,90 @@ const Profile = () => {
           className="justify-content-center align-items-center"
           style={{ height: "100vh" }}
         >
-          <Col md="10" sm="11" xs="11" className="">
-            <div className="text-center">
-              {imageUrl.trim() ? (
-                <img alt="Imagen cargada" className="rounded-circle profile" src={imageUrl} />
-              ) : (
-                <img
-                  alt="Cargar imagen"
-                  className="rounded-circle"
-                  src={inicialImage}
-                />
-              )}
-              <h3>Usuario</h3>
-              <a
-                href="edit-profile"
-                className="text-info text_decoration_a"
-              >
-                Editar información
-              </a>
-            </div>
-            <hr />
-            <div>
-              <h3>Confirmación de perfil</h3>
-              <ul>
-                <li>
+          <Col md="5" sm="10" xs="10" className="my-5 py-5">
+            <Card className="border-0 bg-light">
+              <CardBody>
+                <div className="text-center">
+                  {imageUrl.trim() ? (
+                    <img
+                      alt="Imagen cargada"
+                      className="rounded-circle profile"
+                      src={imageUrl}
+                    />
+                  ) : (
+                    <img
+                      alt="Cargar imagen"
+                      className="rounded-circle"
+                      src={inicialImage}
+                    />
+                  )}
+                  <h3>Usuario</h3>
                   <a
-                    href="#p"
-                    className="text-info text_decoration_a"
-                    onClick={togglePidModal}
-                  >
-                    Confirmar el Documento de Identidad Personal
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="document-confirmation"
+                    href="edit-profile"
                     className="text-info text_decoration_a"
                   >
-                    Confirmar el número de teléfono
+                    Editar información
                   </a>
-                </li>
-              </ul>
-            </div>
-            <hr />
-            <div>
-              <h3>Cuenta</h3>
-              <ul>
-                <li>
-                  <a
-                    href="document-confirmation"
-                    className="text-info text_decoration_a"
-                  >
-                    Cambiar contraseña
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="document-confirmation"
-                    className="text-info text_decoration_a"
-                  >
-                    Eliminar cuenta
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="document-confirmation"
-                    className="text-info text_decoration_a"
-                  >
-                    Cerrar sesión
-                  </a>
-                </li>
-              </ul>
-            </div>
+                </div>
+                <hr />
+                <div>
+                  <h3>Confirmación de perfil</h3>
+                  <ul>
+                    <li>
+                      <a
+                        href="#p"
+                        className="text-info text_decoration_a"
+                        onClick={togglePidModal}
+                      >
+                        Confirmar el Documento de Identidad Personal
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="document-confirmation"
+                        className="text-info text_decoration_a"
+                      >
+                        Confirmar el número de teléfono
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <hr />
+                <div>
+                  <h3>Cuenta</h3>
+                  <ul>
+                    <li>
+                      <a
+                        href="document-confirmation"
+                        className="text-info text_decoration_a"
+                      >
+                        Cambiar contraseña
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="document-confirmation"
+                        className="text-info text_decoration_a"
+                      >
+                        Eliminar cuenta
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="document-confirmation"
+                        className="text-info text_decoration_a"
+                      >
+                        Cerrar sesión
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </CardBody>
+            </Card>
           </Col>
         </Row>
         <Row>
-        <Col md="12">
+          <Col md="12">
             <Modal
               className="px-2 pt-2 pb-2"
               isOpen={pidModal}
@@ -194,8 +211,14 @@ const Profile = () => {
               backdrop={false}
             >
               <div className="modal-header">
-                <h4 className="modal-title">Confirmación de número de teléfono</h4>
-                <button type="button" className="close" onClick={togglePidModal}>
+                <h4 className="modal-title">
+                  Confirmación de número de teléfono
+                </h4>
+                <button
+                  type="button"
+                  className="close"
+                  onClick={togglePidModal}
+                >
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -222,7 +245,7 @@ const Profile = () => {
                       className="form-control"
                       color="Black"
                     />
-                  </FormGroup>                
+                  </FormGroup>
                   <div className="modal-footer mb-2">
                     <button
                       type="submit"
