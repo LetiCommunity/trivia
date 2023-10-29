@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -13,6 +13,7 @@ import Contact from "./components/Contact";
 import NoPage from "./components/NoPage";
 import EditProfile from "./components/EditProfile";
 import SearchTrip from "./components/SearchTrip";
+import Logout from "./components/Logout";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -26,23 +27,30 @@ function App() {
   return (
     <div className="content bg-light">
       <header>
-        <UserNavbar />
+        <UserNavbar token={token}/>
       </header>
       <section>
         <BrowserRouter>
           <Routes>
             <Route index path="/" element={<Home />} />
             <Route index path="home" element={<Home />} />
-            <Route path="registration" element={<Registration />} />
-            <Route path="login" element={<Login />} />
             <Route path="send-package" element={<SendPackage />} />
             <Route path="publish-trip" element={<PublishTrip />} />
             <Route path="search-trip" element={<SearchTrip />} />
-            <Route path="profile" element={<Profile />}/>
-            <Route path="edit-profile" element={<EditProfile/>}/>
-            <Route path="logout" element={<PublishTrip />} />
             <Route path="contact" element={<Contact />} />
             <Route path="*" element={<NoPage />} />
+            {token ? (
+              <>
+                <Route path="profile" element={<Profile />} />
+                <Route path="edit-profile" element={<EditProfile />} />
+                <Route path="logout" element={<Logout />} />
+              </>
+            ) : (
+              <>
+                <Route path="registration" element={<Registration />} />
+                <Route path="login" element={<Login />} />
+              </>
+            )}
           </Routes>
         </BrowserRouter>
       </section>

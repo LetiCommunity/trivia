@@ -9,7 +9,7 @@ import {
   Navbar,
   NavbarBrand,
 } from "reactstrap";
-const UserNavbar = () => {
+const UserNavbar = ({ token }) => {
   const [collapseOpen, setCollapseOpen] = useState(false);
   const handleToggle = () => setCollapseOpen(!collapseOpen);
 
@@ -26,24 +26,37 @@ const UserNavbar = () => {
         </Button>
         <Collapse isOpen={collapseOpen} navbar className="">
           <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink href="login">Iniciar Sesión</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="registration">Registrarse</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="send-package">Haz un envío</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="publish-trip">Publica un viaje</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="profile">Perfil</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="logout">Cerrar sesión</NavLink>
-            </NavItem>
+            {!token ? (
+              <>
+                <NavItem>
+                  <NavLink href="login">Iniciar Sesión</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="registration">Registrarse</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="send-package">Haz un envío</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="publish-trip">Publica un viaje</NavLink>
+                </NavItem>
+              </>
+            ) : (
+              <>
+                <NavItem>
+                  <NavLink href="send-package">Haz un envío</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="publish-trip">Publica un viaje</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="profile">Perfil</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="logout">Cerrar sesión</NavLink>
+                </NavItem>
+              </>
+            )}
           </Nav>
         </Collapse>
       </Navbar>
