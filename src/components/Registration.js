@@ -44,7 +44,7 @@ const Registration = () => {
         email: user.email,
       };
 
-      if (!data.name || !data.surname || !data.phoneNumber || !data.email) {
+      if (!data.name || !data.surname || !data.phoneNumber) {
         setError("Por favor, rellena todos los campos");
         return;
       }
@@ -71,7 +71,6 @@ const Registration = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const data = {
       name: user.name,
       surname: user.surname,
@@ -103,24 +102,18 @@ const Registration = () => {
       );
       return;
     }
-    /**try {
-      const response = await fetch("http://localhost:8080/api/login", {
+    try {
+      await fetch("http://localhost:8989/trivia-api/v1/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        const token = data.token;
-        localStorage.setItem("token", token);
-        window.location.href = "/admin/dashboard";
-      }
     } catch (error) {
       console.error("Error", error);
-    }*/
+      return;
+    }
 
     setUser({
       name: "",
@@ -132,6 +125,7 @@ const Registration = () => {
       passwordConfirmation: "",
     });
     setError("");
+    window.location.href = "/login";
   };
   
   return (

@@ -1,12 +1,10 @@
 import React, { Fragment, useState } from "react";
-import PropTypes from "prop-types";
 import { Button, Card, Col, Form, Input, Row } from "reactstrap";
 import Footer from "./Footer";
-import { useLocation } from "react-router-dom";
-import SearchTrip from "./SearchTrip";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const location = useLocation();
+  let navigate = useNavigate();
   const [searchTrip, setSearchTrip] = useState({
     origin: "",
     destiny: "",
@@ -35,7 +33,24 @@ const Home = () => {
       return;
     }
 
-    return (window.location.href = `search-trip?origin=${data.origin}&destiny=${data.destiny}`);
+    return navigate(
+      `/search-trip?origin=${data.origin}&destiny=${data.destiny}`
+    );
+  };
+
+  const handlePublishTrip = () => {
+    return navigate("publish-trip");
+  };
+
+  const handleSendPackage = () => {
+    return navigate("publish-trip");
+  };
+
+  const handleSearchTrip = (origin, destiny) => {
+    if (!origin || !destiny) {
+      return navigate(`/search-trip`);
+    }
+    return navigate(`/search-trip?origin=${origin}&destiny=${destiny}`);
   };
 
   return (
@@ -106,7 +121,7 @@ const Home = () => {
                 <Col md="4">
                   <div className="">
                     <div className="">
-                      <i class="bi bi-box icon-size"></i>
+                      <i className="bi bi-box icon-size"></i>
                     </div>
                     <div>
                       <h5>Envíos al mejor precio</h5>
@@ -122,7 +137,7 @@ const Home = () => {
                 <Col md="4">
                   <div className="">
                     <div className="">
-                      <i class="bi bi-lock icon-size"></i>
+                      <i className="bi bi-lock icon-size"></i>
                     </div>
                     <div>
                       <h5>Envíos seguros</h5>
@@ -138,7 +153,7 @@ const Home = () => {
                 <Col md="4">
                   <div>
                     <div>
-                      <i class="bi bi-calendar icon-size"></i>
+                      <i className="bi bi-calendar icon-size"></i>
                     </div>
                     <div>
                       <h5>Variedad de fechas disponibles</h5>
@@ -176,7 +191,11 @@ const Home = () => {
                       blanditiis harum.
                     </p>
                     <div className="text-center">
-                      <Button type="button" className="btn btn-info text-white">
+                      <Button
+                        type="button"
+                        onClick={handlePublishTrip}
+                        className="btn btn-info text-white"
+                      >
                         Publica tu viaje
                       </Button>
                     </div>
@@ -194,7 +213,11 @@ const Home = () => {
                       blanditiis harum.
                     </p>
                     <div className="text-center">
-                      <Button type="button" className="btn btn-info text-white">
+                      <Button
+                        type="button"
+                        onClick={handleSendPackage}
+                        className="btn btn-info text-white"
+                      >
                         Realiza tu envío
                       </Button>
                     </div>
@@ -227,34 +250,41 @@ const Home = () => {
             <div className="">
               <Row>
                 <Col md="4">
-                  <a href="#p" className="text_decoration_a">
-                    <Card className="mb-2 bg-light">
-                      <p className="p-3 text-size">Malabo a Bata</p>
-                    </Card>
-                  </a>
+                  <Card
+                    onClick={() => handleSearchTrip("malabo", "bata")}
+                    className="mb-2 bg-light"
+                  >
+                    <p className="p-3 text-size">Malabo a Bata</p>
+                  </Card>
                 </Col>
                 <Col md="4">
-                  <a href="#p" className="text_decoration_a">
-                    <Card className="mb-2 bg-light">
-                      <p className="p-3 text-size">Malabo a Madrid</p>
-                    </Card>
-                  </a>
+                  <Card
+                    onClick={() => handleSearchTrip("malabo", "madrid")}
+                    className="mb-2 bg-light"
+                  >
+                    <p className="p-3 text-size">Malabo a Madrid</p>
+                  </Card>
                 </Col>
                 <Col md="4">
-                  <a href="#p" className="text_decoration_a ">
-                    <Card className="mb-2 bg-light">
-                      <p className="p-3 text-size">Malabo a Mongomeyen</p>
-                    </Card>
-                  </a>
+                  <Card
+                    onClick={() => handleSearchTrip("malabo", "mongomeyen")}
+                    className="mb-2 bg-light"
+                  >
+                    <p className="p-3 text-size">Malabo a Mongomeyen</p>
+                  </Card>
                 </Col>
               </Row>
             </div>
             <div>
-              <p>
-                <a href="#p" className="text_decoration_a text-info">
-                  Ver más
-                </a>
-              </p>
+              <Button
+                type="button"
+                onClick={handleSearchTrip}
+                color="link"
+                outline={true}
+                className="text-info"
+              >
+                Ver más
+              </Button>
             </div>
           </div>
         </div>

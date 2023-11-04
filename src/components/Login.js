@@ -46,7 +46,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8989/trivia-api/v1/login", {
+      const response = await fetch("http://localhost:8989/trivia-api/v1/auth/signin", {
         mode:"cors",
         method: "POST",
         headers: {

@@ -11,46 +11,31 @@ import {
 } from "reactstrap";
 
 const SendPackage = () => {
+  const token = localStorage.getItem("token");
   const [section, setSection] = useState(1);
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState("");
+  const headers = {
+    "Authorization": `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
   const [shippingDetails, setShippingDetails] = useState({
-    user: {
-      id: "",
-    },
-    receiver: {
-      name: "",
-      surname: "",
-      address: "",
-      phoneNumber: "",
-    },
-    package: {
-      name: "",
-      description: "",
-      weight: "",
-      image: "",
-    },
+    name: "",
+    description: "",
+    weight: "",
+    image: "",
+    receiverName: "",
+    receiverSurname: "",
+    receiverAddress: "",
+    receiverPhone: "",
   });
 
-  const handleChange = (event, parentField) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-
-    setShippingDetails((prevShippingDetails) => {
-      if (parentField) {
-        return {
-          ...prevShippingDetails,
-          [parentField]: {
-            ...prevShippingDetails[parentField],
-            [name]: value,
-          },
-        };
-      } else {
-        return {
-          ...prevShippingDetails,
-          [name]: value,
-        };
-      }
-    });
+    setShippingDetails((prevShippingDetails) => ({
+      ...prevShippingDetails,
+      [name]: value,
+    }));
   };
 
   const handleImageUpload = (event) => {
@@ -79,27 +64,32 @@ const SendPackage = () => {
       setImageUrl(imageUrl);
     };
     reader.readAsDataURL(file);
-  }
+  };
 
   const nextSection = () => {
     if (section < 2) {
       const data = {
-        name: shippingDetails.receiver.name,
-        surname: shippingDetails.receiver.surname,
-        address: shippingDetails.receiver.address,
-        phoneNumber: shippingDetails.receiver.phoneNumber,
+        receiverName: shippingDetails.receiverName,
+        receiverSurname: shippingDetails.receiverSurname,
+        receiverAddress: shippingDetails.receiverAddress,
+        receiverPhone: shippingDetails.receiverPhone,
       };
 
-      if (!data.name || !data.surname || !data.address || !data.phoneNumber) {
+      if (
+        !data.receiverName ||
+        !data.receiverSurname ||
+        !data.receiverAddress ||
+        !data.receiverPhone
+      ) {
         setError("Por favor, rellena todos los campos");
         return;
       }
 
       if (
-        data.name.trim() === "" ||
-        data.surname.trim() === "" ||
-        data.address.trim() === "" ||
-        data.phoneNumber.trim() === ""
+        data.receiverName.trim() === "" ||
+        data.receiverSurname.trim() === "" ||
+        data.receiverAddress.trim() === "" ||
+        data.receiverPhone.trim() === ""
       ) {
         setError("Por favor, revisa los espacios al inicio de los textos");
         return;
@@ -117,80 +107,55 @@ const SendPackage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const data = {
-      user: {
-        id: shippingDetails.user.id,
-      },
-      receiver: {
-        name: shippingDetails.receiver.name,
-        surname: shippingDetails.receiver.surname,
-        address: shippingDetails.receiver.address,
-        phoneNumber: shippingDetails.receiver.phoneNumber,
-      },
-      package: {
-        name: shippingDetails.package.name,
-        description: shippingDetails.package.description,
-        weight: shippingDetails.package.weight,
-        image: shippingDetails.package.image,
-      },
+      name: shippingDetails.name,
+      description: shippingDetails.description,
+      weight: shippingDetails.weight,
+      image: shippingDetails.image,
+      receiverName: shippingDetails.receiverName,
+      receiverSurname: shippingDetails.receiverSurname,
+      receiverAddress: shippingDetails.receiverAddress,
+      receiverPhone: shippingDetails.receiverPhone,
     };
 
-    if (
-      !data.package.name ||
-      !data.package.description ||
-      !data.package.weight
-    ) {
+    if (!data.name || !data.description || !data.weight) {
       setError("Por favor, rellena todos los campos");
       return;
     }
 
-    if (
-      data.package.name.trim() === "" ||
-      data.package.description.trim() === ""
-    ) {
+    if (data.name.trim() === "" || data.description.trim() === "") {
       setError("Por favor, revisa los espacios al inicio de los textos");
       return;
     }
 
-    
-    /**try {
-      const response = await fetch("http://localhost:8080/api/login", {
+    if(!token) {
+      localStorage.setItem("package", data);
+      window.location.href = "/signin";
+    }
+    try {
+      await fetch("http://localhost:8989/trivia-api/v1/packages", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: headers,
         body: JSON.stringify(data),
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        const token = data.token;
-        localStorage.setItem("token", token);
-        window.location.href = "/admin/dashboard";
-      }
+      window.location.href = "/home";
     } catch (error) {
       console.error("Error", error);
-    }*/
+      return;
+    }
 
     setShippingDetails({
-      user: {
-        id: "",
-      },
-      receiver: {
-        name: "",
-        surname: "",
-        address: "",
-        phoneNumber: "",
-      },
-      package: {
-        name: "",
-        description: "",
-        weight: "",
-        image: "",
-      },
+      name: "",
+      description: "",
+      weight: "",
+      image: "",
+      receiverName: "",
+      receiverSurname: "",
+      receiverAddress: "",
+      receiverPhone: "",
     });
     setError("");
+    
   };
 
   return (
@@ -212,7 +177,8 @@ const SendPackage = () => {
                     }
                   ></i>{" "}
                   Información de Receptor <i className="bi bi-dash-lg"></i>{" "}
-                  <i className="bi bi-circle-fill text-light"></i> Información de paquete
+                  <i className="bi bi-circle-fill text-light"></i> Información
+                  de paquete
                 </p>
                 <Form onSubmit={handleSubmit}>
                   {section === 1 && (
@@ -223,10 +189,10 @@ const SendPackage = () => {
                           <FormGroup>
                             <Input
                               type="text"
-                              id="name"
-                              name="name"
-                              value={shippingDetails.receiver.name}
-                              onChange={(e) => handleChange(e, "receiver")}
+                              id="receiverName"
+                              name="receiverName"
+                              value={shippingDetails.receiverName}
+                              onChange={handleChange}
                               placeholder="Nombre"
                               className="bg-light"
                             />
@@ -236,10 +202,10 @@ const SendPackage = () => {
                           <FormGroup>
                             <Input
                               type="text"
-                              id="surname"
-                              name="surname"
-                              value={shippingDetails.receiver.surname}
-                              onChange={(e) => handleChange(e, "receiver")}
+                              id="receiverSurname"
+                              name="receiverSurname"
+                              value={shippingDetails.receiverSurname}
+                              onChange={handleChange}
                               placeholder="Apellidos"
                               className="bg-light"
                             />
@@ -249,10 +215,10 @@ const SendPackage = () => {
                           <FormGroup>
                             <Input
                               type="text"
-                              id="address"
-                              name="address"
-                              value={shippingDetails.receiver.address}
-                              onChange={(e) => handleChange(e, "receiver")}
+                              id="receiverAddress"
+                              name="receiverAddress"
+                              value={shippingDetails.receiverAddress}
+                              onChange={handleChange}
                               placeholder="Dirección"
                               className="bg-light"
                             />
@@ -262,10 +228,10 @@ const SendPackage = () => {
                           <FormGroup>
                             <Input
                               type="text"
-                              id="phoneNumber"
-                              name="phoneNumber"
-                              value={shippingDetails.receiver.phoneNumber}
-                              onChange={(e) => handleChange(e, "receiver")}
+                              id="receiverPhone"
+                              name="receiverPhone"
+                              value={shippingDetails.receiverPhone}
+                              onChange={handleChange}
                               placeholder="Teléfono"
                               className="bg-light"
                             />
@@ -287,8 +253,8 @@ const SendPackage = () => {
                               type="text"
                               id="name"
                               name="name"
-                              value={shippingDetails.package.name}
-                              onChange={(e) => handleChange(e, "package")}
+                              value={shippingDetails.name}
+                              onChange={handleChange}
                               placeholder="Nombre"
                               className="bg-light"
                             />
@@ -300,8 +266,8 @@ const SendPackage = () => {
                               type="textarea"
                               id="description"
                               name="description"
-                              value={shippingDetails.package.description}
-                              onChange={(e) => handleChange(e, "package")}
+                              value={shippingDetails.description}
+                              onChange={handleChange}
                               placeholder="Descripción"
                               className="bg-light"
                             />
@@ -313,8 +279,8 @@ const SendPackage = () => {
                               type="number"
                               id="weight"
                               name="weight"
-                              value={shippingDetails.package.weight}
-                              onChange={(e) => handleChange(e, "package")}
+                              value={shippingDetails.weight}
+                              onChange={handleChange}
                               placeholder="Peso"
                               className="bg-light"
                             />
@@ -326,7 +292,7 @@ const SendPackage = () => {
                               type="file"
                               id="image"
                               name="image"
-                              value={shippingDetails.package.image}
+                              value={shippingDetails.image}
                               onChange={handleImageUpload}
                               className="bg-light"
                             />

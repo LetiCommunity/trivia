@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { Button, Card, Col, Form, Input, Row } from "reactstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -15,7 +14,7 @@ const SearchTrip = () => {
     const getTravels = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:8989/trivia-api/v1/travels/"
+          "http://localhost:8989/trivia-api/v1/travels"
         );
         setTravels(data);
       } catch (err) {
