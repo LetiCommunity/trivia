@@ -5,6 +5,7 @@ import axios from "axios";
 
 const SearchTrip = () => {
   const [travels, setTravels] = useState([]);
+  let { origin, destiny } = useParams();
   const [searchTrip, setSearchTrip] = useState({
     origin: "",
     destiny: "",
@@ -14,7 +15,7 @@ const SearchTrip = () => {
     const getTravels = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:8989/trivia-api/v1/travels"
+          "http://localhost:8989/trivia-api/v1/travels/"
         );
         setTravels(data);
       } catch (err) {
@@ -30,6 +31,8 @@ const SearchTrip = () => {
       ...prevSearchTrip,
       [name]: value,
     }));
+    console.log(origin, destiny);
+    
   };
 
   const handleSubmit = (event) => {
@@ -57,7 +60,7 @@ const SearchTrip = () => {
               <div className="search_trip2">
                 <Form onSubmit={handleSubmit}>
                   <Row>
-                    <Col md="5" sm="4" xs="4">
+                    <Col md="6" sm="6" xs="6">
                       <div className="py-1">
                         <Input
                           type="text"
@@ -70,7 +73,7 @@ const SearchTrip = () => {
                         />
                       </div>
                     </Col>
-                    <Col md="5" sm="4" xs="4">
+                    <Col md="6" sm="6" xs="6">
                       <div className="py-1">
                         <Input
                           type="text"
@@ -81,16 +84,6 @@ const SearchTrip = () => {
                           placeholder="¿Cuál es la ciudad de destino?"
                           className="form-control-lg border-0 border-bottom"
                         />
-                      </div>
-                    </Col>
-                    <Col md="2" sm="4" xs="4">
-                      <div className="d-grid gap-2 py-2">
-                        <Button
-                          type="submit"
-                          className="btn btn-info text-white form-control-lg"
-                        >
-                          Buscar
-                        </Button>
                       </div>
                     </Col>
                   </Row>

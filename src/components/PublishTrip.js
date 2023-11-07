@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Card,
@@ -11,62 +12,50 @@ import {
 } from "reactstrap";
 
 const PublishTrip = () => {
+  let navigate = useNavigate();
+  const token = localStorage.getItem("token");
   const [section, setSection] = useState(1);
   const [error, setError] = useState("");
   const [showPlaceholderDate, setShowPlaceholderDate] = useState(true);
   const [showPlaceholderBilling, setShowPlaceholderBilling] = useState(true);
-  const [travelData, setTravelData] = useState({
-    user: {
-      id: "",
-    },
-    travel: {
-      from: "",
-      to: "",
-      date: "",
-      airport: "",
-      terminal: "",
-      company: "",
-      billingDate: "",
-      availableWeight: "",
-    },
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+  const [travel, setTravel] = useState({
+    origin: "",
+    destination: "",
+    date: "",
+    airport: "",
+    terminal: "",
+    company: "",
+    billingDate: "",
+    availableWeight: "",
   });
 
-  const handleChange = (event, parentField) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-
-    setTravelData((prevTravelData) => {
-      if (parentField) {
-        return {
-          ...prevTravelData,
-          [parentField]: {
-            ...prevTravelData[parentField],
-            [name]: value,
-          },
-        };
-      } else {
-        return {
-          ...prevTravelData,
-          [name]: value,
-        };
-      }
-    });
+    setTravel((prevTravel) => ({
+      ...prevTravel,
+      [name]: value,
+    }));
   };
 
   const nextSection = () => {
     if (section < 2) {
       const data = {
-        from: travelData.travel.from,
-        to: travelData.travel.to,
-        date: travelData.travel.date,
-        airport: travelData.travel.airport,
-        terminal: travelData.travel.terminal,
-        company: travelData.travel.company,
-        billingDate: travelData.travel.billingDate,
+        origin: travel.origin,
+        destination: travel.destination,
+        date: travel.date,
+        airport: travel.airport,
+        terminal: travel.terminal,
+        company: travel.company,
+        billingDate: travel.billingDate,
       };
 
       if (
-        !data.from ||
-        !data.to ||
+        !data.origin ||
+        !data.destination ||
         !data.date ||
         !data.airport ||
         !data.terminal ||
@@ -78,8 +67,8 @@ const PublishTrip = () => {
       }
 
       if (
-        data.from.trim() === "" ||
-        data.to.trim() === "" ||
+        data.origin.trim() === "" ||
+        data.destination.trim() === "" ||
         data.airport.trim() === "" ||
         data.terminal.trim() === "" ||
         data.company.trim() === ""
@@ -100,24 +89,18 @@ const PublishTrip = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const data = {
-      user: {
-        id: travelData.user.id,
-      },
-      travel: {
-        from: travelData.travel.from,
-        to: travelData.travel.to,
-        date: travelData.travel.date,
-        airport: travelData.travel.airport,
-        terminal: travelData.travel.terminal,
-        company: travelData.travel.company,
-        billingDate: travelData.travel.billingDate,
-        availableWeight: travelData.travel.availableWeight,
-      },
+      origin: travel.origin,
+      destination: travel.destination,
+      date: travel.date,
+      airport: travel.airport,
+      terminal: travel.terminal,
+      company: travel.company,
+      billingDate: travel.billingDate,
+      availableWeight: travel.availableWeight,
     };
 
-    if (!data.travel.availableWeight) {
+    if (!data.availableWeight) {
       setError("Por favor, rellena todos los campos");
       return;
     }
@@ -130,41 +113,22 @@ const PublishTrip = () => {
     //   return;
     // }
 
-    /**try {
-      const response = await fetch("http://localhost:8080/api/login", {
+    if (!token) {
+      localStorage.setItem("travel", JSON.stringify(data));
+      return navigate("/login");
+    }
+
+    try {
+      await fetch("http://localhost:8989/trivia-api/v1/travels/save", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: headers,
         body: JSON.stringify(data),
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        const token = data.token;
-        localStorage.setItem("token", token);
-        window.location.href = "/admin/dashboard";
-      }
+      return navigate("/actities");
     } catch (error) {
       console.error("Error", error);
-    }*/
-
-    setTravelData({
-      user: {
-        id: "",
-      },
-      travel: {
-        from: "",
-        to: "",
-        date: "",
-        airport: "",
-        terminal: "",
-        company: "",
-        billingDate: "",
-        availableWeight: "",
-      },
-    });
-    setError("");
+      return;
+    }
   };
 
   return (
@@ -178,6 +142,8 @@ const PublishTrip = () => {
             <Card className="border-0 shadow-lg bg-white">
               <CardBody>
                 <p className="text-center">
+                  <i className="bi bi-circle-fill text-info"></i> Información de
+                  viaje <i className="bi bi-dash-lg"></i>{" "}
                   <i
                     className={
                       section === 2
@@ -185,8 +151,7 @@ const PublishTrip = () => {
                         : "bi bi-circle-fill text-light"
                     }
                   ></i>{" "}
-                  Información de viaje <i className="bi bi-dash-lg"></i>{" "}
-                  <i className="bi bi-circle-fill text-light"></i> Disponibilidad
+                  Disponibilidad
                 </p>
                 <Form onSubmit={handleSubmit}>
                   {section === 1 && (
@@ -197,10 +162,10 @@ const PublishTrip = () => {
                           <FormGroup>
                             <Input
                               type="text"
-                              id="from"
-                              name="from"
-                              value={travelData.travel.from}
-                              onChange={(e) => handleChange(e, "travel")}
+                              id="origin"
+                              name="origin"
+                              value={travel.origin}
+                              onChange={handleChange}
                               placeholder="Lugar de origen"
                               className="bg-light"
                             />
@@ -210,10 +175,10 @@ const PublishTrip = () => {
                           <FormGroup>
                             <Input
                               type="text"
-                              id="to"
-                              name="to"
-                              value={travelData.travel.to}
-                              onChange={(e) => handleChange(e, "travel")}
+                              id="destination"
+                              name="destination"
+                              value={travel.destination}
+                              onChange={handleChange}
                               placeholder="Lugar de destino"
                               className="bg-light"
                             />
@@ -225,8 +190,8 @@ const PublishTrip = () => {
                               type={showPlaceholderDate ? "text" : "date"}
                               id="date"
                               name="date"
-                              value={travelData.travel.date}
-                              onChange={(e) => handleChange(e, "travel")}
+                              value={travel.date}
+                              onChange={handleChange}
                               onFocus={() => setShowPlaceholderDate(false)}
                               onBlur={() => setShowPlaceholderDate(true)}
                               placeholder="Fecha de viaje"
@@ -240,8 +205,8 @@ const PublishTrip = () => {
                               type="text"
                               id="airport"
                               name="airport"
-                              value={travelData.travel.airport}
-                              onChange={(e) => handleChange(e, "travel")}
+                              value={travel.airport}
+                              onChange={handleChange}
                               placeholder="Aeropuerto de destino"
                               className="bg-light"
                             />
@@ -253,8 +218,8 @@ const PublishTrip = () => {
                               type="text"
                               id="terminal"
                               name="terminal"
-                              value={travelData.travel.terminal}
-                              onChange={(e) => handleChange(e, "travel")}
+                              value={travel.terminal}
+                              onChange={handleChange}
                               placeholder="Terminal de destino"
                               className="bg-light"
                             />
@@ -266,8 +231,8 @@ const PublishTrip = () => {
                               type="text"
                               id="company"
                               name="company"
-                              value={travelData.travel.company}
-                              onChange={(e) => handleChange(e, "travel")}
+                              value={travel.company}
+                              onChange={handleChange}
                               placeholder="Compañía con la que viaja"
                               className="bg-light"
                             />
@@ -279,8 +244,8 @@ const PublishTrip = () => {
                               type={showPlaceholderBilling ? "text" : "date"}
                               id="billingDate"
                               name="billingDate"
-                              value={travelData.travel.billingDate}
-                              onChange={(e) => handleChange(e, "travel")}
+                              value={travel.billingDate}
+                              onChange={handleChange}
                               onFocus={() => setShowPlaceholderBilling(false)}
                               onBlur={() => setShowPlaceholderDate(true)}
                               placeholder="Fecha de facturación"
@@ -304,9 +269,9 @@ const PublishTrip = () => {
                               type="number"
                               id="availableWeight"
                               name="availableWeight"
-                              value={travelData.travel.availableWeight}
-                              onChange={(e) => handleChange(e, "travel")}
-                              placeholder="Peso disponible"
+                              value={travel.availableWeight}
+                              onChange={handleChange}
+                              placeholder="¿Con cuánto peso puedes viajar (en quilos)?"
                             />
                           </FormGroup>
                         </Col>

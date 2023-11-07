@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Card,
@@ -11,6 +12,7 @@ import {
 } from "reactstrap";
 
 const SendPackage = () => {
+  let navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [section, setSection] = useState(1);
   const [imageUrl, setImageUrl] = useState("");
@@ -128,34 +130,22 @@ const SendPackage = () => {
       return;
     }
 
-    if(!token) {
-      localStorage.setItem("package", data);
-      window.location.href = "/signin";
+    if (!token) {
+      localStorage.setItem("package", JSON.stringify(data));
+      return navigate("/login");;
     }
+
     try {
       await fetch("http://localhost:8989/trivia-api/v1/packages", {
         method: "POST",
         headers: headers,
         body: JSON.stringify(data),
       });
-      window.location.href = "/home";
+      return navigate("/actities");
     } catch (error) {
       console.error("Error", error);
       return;
     }
-
-    setShippingDetails({
-      name: "",
-      description: "",
-      weight: "",
-      image: "",
-      receiverName: "",
-      receiverSurname: "",
-      receiverAddress: "",
-      receiverPhone: "",
-    });
-    setError("");
-    
   };
 
   return (
@@ -169,6 +159,8 @@ const SendPackage = () => {
             <Card className="border-0 shadow-lg bg-white">
               <CardBody>
                 <p className="text-center">
+                  <i className="bi bi-circle-fill text-info"></i> Información de
+                  Receptor <i className="bi bi-dash-lg"></i>{" "}
                   <i
                     className={
                       section === 2
@@ -176,9 +168,7 @@ const SendPackage = () => {
                         : "bi bi-circle-fill text-light"
                     }
                   ></i>{" "}
-                  Información de Receptor <i className="bi bi-dash-lg"></i>{" "}
-                  <i className="bi bi-circle-fill text-light"></i> Información
-                  de paquete
+                  Información de paquete
                 </p>
                 <Form onSubmit={handleSubmit}>
                   {section === 1 && (
@@ -281,7 +271,7 @@ const SendPackage = () => {
                               name="weight"
                               value={shippingDetails.weight}
                               onChange={handleChange}
-                              placeholder="Peso"
+                              placeholder="Peso aproximado..."
                               className="bg-light"
                             />
                           </FormGroup>

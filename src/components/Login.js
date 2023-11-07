@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Card,
@@ -11,6 +12,8 @@ import {
 } from "reactstrap";
 
 const Login = () => {
+  const localStorageData = localStorage.getItem("package");
+  let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [user, setUser] = useState({
@@ -46,20 +49,27 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8989/trivia-api/v1/auth/signin", {
-        mode:"cors",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "http://localhost:8989/trivia-api/v1/auth/signin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
         const token = data.token;
         localStorage.setItem("token", token);
-        window.location.href = "/profile";
+        if (localStorageData) {
+          //return navigate("/activities");
+          return window.location.href = "/activities";
+        }
+        //return navigate("/home");
+        return window.location.href = "/home";
       }
     } catch (error) {
       console.error("Error", error);

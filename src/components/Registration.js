@@ -127,7 +127,7 @@ const Registration = () => {
     setError("");
     window.location.href = "/login";
   };
-  
+
   return (
     <Fragment>
       <div className="content">
@@ -139,6 +139,8 @@ const Registration = () => {
             <Card className="border-0 shadow-lg bg-white">
               <CardBody>
                 <p className="text-center">
+                  <i className="bi bi-circle-fill text-info"></i> Información
+                  Personal <i className="bi bi-dash-lg"></i>{" "}
                   <i
                     className={
                       section === 2
@@ -146,8 +148,7 @@ const Registration = () => {
                         : "bi bi-circle-fill text-light"
                     }
                   ></i>{" "}
-                  Información Personal <i className="bi bi-dash-lg"></i>{" "}
-                  <i className="bi bi-circle-fill text-light"></i> Información de Cuenta
+                  Información de Cuenta
                 </p>
                 <Form onSubmit={handleSubmit}>
                   {section === 1 && (
