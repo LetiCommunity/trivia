@@ -11,21 +11,18 @@ import {
   Row,
 } from "reactstrap";
 
-const SendPackage = () => {
+const SendPackage = ({ token }) => {
   let navigate = useNavigate();
-  const token = localStorage.getItem("token");
   const [section, setSection] = useState(1);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(null);
   const [error, setError] = useState("");
   const headers = {
     "Authorization": `Bearer ${token}`,
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
   };
   const [shippingDetails, setShippingDetails] = useState({
-    name: "",
     description: "",
     weight: "",
-    image: "",
     receiverName: "",
     receiverSurname: "",
     receiverAddress: "",
@@ -57,15 +54,13 @@ const SendPackage = () => {
     if (file.size > maxSize) {
       return;
     }
-
+    setImageUrl(file);
     // Creates an instance of FileReader to read the file
-    const reader = new FileReader();
-    // Defines a callback function for when the reading of the file is completed.
-    reader.onloadend = () => {
-      const imageUrl = reader.result;
-      setImageUrl(imageUrl);
-    };
-    reader.readAsDataURL(file);
+    // const reader = new FileReader();
+    // // Defines a callback function for when the reading of the file is completed.
+    // reader.onloadend = () => {
+    //   setImageUrl(reader.result);
+    // };
   };
 
   const nextSection = () => {
@@ -110,29 +105,28 @@ const SendPackage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
-      name: shippingDetails.name,
       description: shippingDetails.description,
       weight: shippingDetails.weight,
-      image: shippingDetails.image,
+      image: imageUrl,
       receiverName: shippingDetails.receiverName,
       receiverSurname: shippingDetails.receiverSurname,
       receiverAddress: shippingDetails.receiverAddress,
       receiverPhone: shippingDetails.receiverPhone,
     };
 
-    if (!data.name || !data.description || !data.weight) {
+    if (!data.description || !data.weight) {
       setError("Por favor, rellena todos los campos");
       return;
     }
 
-    if (data.name.trim() === "" || data.description.trim() === "") {
+    if (data.description.trim() === "") {
       setError("Por favor, revisa los espacios al inicio de los textos");
       return;
     }
 
     if (!token) {
       localStorage.setItem("package", JSON.stringify(data));
-      return navigate("/login");;
+      return navigate("/login");
     }
 
     try {
@@ -141,7 +135,7 @@ const SendPackage = () => {
         headers: headers,
         body: JSON.stringify(data),
       });
-      return navigate("/actities");
+      //return navigate("/actities");
     } catch (error) {
       console.error("Error", error);
       return;
@@ -240,19 +234,6 @@ const SendPackage = () => {
                         <Col md="12">
                           <FormGroup>
                             <Input
-                              type="text"
-                              id="name"
-                              name="name"
-                              value={shippingDetails.name}
-                              onChange={handleChange}
-                              placeholder="Nombre"
-                              className="bg-light"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col md="12">
-                          <FormGroup>
-                            <Input
                               type="textarea"
                               id="description"
                               name="description"
@@ -282,7 +263,6 @@ const SendPackage = () => {
                               type="file"
                               id="image"
                               name="image"
-                              value={shippingDetails.image}
                               onChange={handleImageUpload}
                               className="bg-light"
                             />

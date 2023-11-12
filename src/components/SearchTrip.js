@@ -32,7 +32,6 @@ const SearchTrip = () => {
       [name]: value,
     }));
     console.log(origin, destiny);
-    
   };
 
   const handleSubmit = (event) => {
@@ -98,7 +97,7 @@ const SearchTrip = () => {
               <div className="my-5 py-5 search_trip_found">
                 {travels.map((travel) => {
                   return (
-                    <a key={travel.id} href="#p" className="text_decoration_a">
+                    <div key={travel.id}>
                       <div className="rounded bg-white text-dark p-3"></div>
                       <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
                         <div className="input_wrapper">
@@ -113,7 +112,7 @@ const SearchTrip = () => {
                         </p>
                         <p className="text-size">{travel.date}</p>
                       </Card>
-                    </a>
+                    </div>
                   );
                 })}
               </div>

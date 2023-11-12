@@ -126,10 +126,8 @@ const Home = () => {
                     <div>
                       <h5>Envíos al mejor precio</h5>
                       <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Maxime mollitia, molestiae quas vel sint commodi
-                        repudiandae consequuntur voluptatum laborum numquam
-                        blanditiis harum.
+                        Gracias a nuestra red de viajeros, ofrecemos los mejores
+                        precios del mercado.
                       </p>
                     </div>
                   </div>
@@ -142,10 +140,8 @@ const Home = () => {
                     <div>
                       <h5>Envíos seguros</h5>
                       <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Maxime mollitia, molestiae quas vel sint commodi
-                        repudiandae consequuntur voluptatum laborum numquam
-                        blanditiis harum.
+                        Trivia se encarga de que su paquete llegue al destino
+                        con toda la garantía de seguridad.
                       </p>
                     </div>
                   </div>
@@ -158,10 +154,9 @@ const Home = () => {
                     <div>
                       <h5>Variedad de fechas disponibles</h5>
                       <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Maxime mollitia, molestiae quas vel sint commodi
-                        repudiandae consequuntur voluptatum laborum numquam
-                        blanditiis harum.
+                        Gracias a nuestra extensa red de viajeros, ofrecemos una
+                        variedad de fechas para que usted pueda enviar su
+                        paquete cuando quiera.
                       </p>
                     </div>
                   </div>
@@ -185,10 +180,9 @@ const Home = () => {
                   <div>
                     <h3>Gana dinero viajando</h3>
                     <p className="">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Maxime mollitia, molestiae quas vel sint commodi
-                      repudiandae consequuntur voluptatum laborum numquam
-                      blanditiis harum.
+                      Gane dinero adicional compartiendo el espacio de su
+                      equipaje. Compense los gastos del viaje con ese dinero
+                      adicional.
                     </p>
                     <div className="text-center">
                       <Button
@@ -275,7 +269,7 @@ const Home = () => {
                 </Col>
               </Row>
             </div>
-            <div>
+            {/* <div>
               <Button
                 type="button"
                 onClick={handleSearchTrip}
@@ -285,7 +279,7 @@ const Home = () => {
               >
                 Ver más
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

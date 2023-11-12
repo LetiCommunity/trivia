@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   Button,
   Card,
@@ -12,7 +13,8 @@ import {
 } from "reactstrap";
 
 const Login = () => {
-  const localStorageData = localStorage.getItem("package");
+  const localStoragePackage = localStorage.getItem("package");
+  const localStorageTravel = localStorage.getItem("travel");
   let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -49,37 +51,26 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch(
+      const { response } = await axios.post(
         "http://localhost:8989/trivia-api/v1/auth/signin",
+        data,
         {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
         }
       );
 
-      if (response.ok) {
-        const data = await response.json();
-        const token = data.token;
-        localStorage.setItem("token", token);
-        if (localStorageData) {
-          //return navigate("/activities");
-          return window.location.href = "/activities";
-        }
-        //return navigate("/home");
-        return window.location.href = "/home";
+      localStorage.setItem("token", JSON.stringify(response.data.token));
+      if (localStoragePackage || localStorageTravel) {
+        //return navigate("/activities");
+        return (window.location.href = "/activities");
       }
+      //return navigate("/home");
+      return (window.location.href = "/home");
     } catch (error) {
       console.error("Error", error);
     }
-
-    setUser({
-      username: "",
-      password: "",
-    });
-    setError("");
   };
   return (
     <Fragment>
@@ -148,12 +139,12 @@ const Login = () => {
                   </Row>
                 </Form>
                 <p>
-                  ¿No tienes cuenta?{" "}
+                  ¿No tiene cuenta?{" "}
                   <a
                     href="registration"
                     className="text-info text_decoration_a"
                   >
-                    Regístrate
+                    Regístrese
                   </a>
                 </p>
               </CardBody>

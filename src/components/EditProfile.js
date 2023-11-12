@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   Button,
   Card,
@@ -11,8 +13,14 @@ import {
 } from "reactstrap";
 import inicialImage from "../assets/img/user.png";
 
-const EditProfile = () => {
+const EditProfile = ({ token }) => {
+  let navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState("");
+  const [error, setError] = useState("");
+  const headers = {
+    "Authorization": `Bearer ${token}`,
+    "Content-Type": "multipart/form-data",
+  };
   const [user, setUser] = useState({
     id: "",
     image: "",
@@ -59,7 +67,42 @@ const EditProfile = () => {
     reader.readAsDataURL(file);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const data = {
+      id: user.id,
+      name: user.name,
+      surname: user.surname,
+      email: user.email,
+      username: user.username,
+    };
+
+    if (!data.name || !data.surname || !data.username) {
+      setError("Por favor, rellena todos los campos");
+      return;
+    }
+
+    if (
+      data.name.trim() === "" ||
+      data.surname.trim() === "" ||
+      data.username.trim() === ""
+    ) {
+      setError("Por favor, revisa los espacios al inicio de los textos");
+      return;
+    }
+
+    try {
+      await axios.post(
+        `http://localhost:8080/trivia-api/v1/users/${data.id}`,
+        data,
+        { headers }
+      );
+      return navigate("/activities");
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
 
   return (
     <div className="content">
@@ -106,7 +149,7 @@ const EditProfile = () => {
                       onChange={handleImageUpload}
                       className="bg-light"
                     />
-                  </FormGroup>                  
+                  </FormGroup>
                   <FormGroup>
                     <Input
                       placeholder="Nombre"
@@ -125,6 +168,17 @@ const EditProfile = () => {
                       id="surname"
                       name="surname"
                       value={user.surname}
+                      onChange={handleChange}
+                      className="form-control bg-light"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Input
+                      placeholder="Email"
+                      type="text"
+                      id="email"
+                      name="email"
+                      value={user.email}
                       onChange={handleChange}
                       className="form-control bg-light"
                     />

@@ -110,22 +110,11 @@ const Registration = () => {
         },
         body: JSON.stringify(data),
       });
+      window.location.href = "/login";
     } catch (error) {
       console.error("Error", error);
       return;
     }
-
-    setUser({
-      name: "",
-      surname: "",
-      phoneNumber: "",
-      email: "",
-      username: "",
-      password: "",
-      passwordConfirmation: "",
-    });
-    setError("");
-    window.location.href = "/login";
   };
 
   return (

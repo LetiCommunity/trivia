@@ -11,15 +11,14 @@ import {
   Row,
 } from "reactstrap";
 
-const PublishTrip = () => {
+const PublishTrip = ({ token }) => {
   let navigate = useNavigate();
-  const token = localStorage.getItem("token");
   const [section, setSection] = useState(1);
   const [error, setError] = useState("");
   const [showPlaceholderDate, setShowPlaceholderDate] = useState(true);
   const [showPlaceholderBilling, setShowPlaceholderBilling] = useState(true);
   const headers = {
-    Authorization: `Bearer ${token}`,
+    "Authorization": `Bearer ${token}`,
     "Content-Type": "application/json",
   };
   const [travel, setTravel] = useState({

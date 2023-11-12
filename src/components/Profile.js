@@ -1,6 +1,8 @@
-import React, { Fragment, useState } from "react";
-import PropTypes from "prop-types";
+import React, { Fragment, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
+  Button,
   Card,
   CardBody,
   Col,
@@ -12,23 +14,38 @@ import {
 } from "reactstrap";
 import inicialImage from "../assets/img/user.png";
 
-const Profile = () => {
+const Profile = ({ token }) => {
+  let navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState("");
-  const [pidModal, setPidModal] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const headers = {
+    "Authorization": `Bearer ${token}`,
+    "Content-Type": "multipart/form-data",
+  };
   const [user, setUser] = useState({
     id: "",
-    pid: "",
     image: "",
     name: "",
     surname: "",
     phoneNumber: "",
-    email: "",
     username: "",
-    password: "",
-    passwordConfirmation: "",
   });
+
+  useEffect(() => {
+    const getProfile = async () => {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:8989/trivia-api/v1/users/profile",
+          { headers }
+        );
+        setUser(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getProfile();
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -39,31 +56,24 @@ const Profile = () => {
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  };
+
+  const handleConfirmationPhone = async (event) => {
     event.preventDefault();
 
     const data = {
-      name: user.name,
-      pid: user.pid,
-      surname: user.surname,
       phoneNumber: user.phoneNumber,
-      email: user.email,
-      username: user.username,
-      password: user.password,
-      passwordConfirmation: user.passwordConfirmation,
     };
 
-    if (!data.username || !data.password || !data.passwordConfirmation) {
-      setError("Por favor, rellena todos los campos");
+    if (!data.phoneNumber) {
+      setError("Por favor, ponga un número de teléfono válido");
       return;
     }
 
-    if (
-      data.username.trim() === "" ||
-      data.password.trim() === "" ||
-      data.passwordConfirmation.trim() === ""
-    ) {
-      setError("Por favor, revisa los espacios al inicio de los textos");
+    if (data.phoneNumber.trim() === "") {
+      setError("Por favor, revise los espacios al inicio del texto");
       return;
     }
 
@@ -73,24 +83,15 @@ const Profile = () => {
       );
       return;
     }
-    /**try {
-      const response = await fetch("http://localhost:8080/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        const token = data.token;
-        localStorage.setItem("token", token);
-        window.location.href = "/admin/dashboard";
-      }
+    try {
+      await axios.post(
+        `http://localhost:8080/trivia-api/v1/users/${data.id}`,
+        data,
+        { headers }
+      );
     } catch (error) {
       console.error("Error", error);
-    }*/
+    }
 
     setUser({
       name: "",
@@ -105,12 +106,23 @@ const Profile = () => {
     setError("");
   };
 
-  const togglePidModal = () => {
-    setPidModal(!pidModal);
+  const handlePasswordChange = () => {
+    return navigate("/logout");
   };
 
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
+  const handleDeleteAccount = async () => {
+    try {
+      await axios.delete("http://localhost:8989/trivia-api/v1/users/profile", {
+        headers,
+      });
+      return (window.location.href = "/home");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleLogout = () => {
+    return navigate("/logout");
   };
 
   return (
@@ -137,7 +149,7 @@ const Profile = () => {
                       src={inicialImage}
                     />
                   )}
-                  <h3>Usuario</h3>
+                  <h3>{user.username}</h3>
                   <a
                     href="edit-profile"
                     className="text-info text_decoration_a"
@@ -150,21 +162,15 @@ const Profile = () => {
                   <h3>Confirmación de perfil</h3>
                   <ul>
                     <li>
-                      <a
-                        href="#p"
-                        className="text-info text_decoration_a"
-                        onClick={togglePidModal}
-                      >
-                        Confirmar el Documento de Identidad Personal
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="document-confirmation"
-                        className="text-info text_decoration_a"
+                      <Button
+                        type="button"
+                        onClick={toggleModal}
+                        color="link"
+                        outline={true}
+                        className="text-info"
                       >
                         Confirmar el número de teléfono
-                      </a>
+                      </Button>
                     </li>
                   </ul>
                 </div>
@@ -173,28 +179,37 @@ const Profile = () => {
                   <h3>Cuenta</h3>
                   <ul>
                     <li>
-                      <a
-                        href="document-confirmation"
-                        className="text-info text_decoration_a"
+                      <Button
+                        type="button"
+                        onClick={handlePasswordChange}
+                        color="link"
+                        outline={true}
+                        className="text-info"
                       >
                         Cambiar contraseña
-                      </a>
+                      </Button>
                     </li>
                     <li>
-                      <a
-                        href="document-confirmation"
-                        className="text-info text_decoration_a"
+                      <Button
+                        type="button"
+                        onClick={handleDeleteAccount}
+                        color="link"
+                        outline={true}
+                        className="text-info"
                       >
                         Eliminar cuenta
-                      </a>
+                      </Button>
                     </li>
                     <li>
-                      <a
-                        href="document-confirmation"
-                        className="text-info text_decoration_a"
+                      <Button
+                        type="button"
+                        onClick={handleLogout}
+                        color="link"
+                        outline={true}
+                        className="text-info"
                       >
                         Cerrar sesión
-                      </a>
+                      </Button>
                     </li>
                   </ul>
                 </div>
@@ -206,41 +221,27 @@ const Profile = () => {
           <Col md="12">
             <Modal
               className="px-2 pt-2 pb-2"
-              isOpen={pidModal}
-              toggle={togglePidModal}
+              isOpen={modalOpen}
+              toggle={toggleModal}
               backdrop={false}
             >
               <div className="modal-header">
                 <h4 className="modal-title">
                   Confirmación de número de teléfono
                 </h4>
-                <button
-                  type="button"
-                  className="close"
-                  onClick={togglePidModal}
-                >
+                <button type="button" className="close" onClick={toggleModal}>
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div className="model-body px-2 mt-2">
-                <Form onSubmit={handleSubmit}>
-                  <FormGroup>
-                    <Input
-                      type="hidden"
-                      id="id"
-                      name="id"
-                      value={user.id}
-                      onChange={handleChange}
-                      className="form-control"
-                    />
-                  </FormGroup>
+                <Form onSubmit={handleConfirmationPhone}>
                   <FormGroup>
                     <Input
                       placeholder="Número de teléfono"
                       type="text"
                       id="phoneNumber"
                       name="phoneNumber"
-                      value={user.pid}
+                      value={user.phoneNumber}
                       onChange={handleChange}
                       className="form-control"
                       color="Black"
