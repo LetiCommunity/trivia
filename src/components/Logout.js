@@ -6,11 +6,13 @@ const Logout = async () => {
 
     if (response.ok) {
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
       return window.location.href = "/home";
     }
   } catch (error) {
     console.error("Error", error);
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     return window.location.href = "/home";
   }
 };

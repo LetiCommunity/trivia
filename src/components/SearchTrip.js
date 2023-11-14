@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Button, Card, Col, Form, Input, Row } from "reactstrap";
+import { Card, Col, Form, Input, Row } from "reactstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -15,7 +15,7 @@ const SearchTrip = () => {
     const getTravels = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:8989/trivia-api/v1/travels/"
+          "http://localhost:5000/api/trivia/travels"
         );
         setTravels(data);
       } catch (err) {
@@ -31,23 +31,6 @@ const SearchTrip = () => {
       ...prevSearchTrip,
       [name]: value,
     }));
-    console.log(origin, destiny);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = {
-      origin: searchTrip.origin,
-      destiny: searchTrip.destiny,
-    };
-
-    if (!data.origin || !data.destiny) {
-      return;
-    }
-
-    if (data.origin.trim() === "" || data.destiny.trim() === "") {
-      return;
-    }
   };
 
   return (
@@ -57,36 +40,34 @@ const SearchTrip = () => {
           <Row className="justify-content-center">
             <Col md="9" sm="11" xs="11">
               <div className="search_trip2">
-                <Form onSubmit={handleSubmit}>
-                  <Row>
-                    <Col md="6" sm="6" xs="6">
-                      <div className="py-1">
-                        <Input
-                          type="text"
-                          id="origin"
-                          name="origin"
-                          value={searchTrip.origin}
-                          onChange={handleChange}
-                          placeholder="¿Desde qué ciudad hace el envío?"
-                          className="form-control-lg border-0 border-bottom"
-                        />
-                      </div>
-                    </Col>
-                    <Col md="6" sm="6" xs="6">
-                      <div className="py-1">
-                        <Input
-                          type="text"
-                          id="destiny"
-                          name="destiny"
-                          value={searchTrip.destiny}
-                          onChange={handleChange}
-                          placeholder="¿Cuál es la ciudad de destino?"
-                          className="form-control-lg border-0 border-bottom"
-                        />
-                      </div>
-                    </Col>
-                  </Row>
-                </Form>
+                <Row>
+                  <Col md="6" sm="6" xs="6">
+                    <div className="py-1">
+                      <Input
+                        type="text"
+                        id="origin"
+                        name="origin"
+                        value={searchTrip.origin}
+                        onChange={handleChange}
+                        placeholder="¿Desde qué ciudad hace el envío?"
+                        className="form-control-lg border-0 border-bottom"
+                      />
+                    </div>
+                  </Col>
+                  <Col md="6" sm="6" xs="6">
+                    <div className="py-1">
+                      <Input
+                        type="text"
+                        id="destiny"
+                        name="destiny"
+                        value={searchTrip.destiny}
+                        onChange={handleChange}
+                        placeholder="¿Cuál es la ciudad de destino?"
+                        className="form-control-lg border-0 border-bottom"
+                      />
+                    </div>
+                  </Col>
+                </Row>
               </div>
             </Col>
           </Row>

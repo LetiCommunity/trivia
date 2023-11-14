@@ -13,21 +13,23 @@ import {
 } from "reactstrap";
 import inicialImage from "../assets/img/user.png";
 
-const EditProfile = ({ token }) => {
+const EditProfile = () => {
+  const token = localStorage.getItem("token");
+  const userData = JSON.parse(localStorage.getItem("user"));
   let navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState("");
   const headers = {
-    "Authorization": `Bearer ${token}`,
+    token: `${token}`,
     "Content-Type": "multipart/form-data",
   };
   const [user, setUser] = useState({
-    id: "",
-    image: "",
-    name: "",
-    surname: "",
-    email: "",
-    username: "",
+    _id: userData._id,
+    image: userData.image,
+    name: userData.name,
+    surname: userData.surname,
+    email: userData.email,
+    username: userData.username,
   });
 
   const handleChange = (event) => {
@@ -94,7 +96,7 @@ const EditProfile = ({ token }) => {
 
     try {
       await axios.post(
-        `http://localhost:8080/trivia-api/v1/users/${data.id}`,
+        `http://localhost:5000/api/trivia/users/${data.id}`,
         data,
         { headers }
       );
@@ -133,9 +135,9 @@ const EditProfile = ({ token }) => {
                   <FormGroup>
                     <Input
                       type="hidden"
-                      id="id"
-                      name="id"
-                      value={user.id}
+                      id="_id"
+                      name="_id"
+                      value={user._id}
                       onChange={handleChange}
                       className="form-control"
                     />

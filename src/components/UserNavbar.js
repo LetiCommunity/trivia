@@ -53,10 +53,10 @@ const UserNavbar = ({ token }) => {
                   <NavLink href="activity">Actividad</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="send-package">Haz un envío</NavLink>
+                  <NavLink href="send-package">Realizar envío</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="publish-trip">Publica un viaje</NavLink>
+                  <NavLink href="publish-trip">Publicar viaje</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink href="profile">Perfil</NavLink>

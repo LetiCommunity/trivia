@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   Button,
   Card,
@@ -11,14 +12,15 @@ import {
   Row,
 } from "reactstrap";
 
-const PublishTrip = ({ token }) => {
+const PublishTrip = () => {
+  const token = localStorage.getItem("token");
   let navigate = useNavigate();
   const [section, setSection] = useState(1);
   const [error, setError] = useState("");
   const [showPlaceholderDate, setShowPlaceholderDate] = useState(true);
   const [showPlaceholderBilling, setShowPlaceholderBilling] = useState(true);
   const headers = {
-    "Authorization": `Bearer ${token}`,
+    token: `${token}`,
     "Content-Type": "application/json",
   };
   const [travel, setTravel] = useState({
@@ -104,26 +106,16 @@ const PublishTrip = ({ token }) => {
       return;
     }
 
-    // if (
-    //   data.package.name.trim() === "" ||
-    //   data.package.description.trim() === ""
-    // ) {
-    //   setError("Por favor, revisa los espacios al inicio de los textos");
-    //   return;
-    // }
-
     if (!token) {
       localStorage.setItem("travel", JSON.stringify(data));
       return navigate("/login");
     }
 
     try {
-      await fetch("http://localhost:8989/trivia-api/v1/travels/save", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(data),
+      await axios.post("http://localhost:5000/api/trivia/travels", data, {
+        headers,
       });
-      return navigate("/actities");
+      return navigate("/activity");
     } catch (error) {
       console.error("Error", error);
       return;

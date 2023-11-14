@@ -1,109 +1,17 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {
-  Button,
-  Card,
-  CardBody,
-  Col,
-  Form,
-  FormGroup,
-  Input,
-  Modal,
-  Row,
-} from "reactstrap";
+import { Button, Card, CardBody, Col, Row } from "reactstrap";
 import inicialImage from "../assets/img/user.png";
 
-const Profile = ({ token }) => {
+const Profile = () => {
+  const userData = JSON.parse(localStorage.getItem("user"));
   let navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState("");
-  const [error, setError] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  const headers = {
-    "Authorization": `Bearer ${token}`,
-    "Content-Type": "multipart/form-data",
-  };
-  const [user, setUser] = useState({
-    id: "",
-    image: "",
-    name: "",
-    surname: "",
-    phoneNumber: "",
-    username: "",
-  });
-
-  useEffect(() => {
-    const getProfile = async () => {
-      try {
-        const { data } = await axios.get(
-          "http://localhost:8989/trivia-api/v1/users/profile",
-          { headers }
-        );
-        setUser(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    getProfile();
-  }, []);
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
-  };
 
   const toggleModal = () => {
     setModalOpen(!modalOpen);
-  };
-
-  const handleConfirmationPhone = async (event) => {
-    event.preventDefault();
-
-    const data = {
-      phoneNumber: user.phoneNumber,
-    };
-
-    if (!data.phoneNumber) {
-      setError("Por favor, ponga un número de teléfono válido");
-      return;
-    }
-
-    if (data.phoneNumber.trim() === "") {
-      setError("Por favor, revise los espacios al inicio del texto");
-      return;
-    }
-
-    if (!(data.password === data.passwordConfirmation)) {
-      setError(
-        "Por favor, revisa que la contraseña y la confirmación coincidan"
-      );
-      return;
-    }
-    try {
-      await axios.post(
-        `http://localhost:8080/trivia-api/v1/users/${data.id}`,
-        data,
-        { headers }
-      );
-    } catch (error) {
-      console.error("Error", error);
-    }
-
-    setUser({
-      name: "",
-      pid: "",
-      surname: "",
-      phoneNumber: "",
-      email: "",
-      username: "",
-      password: "",
-      passwordConfirmation: "",
-    });
-    setError("");
   };
 
   const handlePasswordChange = () => {
@@ -112,9 +20,7 @@ const Profile = ({ token }) => {
 
   const handleDeleteAccount = async () => {
     try {
-      await axios.delete("http://localhost:8989/trivia-api/v1/users/profile", {
-        headers,
-      });
+      await axios.delete("http://localhost:5000/api/trivia/auth");
       return (window.location.href = "/home");
     } catch (err) {
       console.error(err);
@@ -149,7 +55,7 @@ const Profile = ({ token }) => {
                       src={inicialImage}
                     />
                   )}
-                  <h3>{user.username}</h3>
+                  <h3>{userData.username}</h3>
                   <a
                     href="edit-profile"
                     className="text-info text_decoration_a"
@@ -219,7 +125,7 @@ const Profile = ({ token }) => {
         </Row>
         <Row>
           <Col md="12">
-            <Modal
+            {/* <Modal
               className="px-2 pt-2 pb-2"
               isOpen={modalOpen}
               toggle={toggleModal}
@@ -258,7 +164,7 @@ const Profile = ({ token }) => {
                   </div>
                 </Form>
               </div>
-            </Modal>
+            </Modal> */}
           </Col>
         </Row>
       </div>

@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   Button,
   Card,
@@ -17,7 +18,7 @@ const SendPackage = ({ token }) => {
   const [imageUrl, setImageUrl] = useState(null);
   const [error, setError] = useState("");
   const headers = {
-    "Authorization": `Bearer ${token}`,
+    token: `${token}`,
     "Content-Type": "multipart/form-data",
   };
   const [shippingDetails, setShippingDetails] = useState({
@@ -55,12 +56,6 @@ const SendPackage = ({ token }) => {
       return;
     }
     setImageUrl(file);
-    // Creates an instance of FileReader to read the file
-    // const reader = new FileReader();
-    // // Defines a callback function for when the reading of the file is completed.
-    // reader.onloadend = () => {
-    //   setImageUrl(reader.result);
-    // };
   };
 
   const nextSection = () => {
@@ -114,7 +109,7 @@ const SendPackage = ({ token }) => {
       receiverPhone: shippingDetails.receiverPhone,
     };
 
-    if (!data.description || !data.weight) {
+    if (!data.description || !data.weight || !data.image) {
       setError("Por favor, rellena todos los campos");
       return;
     }
@@ -130,12 +125,10 @@ const SendPackage = ({ token }) => {
     }
 
     try {
-      await fetch("http://localhost:8989/trivia-api/v1/packages", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(data),
+      await axios.post("http://localhost:5000/api/trivia/packages", data, {
+        headers,
       });
-      //return navigate("/actities");
+      return navigate("/activity");
     } catch (error) {
       console.error("Error", error);
       return;

@@ -18,6 +18,9 @@ const Login = () => {
   let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const headers = {
+    "Content-Type": "application/json",
+  };
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -51,17 +54,14 @@ const Login = () => {
     }
 
     try {
-      const { response } = await axios.post(
-        "http://localhost:8989/trivia-api/v1/auth/signin",
+      const response = await axios.post(
+        "http://localhost:5000/api/trivia/auth/signin",
         data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        { headers }
       );
 
-      localStorage.setItem("token", JSON.stringify(response.data.token));
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       if (localStoragePackage || localStorageTravel) {
         //return navigate("/activities");
         return (window.location.href = "/activities");

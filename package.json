@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-amplify/ui-components": "^1.9.40",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "aws-amplify": "^4.3.46",
+    "aws-amplify-react": "^5.1.43",
     "axios": "^1.5.1",
     "bootstrap": "^5.3.1",
     "bootstrap-icons": "^1.10.5",
