@@ -5,6 +5,11 @@ const Logout = async () => {
     );
 
     if (response.ok) {
+      // signOut(auth).then(() => {
+      //   // Sign-out successful.
+      // }).catch((error) => {
+      //   // An error happened.
+      // });
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       return window.location.href = "/home";

@@ -1,4 +1,7 @@
 import React, { Fragment, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import {
   Button,
   Card,
@@ -7,15 +10,25 @@ import {
   Form,
   FormGroup,
   Input,
+  Label,
   Row,
 } from "reactstrap";
+import auth from "./firebase";
 
 const Registration = () => {
+  let navigate = useNavigate();
+  const token = localStorage.getItem("token");
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false);
+  const [otp, setOTP] = useState(false);
+  const [confirmationResult, setConfirmationResult] = useState("");
   const [error, setError] = useState("");
   const [section, setSection] = useState(1);
+  const headers = {
+    token: `${token}`,
+    "Content-Type": "application/json",
+  };
   const [user, setUser] = useState({
     name: "",
     surname: "",
@@ -24,6 +37,7 @@ const Registration = () => {
     username: "",
     password: "",
     passwordConfirmation: "",
+    phoneConfirmation: "",
   });
 
   const handleChange = (event) => {
@@ -36,15 +50,14 @@ const Registration = () => {
   };
 
   const nextSection = () => {
-    if (section < 2) {
+    if (section === 1) {
       const data = {
         name: user.name,
         surname: user.surname,
-        phoneNumber: user.phoneNumber,
         email: user.email,
       };
 
-      if (!data.name || !data.surname || !data.phoneNumber) {
+      if (!data.name || !data.surname) {
         setError("Por favor, rellena todos los campos");
         return;
       }
@@ -52,10 +65,39 @@ const Registration = () => {
       if (
         data.name.trim() === "" ||
         data.surname.trim() === "" ||
-        data.phoneNumber.trim() === "" ||
         data.email.trim() === ""
       ) {
         setError("Por favor, revisa los espacios al inicio de los textos");
+        return;
+      }
+      setSection(section + 1);
+      setError("");
+    }
+    if (section === 2) {
+      const data = {
+        username: user.username,
+        password: user.password,
+        passwordConfirmation: user.passwordConfirmation,
+      };
+
+      if (!data.username || !data.password || !data.passwordConfirmation) {
+        setError("Por favor, rellena todos los campos");
+        return;
+      }
+
+      if (
+        data.username.trim() === "" ||
+        data.password.trim() === "" ||
+        data.passwordConfirmation.trim() === ""
+      ) {
+        setError("Por favor, revisa los espacios al inicio de los textos");
+        return;
+      }
+
+      if (!(data.password === data.passwordConfirmation)) {
+        setError(
+          "Por favor, revisa que la contraseña y la confirmación coincidan"
+        );
         return;
       }
       setSection(section + 1);
@@ -69,6 +111,21 @@ const Registration = () => {
     }
   };
 
+  const validation = async () => {
+    let recaptchaVerifier = new RecaptchaVerifier(auth, "sign-in-button", {
+      size: "invisible",
+    });
+    await signInWithPhoneNumber(auth, user.phoneNumber, recaptchaVerifier)
+      .then((response) => {
+        setOTP(true);
+        setConfirmationResult(response);
+        alert("Código enviado");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
@@ -78,43 +135,28 @@ const Registration = () => {
       email: user.email,
       username: user.username,
       password: user.password,
-      passwordConfirmation: user.passwordConfirmation,
     };
 
-    if (!data.username || !data.password || !data.passwordConfirmation) {
-      setError("Por favor, rellena todos los campos");
-      return;
-    }
-
-    if (
-      data.username.trim() === "" ||
-      data.password.trim() === "" ||
-      data.passwordConfirmation.trim() === ""
-    ) {
-      setError("Por favor, revisa los espacios al inicio de los textos");
-      return;
-    }
-
-    // eslint-disable-next-line eqeqeq
-    if (!(data.password == data.passwordConfirmation)) {
-      setError(
-        "Por favor, revisa que la contraseña y la confirmación coincidan"
-      );
-      return;
-    }
-    try {
-      await fetch("http://localhost:8989/trivia-api/v1/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+    confirmationResult
+      .confirm(user.phoneConfirmation)
+      .then((result) => {
+        try {
+          axios.post("http://localhost:5000/api/trivia/auth/signup", data, {
+            headers,
+          });
+          return navigate("/login");
+        } catch (error) {
+          console.error("Error", error);
+          return;
+        }
+      })
+      .catch((error) => {
+        console.error("Error", error);
       });
-      window.location.href = "/login";
-    } catch (error) {
-      console.error("Error", error);
-      return;
-    }
+  };
+
+  const handleLogin = () => {
+    return navigate("/login");
   };
 
   return (
@@ -128,16 +170,25 @@ const Registration = () => {
             <Card className="border-0 shadow-lg bg-white">
               <CardBody>
                 <p className="text-center">
-                  <i className="bi bi-circle-fill text-info"></i> Información
+                  <i className="bi bi-circle-fill text-info"></i>
                   Personal <i className="bi bi-dash-lg"></i>{" "}
                   <i
                     className={
-                      section === 2
+                      section > 1
                         ? "bi bi-circle-fill text-info"
                         : "bi bi-circle-fill text-light"
                     }
                   ></i>{" "}
-                  Información de Cuenta
+                  Cuenta
+                  <i className="bi bi-dash-lg"></i>{" "}
+                  <i
+                    className={
+                      section === 3
+                        ? "bi bi-circle-fill text-info"
+                        : "bi bi-circle-fill text-light"
+                    }
+                  ></i>{" "}
+                  Confirmación
                 </p>
                 <Form onSubmit={handleSubmit}>
                   {section === 1 && (
@@ -146,6 +197,7 @@ const Registration = () => {
                       <Row>
                         <Col md="12">
                           <FormGroup>
+                            {/* <Label>Nombre</Label> */}
                             <Input
                               type="text"
                               id="name"
@@ -166,19 +218,6 @@ const Registration = () => {
                               value={user.surname}
                               onChange={handleChange}
                               placeholder="Apellidos"
-                              className="bg-light"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col md="12">
-                          <FormGroup>
-                            <Input
-                              type="text"
-                              id="phoneNumber"
-                              name="phoneNumber"
-                              value={user.phoneNumber}
-                              onChange={handleChange}
-                              placeholder="Teléfono"
                               className="bg-light"
                             />
                           </FormGroup>
@@ -277,9 +316,77 @@ const Registration = () => {
                       </Row>
                     </>
                   )}
+                  {section === 3 && (
+                    <>
+                      <h2>Confirmación de Teléfono</h2>
+                      <Row>
+                        <Col md="12">
+                          <FormGroup>
+                            <Input
+                              type="text"
+                              id="phoneNumber"
+                              name="phoneNumber"
+                              value={user.phoneNumber}
+                              onChange={handleChange}
+                              placeholder="Teléfono"
+                              className="bg-light"
+                            />
+                          </FormGroup>
+                          {/* <Col md="12">
+                          <Row>
+                            <Col md="4">
+                              <FormGroup>
+                                <Input
+                                  type="select"
+                                  id="phoneNumber"
+                                  name="phoneNumber"
+                                  value={user.phoneNumber}
+                                  onChange={handleChange}
+                                  placeholder="Teléfono"
+                                  className="bg-light"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col md="8">
+                              <FormGroup>
+                                <Input
+                                  type="text"
+                                  id="phoneNumber"
+                                  name="phoneNumber"
+                                  value={user.phoneNumber}
+                                  onChange={handleChange}
+                                  placeholder="Teléfono"
+                                  className="bg-light"
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                        </Col> */}
+                        </Col>
+                        {otp && (
+                          <Col md="12">
+                            <FormGroup>
+                              <Input
+                                type="text"
+                                id="phoneConfirmation"
+                                name="phoneConfirmation"
+                                value={user.phoneConfirmation}
+                                onChange={handleChange}
+                                placeholder="Código de confirmación"
+                                className="bg-light"
+                              />
+                            </FormGroup>
+                          </Col>
+                        )}
+                        <Col md="12">
+                          <p className="text-danger text-center">{error}</p>
+                        </Col>
+                      </Row>
+                    </>
+                  )}
                   <Row>
                     <Col md="6" xs="6">
-                      {section === 2 && (
+                      {section > 1 && (
                         <Button
                           type="button"
                           onClick={previoustSection}
@@ -290,7 +397,7 @@ const Registration = () => {
                       )}
                     </Col>
                     <Col md="6" sm="6" xs="6">
-                      {section === 1 && (
+                      {section < 3 && (
                         <Button
                           type="button"
                           onClick={nextSection}
@@ -299,12 +406,22 @@ const Registration = () => {
                           Siguiente
                         </Button>
                       )}
-                      {section === 2 && (
+                      {section === 3 && !otp && (
+                        <Button
+                          type="button"
+                          id="sign-in-button"
+                          className="btn btn-info text-white right"
+                          onClick={validation}
+                        >
+                          Enviar
+                        </Button>
+                      )}
+                      {otp && (
                         <Button
                           type="submit"
                           className="btn btn-info text-white right"
                         >
-                          Enviar
+                          Confirmar
                         </Button>
                       )}
                     </Col>
@@ -312,10 +429,16 @@ const Registration = () => {
                 </Form>
                 <br />
                 <p>
-                  ¿Ya tienes cuenta?{" "}
-                  <a href="login" className="text-info text_decoration_a">
-                    Inicia sesión
-                  </a>
+                  ¿Ya tiene cuenta?{" "}
+                  <Button
+                    type="button"
+                    onClick={handleLogin}
+                    color="link"
+                    outline={true}
+                    className="text-info"
+                  >
+                    Inicie sesión
+                  </Button>
                 </p>
               </CardBody>
             </Card>

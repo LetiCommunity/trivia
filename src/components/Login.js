@@ -72,6 +72,11 @@ const Login = () => {
       console.error("Error", error);
     }
   };
+
+  const handleRegistration = () => {
+    return navigate("/registration");
+  };
+
   return (
     <Fragment>
       <div className="content">
@@ -140,12 +145,15 @@ const Login = () => {
                 </Form>
                 <p>
                   ¿No tiene cuenta?{" "}
-                  <a
-                    href="registration"
-                    className="text-info text_decoration_a"
+                  <Button
+                    type="button"
+                    onClick={handleRegistration}
+                    color="link"
+                    outline={true}
+                    className="text-info"
                   >
                     Regístrese
-                  </a>
+                  </Button>
                 </p>
               </CardBody>
             </Card>
