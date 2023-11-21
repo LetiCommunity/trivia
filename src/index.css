@@ -133,6 +133,16 @@ ul {
   float: right;
 }
 
+.logo {
+  width: 100px;
+  height: 24px;
+}
+
+.logo2 {
+  width: 100px;
+  height: 50px;
+}
+
 .profile {
   width: 96px;
   height: 96px;

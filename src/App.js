@@ -13,6 +13,7 @@ import Profile from "./components/Profile";
 import Contact from "./components/Contact";
 import NoPage from "./components/NoPage";
 import EditProfile from "./components/EditProfile";
+import ChangePassword from "./components/ChangePassword";
 import SearchTrip from "./components/SearchTrip";
 import Logout from "./components/Logout";
 
@@ -46,6 +47,7 @@ function App() {
               <>
                 <Route path="profile" element={<Profile />} />
                 <Route path="edit-profile" element={<EditProfile />} />
+                <Route path="change-password" element={<ChangePassword />} />
                 <Route path="logout" element={<Logout />} />
               </>
             ) : (

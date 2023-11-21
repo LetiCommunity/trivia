@@ -39,11 +39,11 @@ const Home = () => {
   };
 
   const handlePublishTrip = () => {
-    return navigate("publish-trip");
+    return navigate("/publish-trip");
   };
 
   const handleSendPackage = () => {
-    return navigate("publish-trip");
+    return navigate("/send-package");
   };
 
   const handleSearchTrip = (origin, destiny) => {
@@ -70,7 +70,7 @@ const Home = () => {
                   <Card className="py-2 px-2">
                     <Form onSubmit={handleSubmit}>
                       <Row>
-                        <Col md="5 ">
+                        <Col md="5">
                           <div className="py-1">
                             <Input
                               type="text"
@@ -269,17 +269,6 @@ const Home = () => {
                 </Col>
               </Row>
             </div>
-            {/* <div>
-              <Button
-                type="button"
-                onClick={handleSearchTrip}
-                color="link"
-                outline={true}
-                className="text-info"
-              >
-                Ver más
-              </Button>
-            </div> */}
           </div>
         </div>
       </div>

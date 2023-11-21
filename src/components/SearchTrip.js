@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Card, Col, Input, Row } from "reactstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import moment from "moment";
 
 const SearchTrip = () => {
   const [travels, setTravels] = useState([]);
@@ -11,6 +12,7 @@ const SearchTrip = () => {
     destiny: "",
   });
 
+  console.log(origin, destiny);
   useEffect(() => {
     const getTravels = async () => {
       try {
@@ -18,6 +20,20 @@ const SearchTrip = () => {
           "http://localhost:5000/api/trivia/travels"
         );
         setTravels(data);
+        // let filter;
+        // if (!searchTrip.origin || !searchTrip.destiny) {
+        //   filter = (travel) => {
+        //     return travel.origin === "Malabo" && travel.destination === "Bata";
+        //   };
+        // } else {
+        //   filter = (travel) => {
+        //     return (
+        //       travel.origin === searchTrip.origin &&
+        //       travel.destination === searchTrip.destiny
+        //     );
+        //   };
+        // }
+        // setTravels(travels.filter(filter));
       } catch (err) {
         console.error(err);
       }
@@ -91,7 +107,9 @@ const SearchTrip = () => {
                         <p className="text-size">
                           {travel.origin} a {travel.destination}
                         </p>
-                        <p className="text-size">{travel.date}</p>
+                        <p className="text-size">
+                          {moment(travel.date).format("DD/MM/YYYY HH:mm:ss")}
+                        </p>
                       </Card>
                     </div>
                   );

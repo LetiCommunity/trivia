@@ -9,6 +9,7 @@ import {
   Form,
   FormGroup,
   Input,
+  Label,
   Row,
 } from "reactstrap";
 
@@ -64,12 +65,14 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(response.data.user));
       if (localStoragePackage || localStorageTravel) {
         //return navigate("/activities");
-        return (window.location.href = "/activities");
+        return (window.location.href = "/activity");
       }
       //return navigate("/home");
       return (window.location.href = "/home");
     } catch (error) {
       console.error("Error", error);
+      setError("Usuario o contraseña incorrectos");
+      return;
     }
   };
 
@@ -91,7 +94,7 @@ const Login = () => {
                 <Form onSubmit={handleSubmit}>
                   <Row>
                     <Col md="12">
-                      <FormGroup>
+                      <FormGroup floating>
                         <Input
                           type="text"
                           id="username"
@@ -101,10 +104,11 @@ const Login = () => {
                           placeholder="Nombre de usuario"
                           className="bg-light"
                         />
+                        <Label for="username">Nombre de usuario</Label>
                       </FormGroup>
                     </Col>
                     <Col md="12">
-                      <FormGroup className="input_wrapper">
+                      <FormGroup className="input_wrapper" floating>
                         <Input
                           type={showPassword ? "text" : "password"}
                           id="password"
@@ -124,6 +128,7 @@ const Login = () => {
                             }
                           ></i>
                         </a>
+                        <Label for="password">Contraseña</Label>
                       </FormGroup>
                     </Col>
                     <Col md="12">

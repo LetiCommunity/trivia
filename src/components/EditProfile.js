@@ -9,6 +9,7 @@ import {
   Form,
   FormGroup,
   Input,
+  Label,
   Row,
 } from "reactstrap";
 import inicialImage from "../assets/img/user.png";
@@ -21,7 +22,7 @@ const EditProfile = () => {
   const [error, setError] = useState("");
   const headers = {
     token: `${token}`,
-    "Content-Type": "multipart/form-data",
+    "Content-Type": "application/json",
   };
   const [user, setUser] = useState({
     _id: userData._id,
@@ -71,9 +72,8 @@ const EditProfile = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const data = {
-      id: user.id,
+      id: user._id,
       name: user.name,
       surname: user.surname,
       email: user.email,
@@ -95,12 +95,12 @@ const EditProfile = () => {
     }
 
     try {
-      await axios.post(
-        `http://localhost:5000/api/trivia/users/${data.id}`,
+      await axios.put(
+        `http://localhost:5000/api/trivia/profiles/profile`,
         data,
         { headers }
       );
-      return navigate("/activities");
+      return navigate("/profile");
     } catch (error) {
       console.error("Error", error);
     }
@@ -132,7 +132,7 @@ const EditProfile = () => {
               </div>
               <div>
                 <Form onSubmit={handleSubmit}>
-                  <FormGroup>
+                  <FormGroup floating>
                     <Input
                       type="hidden"
                       id="_id"
@@ -142,7 +142,7 @@ const EditProfile = () => {
                       className="form-control"
                     />
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup floating>
                     <Input
                       type="file"
                       id="image"
@@ -152,7 +152,7 @@ const EditProfile = () => {
                       className="bg-light"
                     />
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup floating>
                     <Input
                       placeholder="Nombre"
                       type="text"
@@ -162,8 +162,9 @@ const EditProfile = () => {
                       onChange={handleChange}
                       className="form-control bg-light"
                     />
+                    <Label for="name">Nombre</Label>
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup floating>
                     <Input
                       placeholder="Apellidos"
                       type="text"
@@ -173,8 +174,9 @@ const EditProfile = () => {
                       onChange={handleChange}
                       className="form-control bg-light"
                     />
+                    <Label for="surname">Apellidos</Label>
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup floating>
                     <Input
                       placeholder="Email"
                       type="text"
@@ -184,8 +186,9 @@ const EditProfile = () => {
                       onChange={handleChange}
                       className="form-control bg-light"
                     />
+                    <Label for="email">Email</Label>
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup floating>
                     <Input
                       placeholder="Nombre de usuario"
                       type="text"
@@ -195,7 +198,11 @@ const EditProfile = () => {
                       onChange={handleChange}
                       className="form-control bg-light"
                     />
+                    <Label for="username">Nombre de usuario</Label>
                   </FormGroup>
+                  <Col md="12">
+                    <p className="text-danger text-center">{error}</p>
+                  </Col>
                   <FormGroup className="text-center">
                     <Button type="submit" className="btn btn-info text-white">
                       Guardar

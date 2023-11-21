@@ -32,17 +32,17 @@ const Registration = () => {
   const [user, setUser] = useState({
     name: "",
     surname: "",
-    phoneNumber: "",
     email: "",
     username: "",
     password: "",
     passwordConfirmation: "",
+    countryCode: "+240",
+    phoneNumber: "",
     phoneConfirmation: "",
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setUser((prevUser) => ({
       ...prevUser,
       [name]: value,
@@ -115,7 +115,8 @@ const Registration = () => {
     let recaptchaVerifier = new RecaptchaVerifier(auth, "sign-in-button", {
       size: "invisible",
     });
-    await signInWithPhoneNumber(auth, user.phoneNumber, recaptchaVerifier)
+    const phone = user.countryCode + user.phoneNumber
+    await signInWithPhoneNumber(auth, phone, recaptchaVerifier)
       .then((response) => {
         setOTP(true);
         setConfirmationResult(response);
@@ -196,8 +197,7 @@ const Registration = () => {
                       <h2>Información Personal</h2>
                       <Row>
                         <Col md="12">
-                          <FormGroup>
-                            {/* <Label>Nombre</Label> */}
+                          <FormGroup floating>
                             <Input
                               type="text"
                               id="name"
@@ -207,10 +207,11 @@ const Registration = () => {
                               placeholder="Nombre"
                               className="bg-light"
                             />
+                            <Label for="name">Nombre</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="text"
                               id="surname"
@@ -220,19 +221,21 @@ const Registration = () => {
                               placeholder="Apellidos"
                               className="bg-light"
                             />
+                            <Label for="surname">Apellidos</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="email"
                               id="email"
                               name="email"
-                              value={user.email}
-                              onChange={handleChange}
                               placeholder="Email"
                               className="bg-light"
+                              value={user.email}
+                              onChange={handleChange}
                             />
+                            <Label for="email">Email</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
@@ -246,7 +249,7 @@ const Registration = () => {
                       <h2>Información de Cuenta</h2>
                       <Row>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="text"
                               id="username"
@@ -256,10 +259,11 @@ const Registration = () => {
                               placeholder="Nombre de usuario"
                               className="bg-light"
                             />
+                            <Label for="username">Username</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup className="input_wrapper">
+                          <FormGroup className="input_wrapper" floating>
                             <Input
                               type={showPassword ? "text" : "password"}
                               id="password"
@@ -279,10 +283,11 @@ const Registration = () => {
                                 }
                               ></i>
                             </a>
+                            <Label for="password">Contraseña</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup className="input_wrapper">
+                          <FormGroup className="input_wrapper" floating>
                             <Input
                               type={
                                 showPasswordConfirmation ? "text" : "password"
@@ -308,6 +313,9 @@ const Registration = () => {
                                 }
                               ></i>
                             </a>
+                            <Label for="passwordConfirmation">
+                              Confirmar Contraseña
+                            </Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
@@ -321,36 +329,28 @@ const Registration = () => {
                       <h2>Confirmación de Teléfono</h2>
                       <Row>
                         <Col md="12">
-                          <FormGroup>
-                            <Input
-                              type="text"
-                              id="phoneNumber"
-                              name="phoneNumber"
-                              value={user.phoneNumber}
-                              onChange={handleChange}
-                              placeholder="Teléfono"
-                              className="bg-light"
-                            />
-                          </FormGroup>
-                          {/* <Col md="12">
                           <Row>
                             <Col md="4">
-                              <FormGroup>
+                              <FormGroup floating>
                                 <Input
                                   type="select"
-                                  id="phoneNumber"
-                                  name="phoneNumber"
-                                  value={user.phoneNumber}
+                                  id="countryCode"
+                                  name="countryCode"
+                                  value={user.countryCode}
                                   onChange={handleChange}
-                                  placeholder="Teléfono"
+                                  placeholder="Código de país"
                                   className="bg-light"
-                                />
+                                >
+                                  <option value="+240">+240</option>
+                                  <option value="+34">+34</option>
+                                </Input>
+                                <Label for="countryCode">Código de país</Label>
                               </FormGroup>
                             </Col>
                             <Col md="8">
-                              <FormGroup>
+                              <FormGroup floating>
                                 <Input
-                                  type="text"
+                                  type="number"
                                   id="phoneNumber"
                                   name="phoneNumber"
                                   value={user.phoneNumber}
@@ -358,10 +358,10 @@ const Registration = () => {
                                   placeholder="Teléfono"
                                   className="bg-light"
                                 />
+                                <Label for="phoneNumber">Teléfono</Label>
                               </FormGroup>
                             </Col>
                           </Row>
-                        </Col> */}
                         </Col>
                         {otp && (
                           <Col md="12">

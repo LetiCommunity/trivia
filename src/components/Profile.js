@@ -2,26 +2,47 @@ import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button, Card, CardBody, Col, Row } from "reactstrap";
+import { signOut } from "firebase/auth";
+
+import auth from "./firebase";
 import inicialImage from "../assets/img/user.png";
 
 const Profile = () => {
-  const userData = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
   let navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const headers = {
+    token: `${token}`,
+    "Content-Type": "application/json",
+  };
 
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
 
+  const handleEditProfile = () => {
+    return navigate("/edit-profile");
+  };
+
   const handlePasswordChange = () => {
-    return navigate("/logout");
+    return navigate("/change-password");
   };
 
   const handleDeleteAccount = async () => {
     try {
-      await axios.delete("http://localhost:5000/api/trivia/auth");
-      return (window.location.href = "/home");
+      await axios.delete("http://localhost:5000/api/trivia/profiles/profile", {
+        headers,
+      });
+      signOut(auth)
+        .then(() => {
+          navigate("/logout");
+          return (window.location.href = "/home");
+        })
+        .catch((error) => {
+          // An error happened.
+        });
     } catch (err) {
       console.error(err);
     }
@@ -55,16 +76,19 @@ const Profile = () => {
                       src={inicialImage}
                     />
                   )}
-                  <h3>{userData.username}</h3>
-                  <a
-                    href="edit-profile"
-                    className="text-info text_decoration_a"
+                  <h3>{user.username}</h3>
+                  <Button
+                    type="button"
+                    onClick={handleEditProfile}
+                    color="link"
+                    outline={true}
+                    className="text-info"
                   >
                     Editar información
-                  </a>
+                  </Button>
                 </div>
-                <hr />
-                <div>
+                {/*<hr />
+                 <div>
                   <h3>Confirmación de perfil</h3>
                   <ul>
                     <li>
@@ -75,11 +99,11 @@ const Profile = () => {
                         outline={true}
                         className="text-info"
                       >
-                        Confirmar el número de teléfono
+                        Cambiar teléfono
                       </Button>
                     </li>
                   </ul>
-                </div>
+                </div> */}
                 <hr />
                 <div>
                   <h3>Cuenta</h3>
@@ -121,50 +145,6 @@ const Profile = () => {
                 </div>
               </CardBody>
             </Card>
-          </Col>
-        </Row>
-        <Row>
-          <Col md="12">
-            {/* <Modal
-              className="px-2 pt-2 pb-2"
-              isOpen={modalOpen}
-              toggle={toggleModal}
-              backdrop={false}
-            >
-              <div className="modal-header">
-                <h4 className="modal-title">
-                  Confirmación de número de teléfono
-                </h4>
-                <button type="button" className="close" onClick={toggleModal}>
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="model-body px-2 mt-2">
-                <Form onSubmit={handleConfirmationPhone}>
-                  <FormGroup>
-                    <Input
-                      placeholder="Número de teléfono"
-                      type="text"
-                      id="phoneNumber"
-                      name="phoneNumber"
-                      value={user.phoneNumber}
-                      onChange={handleChange}
-                      className="form-control"
-                      color="Black"
-                    />
-                  </FormGroup>
-                  <div className="modal-footer mb-2">
-                    <button
-                      type="submit"
-                      onClick={toggleModal}
-                      className="btn btn-fill"
-                    >
-                      Guardar
-                    </button>
-                  </div>
-                </Form>
-              </div>
-            </Modal> */}
           </Col>
         </Row>
       </div>

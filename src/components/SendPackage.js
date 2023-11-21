@@ -9,10 +9,13 @@ import {
   Form,
   FormGroup,
   Input,
+  Label,
   Row,
 } from "reactstrap";
+import { Buffer } from 'buffer';
 
-const SendPackage = ({ token }) => {
+const SendPackage = () => {
+  const token = localStorage.getItem("token");
   let navigate = useNavigate();
   const [section, setSection] = useState(1);
   const [imageUrl, setImageUrl] = useState(null);
@@ -121,7 +124,10 @@ const SendPackage = ({ token }) => {
 
     if (!token) {
       localStorage.setItem("package", JSON.stringify(data));
-      return navigate("/login");
+      
+      localStorage.setItem("packageImage", imageUrl.toString());
+      console.log(Buffer.from(localStorage.getItem("packageImage")));
+      return //navigate("/login");
     }
 
     try {
@@ -163,7 +169,7 @@ const SendPackage = ({ token }) => {
                       <h2>Información de receptor</h2>
                       <Row>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="text"
                               id="receiverName"
@@ -173,10 +179,11 @@ const SendPackage = ({ token }) => {
                               placeholder="Nombre"
                               className="bg-light"
                             />
+                            <Label for="receiverName">Nombre</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="text"
                               id="receiverSurname"
@@ -186,10 +193,11 @@ const SendPackage = ({ token }) => {
                               placeholder="Apellidos"
                               className="bg-light"
                             />
+                            <Label for="receiverSurname">Apellidos</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="text"
                               id="receiverAddress"
@@ -199,12 +207,13 @@ const SendPackage = ({ token }) => {
                               placeholder="Dirección"
                               className="bg-light"
                             />
+                            <Label for="receiverAddress">Dirección</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
-                              type="text"
+                              type="number"
                               id="receiverPhone"
                               name="receiverPhone"
                               value={shippingDetails.receiverPhone}
@@ -212,6 +221,7 @@ const SendPackage = ({ token }) => {
                               placeholder="Teléfono"
                               className="bg-light"
                             />
+                            <Label for="receiverPhone">Teléfono</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
@@ -225,7 +235,7 @@ const SendPackage = ({ token }) => {
                       <h2>Información de paquete</h2>
                       <Row>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="textarea"
                               id="description"
@@ -235,10 +245,11 @@ const SendPackage = ({ token }) => {
                               placeholder="Descripción"
                               className="bg-light"
                             />
+                            <Label for="description">Descripción</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="number"
                               id="weight"
@@ -248,10 +259,11 @@ const SendPackage = ({ token }) => {
                               placeholder="Peso aproximado..."
                               className="bg-light"
                             />
+                            <Label for="weight">Peso aproximado...</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="file"
                               id="image"

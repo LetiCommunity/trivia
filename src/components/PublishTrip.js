@@ -9,6 +9,7 @@ import {
   Form,
   FormGroup,
   Input,
+  Label,
   Row,
 } from "reactstrap";
 
@@ -150,7 +151,7 @@ const PublishTrip = () => {
                       <h2>Información de viaje</h2>
                       <Row>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="text"
                               id="origin"
@@ -160,10 +161,11 @@ const PublishTrip = () => {
                               placeholder="Lugar de origen"
                               className="bg-light"
                             />
+                            <Label for="origin">Lugar de origen</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="text"
                               id="destination"
@@ -173,10 +175,11 @@ const PublishTrip = () => {
                               placeholder="Lugar de destino"
                               className="bg-light"
                             />
+                            <Label for="destination">Lugar de destino</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type={showPlaceholderDate ? "text" : "date"}
                               id="date"
@@ -188,10 +191,11 @@ const PublishTrip = () => {
                               placeholder="Fecha de viaje"
                               className="bg-light"
                             />
+                            <Label for="date">Fecha de viaje</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="text"
                               id="airport"
@@ -201,10 +205,11 @@ const PublishTrip = () => {
                               placeholder="Aeropuerto de destino"
                               className="bg-light"
                             />
+                            <Label for="airport">Aeropuerto</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="text"
                               id="terminal"
@@ -214,10 +219,11 @@ const PublishTrip = () => {
                               placeholder="Terminal de destino"
                               className="bg-light"
                             />
+                            <Label for="terminal">Terminal de destino</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="text"
                               id="company"
@@ -227,10 +233,13 @@ const PublishTrip = () => {
                               placeholder="Compañía con la que viaja"
                               className="bg-light"
                             />
+                            <Label for="company">
+                              Compañía con la que viaja
+                            </Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type={showPlaceholderBilling ? "text" : "date"}
                               id="billingDate"
@@ -242,6 +251,9 @@ const PublishTrip = () => {
                               placeholder="Fecha de facturación"
                               className="bg-light"
                             />
+                            <Label for="billingDate">
+                              Fecha de facturación
+                            </Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
@@ -255,15 +267,19 @@ const PublishTrip = () => {
                       <h2>Información de disponibilidad</h2>
                       <Row>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup floating>
                             <Input
                               type="number"
                               id="availableWeight"
                               name="availableWeight"
                               value={travel.availableWeight}
                               onChange={handleChange}
-                              placeholder="¿Con cuánto peso puedes viajar (en quilos)?"
+                              placeholder="¿Con cuánto peso adicional puedes viajar (en quilos)?"
                             />
+                            <Label for="availableWeight">
+                              ¿Con cuánto peso adicional puedes viajar (en
+                              quilos)?
+                            </Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">

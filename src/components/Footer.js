@@ -26,9 +26,11 @@ const Footer = () => {
               </Nav>
             </div>
             <div className="copyright">
-              <a href="#p" target="_blank">
-                Trivia
-              </a>{" "}
+              {/* <img
+                className="logo2"
+                alt="Trivia"
+                src={require("../assets/img/logo3.png")}
+              /> */}
               © {new Date().getFullYear()} Todos los derechos reservados.
             </div>
             <div>

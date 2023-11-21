@@ -2,9 +2,8 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Button, Card, Col, Row } from "reactstrap";
 import axios from "axios";
 import moment from "moment";
-import { Buffer } from 'buffer';
 
-const Activity = () => {
+const Notification = () => {
   const token = localStorage.getItem("token");
   const localStoragePackage = localStorage.getItem("package");
   const localStorageTravel = localStorage.getItem("travel");
@@ -46,7 +45,7 @@ const Activity = () => {
         if (viewMoreTravels) {
           setTravels(data);
         } else {
-          setTravels(data.slice(0, 3));
+          setTravels(data.slice(0, 2));
         }
       } catch (err) {
         console.error(err);
@@ -74,7 +73,7 @@ const Activity = () => {
       try {
         await axios.post(
           "http://localhost:5000/api/trivia/travels",
-          JSON.parse(localStorageTravel),
+          JSON.parse(localStoragePackage),
           { headers }
         );
         localStorage.removeItem("travel");
@@ -138,8 +137,8 @@ const Activity = () => {
                     <div key={item._id}>
                       <div className="rounded bg-light text-dark p-3"></div>
                       <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                        <div className="input_wrapper">
-                          {/* <img
+                        {/* <div className="input_wrapper">
+                          <img
                             className="rounded-circle input_icon mt-3"
                             alt={item.image}
                             src={axios
@@ -148,8 +147,8 @@ const Activity = () => {
                                 { headers }
                               )
                               .then((response) => Buffer.from(response.data))}
-                          /> */}
-                        </div>
+                          />
+                        </div> */}
                         <p className="text-size">
                           {item.image} {item.description}
                         </p>
@@ -180,4 +179,4 @@ const Activity = () => {
   );
 };
 
-export default Activity;
+export default Notification;

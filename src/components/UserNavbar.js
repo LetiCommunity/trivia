@@ -9,14 +9,21 @@ import {
   NavbarBrand,
 } from "reactstrap";
 
-const UserNavbar = ({ token }) => {
+const UserNavbar = () => {
+  const token = localStorage.getItem("token");
   const [collapseOpen, setCollapseOpen] = useState(false);
   const handleToggle = () => setCollapseOpen(!collapseOpen);
 
   return (
     <Fragment>
       <Navbar className="fixed-top bg-light">
-        <NavbarBrand href="/home">Trivia</NavbarBrand>
+        <NavbarBrand href="/home">
+          <img
+            className="logo"
+            alt="Trivia"
+            src={require("../assets/img/logo3.png")}
+          />
+        </NavbarBrand>
         {/* <Button onClick={handleToggle} className="navbar-toggler border-0">
           <i className="bi bi-bell"></i>
         </Button> */}
