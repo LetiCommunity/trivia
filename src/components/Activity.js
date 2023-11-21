@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Button, Card, Col, Row } from "reactstrap";
 import axios from "axios";
 import moment from "moment";
-import { Buffer } from 'buffer';
+//import { Buffer } from 'buffer';
 
 const Activity = () => {
   const token = localStorage.getItem("token");
@@ -12,6 +12,7 @@ const Activity = () => {
   const [travels, setTravels] = useState([]);
   const [viewMorePackages, setViewMorePackages] = useState(false);
   const [viewMoreTravels, setViewMoreTravels] = useState(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const headers = {
     token: `${token}`,
     "Content-Type": "application/json",
@@ -34,7 +35,7 @@ const Activity = () => {
       }
     };
     getPackages();
-  }, [travels, viewMorePackages]);
+  }, [headers, travels, viewMorePackages]);
 
   useEffect(() => {
     const getTravels = async () => {
@@ -53,7 +54,7 @@ const Activity = () => {
       }
     };
     getTravels();
-  }, [travels, viewMoreTravels]);
+  }, [headers, travels, viewMoreTravels]);
 
   const handleLocalStorageData = async () => {
     if (localStoragePackage) {

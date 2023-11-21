@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from "react";
-import PropTypes from "prop-types";
+import React, { Fragment } from "react";
+//import PropTypes from "prop-types";
 
 const Contact = () => {
   return (

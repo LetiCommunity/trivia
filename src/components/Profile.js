@@ -12,14 +12,9 @@ const Profile = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   let navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
   const headers = {
     token: `${token}`,
     "Content-Type": "application/json",
-  };
-
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
   };
 
   const handleEditProfile = () => {
@@ -41,7 +36,7 @@ const Profile = () => {
           return (window.location.href = "/home");
         })
         .catch((error) => {
-          // An error happened.
+          setImageUrl("") //Test
         });
     } catch (err) {
       console.error(err);

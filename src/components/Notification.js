@@ -11,6 +11,7 @@ const Notification = () => {
   const [travels, setTravels] = useState([]);
   const [viewMorePackages, setViewMorePackages] = useState(false);
   const [viewMoreTravels, setViewMoreTravels] = useState(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const headers = {
     token: `${token}`,
     "Content-Type": "application/json",
@@ -33,7 +34,7 @@ const Notification = () => {
       }
     };
     getPackages();
-  }, [travels, viewMorePackages]);
+  }, [headers, travels, viewMorePackages]);
 
   useEffect(() => {
     const getTravels = async () => {
@@ -52,7 +53,7 @@ const Notification = () => {
       }
     };
     getTravels();
-  }, [travels, viewMoreTravels]);
+  }, [headers, travels, viewMoreTravels]);
 
   const handleLocalStorageData = async () => {
     if (localStoragePackage) {
