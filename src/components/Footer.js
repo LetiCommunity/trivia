@@ -29,7 +29,7 @@ const Footer = () => {
               {/* <img
                 className="logo2"
                 alt="Trivia"
-                src={require("../assets/img/logo3.png")}
+                src={require("../assets/img/logo1.png")}
               /> */}
               © {new Date().getFullYear()} Todos los derechos reservados.
             </div>
