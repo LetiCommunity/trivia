@@ -6,13 +6,13 @@ import { getAuth  } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyARL1aWtVKUuaYBLrA11o56DTQ7UWz8oDw",
-  authDomain: "trivia-f50aa.firebaseapp.com",
-  projectId: "trivia-f50aa",
-  storageBucket: "trivia-f50aa.appspot.com",
-  messagingSenderId: "722481949474",
-  appId: "1:722481949474:web:87fb2e7b2227c1cf0d937b",
-  measurementId: "G-8QD4DJ1BSV"
+  apiKey: "AIzaSyD3ixzEl3HK6v0qYt3Vo6-oVnDTFfpW7cw",
+  authDomain: "trivia-5f881.firebaseapp.com",
+  projectId: "trivia-5f881",
+  storageBucket: "trivia-5f881.appspot.com",
+  messagingSenderId: "301875373906",
+  appId: "1:301875373906:web:69520470da8c9bd6f77c8b",
+  measurementId: "G-LZJZXMEK0Z"
 };
 
 // Initialize Firebase
