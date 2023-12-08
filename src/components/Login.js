@@ -56,7 +56,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/trivia/auth/signin",
+        "http://13.43.167.192/api/trivia/auth/signin",
         data,
         { headers }
       );

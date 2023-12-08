@@ -96,7 +96,7 @@ const EditProfile = () => {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/trivia/profiles/profile`,
+        `http://13.43.167.192/api/trivia/profiles/profile`,
         data,
         { headers }
       );

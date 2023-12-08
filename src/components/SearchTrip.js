@@ -17,7 +17,7 @@ const SearchTrip = () => {
     const getTravels = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/trivia/travels"
+          "http://13.43.167.192/api/trivia/travels"
         );
         setTravels(data);
         // let filter;

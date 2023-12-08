@@ -113,7 +113,7 @@ const PublishTrip = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/trivia/travels", data, {
+      await axios.post("http://13.43.167.192/api/trivia/travels", data, {
         headers,
       });
       return navigate("/activity");

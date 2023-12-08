@@ -27,7 +27,7 @@ const Profile = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      await axios.delete("http://localhost:5000/api/trivia/profiles/profile", {
+      await axios.delete("http://13.43.167.192/api/trivia/profiles/profile", {
         headers,
       });
       signOut(auth)

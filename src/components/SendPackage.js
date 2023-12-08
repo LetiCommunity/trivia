@@ -131,7 +131,7 @@ const SendPackage = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/trivia/packages", data, {
+      await axios.post("http://13.43.167.192/api/trivia/packages", data, {
         headers,
       });
       return navigate("/activity");

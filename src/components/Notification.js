@@ -21,7 +21,7 @@ const Notification = () => {
     const getPackages = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/trivia/packages/proprietor",
+          "http://13.43.167.192/api/trivia/packages/proprietor",
           { headers }
         );
         if (viewMorePackages) {
@@ -40,7 +40,7 @@ const Notification = () => {
     const getTravels = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/trivia/travels/proprietor",
+          "http://13.43.167.192/api/trivia/travels/proprietor",
           { headers }
         );
         if (viewMoreTravels) {
@@ -59,7 +59,7 @@ const Notification = () => {
     if (localStoragePackage) {
       try {
         await axios.post(
-          "http://localhost:5000/api/trivia/packages",
+          "http://13.43.167.192/api/trivia/packages",
           JSON.parse(localStoragePackage),
           { headers }
         );
@@ -73,7 +73,7 @@ const Notification = () => {
     if (localStorageTravel) {
       try {
         await axios.post(
-          "http://localhost:5000/api/trivia/travels",
+          "http://13.43.167.192/api/trivia/travels",
           JSON.parse(localStoragePackage),
           { headers }
         );

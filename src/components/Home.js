@@ -201,10 +201,9 @@ const Home = () => {
                   <div>
                     <h3>Envío fácil, rápido y seguro</h3>
                     <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Maxime mollitia, molestiae quas vel sint commodi
-                      repudiandae consequuntur voluptatum laborum numquam
-                      blanditiis harum.
+                      Nuetra red de viajeros se encargan de hacer llegar su
+                      paquete a su destino de forma segura, en el menor tiempo
+                      posible y a un buen precio.
                     </p>
                     <div className="text-center">
                       <Button
