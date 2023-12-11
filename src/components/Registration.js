@@ -64,8 +64,7 @@ const Registration = () => {
 
       if (
         data.name.trim() === "" ||
-        data.surname.trim() === "" ||
-        data.email.trim() === ""
+        data.surname.trim() === ""
       ) {
         setError("Por favor, revisa los espacios al inicio de los textos");
         return;
