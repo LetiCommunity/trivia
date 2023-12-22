@@ -141,7 +141,7 @@ const Registration = () => {
       .confirm(user.phoneConfirmation)
       .then((result) => {
         try {
-          axios.post("http://13.43.167.192/api/trivia/auth/signup", data, {
+          axios.post("https://trivi4.com/api/trivia/auth/signup", data, {
             headers,
           });
           return navigate("/login");
