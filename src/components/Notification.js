@@ -21,7 +21,7 @@ const Notification = () => {
     const getPackages = async () => {
       try {
         const { data } = await axios.get(
-          "http://13.43.167.192/api/trivia/packages/proprietor",
+          "https://trivi4.com/api/trivia/packages/proprietor",
           { headers }
         );
         if (viewMorePackages) {
@@ -40,7 +40,7 @@ const Notification = () => {
     const getTravels = async () => {
       try {
         const { data } = await axios.get(
-          "http://13.43.167.192/api/trivia/travels/proprietor",
+          "https://trivi4.com/api/trivia/travels/proprietor",
           { headers }
         );
         if (viewMoreTravels) {
@@ -73,7 +73,7 @@ const Notification = () => {
     if (localStorageTravel) {
       try {
         await axios.post(
-          "http://13.43.167.192/api/trivia/travels",
+          "https://trivi4.com/api/trivia/travels",
           JSON.parse(localStoragePackage),
           { headers }
         );
