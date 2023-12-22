@@ -73,7 +73,7 @@ const ChangePassword = () => {
 
     try {
       await axios.patch(
-        `http://13.43.167.192/api/trivia/profiles/profile`,
+        `https://trivi4.com/api/trivia/profiles/profile`,
         data,
         { headers }
       );
