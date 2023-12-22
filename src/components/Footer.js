@@ -9,7 +9,7 @@ const Footer = () => {
         <Row>
           <Col>
             <div>
-              <p className="">
+              <p>
                 <Link
                   to={{ pathname: "/p" }}
                   className="text-white text_decoration_a left"

@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import {
   Button,
@@ -16,7 +16,6 @@ import {
 const Login = () => {
   const localStoragePackage = localStorage.getItem("package");
   const localStorageTravel = localStorage.getItem("travel");
-  let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const headers = {
@@ -74,10 +73,6 @@ const Login = () => {
       setError("Usuario o contraseña incorrectos");
       return;
     }
-  };
-
-  const handleRegistration = () => {
-    return navigate("/registration");
   };
 
   return (
@@ -150,15 +145,12 @@ const Login = () => {
                 </Form>
                 <p>
                   ¿No tiene cuenta?{" "}
-                  <Button
-                    type="button"
-                    onClick={handleRegistration}
-                    color="link"
-                    outline={true}
-                    className="text-info"
+                  <Link
+                    to={{ pathname: "/registration" }}
+                    className="text-info text_decoration_a left"
                   >
                     Regístrese
-                  </Button>
+                  </Link>
                 </p>
               </CardBody>
             </Card>

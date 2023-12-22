@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import {
   Button,
@@ -150,14 +150,6 @@ const Registration = () => {
       .catch((error) => {
         console.error("Error", error);
       });
-  };
-
-  const handleLogin = () => {
-    return navigate("/login");
-  };
-
-  const handleTerms = () => {
-    return navigate("/terms");
   };
 
   return (
@@ -430,41 +422,32 @@ const Registration = () => {
                 <br />
                 <p>
                   ¿Ya tiene cuenta?{" "}
-                  <Button
-                    type="button"
-                    onClick={handleLogin}
-                    color="link"
-                    outline={true}
-                    className="text-info"
+                  <Link
+                    to={{ pathname: "/login" }}
+                    className="text-info text_decoration_a left"
                   >
                     Inicie sesión
-                  </Button>
+                  </Link>
                 </p>
               </CardBody>
             </Card>
             <div className="my-3">
               <p>
                 <small className="text-secondary">
-                  Al registrarse, acepta nuestros
-                  <Button
-                    type="button"
-                    onClick={handleTerms}
-                    color="link"
-                    outline={true}
-                    className="text-info"
+                  Al registrarse, acepta nuestros{" "}
+                  <Link
+                    to={{ pathname: "/terms" }}
+                    className="text-info text_decoration_a left"
                   >
                     Términos
-                  </Button>
-                  y
-                  <Button
-                    type="button"
-                    onClick={handleTerms}
-                    color="link"
-                    outline={true}
-                    className="text-info"
+                  </Link>{" "}
+                  y{" "}
+                  <Link
+                    to={{ pathname: "/p" }}
+                    className="text-info text_decoration_a left"
                   >
                     Política de privacidad
-                  </Button>
+                  </Link>
                 </small>
               </p>
             </div>

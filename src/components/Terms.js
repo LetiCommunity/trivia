@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import Footer from "./Footer";
 import { Card } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const Terms = () => {
   return (
@@ -122,7 +123,14 @@ const Terms = () => {
             <li>
               <p>
                 Sitio web: el sitio de Trivia al que se puede acceder a través
-                de esta URL <a href="https://app.trivi4.com">app.trivi4.com</a>.
+                de esta URL{" "}
+                <Link
+                  to={{ pathname: "/home" }}
+                  className="text-info text_decoration_a"
+                >
+                  app.trivi4.com
+                </Link>
+                .
               </p>
             </li>
             <li>
@@ -188,7 +196,13 @@ const Terms = () => {
             Seremos tan breves como lo permitan nuestros abogados. Lo principal
             que debe recordar es que al publicar un paquete o viaje en Trivia,
             acepta los términos junto con la{" "}
-            <a href="#p">Politica de privacidad</a> de Trivia.
+            <Link
+              to={{ pathname: "/terms" }}
+              className="text-info text_decoration_a"
+            >
+              Politica de privacidad
+            </Link>{" "}
+            de Trivia.
           </p>
           <p>
             Si por alguna razón no está completamente satisfecho con algún bien
