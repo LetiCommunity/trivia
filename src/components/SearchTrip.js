@@ -17,7 +17,7 @@ const SearchTrip = () => {
     const getTravels = async () => {
       try {
         const { data } = await axios.get(
-          "http://13.43.167.192/api/trivia/travels"
+          "https://trivi4.com/api/trivia/travels"
         );
         setTravels(data);
         // let filter;
