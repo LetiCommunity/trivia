@@ -62,10 +62,7 @@ const Registration = () => {
         return;
       }
 
-      if (
-        data.name.trim() === "" ||
-        data.surname.trim() === ""
-      ) {
+      if (data.name.trim() === "" || data.surname.trim() === "") {
         setError("Por favor, revisa los espacios al inicio de los textos");
         return;
       }
@@ -114,7 +111,7 @@ const Registration = () => {
     let recaptchaVerifier = new RecaptchaVerifier(auth, "sign-in-button", {
       size: "invisible",
     });
-    const phone = user.countryCode + user.phoneNumber
+    const phone = user.countryCode + user.phoneNumber;
     await signInWithPhoneNumber(auth, phone, recaptchaVerifier)
       .then((response) => {
         setOTP(true);
@@ -157,6 +154,10 @@ const Registration = () => {
 
   const handleLogin = () => {
     return navigate("/login");
+  };
+
+  const handleTerms = () => {
+    return navigate("/terms");
   };
 
   return (
@@ -444,17 +445,26 @@ const Registration = () => {
             <div className="my-3">
               <p>
                 <small className="text-secondary">
-                  Al registrarse, acepta nuestros{" "}
-                  <a href="#terms" className="text-info text_decoration_a">
+                  Al registrarse, acepta nuestros
+                  <Button
+                    type="button"
+                    onClick={handleTerms}
+                    color="link"
+                    outline={true}
+                    className="text-info"
+                  >
                     Términos
-                  </a>{" "}
-                  y{" "}
-                  <a
-                    href="#privacy-policy"
-                    className="text-info text_decoration_a"
+                  </Button>
+                  y
+                  <Button
+                    type="button"
+                    onClick={handleTerms}
+                    color="link"
+                    outline={true}
+                    className="text-info"
                   >
                     Política de privacidad
-                  </a>
+                  </Button>
                 </small>
               </p>
             </div>

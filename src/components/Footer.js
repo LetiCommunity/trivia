@@ -1,7 +1,12 @@
 import React, { Fragment } from "react";
-import { Col, Nav, NavItem, NavLink, Row } from "reactstrap";
+import { useNavigate } from "react-router-dom";
+import { Button, Col, Nav, NavItem, NavLink, Row } from "reactstrap";
 
 const Footer = () => {
+  let navigate = useNavigate();
+  const handleTerms = () => {
+    return navigate("/terms");
+  };
   return (
     <Fragment>
       <div className="mt-5 px-5 py-5 text-center">
@@ -43,6 +48,17 @@ const Footer = () => {
               <a href="#p">
                 <i className="bi bi-whatsapp text-white"></i>
               </a>
+            </div>
+            <div>
+              <Button
+                type="button"
+                onClick={handleTerms}
+                color="link"
+                outline={true}
+                className="text-info"
+              >
+                Términos
+              </Button>
             </div>
           </Col>
         </Row>

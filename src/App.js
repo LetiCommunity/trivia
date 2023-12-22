@@ -16,6 +16,7 @@ import EditProfile from "./components/EditProfile";
 import ChangePassword from "./components/ChangePassword";
 import SearchTrip from "./components/SearchTrip";
 import Logout from "./components/Logout";
+import Terms from "./components/Terms";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -42,6 +43,7 @@ function App() {
             <Route path="publish-trip" element={<PublishTrip />} />
             <Route path="search-trip" element={<SearchTrip />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="terms" element={<Terms />} />
             <Route path="*" element={<NoPage />} />
             {token ? (
               <>
