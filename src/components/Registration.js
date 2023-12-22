@@ -122,7 +122,7 @@ const Registration = () => {
         alert("Código enviado");
       })
       .catch((error) => {
-        console.error(error);
+        console.error(error.message);
       });
   };
 
