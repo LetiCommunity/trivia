@@ -140,16 +140,11 @@ const Activity = () => {
                       <div className="rounded bg-light text-dark p-3"></div>
                       <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
                         <div className="input_wrapper">
-                          {/* <img
+                          <img
                             className="rounded-circle input_icon mt-3"
                             alt={item.image}
-                            src={axios
-                              .get(
-                                `https://trivi4.com/api/trivia/packages/image/${item.image}`,
-                                { headers }
-                              )
-                              .then((response) => Buffer.from(response.data))}
-                          /> */}
+                            src={`https://trivi4.com/api/trivia/packages/image/${item.image}`}
+                          />
                         </div>
                         <p className="text-size">
                           {item.image} {item.description}

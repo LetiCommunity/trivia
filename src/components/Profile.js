@@ -11,7 +11,6 @@ const Profile = () => {
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
   let navigate = useNavigate();
-  const [imageUrl, setImageUrl] = useState("");
   const headers = {
     token: `${token}`,
     "Content-Type": "application/json",
@@ -36,7 +35,7 @@ const Profile = () => {
           return (window.location.href = "/home");
         })
         .catch((error) => {
-          setImageUrl("") //Test
+          //setImageUrl("") //Test
         });
     } catch (err) {
       console.error(err);
@@ -58,16 +57,16 @@ const Profile = () => {
             <Card className="border-0 bg-light">
               <CardBody>
                 <div className="text-center">
-                  {imageUrl.trim() ? (
+                  {user.image ? (
                     <img
                       alt="Imagen cargada"
                       className="rounded-circle profile"
-                      src={imageUrl}
+                      src={`http://localhost:5000/api/trivia/profiles/image/${user.image}`}
                     />
                   ) : (
                     <img
-                      alt="Cargar imagen"
-                      className="rounded-circle"
+                      alt="Imagen cargada"
+                      className="rounded-circle profile"
                       src={inicialImage}
                     />
                   )}
