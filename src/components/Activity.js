@@ -22,7 +22,7 @@ const Activity = () => {
     const getPackages = async () => {
       try {
         const { data } = await axios.get(
-          "http://13.43.167.192/api/trivia/packages/proprietor",
+          "https://trivi4.com/api/trivia/packages/proprietor",
           { headers }
         );
         if (viewMorePackages) {
@@ -41,7 +41,7 @@ const Activity = () => {
     const getTravels = async () => {
       try {
         const { data } = await axios.get(
-          "http://13.43.167.192/api/trivia/travels/proprietor",
+          "https://trivi4.com/api/trivia/travels/proprietor",
           { headers }
         );
         if (viewMoreTravels) {
@@ -60,7 +60,7 @@ const Activity = () => {
     if (localStoragePackage) {
       try {
         await axios.post(
-          "http://13.43.167.192/api/trivia/packages",
+          "https://trivi4.com/api/trivia/packages",
           JSON.parse(localStoragePackage),
           { headers }
         );
@@ -74,7 +74,7 @@ const Activity = () => {
     if (localStorageTravel) {
       try {
         await axios.post(
-          "http://13.43.167.192/api/trivia/travels",
+          "https://trivi4.com/api/trivia/travels",
           JSON.parse(localStorageTravel),
           { headers }
         );
@@ -145,7 +145,7 @@ const Activity = () => {
                             alt={item.image}
                             src={axios
                               .get(
-                                `http://localhost:5000/api/trivia/packages/image/${item.image}`,
+                                `https://trivi4.com/api/trivia/packages/image/${item.image}`,
                                 { headers }
                               )
                               .then((response) => Buffer.from(response.data))}
