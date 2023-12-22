@@ -240,6 +240,44 @@ const Home = () => {
                 </Col>
               </Row>
             </div>
+            {/* <div className="">
+              <Row>
+                <Col md="4">
+                  <Link
+                    to={{ pathname: handleSearchTrip("malabo", "bata")}}
+                    className="text-white text_decoration_a left"
+                  >
+                    <Card className="mb-2 bg-light">
+                      <p className="p-3 text-size">Malabo a Bata</p>
+                    </Card>
+                  </Link>
+                </Col>
+                <Col md="4">
+                  <Link
+                    to={{
+                      pathname: handleSearchTrip("malabo", "madrid"),
+                    }}
+                    className="text-white text_decoration_a left"
+                  >
+                    <Card className="mb-2 bg-light">
+                      <p className="p-3 text-size">Malabo a Madrid</p>
+                    </Card>
+                  </Link>
+                </Col>
+                <Col md="4">
+                  <Link
+                    to={{
+                      pathname: handleSearchTrip("malabo", "mongomeyen"),
+                    }}
+                    className="text-white text_decoration_a left"
+                  >
+                    <Card className="mb-2 bg-light">
+                      <p className="p-3 text-size">Malabo a Mongomeyen</p>
+                    </Card>
+                  </Link>
+                </Col>
+              </Row>
+            </div> */}
             <div className="">
               <Row>
                 <Col md="4">

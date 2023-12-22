@@ -1,36 +1,30 @@
 import React, { Fragment } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, Col, Nav, NavItem, NavLink, Row } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Col, Row } from "reactstrap";
 
 const Footer = () => {
-  let navigate = useNavigate();
-  const handleTerms = () => {
-    return navigate("/terms");
-  };
   return (
     <Fragment>
-      <div className="mt-5 px-5 py-5 text-center">
+      <div className="mt-5 px-5 py-2">
         <Row>
           <Col>
             <div>
-              <Nav>
-                <NavItem>
-                  <p>
-                    <NavLink href="#" className="text-white">
-                      Sobre nosotros
-                    </NavLink>
-                  </p>
-                </NavItem>
-                <NavItem>
-                  <p>
-                    <NavLink href="contact" className="text-white">
-                      Contáctanos
-                    </NavLink>
-                  </p>
-                </NavItem>
-              </Nav>
+              <p className="">
+                <Link
+                  to={{ pathname: "/p" }}
+                  className="text-white text_decoration_a left"
+                >
+                  Sobre nosotros
+                </Link>{" "}
+                <Link
+                  to={{ pathname: "/p" }}
+                  className="text-white text_decoration_a left"
+                >
+                  Contáctanos
+                </Link>
+              </p>
             </div>
-            <div className="copyright">
+            <div className="copyright text-center">
               {/* <img
                 className="logo2"
                 alt="Trivia"
@@ -38,7 +32,7 @@ const Footer = () => {
               /> */}
               © {new Date().getFullYear()} Todos los derechos reservados.
             </div>
-            <div>
+            <div className="text-center">
               <a href="#p">
                 <i className="bi bi-instagram text-white"></i>
               </a>{" "}
@@ -50,15 +44,21 @@ const Footer = () => {
               </a>
             </div>
             <div>
-              <Button
-                type="button"
-                onClick={handleTerms}
-                color="link"
-                outline={true}
-                className="text-info"
-              >
-                Términos
-              </Button>
+              <p className="right">
+                <Link
+                  to={{ pathname: "/terms" }}
+                  className="text-white text_decoration_a"
+                >
+                  Términos
+                </Link>{" "}
+                y{" "}
+                <Link
+                  to={{ pathname: "/terms" }}
+                  className="text-white text_decoration_a"
+                >
+                  Política de privacidad
+                </Link>
+              </p>
             </div>
           </Col>
         </Row>
