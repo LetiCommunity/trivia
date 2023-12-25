@@ -61,7 +61,7 @@ const Profile = () => {
                     <img
                       alt="Imagen cargada"
                       className="rounded-circle profile"
-                      src={`http://localhost:5000/api/trivia/profiles/image/${user.image}`}
+                      src={`https://trivi4.com/api/trivia/profiles/image/${user.image}`}
                     />
                   ) : (
                     <img
