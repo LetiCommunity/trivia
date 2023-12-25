@@ -38,7 +38,11 @@ const UserNavbar = () => {
             <img
               alt="Imagen cargada"
               className="rounded-circle profile-bar"
-              src={`https://trivi4.com/api/trivia/profiles/image/${user.image}`}
+              src={
+                user.image
+                  ? `https://trivi4.com/api/trivia/profiles/image/${user.image}`
+                  : inicialImage
+              }
             />
           ) : (
             <img
