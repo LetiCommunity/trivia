@@ -139,16 +139,15 @@ const Activity = () => {
                     <div key={item._id}>
                       <div className="rounded bg-light text-dark p-3"></div>
                       <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                        <div className="input_wrapper">
+                        <div className="">
                           <img
-                            className="rounded-circle input_icon mt-3"
+                            className="package-image input_icon"
                             alt={item.image}
                             src={`https://trivi4.com/api/trivia/packages/image/${item.image}`}
                           />
                         </div>
-                        <p className="text-size">
-                          {item.image} {item.description}
-                        </p>
+                        <p className="text-size">Para: {item.receiverName}</p>
+                        <p className="text-size">Estado: {item.status}</p>
                         <p className="text-size">
                           {moment(item.createdAt).format("DD/MM/YYYY HH:mm:ss")}
                         </p>
