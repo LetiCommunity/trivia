@@ -34,10 +34,10 @@ const UserNavbar = () => {
           onClick={handleToggle}
           className="navbar-toggler border-0 bg-light"
         >
-          {user.image ? (
+          {user ? (
             <img
-              alt="Imagen cargada profile-bar"
-              className="rounded-circle"
+              alt="Imagen cargada"
+              className="rounded-circle profile-bar"
               src={`https://trivi4.com/api/trivia/profiles/image/${user.image}`}
             />
           ) : (
