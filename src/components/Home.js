@@ -201,7 +201,7 @@ const Home = () => {
                   <div>
                     <h3>Envío fácil, rápido y seguro</h3>
                     <p>
-                      Nuetra red de viajeros se encargan de hacer llegar su
+                      Nuestra red de viajeros se encargan de hacer llegar su
                       paquete a su destino de forma segura, en el menor tiempo
                       posible y a un buen precio.
                     </p>

@@ -1,362 +1,374 @@
 import React, { Fragment } from "react";
 import Footer from "./Footer";
-import { Card } from "reactstrap";
+import { Card, Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 
 const Terms = () => {
   return (
     <Fragment>
-      <div className="content m-5 py-5">
-        <h1>Términos y Condiciones</h1>
-        <Card className="p-5">
-          <small>Actualizado el 22-12-2023</small>
-          <h2>Términos generales</h2>
-          <p>
-            Al acceder y realizar un pedido con Trivia usted confirma que está
-            de acuerdo y sujeto a los términos de servicio contenidos en los
-            Términos y condiciones que se describen a continuación. Estos
-            términos se aplican a todo el sitio web y a cualquier correo
-            electrónico u otro tipo de comunicación entre usted y Trivia.
-          </p>
-          <p>
-            Bajo ninguna circunstancia el equipo de Trivia será responsable de
-            ningún daño directo, indirecto, especial; incidental o consecuente,
-            que incluye, entre otros, la pérdida de datos o ganancias que surjan
-            del uso o la incapacidad de usar los materiales de este sitio,
-            incluso si el equipo de Trivia o un representante autorizado han
-            sido informados de la posibilidad de tales daños. Si su uso de
-            materiales de este sitio resulta en la necesidad de servicio,
-            reparación o corrección de equipos o datos, usted asume los costos
-            de los mismos.
-          </p>
-          <p>
-            Trivia no será responsable de ningún resultado que pueda ocurrir
-            durante el curso del uso de nuestros recursos. Nos reservamos el
-            derecho de cambiar los precios y revisar la política de uso de
-            recursos en cualquier momento.
-          </p>
-          <h2>Licencia</h2>
-          <p>
-            Trivia le otorga una licencia revocable, no exclusiva,
-            intransferible y limitada para descargar, instalar y usar la
-            plataforma estrictamente de acuerdo con los términos de este
-            Acuerdo.
-          </p>
-          <p>
-            Estos Términos y condiciones son un contrato entre usted y Trivia
-            (referidos en estos Términos y condiciones como "Trivia",
-            "nosotros": o "nuestro"), el proveedor del sitio web de Trivia y los
-            servicios accesibles desde el sitio web de Trivia (que se denominan
-            colectivamente en estos Términos y condiciones como el 'Servicio de
-            Trivia").
-          </p>
-          <p>
-            Usted acepta estar sujeto a estos Términos y condiciones. Si no está
-            de acuerdo con estos Términos y condiciones, no utilice el Servicio
-            de Trivia. En estos Términos y condiciones; "usted" se refiere tanto
-            a usted como individuo como a la entidad que representa. Si viola
-            cualquiera de estos Términos y condiciones, nos reservamos el
-            derecho de cancelar su cuenta o bloquear el acceso a su cuenta sin
-            previo aviso.
-          </p>
-          <h2>Definiciones y términos clave</h2>
-          <p>
-            Para ayudar a explicar las cosas de la manera más clara posible en
-            estos Términos y Condiciones; cada vez que se hace referencia a
-            cualquiera de estos términos se definen estrictamente como:
-          </p>
-          <ul>
-            <li>
+      <div className="content">
+        <Row className="m-2 py-5">
+          <Col md="12" sm="12" xs="12">
+            <h1>Términos y Condiciones</h1>
+            <Card className="p-5">
+              <small>Actualizado el 22-12-2023</small>
+              <h2>Términos generales</h2>
               <p>
-                Cookie: pequeña cantidad de datos generados por un sitio web y
-                guardados por su navegador web. Se utiliza para identificar su
-                navegador: proporcionar análisis, recordar información sobre
-                usted, como su preferencia de idioma o información de inicio de
-                sesión.
-              </p>
-            </li>
-            <li>
-              <p>
-                Compañía: cuando estos términos mencionan "Compañía" y,
-                "nosotros", "nos" o "nuestro", se refiere a Trivia, que es
-                responsable de su información en virtud de estos Términos y
-                Condiciones.
-              </p>
-            </li>
-            <li>
-              <p>
-                Plataforma: sitio web de Internet; aplicación web o aplicación
-                digital de cara al público de Trivia. País: donde se encuentra
-                Trivia o los propietarios / fundadores de Trivia en este caso es
-                Guinea Ecuatorial.
-              </p>
-            </li>
-            <li>
-              <p>
-                País: donde se encuentra Trivia o los propietarios / fundadores
-                de Trivia en este caso es Guinea Ecuatorial.
-              </p>
-            </li>
-            <li>
-              <p>
-                Dispositivo: cualquier dispositivo conectado a Internet, como un
-                teléfono, tablet, computadora o cualquier otro dispositivo que
-                se pueda usar para visitar Trivia y usar los servicios de
+                Al acceder y realizar un pedido con Trivia usted confirma que
+                está de acuerdo y sujeto a los términos de servicio contenidos
+                en los Términos y condiciones que se describen a continuación.
+                Estos términos se aplican a todo el sitio web y a cualquier
+                correo electrónico u otro tipo de comunicación entre usted y
                 Trivia.
               </p>
-            </li>
-            <li>
               <p>
-                Servicio: se refiere al servicio brindado por Trivia como se
-                describe en los términos relativos (si están disponibles) y en
-                esta plataforma.
+                Bajo ninguna circunstancia el equipo de Trivia será responsable
+                de ningún daño directo, indirecto, especial; incidental o
+                consecuente, que incluye, entre otros, la pérdida de datos o
+                ganancias que surjan del uso o la incapacidad de usar los
+                materiales de este sitio, incluso si el equipo de Trivia o un
+                representante autorizado han sido informados de la posibilidad
+                de tales daños. Si su uso de materiales de este sitio resulta en
+                la necesidad de servicio, reparación o corrección de equipos o
+                datos, usted asume los costos de los mismos.
               </p>
-            </li>
-            <li>
               <p>
-                Terceros: se refiere a anunciantes. patrocinadores de concursos,
-                socios promocionales y de marketing y otros que brindan nuestro
-                contenido o cuyos productos o servicios que creemos que pueden
-                interesarle.
+                Trivia no será responsable de ningún resultado que pueda ocurrir
+                durante el curso del uso de nuestros recursos. Nos reservamos el
+                derecho de cambiar los precios y revisar la política de uso de
+                recursos en cualquier momento.
               </p>
-            </li>
-            <li>
+              <h2>Licencia</h2>
               <p>
-                Sitio web: el sitio de Trivia al que se puede acceder a través
-                de esta URL{" "}
+                Trivia le otorga una licencia revocable, no exclusiva,
+                intransferible y limitada para descargar, instalar y usar la
+                plataforma estrictamente de acuerdo con los términos de este
+                Acuerdo.
+              </p>
+              <p>
+                Estos Términos y condiciones son un contrato entre usted y
+                Trivia (referidos en estos Términos y condiciones como "Trivia",
+                "nosotros": o "nuestro"), el proveedor del sitio web de Trivia y
+                los servicios accesibles desde el sitio web de Trivia (que se
+                denominan colectivamente en estos Términos y condiciones como el
+                'Servicio de Trivia").
+              </p>
+              <p>
+                Usted acepta estar sujeto a estos Términos y condiciones. Si no
+                está de acuerdo con estos Términos y condiciones, no utilice el
+                Servicio de Trivia. En estos Términos y condiciones; "usted" se
+                refiere tanto a usted como individuo como a la entidad que
+                representa. Si viola cualquiera de estos Términos y condiciones,
+                nos reservamos el derecho de cancelar su cuenta o bloquear el
+                acceso a su cuenta sin previo aviso.
+              </p>
+              <h2>Definiciones y términos clave</h2>
+              <p>
+                Para ayudar a explicar las cosas de la manera más clara posible
+                en estos Términos y Condiciones; cada vez que se hace referencia
+                a cualquiera de estos términos se definen estrictamente como:
+              </p>
+              <ul>
+                <li>
+                  <p>
+                    Cookie: pequeña cantidad de datos generados por un sitio web
+                    y guardados por su navegador web. Se utiliza para
+                    identificar su navegador: proporcionar análisis, recordar
+                    información sobre usted, como su preferencia de idioma o
+                    información de inicio de sesión.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Compañía: cuando estos términos mencionan "Compañía" y,
+                    "nosotros", "nos" o "nuestro", se refiere a Trivia, que es
+                    responsable de su información en virtud de estos Términos y
+                    Condiciones.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Plataforma: sitio web de Internet; aplicación web o
+                    aplicación digital de cara al público de Trivia. País: donde
+                    se encuentra Trivia o los propietarios / fundadores de
+                    Trivia en este caso es Guinea Ecuatorial.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    País: donde se encuentra Trivia o los propietarios /
+                    fundadores de Trivia en este caso es Guinea Ecuatorial.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Dispositivo: cualquier dispositivo conectado a Internet,
+                    como un teléfono, tablet, computadora o cualquier otro
+                    dispositivo que se pueda usar para visitar Trivia y usar los
+                    servicios de Trivia.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Servicio: se refiere al servicio brindado por Trivia como se
+                    describe en los términos relativos (si están disponibles) y
+                    en esta plataforma.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Terceros: se refiere a anunciantes. patrocinadores de
+                    concursos, socios promocionales y de marketing y otros que
+                    brindan nuestro contenido o cuyos productos o servicios que
+                    creemos que pueden interesarle.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Sitio web: el sitio de Trivia al que se puede acceder a
+                    través de esta URL{" "}
+                    <Link
+                      to={{ pathname: "/home" }}
+                      className="text-info text_decoration_a"
+                    >
+                      app.trivi4.com
+                    </Link>
+                    .
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Usted: una persona o entidad que está registrada con Trivia
+                    para utilizar los Servicios.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Dispositivo: cualquier dispositivo conectado a Internet,
+                    como un teléfono, tablet, computadora o cualquier otro
+                    dispositivo que se pueda usar para visitar Trivia y usar los
+                    servicios de Trivia.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Dispositivo: cualquier dispositivo conectado a Internet,
+                    como un teléfono, tablet, computadora o cualquier otro
+                    dispositivo que se pueda usar para visitar Trivia y usar los
+                    servicios de Trivia.
+                  </p>
+                </li>
+              </ul>
+              <h2>Restricciones</h2>
+              <p>Usted acepta no hacerlo y no permitirá a otros.</p>
+              <ul>
+                <li>
+                  <p>
+                    Licenciar, vender: alquilar; arrendar, asignar; distribuir:
+                    transmitir, alojar, subcontratar: divulgar o explotar
+                    comercialmente la plataforma o poner la plataforma a
+                    disposición de terceros.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Modificar, realizar trabajos derivados, desensamblar,
+                    descifrar, realzar una compilación inversa o realizar
+                    ingeniería inversa de cualquier parte de la plataforma
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Eliminar: alterar u ocultar cualquier aviso de propiedad
+                    (incluido cualquier aviso de derechos de autor o marca
+                    registrada) de sus afiliados, socios, proveedores o
+                    licenciatanos de la plataforma.
+                  </p>
+                </li>
+              </ul>
+              <h2>Política de Devolución y Reembolso</h2>
+              <p>
+                Gracias por usar los servicios de Trivia. Apreciamos el hecho de
+                que le guste nuestros. También queremos asegurarnos de que tenga
+                una experiencia gratificante mientras explora, evalúa y usa
+                nuestros servicios.
+              </p>
+              <p>
+                Al igual que con cualquier experiencia al usar servicios,
+                existen términos y condiciones que se aplican a las
+                transacciones en Trivia. Seremos tan breves como lo permitan
+                nuestros abogados. Lo principal que debe recordar es que al
+                publicar un paquete o viaje en Trivia, acepta los términos junto
+                con la{" "}
                 <Link
-                  to={{ pathname: "/home" }}
+                  to={{ pathname: "/terms" }}
                   className="text-info text_decoration_a"
                 >
-                  app.trivi4.com
-                </Link>
-                .
+                  Politica de privacidad
+                </Link>{" "}
+                de Trivia.
               </p>
-            </li>
-            <li>
               <p>
-                Usted: una persona o entidad que está registrada con Trivia para
-                utilizar los Servicios.
+                Si por alguna razón no está completamente satisfecho con algún
+                bien o servicio que le brindamos no dude en contactarnos y
+                discutiremos cualquiera de los problemas que esté atravesando
+                con nuestro servicio.
               </p>
-            </li>
-            <li>
+              <h2>Tus sugerencias</h2>
               <p>
-                Dispositivo: cualquier dispositivo conectado a Internet, como un
-                teléfono, tablet, computadora o cualquier otro dispositivo que
-                se pueda usar para visitar Trivia y usar los servicios de
-                Trivia.
+                Cualquier, comentario, idea; mejora o sugerencia
+                (colectivamente, "Sugerencias') que usted proporcione a Trivia
+                con respecto a la plataforma seguirá siendo propiedad única y
+                exclusiva de Trivia.
               </p>
-            </li>
-            <li>
               <p>
-                Dispositivo: cualquier dispositivo conectado a Internet, como un
-                teléfono, tablet, computadora o cualquier otro dispositivo que
-                se pueda usar para visitar Trivia y usar los servicios de
-                Trivia.
+                Trivia tendrá la libertad de usar; copiar, modificar, publicar o
+                redistribuir las Sugerencias para cualquier propósito y de
+                cualquier manera sin ningún crédito o compensación para usted.
               </p>
-            </li>
-          </ul>
-          <h2>Restricciones</h2>
-          <p>Usted acepta no hacerlo y no permitirá a otros.</p>
-          <ul>
-            <li>
+              <h2>Tu consentimiento</h2>
               <p>
-                Licenciar, vender: alquilar; arrendar, asignar; distribuir:
-                transmitir, alojar, subcontratar: divulgar o explotar
-                comercialmente la plataforma o poner la plataforma a disposición
+                Hemos actualizado nuestros Términos y condiciones para brindarle
+                total transparencia sobre lo que se establece cuando visita
+                nuestro sitio y cómo se utiliza. Al utilizar nuestra plataforma;
+                registrar una cuenta o publicar un paquete o viaje, por la
+                presente acepta nuestros Términos y condiciones.
+              </p>
+              <h2>Enlaces a otros Sitios Web </h2>
+              <p>
+                Estos Términos y Condiciones se aplican solo a los Servicios.
+                Los Servicios pueden contener enlaces a otros sitios web que
+                Trivia no opera ni controla. No somos responsables por el
+                contenido; la precisión o las opiniones expresadas en dichos
+                sitios web, y dichos sitios web no son investigados,
+                monitoreados o verificados por nuestra precisión o integridad.
+                Recuerde que cuando utiliza un enlace para ir de los Servicios a
+                otro sitio web nuestros Términos y condiciones dejan de estar
+                vigentes. Su navegación e interacción en cualquier otro sitio
+                web incluidos aquellos que tienen un enlace en nuestra
+                plataforma están sujetos a las propias reglas y políticas de ese
+                sitio web. Dichos terceros pueden utilizar sus propias cookies u
+                otros métodos para recopilar información sobre usted.
+              </p>
+              <h2>Cookies</h2>
+              <p>
+                Trivia utiliza 'cookies' para identificar las áreas de nuestro
+                sitio web que ha visitado. Una cookie es una pequeña porción de
+                datos que su navegador web almacena en su computadora o
+                dispositivo móvil. Usamos cookies para mejorar el rendimiento y
+                la funcionalidad de nuestra plataforma, pero no son esenciales
+                para su uso. Sin embargo, sin estas cookies, es posible que
+                ciertas funciones, no estén disponibles o se le solicitará que
+                ingrese sus datos de inicio de sesión cada vez que visite la
+                plataforma, ya que no podríamos recordar que había iniciado
+                sesión anteriormente. La mayoría de los navegadores web se
+                pueden configurar para desactivar el uso de cookies. Sin
+                embargo, si desactiva las cookies, es posible que no pueda
+                acceder a la funcionalidad de nuestro sitio web correctamente o
+                en absoluto. Nunca colocamos información de identificación
+                personal en cookles.
+              </p>
+              <h2>Cambios en nuestros Términos y Condiciones</h2>
+              <p>
+                Usted reconoce y acepta que Trivia puede dejar de brindarle (de
+                forma permanente o temporal) el Servicio (o cualquier función
+                dentro del Servicio) a usted o a los usuarios en general, a
+                discreción exclusiva de Trivia; sin previo aviso. Puede dejar de
+                utilizar el Servicio en cualquier momento. No es necesario que
+                informe específicamente a Trivia cuando deje de usar el
+                Servicio. Usted reconoce y acepta que si Trivia deshabilita el
+                acceso a su cuenta, es posible que no pueda acceder al Servicio.
+                Los detalles de su cuenta o cualquier archivo u otro material
+                contenido en su cuenta
+              </p>
+              <p>
+                Si decidimos cambiar nuestros Términos y condiciones;
+                publicaremos esos cambios en esta página y / o actualizaremos la
+                fecha de modificación de los Términos y condiciones a
+                continuación.
+              </p>
+              <h2>Modificaciones a nuestra plataforma</h2>
+              <p>
+                Trivia se reserva el derecho de modificar, suspender o
+                interrumpir, temporal o permanentemente, la plataforma o
+                cualquier servicio al que se conecte con o sin previo aviso y
+                sin responsabilidad ante usted.
+              </p>
+              <h2>Actualizaciones a nuestra plataforma</h2>
+              <p>
+                Trivia puede, de vez en cuando, proporcionar mejoras a las
+                características y funcionalidad de la plataforma que pueden
+                incluir parches, corrección de errores, actualizaciones, mejoras
+                y otras modificaciones ("Actualizaciones").
+              </p>
+              <p>
+                Las actualizaciones pueden modificar o eliminar ciertas
+                características y / o funcionalidades de la plataforma. Usted
+                acepta que Trivia no tiene la obligación de (I) proporcionar
+                Actualizaciones; o (II) continuar proporcionándole o habilitando
+                características y / o funcionalidades particulares de la
+                plataforma.
+              </p>
+              <p>
+                Además; acepta que todas las Actualizaciones (I) se considerarán
+                una parte integral de la plataforma y (II) estarán sujetas a los
+                términos y condiciones de este Acuerdo
+              </p>
+              <h2>Servicios de Terceros</h2>
+              <p>
+                Podemos mostrar, incluir o poner a disposición contenido de
+                terceros (incluidos datos e información, aplicaciones y otros
+                servicios) o proporcionar enlaces a sitios web o servicias de
+                terceros ("Servicios de terceros").
+              </p>
+              <p>
+                Usted reconoce y acepta que Trivia no será responsable de ningún
+                Servicio de terceros; incluida su precisión, integridad;
+                puntualidad, validez, cumplimiento de los derechos de autor,
+                legalidad, decencia, calidad o cualquier otro aspecto de los
+                mismos.
+              </p>
+              <p>
+                Trivia no asume ni tendrá ninguna obligación o responsabilidad
+                ante usted o cualquier otra persona o entidad por los Servicios
                 de terceros.
               </p>
-            </li>
-            <li>
               <p>
-                Modificar, realizar trabajos derivados, desensamblar, descifrar,
-                realzar una compilación inversa o realizar ingeniería inversa de
-                cualquier parte de la plataforma
+                Los Servicios de terceros y los enlaces a las mismos se brindan
+                únicamente para su conveniencia y usted accede a ellos y los usa
+                completamente bajo su propio riesgo y sujeto a los términos y
+                condiciones de dichos terceros.
               </p>
-            </li>
-            <li>
+              <h2>Duración y Terminación</h2>
               <p>
-                Eliminar: alterar u ocultar cualquier aviso de propiedad
-                (incluido cualquier aviso de derechos de autor o marca
-                registrada) de sus afiliados, socios, proveedores o
-                licenciatanos de la plataforma.
+                Este Acuerdo permanecerá en vigor hasta que usted o Trivia lo
+                rescindan.
               </p>
-            </li>
-          </ul>
-          <h2>Política de Devolución y Reembolso</h2>
-          <p>
-            Gracias por usar los servicios de Trivia. Apreciamos el hecho de que
-            le guste nuestros. También queremos asegurarnos de que tenga una
-            experiencia gratificante mientras explora, evalúa y usa nuestros
-            servicios.
-          </p>
-          <p>
-            Al igual que con cualquier experiencia al usar servicios, existen
-            términos y condiciones que se aplican a las transacciones en Trivia.
-            Seremos tan breves como lo permitan nuestros abogados. Lo principal
-            que debe recordar es que al publicar un paquete o viaje en Trivia,
-            acepta los términos junto con la{" "}
-            <Link
-              to={{ pathname: "/terms" }}
-              className="text-info text_decoration_a"
-            >
-              Politica de privacidad
-            </Link>{" "}
-            de Trivia.
-          </p>
-          <p>
-            Si por alguna razón no está completamente satisfecho con algún bien
-            o servicio que le brindamos no dude en contactarnos y discutiremos
-            cualquiera de los problemas que esté atravesando con nuestro
-            servicio.
-          </p>
-          <h2>Tus sugerencias</h2>
-          <p>
-            Cualquier, comentario, idea; mejora o sugerencia (colectivamente,
-            "Sugerencias') que usted proporcione a Trivia con respecto a la
-            plataforma seguirá siendo propiedad única y exclusiva de Trivia.
-          </p>
-          <p>
-            Trivia tendrá la libertad de usar; copiar, modificar, publicar o
-            redistribuir las Sugerencias para cualquier propósito y de cualquier
-            manera sin ningún crédito o compensación para usted.
-          </p>
-          <h2>Tu consentimiento</h2>
-          <p>
-            Hemos actualizado nuestros Términos y condiciones para brindarle
-            total transparencia sobre lo que se establece cuando visita nuestro
-            sitio y cómo se utiliza. Al utilizar nuestra plataforma; registrar
-            una cuenta o publicar un paquete o viaje, por la presente acepta
-            nuestros Términos y condiciones.
-          </p>
-          <h2>Enlaces a otros Sitios Web </h2>
-          <p>
-            Estos Términos y Condiciones se aplican solo a los Servicios. Los
-            Servicios pueden contener enlaces a otros sitios web que Trivia no
-            opera ni controla. No somos responsables por el contenido; la
-            precisión o las opiniones expresadas en dichos sitios web, y dichos
-            sitios web no son investigados, monitoreados o verificados por
-            nuestra precisión o integridad. Recuerde que cuando utiliza un
-            enlace para ir de los Servicios a otro sitio web nuestros Términos y
-            condiciones dejan de estar vigentes. Su navegación e interacción en
-            cualquier otro sitio web incluidos aquellos que tienen un enlace en
-            nuestra plataforma están sujetos a las propias reglas y políticas de
-            ese sitio web. Dichos terceros pueden utilizar sus propias cookies u
-            otros métodos para recopilar información sobre usted.
-          </p>
-          <h2>Cookies</h2>
-          <p>
-            Trivia utiliza 'cookies' para identificar las áreas de nuestro sitio
-            web que ha visitado. Una cookie es una pequeña porción de datos que
-            su navegador web almacena en su computadora o dispositivo móvil.
-            Usamos cookies para mejorar el rendimiento y la funcionalidad de
-            nuestra plataforma, pero no son esenciales para su uso. Sin embargo,
-            sin estas cookies, es posible que ciertas funciones, no estén
-            disponibles o se le solicitará que ingrese sus datos de inicio de
-            sesión cada vez que visite la plataforma, ya que no podríamos
-            recordar que había iniciado sesión anteriormente. La mayoría de los
-            navegadores web se pueden configurar para desactivar el uso de
-            cookies. Sin embargo, si desactiva las cookies, es posible que no
-            pueda acceder a la funcionalidad de nuestro sitio web correctamente
-            o en absoluto. Nunca colocamos información de identificación
-            personal en cookles.
-          </p>
-          <h2>Cambios en nuestros Términos y Condiciones</h2>
-          <p>
-            Usted reconoce y acepta que Trivia puede dejar de brindarle (de
-            forma permanente o temporal) el Servicio (o cualquier función dentro
-            del Servicio) a usted o a los usuarios en general, a discreción
-            exclusiva de Trivia; sin previo aviso. Puede dejar de utilizar el
-            Servicio en cualquier momento. No es necesario que informe
-            específicamente a Trivia cuando deje de usar el Servicio. Usted
-            reconoce y acepta que si Trivia deshabilita el acceso a su cuenta,
-            es posible que no pueda acceder al Servicio. Los detalles de su
-            cuenta o cualquier archivo u otro material contenido en su cuenta
-          </p>
-          <p>
-            Si decidimos cambiar nuestros Términos y condiciones; publicaremos
-            esos cambios en esta página y / o actualizaremos la fecha de
-            modificación de los Términos y condiciones a continuación.
-          </p>
-          <h2>Modificaciones a nuestra plataforma</h2>
-          <p>
-            Trivia se reserva el derecho de modificar, suspender o interrumpir,
-            temporal o permanentemente, la plataforma o cualquier servicio al
-            que se conecte con o sin previo aviso y sin responsabilidad ante
-            usted.
-          </p>
-          <h2>Actualizaciones a nuestra plataforma</h2>
-          <p>
-            Trivia puede, de vez en cuando, proporcionar mejoras a las
-            características y funcionalidad de la plataforma que pueden incluir
-            parches, corrección de errores, actualizaciones, mejoras y otras
-            modificaciones ("Actualizaciones").
-          </p>
-          <p>
-            Las actualizaciones pueden modificar o eliminar ciertas
-            características y / o funcionalidades de la plataforma. Usted acepta
-            que Trivia no tiene la obligación de (I) proporcionar
-            Actualizaciones; o (II) continuar proporcionándole o habilitando
-            características y / o funcionalidades particulares de la plataforma.
-          </p>
-          <p>
-            Además; acepta que todas las Actualizaciones (I) se considerarán una
-            parte integral de la plataforma y (II) estarán sujetas a los
-            términos y condiciones de este Acuerdo
-          </p>
-          <h2>Servicios de Terceros</h2>
-          <p>
-            Podemos mostrar, incluir o poner a disposición contenido de terceros
-            (incluidos datos e información, aplicaciones y otros servicios) o
-            proporcionar enlaces a sitios web o servicias de terceros
-            ("Servicios de terceros").
-          </p>
-          <p>
-            Usted reconoce y acepta que Trivia no será responsable de ningún
-            Servicio de terceros; incluida su precisión, integridad;
-            puntualidad, validez, cumplimiento de los derechos de autor,
-            legalidad, decencia, calidad o cualquier otro aspecto de los mismos.
-          </p>
-          <p>
-            Trivia no asume ni tendrá ninguna obligación o responsabilidad ante
-            usted o cualquier otra persona o entidad por los Servicios de
-            terceros.
-          </p>
-          <p>
-            Los Servicios de terceros y los enlaces a las mismos se brindan
-            únicamente para su conveniencia y usted accede a ellos y los usa
-            completamente bajo su propio riesgo y sujeto a los términos y
-            condiciones de dichos terceros.
-          </p>
-          <h2>Duración y Terminación</h2>
-          <p>
-            Este Acuerdo permanecerá en vigor hasta que usted o Trivia lo
-            rescindan.
-          </p>
-          <p>
-            Trivia puede, a su entera discreción, en cualquier momento y por
-            cualquier motivo o sin él; suspender o rescindir este Acuerdo con o
-            sin previo aviso
-          </p>
-          <p>
-            Este Acuerdo terminará inmediatamente sin previo aviso de Trivia en
-            caso de que no cumpla con alguna de las disposiciones de este
-            Acuerdo. También puede rescindir este Acuerdo eliminando la
-            plataforma y todas las copias del mismo de su computadora.
-          </p>
-          <p>
-            Tras la rescisión de este Acuerdo deberá dejar de utilizar la
-            plataforma y eliminar todas las copias de la plataforma de su
-            computadora.
-          </p>
-          <p>
-            La rescisión de este Acuerdo no limitará ninguno de los derechos o
-            recursos de Trivia por ley o en equidad en caso de incumplimiento
-            por su parte (durante la vigencia de este Acuerdo) de cualquiera de
-            sus obligaciones en virtud del presente Acuerdo.
-          </p>
-        </Card>
-        {/* <p>
+              <p>
+                Trivia puede, a su entera discreción, en cualquier momento y por
+                cualquier motivo o sin él; suspender o rescindir este Acuerdo
+                con o sin previo aviso
+              </p>
+              <p>
+                Este Acuerdo terminará inmediatamente sin previo aviso de Trivia
+                en caso de que no cumpla con alguna de las disposiciones de este
+                Acuerdo. También puede rescindir este Acuerdo eliminando la
+                plataforma y todas las copias del mismo de su computadora.
+              </p>
+              <p>
+                Tras la rescisión de este Acuerdo deberá dejar de utilizar la
+                plataforma y eliminar todas las copias de la plataforma de su
+                computadora.
+              </p>
+              <p>
+                La rescisión de este Acuerdo no limitará ninguno de los derechos
+                o recursos de Trivia por ley o en equidad en caso de
+                incumplimiento por su parte (durante la vigencia de este
+                Acuerdo) de cualquiera de sus obligaciones en virtud del
+                presente Acuerdo.
+              </p>
+            </Card>
+            {/* <p>
           Duración y Terminación Este Acuerdo permanecerá en vigor hasta que
           usted o Trivia lo rescindan. Trivia puede, a su entera discreción, en
           cualquier momento y por cualquier motivo o sin él: suspender o
@@ -633,6 +645,8 @@ const Terms = () => {
           contactarnos si tiene alguna pregunta. • A través de este enlace:
           presupuesto-626db web app
         </p> */}
+          </Col>
+        </Row>
       </div>
       <footer className="footer bg-dark text-white">
         <Footer />

@@ -69,7 +69,7 @@ const Login = () => {
       //return navigate("/home");
       return (window.location.href = "/home");
     } catch (error) {
-      console.error("Error", error);
+      console.error("Error", error.message);
       setError("Usuario o contraseña incorrectos");
       return;
     }
