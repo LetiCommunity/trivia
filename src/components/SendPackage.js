@@ -12,7 +12,6 @@ import {
   Label,
   Row,
 } from "reactstrap";
-import { Buffer } from 'buffer';
 
 const SendPackage = () => {
   const token = localStorage.getItem("token");

@@ -18,8 +18,8 @@ const EditProfile = () => {
   const token = localStorage.getItem("token");
   const userData = JSON.parse(localStorage.getItem("user"));
   let navigate = useNavigate();
-  const [imageUrl, setImageUrl] = useState("");
-  const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState(null);
+  const [image, setImage] = useState(null);
   const [error, setError] = useState("");
   const headers = {
     token: `${token}`,
@@ -60,7 +60,7 @@ const EditProfile = () => {
       return;
     }
 
-    setImage({ image: file });
+    setImage(file);
     // Creates an instance of FileReader to read the file
     const reader = new FileReader();
     // Defines a callback function for when the reading of the file is completed.
