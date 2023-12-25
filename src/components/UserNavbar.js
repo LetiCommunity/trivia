@@ -9,8 +9,11 @@ import {
   NavbarBrand,
 } from "reactstrap";
 
+import inicialImage from "../assets/img/user-bar.png";
+
 const UserNavbar = () => {
   const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
   const [collapseOpen, setCollapseOpen] = useState(false);
   const handleToggle = () => setCollapseOpen(!collapseOpen);
 
@@ -31,11 +34,19 @@ const UserNavbar = () => {
           onClick={handleToggle}
           className="navbar-toggler border-0 bg-light"
         >
-          <img
-            className="rounded-circle"
-            alt="https://icons8.com/icon/85356/male-user"
-            src={require("../assets/img/user-bar.png")}
-          />
+          {user.image ? (
+            <img
+              alt="Imagen cargada profile-bar"
+              className="rounded-circle"
+              src={`https://trivi4.com/api/trivia/profiles/image/${user.image}`}
+            />
+          ) : (
+            <img
+              alt="Imagen cargada"
+              className="rounded-circle profile-bar"
+              src={inicialImage}
+            />
+          )}
         </Button>
         <Collapse isOpen={collapseOpen} navbar className="">
           <Nav className="ml-auto" navbar>
