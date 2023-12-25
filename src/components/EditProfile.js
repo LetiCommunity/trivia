@@ -18,7 +18,7 @@ const EditProfile = () => {
   const token = localStorage.getItem("token");
   const userData = JSON.parse(localStorage.getItem("user"));
   let navigate = useNavigate();
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
   const [image, setImage] = useState(null);
   const [error, setError] = useState("");
   const headers = {
