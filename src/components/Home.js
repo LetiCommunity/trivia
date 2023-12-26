@@ -87,8 +87,8 @@ const Home = () => {
                           <div className="py-1">
                             <Input
                               type="text"
-                              id="destiny"
-                              name="destiny"
+                              id="destination"
+                              name="destination"
                               value={searchTrip.destination}
                               onChange={handleChange}
                               placeholder="¿Cuál es la ciudad de destino?"
