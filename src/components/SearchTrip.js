@@ -6,7 +6,7 @@ import moment from "moment";
 
 const SearchTrip = () => {
   const [travels, setTravels] = useState([]);
-  const [travelFilter, setTravelFilter] = useState([]);
+  //const [travelFilter, setTravelFilter] = useState([]);
   let location = useLocation();
   const [searchTrip, setSearchTrip] = useState({
     origin: "",
@@ -41,24 +41,24 @@ const SearchTrip = () => {
     }));
   };
 
-  const filterTrip = () => {
-    let filter;
-    if (!searchTrip.origin || !searchTrip.destination) {
-      filter = (travel) => {
-        return travel.origin === origin && travel.destination === destination;
-      };
-    } else {
-      filter = (travel) => {
-        return (
-          travel.origin === searchTrip.origin &&
-          travel.destination === searchTrip.destination
-        );
-      };
-    }
-    setTravelFilter(travels.filter(filter));
-  };
+  // const filterTrip = () => {
+  //   let filter;
+  //   if (!searchTrip.origin || !searchTrip.destination) {
+  //     filter = (travel) => {
+  //       return travel.origin === origin && travel.destination === destination;
+  //     };
+  //   } else {
+  //     filter = (travel) => {
+  //       return (
+  //         travel.origin === searchTrip.origin &&
+  //         travel.destination === searchTrip.destination
+  //       );
+  //     };
+  //   }
+  //   setTravelFilter(travels.filter(filter));
+  // };
 
-  filterTrip();
+  //filterTrip();
 
   return (
     <Fragment>
@@ -103,7 +103,7 @@ const SearchTrip = () => {
           <Row className="justify-content-center">
             <Col md="6" sm="11" xs="11">
               <div className="my-5 py-5 search_trip_found">
-                {travelFilter.map((travel) => {
+                {travels.map((travel) => {
                   return (
                     <div key={travel.id}>
                       <div className="rounded bg-white text-dark p-3"></div>
