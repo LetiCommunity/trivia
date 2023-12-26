@@ -13,12 +13,12 @@ const SearchTrip = () => {
     destination: "",
   });
 
-  //let queryParams = new URLSearchParams(location.search);
-  //let origin = queryParams.get("origin");
-  //let destination = queryParams.get("destination");
-  //origin = origin.charAt(0).toUpperCase() + origin.slice(1);
-  //destination = destination.charAt(0).toUpperCase() + destination.slice(1);
-
+  let queryParams = new URLSearchParams(location.search);
+  let origin = queryParams.get("origin");
+  let destination = queryParams.get("destination");
+  origin = origin.charAt(0).toUpperCase() + origin.slice(1);
+  destination = destination.charAt(0).toUpperCase() + destination.slice(1);
+  console.log(origin, destination);
   useEffect(() => {
     const getTravels = async () => {
       try {
@@ -41,24 +41,24 @@ const SearchTrip = () => {
     }));
   };
 
-  // const filterTrip = () => {
-  //   let filter;
-  //   if (!searchTrip.origin || !searchTrip.destination) {
-  //     filter = (travel) => {
-  //       return travel.origin === origin && travel.destination === destination;
-  //     };
-  //   } else {
-  //     filter = (travel) => {
-  //       return (
-  //         travel.origin === searchTrip.origin &&
-  //         travel.destination === searchTrip.destination
-  //       );
-  //     };
-  //   }
-  //   setTravelFilter(travels.filter(filter));
-  // };
+  const filterTrip = () => {
+    let filter;
+    if (!searchTrip.origin || !searchTrip.destination) {
+      filter = (travel) => {
+        return travel.origin === origin && travel.destination === destination;
+      };
+    } else {
+      filter = (travel) => {
+        return (
+          travel.origin === searchTrip.origin &&
+          travel.destination === searchTrip.destination
+        );
+      };
+    }
+    setTravelFilter(travels.filter(filter));
+  };
 
-  // filterTrip();
+  filterTrip();
 
   return (
     <Fragment>
