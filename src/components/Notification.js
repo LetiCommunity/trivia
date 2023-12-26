@@ -3,14 +3,14 @@ import { Button, Card, Col, Row } from "reactstrap";
 import axios from "axios";
 import moment from "moment";
 
-const Notification = () => {
+const Activity = () => {
   const token = localStorage.getItem("token");
   const localStoragePackage = localStorage.getItem("package");
   const localStorageTravel = localStorage.getItem("travel");
   const [packages, setPackages] = useState([]);
-  const [travels, setTravels] = useState([]);
+  //const [travels, setTravels] = useState([]);
   const [viewMorePackages, setViewMorePackages] = useState(false);
-  const [viewMoreTravels, setViewMoreTravels] = useState(false);
+  //const [viewMoreTravels, setViewMoreTravels] = useState(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const headers = {
     token: `${token}`,
@@ -34,32 +34,32 @@ const Notification = () => {
       }
     };
     getPackages();
-  }, [headers, travels, viewMorePackages]);
+  }, [headers, viewMorePackages]);
 
-  useEffect(() => {
-    const getTravels = async () => {
-      try {
-        const { data } = await axios.get(
-          "https://trivi4.com/api/trivia/travels/proprietor",
-          { headers }
-        );
-        if (viewMoreTravels) {
-          setTravels(data);
-        } else {
-          setTravels(data.slice(0, 2));
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    getTravels();
-  }, [headers, travels, viewMoreTravels]);
+  // useEffect(() => {
+  //   const getTravels = async () => {
+  //     try {
+  //       const { data } = await axios.get(
+  //         "https://trivi4.com/api/trivia/travels/proprietor",
+  //         { headers }
+  //       );
+  //       if (viewMoreTravels) {
+  //         setTravels(data);
+  //       } else {
+  //         setTravels(data.slice(0, 3));
+  //       }
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+  //   getTravels();
+  // }, [headers, travels, viewMoreTravels]);
 
   const handleLocalStorageData = async () => {
     if (localStoragePackage) {
       try {
         await axios.post(
-          "http://13.43.167.192/api/trivia/packages",
+          "https://trivi4.com/api/trivia/packages",
           JSON.parse(localStoragePackage),
           { headers }
         );
@@ -74,7 +74,7 @@ const Notification = () => {
       try {
         await axios.post(
           "https://trivi4.com/api/trivia/travels",
-          JSON.parse(localStoragePackage),
+          JSON.parse(localStorageTravel),
           { headers }
         );
         localStorage.removeItem("travel");
@@ -90,9 +90,9 @@ const Notification = () => {
     setViewMorePackages(!viewMorePackages);
   };
 
-  const handleViewMoreTravels = () => {
-    setViewMoreTravels(!viewMoreTravels);
-  };
+  // const handleViewMoreTravels = () => {
+  //   setViewMoreTravels(!viewMoreTravels);
+  // };
 
   return (
     <Fragment>
@@ -101,58 +101,21 @@ const Notification = () => {
           <Row className="justify-content-center">
             <Col md="6" sm="10" xs="10">
               <div className="my-5 py-5">
-                <h3>Viajes publicados</h3>
-                {travels.map((item) => {
-                  return (
-                    <div key={item._id}>
-                      <div className="rounded bg-light text-dark p-3"></div>
-                      <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                        <p className="text-size">
-                          {item.origin} a {item.destination}
-                        </p>
-                        <p className="text-size">
-                          {moment(item.createdAt).format("DD/MM/YYYY HH:mm:ss")}
-                        </p>
-                      </Card>
-                    </div>
-                  );
-                })}
-                <div>
-                  <Button
-                    type="button"
-                    color="link"
-                    outline={true}
-                    className="text-info"
-                    onClick={handleViewMoreTravels}
-                  >
-                    {viewMoreTravels ? "Ver menos" : "Ver más"}
-                  </Button>
-                </div>
-              </div>
-            </Col>
-            <Col md="6" sm="10" xs="10">
-              <div className="my-5 py-5">
-                <h3>Paquetes publicados</h3>
+                <h3>Paquetes disponibles</h3>
                 {packages.map((item) => {
                   return (
                     <div key={item._id}>
                       <div className="rounded bg-light text-dark p-3"></div>
                       <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                        {/* <div className="input_wrapper">
+                        <div className="">
                           <img
-                            className="rounded-circle input_icon mt-3"
+                            className="package-image input_icon"
                             alt={item.image}
-                            src={axios
-                              .get(
-                                `http://localhost:5000/api/trivia/packages/image/${item.image}`,
-                                { headers }
-                              )
-                              .then((response) => Buffer.from(response.data))}
+                            src={`https://trivi4.com/api/trivia/packages/image/${item.image}`}
                           />
-                        </div> */}
-                        <p className="text-size">
-                          {item.image} {item.description}
-                        </p>
+                        </div>
+                        <p className="text-size">Para: {item.receiverName}</p>
+                        <p className="text-size">Estado: {item.status}</p>
                         <p className="text-size">
                           {moment(item.createdAt).format("DD/MM/YYYY HH:mm:ss")}
                         </p>
@@ -180,4 +143,4 @@ const Notification = () => {
   );
 };
 
-export default Notification;
+export default Activity;

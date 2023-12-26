@@ -72,6 +72,9 @@ const UserNavbar = () => {
             ) : (
               <>
                 <NavItem>
+                  <NavLink href="notifications">Notificaciones</NavLink>
+                </NavItem>
+                <NavItem>
                   <NavLink href="activity">Actividad</NavLink>
                 </NavItem>
                 <NavItem>
@@ -94,7 +97,5 @@ const UserNavbar = () => {
     </Fragment>
   );
 };
-
-Navbar.PropTypes = {};
 
 export default UserNavbar;

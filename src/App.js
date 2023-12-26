@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
 import Activity from "./components/Activity";
+import Notification from "./components/Notification";
 import SendPackage from "./components/SendPackage";
 import PublishTrip from "./components/PublishTrip";
 import Profile from "./components/Profile";
@@ -38,7 +39,6 @@ function App() {
           <Routes>
             <Route index path="/" element={<Home />} />
             <Route index path="home" element={<Home />} />
-            <Route path="activity" element={<Activity />} />
             <Route path="send-package" element={<SendPackage />} />
             <Route path="publish-trip" element={<PublishTrip />} />
             <Route path="search-trip" element={<SearchTrip />} />
@@ -47,6 +47,8 @@ function App() {
             <Route path="*" element={<NoPage />} />
             {token ? (
               <>
+                <Route path="activity" element={<Activity />} />
+                <Route path="notifications" element={<Notification />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="edit-profile" element={<EditProfile />} />
                 <Route path="change-password" element={<ChangePassword />} />

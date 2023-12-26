@@ -13,21 +13,21 @@ const SearchTrip = () => {
     destination: "",
   });
 
-  let queryParams = new URLSearchParams(location.search);
-  let origin = queryParams.get("origin");
-  let destination = queryParams.get("destination");
-  origin = origin.charAt(0).toUpperCase() + origin.slice(1);
-  destination = destination.charAt(0).toUpperCase() + destination.slice(1);
+  //let queryParams = new URLSearchParams(location.search);
+  //let origin = queryParams.get("origin");
+  //let destination = queryParams.get("destination");
+  //origin = origin.charAt(0).toUpperCase() + origin.slice(1);
+  //destination = destination.charAt(0).toUpperCase() + destination.slice(1);
 
   useEffect(() => {
     const getTravels = async () => {
       try {
         const { data } = await axios.get(
-          "https://trivi4.com/api/trivia/travels"
+          "https://trivi4.com/api/trivia/travels/filterByDate"
         );
         setTravels(data);
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error(error.message);
       }
     };
     getTravels();

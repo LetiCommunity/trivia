@@ -35,7 +35,7 @@ const Activity = () => {
       }
     };
     getPackages();
-  }, [headers, travels, viewMorePackages]);
+  }, [headers, viewMorePackages]);
 
   useEffect(() => {
     const getTravels = async () => {
@@ -54,7 +54,7 @@ const Activity = () => {
       }
     };
     getTravels();
-  }, [headers, travels, viewMoreTravels]);
+  }, [headers, viewMoreTravels]);
 
   const handleLocalStorageData = async () => {
     if (localStoragePackage) {
