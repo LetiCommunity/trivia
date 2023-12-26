@@ -7,7 +7,7 @@ const Home = () => {
   let navigate = useNavigate();
   const [searchTrip, setSearchTrip] = useState({
     origin: "",
-    destiny: "",
+    destination: "",
   });
 
   const handleChange = (event) => {
@@ -22,19 +22,19 @@ const Home = () => {
     event.preventDefault();
     const data = {
       origin: searchTrip.origin,
-      destiny: searchTrip.destiny,
+      destination: searchTrip.destination,
     };
 
-    if (!data.origin || !data.destiny) {
+    if (!data.origin || !data.destination) {
       return;
     }
 
-    if (data.origin.trim() === "" || data.destiny.trim() === "") {
+    if (data.origin.trim() === "" || data.destination.trim() === "") {
       return;
     }
 
     return navigate(
-      `/search-trip?origin=${data.origin}&destiny=${data.destiny}`
+      `/search-trip?origin=${data.origin}&destination=${data.destination}`
     );
   };
 
@@ -46,11 +46,11 @@ const Home = () => {
     return navigate("/send-package");
   };
 
-  const handleSearchTrip = (origin, destiny) => {
-    if (!origin || !destiny) {
+  const handleSearchTrip = (origin, destination) => {
+    if (!origin || !destination) {
       return navigate(`/search-trip`);
     }
-    return navigate(`/search-trip?origin=${origin}&destiny=${destiny}`);
+    return navigate(`/search-trip?origin=${origin}&destination=${destination}`);
   };
 
   return (
@@ -89,7 +89,7 @@ const Home = () => {
                               type="text"
                               id="destiny"
                               name="destiny"
-                              value={searchTrip.destiny}
+                              value={searchTrip.destination}
                               onChange={handleChange}
                               placeholder="¿Cuál es la ciudad de destino?"
                               className="form-control-lg border-0 border-bottom"

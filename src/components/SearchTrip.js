@@ -1,18 +1,24 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Card, Col, Input, Row } from "reactstrap";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 
 const SearchTrip = () => {
   const [travels, setTravels] = useState([]);
-  let { origin, destiny } = useParams();
+  const [travelFilter, setTravelFilter] = useState([]);
+  let location = useLocation();
   const [searchTrip, setSearchTrip] = useState({
     origin: "",
-    destiny: "",
+    destination: "",
   });
 
-  console.log(origin, destiny);
+  let queryParams = new URLSearchParams(location.search);
+  let origin = queryParams.get("origin");
+  let destination = queryParams.get("destination");
+  origin = origin.charAt(0).toUpperCase() + origin.slice(1);
+  destination = destination.charAt(0).toUpperCase() + destination.slice(1);
+
   useEffect(() => {
     const getTravels = async () => {
       try {
@@ -20,20 +26,6 @@ const SearchTrip = () => {
           "https://trivi4.com/api/trivia/travels"
         );
         setTravels(data);
-        // let filter;
-        // if (!searchTrip.origin || !searchTrip.destiny) {
-        //   filter = (travel) => {
-        //     return travel.origin === "Malabo" && travel.destination === "Bata";
-        //   };
-        // } else {
-        //   filter = (travel) => {
-        //     return (
-        //       travel.origin === searchTrip.origin &&
-        //       travel.destination === searchTrip.destiny
-        //     );
-        //   };
-        // }
-        // setTravels(travels.filter(filter));
       } catch (err) {
         console.error(err);
       }
@@ -48,6 +40,25 @@ const SearchTrip = () => {
       [name]: value,
     }));
   };
+
+  // const filterTrip = () => {
+  //   let filter;
+  //   if (!searchTrip.origin || !searchTrip.destination) {
+  //     filter = (travel) => {
+  //       return travel.origin === origin && travel.destination === destination;
+  //     };
+  //   } else {
+  //     filter = (travel) => {
+  //       return (
+  //         travel.origin === searchTrip.origin &&
+  //         travel.destination === searchTrip.destination
+  //       );
+  //     };
+  //   }
+  //   setTravelFilter(travels.filter(filter));
+  // };
+
+  // filterTrip();
 
   return (
     <Fragment>
@@ -76,7 +87,7 @@ const SearchTrip = () => {
                         type="text"
                         id="destiny"
                         name="destiny"
-                        value={searchTrip.destiny}
+                        value={searchTrip.destination}
                         onChange={handleChange}
                         placeholder="¿Cuál es la ciudad de destino?"
                         className="form-control-lg border-0 border-bottom"
@@ -92,7 +103,7 @@ const SearchTrip = () => {
           <Row className="justify-content-center">
             <Col md="6" sm="11" xs="11">
               <div className="my-5 py-5 search_trip_found">
-                {travels.map((travel) => {
+                {travelFilter.map((travel) => {
                   return (
                     <div key={travel.id}>
                       <div className="rounded bg-white text-dark p-3"></div>

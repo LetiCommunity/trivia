@@ -18,8 +18,6 @@ const PublishTrip = () => {
   let navigate = useNavigate();
   const [section, setSection] = useState(1);
   const [error, setError] = useState("");
-  const [showPlaceholderDate, setShowPlaceholderDate] = useState(true);
-  const [showPlaceholderBilling, setShowPlaceholderBilling] = useState(true);
   const headers = {
     token: `${token}`,
     "Content-Type": "application/json",
@@ -31,7 +29,7 @@ const PublishTrip = () => {
     airport: "",
     terminal: "",
     company: "",
-    billingDate: "",
+    billingTime: "",
     availableWeight: "",
   });
 
@@ -52,7 +50,7 @@ const PublishTrip = () => {
         airport: travel.airport,
         terminal: travel.terminal,
         company: travel.company,
-        billingDate: travel.billingDate,
+        billingTime: travel.billingTime,
       };
 
       if (
@@ -62,7 +60,7 @@ const PublishTrip = () => {
         !data.airport ||
         !data.terminal ||
         !data.company ||
-        !data.billingDate
+        !data.billingTime
       ) {
         setError("Por favor, rellena todos los campos");
         return;
@@ -98,7 +96,7 @@ const PublishTrip = () => {
       airport: travel.airport,
       terminal: travel.terminal,
       company: travel.company,
-      billingDate: travel.billingDate,
+      billingTime: travel.billingTime,
       availableWeight: travel.availableWeight,
     };
 
@@ -118,7 +116,7 @@ const PublishTrip = () => {
       });
       return navigate("/activity");
     } catch (error) {
-      console.error("Error", error);
+      console.error("Error", error.message);
       return;
     }
   };
@@ -181,13 +179,11 @@ const PublishTrip = () => {
                         <Col md="12">
                           <FormGroup floating>
                             <Input
-                              type={showPlaceholderDate ? "text" : "date"}
+                              type="date"
                               id="date"
                               name="date"
                               value={travel.date}
                               onChange={handleChange}
-                              onFocus={() => setShowPlaceholderDate(false)}
-                              onBlur={() => setShowPlaceholderDate(true)}
                               placeholder="Fecha de viaje"
                               className="bg-light"
                             />
@@ -241,18 +237,16 @@ const PublishTrip = () => {
                         <Col md="12">
                           <FormGroup floating>
                             <Input
-                              type={showPlaceholderBilling ? "text" : "date"}
-                              id="billingDate"
-                              name="billingDate"
-                              value={travel.billingDate}
+                              type="time"
+                              id="billingTime"
+                              name="billingTime"
+                              value={travel.billingTime}
                               onChange={handleChange}
-                              onFocus={() => setShowPlaceholderBilling(false)}
-                              onBlur={() => setShowPlaceholderDate(true)}
                               placeholder="Fecha de facturación"
                               className="bg-light"
                             />
-                            <Label for="billingDate">
-                              Fecha de facturación
+                            <Label for="billingTime">
+                              Hora de facturación
                             </Label>
                           </FormGroup>
                         </Col>
