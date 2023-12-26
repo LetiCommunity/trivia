@@ -28,12 +28,14 @@ const SendPackage = () => {
     weight: "",
     receiverName: "",
     receiverSurname: "",
-    receiverAddress: "",
+    receiverCity: "Malabo",
+    receiverStreet: "",
     receiverPhone: "",
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    console.log(name, value);
     setShippingDetails((prevShippingDetails) => ({
       ...prevShippingDetails,
       [name]: value,
@@ -65,14 +67,16 @@ const SendPackage = () => {
       const data = {
         receiverName: shippingDetails.receiverName,
         receiverSurname: shippingDetails.receiverSurname,
-        receiverAddress: shippingDetails.receiverAddress,
+        receiverCity: shippingDetails.receiverCity,
+        receiverStreet: shippingDetails.receiverStreet,
         receiverPhone: shippingDetails.receiverPhone,
       };
 
       if (
         !data.receiverName ||
         !data.receiverSurname ||
-        !data.receiverAddress ||
+        !data.receiverCity ||
+        !data.receiverStreet ||
         !data.receiverPhone
       ) {
         setError("Por favor, rellena todos los campos");
@@ -82,7 +86,8 @@ const SendPackage = () => {
       if (
         data.receiverName.trim() === "" ||
         data.receiverSurname.trim() === "" ||
-        data.receiverAddress.trim() === "" ||
+        data.receiverCity.trim() === "" ||
+        data.receiverStreet.trim() === "" ||
         data.receiverPhone.trim() === ""
       ) {
         setError("Por favor, revisa los espacios al inicio de los textos");
@@ -107,7 +112,8 @@ const SendPackage = () => {
       image: imageUrl,
       receiverName: shippingDetails.receiverName,
       receiverSurname: shippingDetails.receiverSurname,
-      receiverAddress: shippingDetails.receiverAddress,
+      receiverCity: shippingDetails.receiverCity,
+      receiverStreet: shippingDetails.receiverStreet,
       receiverPhone: shippingDetails.receiverPhone,
     };
 
@@ -198,15 +204,33 @@ const SendPackage = () => {
                         <Col md="12">
                           <FormGroup floating>
                             <Input
-                              type="text"
-                              id="receiverAddress"
-                              name="receiverAddress"
-                              value={shippingDetails.receiverAddress}
+                              type="select"
+                              id="receiverCity"
+                              name="receiverCity"
+                              value={shippingDetails.receiverCity}
                               onChange={handleChange}
                               placeholder="Dirección"
                               className="bg-light"
+                            >
+                              <option value="Malabo">Malabo</option>
+                              <option value="Bata">Bata</option>
+                              <option value="Madrid">Madrid</option>
+                            </Input>
+                            <Label for="receiverCity">Ciudad</Label>
+                          </FormGroup>
+                        </Col>
+                        <Col md="12">
+                          <FormGroup floating>
+                            <Input
+                              type="text"
+                              id="receiverStreet"
+                              name="receiverStreet"
+                              value={shippingDetails.receiverStreet}
+                              onChange={handleChange}
+                              placeholder="Calle o Barrio"
+                              className="bg-light"
                             />
-                            <Label for="receiverAddress">Dirección</Label>
+                            <Label for="receiverStreet">Calle o Barrio</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
