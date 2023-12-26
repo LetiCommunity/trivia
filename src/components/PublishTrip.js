@@ -23,8 +23,8 @@ const PublishTrip = () => {
     "Content-Type": "application/json",
   };
   const [travel, setTravel] = useState({
-    origin: "",
-    destination: "",
+    origin: "Malabo",
+    destination: "Malabo",
     date: "",
     airport: "",
     terminal: "",
@@ -151,28 +151,36 @@ const PublishTrip = () => {
                         <Col md="12">
                           <FormGroup floating>
                             <Input
-                              type="text"
+                              type="select"
                               id="origin"
                               name="origin"
                               value={travel.origin}
                               onChange={handleChange}
                               placeholder="Lugar de origen"
                               className="bg-light"
-                            />
+                            >
+                              <option value="Malabo">Malabo</option>
+                              <option value="Bata">Bata</option>
+                              <option value="Madrid">Madrid</option>
+                            </Input>
                             <Label for="origin">Lugar de origen</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
                           <FormGroup floating>
                             <Input
-                              type="text"
+                              type="select"
                               id="destination"
                               name="destination"
                               value={travel.destination}
                               onChange={handleChange}
                               placeholder="Lugar de destino"
                               className="bg-light"
-                            />
+                            >
+                              <option value="Malabo">Malabo</option>
+                              <option value="Bata">Bata</option>
+                              <option value="Madrid">Madrid</option>
+                            </Input>
                             <Label for="destination">Lugar de destino</Label>
                           </FormGroup>
                         </Col>
@@ -245,9 +253,7 @@ const PublishTrip = () => {
                               placeholder="Fecha de facturación"
                               className="bg-light"
                             />
-                            <Label for="billingTime">
-                              Hora de facturación
-                            </Label>
+                            <Label for="billingTime">Hora de facturación</Label>
                           </FormGroup>
                         </Col>
                         <Col md="12">
