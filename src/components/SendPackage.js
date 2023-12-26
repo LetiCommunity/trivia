@@ -35,7 +35,6 @@ const SendPackage = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setShippingDetails((prevShippingDetails) => ({
       ...prevShippingDetails,
       [name]: value,
