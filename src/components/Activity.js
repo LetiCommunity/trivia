@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Card, Col, Modal, Row } from "reactstrap";
+import { Button, Card, CardBody, Col, Modal, Row } from "reactstrap";
 import axios from "axios";
 import moment from "moment";
 //import { Buffer } from 'buffer';
@@ -186,7 +186,7 @@ const Activity = () => {
                           <img
                             className="package-image input_icon"
                             alt={item.image}
-                            src={`https://trivi4.com/api/trivia/packages/image/${item.image}`}
+                            src={`http://localhost:5000/api/trivia/packages/image/${item.image}`}
                           />
                         </div>
                         <p className="text-size">Para: {item.receiverName}</p>
@@ -232,117 +232,134 @@ const Activity = () => {
                 toggle={toggleTravelDetails}
                 backdrop={false}
               >
-                <div className="modal-header">
-                  <h4 className="modal-title">Detalles del viaje</h4>
-                  <button
-                    type="button"
-                    className="close"
-                    onClick={toggleTravelDetails}
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div className="modal-body">
-                  {userTravel && (
-                    <div>
-                      <div>
-                        <h5>Información del viaje</h5>
-                        <p>Origen: {userTravel.origin}</p>
-                        <p>Destino: {userTravel.destination}</p>
-                        <p>
-                          Fecha: {moment(userTravel.date).format("DD/MM/YYYY")}
-                        </p>
-                        <p>Aeropuerto: {userTravel.airport}</p>
-                        <p>Terminal: {userTravel.terminal}</p>
-                        <p>Compañía: {userTravel.company}</p>
-                        <p>Hora de facturación: {userTravel.billingTime}</p>
-                      </div>
-                      <div>
-                        <h5>Información de disponibilidad</h5>
-                        <p>
-                          Disponibilidad: {userTravel.availableWeight} kilos
-                        </p>
-                        {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
-                      </div>
-                      <div>
-                        <Button
-                          id="tooltip545690"
-                          title="Editar Detalles del viaje"
-                          type="button"
-                          color="info"
-                          className="text-white"
-                          onClick={() => handleEditTravel(userTravel._id)}
-                        >
-                          Editar
-                        </Button>
-                      </div>
+                <Card className="border-0 shadow-lg bg-white">
+                  <CardBody>
+                    <div className="modal-header">
+                      <h4 className="modal-title">Detalles del viaje</h4>
+                      <button
+                        type="button"
+                        className="close"
+                        onClick={toggleTravelDetails}
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                     </div>
-                  )}
-                </div>
+                    <div className="modal-body">
+                      {userTravel && (
+                        <div>
+                          <div>
+                            <h5>Información del viaje</h5>
+                            <p>Origen: {userTravel.origin}</p>
+                            <p>Destino: {userTravel.destination}</p>
+                            <p>
+                              Fecha:{" "}
+                              {moment(userTravel.date).format("DD/MM/YYYY")}
+                            </p>
+                            <p>Aeropuerto: {userTravel.airport}</p>
+                            <p>Terminal: {userTravel.terminal}</p>
+                            <p>Compañía: {userTravel.company}</p>
+                            <p>Hora de facturación: {userTravel.billingTime}</p>
+                          </div>
+                          <div>
+                            <h5>Información de disponibilidad</h5>
+                            <p>
+                              Disponibilidad: {userTravel.availableWeight} kilos
+                            </p>
+                            {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
+                          </div>
+                          <div>
+                            <Button
+                              id="tooltip545690"
+                              title="Editar Detalles del viaje"
+                              type="button"
+                              color="info"
+                              className="text-white"
+                              onClick={() => handleEditTravel(userTravel._id)}
+                            >
+                              Editar
+                            </Button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </CardBody>
+                </Card>
               </Modal>
             </Col>
           </Row>
           <Row>
-            <Col md="12">
+            <Col md="12"></Col>
+          </Row>
+          <Row
+            className="justify-content-center align-items-center"
+            style={{ height: "100vh" }}
+          >
+            <Col md="5" sm="10" xs="10" className="my-5 py-5">
               <Modal
                 isOpen={packageDetailsModal}
                 toggle={togglePackageDetails}
                 backdrop={false}
               >
-                <div className="modal-header">
-                  <h4 className="modal-title">Detalles del Paquete</h4>
-                  <button
-                    type="button"
-                    className="close"
-                    onClick={togglePackageDetails}
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div className="modal-body">
-                  {userPackage && (
-                    <div>
-                      <div>
-                        <h5>Información del receptor</h5>
-                        <p>Nombre: {userPackage.receiverName}</p>
-                        <p>Apellidos: {userPackage.receiverSurname}</p>
-                        <p>Ciudad: {userPackage.receiverCity}</p>
-                        <p>Calle / Barrio: {userPackage.receiverStreet}</p>
-                        <p>Teléfono: {userPackage.receiverPhone}</p>
-                        {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
-                      </div>
-                      <div>
-                        <h5>Información del paquete</h5>
-                        <p>Peso aproximado: {userPackage.weight}</p>
-                        {/* <p>Imagen: {course.description}</p> */}
-                        <p>Estado: {userPackage.state}</p>
-                        <p>
-                          Fecha de publicación:{" "}
-                          {moment(userTravel.createdAt).format("DD/MM/YYYY")}
-                        </p>
-                        {/* <img
+                <Card className="border-0 shadow-lg bg-white">
+                  <CardBody>
+                    <div className="modal-header">
+                      <h4 className="modal-title">Detalles del Paquete</h4>
+                      <button
+                        type="button"
+                        className="close"
+                        onClick={togglePackageDetails}
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      {userPackage && (
+                        <div>
+                          <div>
+                            <h5>Información del receptor</h5>
+                            <p>Nombre: {userPackage.receiverName}</p>
+                            <p>Apellidos: {userPackage.receiverSurname}</p>
+                            <p>Ciudad: {userPackage.receiverCity}</p>
+                            <p>Calle / Barrio: {userPackage.receiverStreet}</p>
+                            <p>Teléfono: {userPackage.receiverPhone}</p>
+                            {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
+                          </div>
+                          <div>
+                            <h5>Información del paquete</h5>
+                            <p>Peso aproximado: {userPackage.weight}</p>
+                            {/* <p>Imagen: {course.description}</p> */}
+                            <p>Estado: {userPackage.state}</p>
+                            <p>
+                              Fecha de publicación:{" "}
+                              {moment(userTravel.createdAt).format(
+                                "DD/MM/YYYY"
+                              )}
+                            </p>
+                            {/* <img
                             className="package-image"
                             alt={userPackage.image}
-                            src={`https://trivi4.com/api/trivia/packages/image/${userPackage.image}`}
+                            src={`http://localhost:5000/api/trivia/packages/image/${userPackage.image}`}
                           /> */}
-                        <p>Descripción: {userPackage.description}</p>
-                        {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
-                      </div>
-                      <div>
-                        <Button
-                          id="tooltip545670"
-                          title="Editar Detalles del paquete"
-                          type="button"
-                          color="info"
-                          className="text-white"
-                          onClick={() => handleEditPackage(userPackage._id)}
-                        >
-                          Editar
-                        </Button>
-                      </div>
+                            <p>Descripción: {userPackage.description}</p>
+                            {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
+                          </div>
+                          <div>
+                            <Button
+                              id="tooltip545670"
+                              title="Editar Detalles del paquete"
+                              type="button"
+                              color="info"
+                              className="text-white"
+                              onClick={() => handleEditPackage(userPackage._id)}
+                            >
+                              Editar
+                            </Button>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
+                  </CardBody>
+                </Card>
               </Modal>
             </Col>
           </Row>
