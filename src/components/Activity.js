@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Button, Card, Col, Row } from "reactstrap";
+import { Button, Card, Col, Modal, Row } from "reactstrap";
 import axios from "axios";
 import moment from "moment";
 //import { Buffer } from 'buffer';
@@ -12,11 +12,15 @@ const Activity = () => {
   const [travels, setTravels] = useState([]);
   const [viewMorePackages, setViewMorePackages] = useState(false);
   const [viewMoreTravels, setViewMoreTravels] = useState(false);
+  const [packageDetailsModal, setPackageDetailsModal] = useState(false);
+  const [travelDetailsModal, setTravelDetailsModal] = useState(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const headers = {
     token: `${token}`,
     "Content-Type": "application/json",
   };
+  const [userPackage, setUserPackage] = useState({});
+  const [userTravel, setUserTravel] = useState({});
 
   useEffect(() => {
     const getPackages = async () => {
@@ -95,6 +99,24 @@ const Activity = () => {
     setViewMoreTravels(!viewMoreTravels);
   };
 
+  const togglePackageDetails = () => {
+    setPackageDetailsModal(!packageDetailsModal);
+  };
+
+  const toggleTravelDetails = () => {
+    setTravelDetailsModal(!travelDetailsModal);
+  };
+
+  const handlePackageDetails = (item) => {
+    setUserPackage(item);
+    togglePackageDetails();
+  };
+
+  const handleTravelDetails = (item) => {
+    setUserTravel(item);
+    toggleTravelDetails();
+  };
+
   return (
     <Fragment>
       <div className="content">
@@ -114,6 +136,15 @@ const Activity = () => {
                         <p className="text-size">
                           {moment(item.createdAt).format("DD/MM/YYYY HH:mm:ss")}
                         </p>
+                        <Button
+                          id="tooltip5456778"
+                          title="Detalles de paquete"
+                          type="button"
+                          onClick={() => handleTravelDetails(item)}
+                          className="btn-icon btn-round"
+                        >
+                          <i className="tim-icons icon-simple-add" />
+                        </Button>
                       </Card>
                     </div>
                   );
@@ -151,6 +182,15 @@ const Activity = () => {
                         <p className="text-size">
                           {moment(item.createdAt).format("DD/MM/YYYY HH:mm:ss")}
                         </p>
+                        <Button
+                          id="tooltip5456778"
+                          title="Detalles de paquete"
+                          type="button"
+                          onClick={() => handlePackageDetails(item)}
+                          className="btn-icon btn-round"
+                        >
+                          <i className="tim-icons icon-simple-add" />
+                        </Button>
                       </Card>
                     </div>
                   );
@@ -167,6 +207,95 @@ const Activity = () => {
                   </Button>
                 </div>
               </div>
+            </Col>
+          </Row>
+        </div>
+        <div>
+          <Row>
+            <Col md="12">
+              <Modal
+                isOpen={travelDetailsModal}
+                toggle={toggleTravelDetails}
+                backdrop={false}
+              >
+                <div className="modal-header">
+                  <h4 className="modal-title">Detalles del viaje</h4>
+                  <button
+                    type="button"
+                    className="close"
+                    onClick={toggleTravelDetails}
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  {userTravel && (
+                    <div>
+                      <div>
+                        <h5>Información del viaje</h5>
+                        <p>Origen: {userTravel.origin}</p>
+                        <p>Destino: {userTravel.destination}</p>
+                        <p>Fecha: {userTravel.date}</p>
+                        <p>Aeropuerto: {userTravel.airport}</p>
+                        <p>Terminal: {userTravel.terminal}</p>
+                        <p>Compañía: {userTravel.company}</p>
+                        <p>Hora de facturación: {userTravel.billingTime}</p>
+                      </div>
+                      <div>
+                        <h5>Información de disponibilidad</h5>
+                        <p>
+                          Disponibilidad: {userTravel.availableWeight} kilos
+                        </p>
+                        {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </Modal>
+            </Col>
+          </Row>
+          <Row>
+            <Col md="12">
+              <Modal
+                isOpen={packageDetailsModal}
+                toggle={togglePackageDetails}
+                backdrop={false}
+              >
+                <div className="modal-header">
+                  <h4 className="modal-title">Detalles del Paquete</h4>
+                  <button
+                    type="button"
+                    className="close"
+                    onClick={togglePackageDetails}
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  {userPackage && (
+                    <div>
+                      <div>
+                        <h5>Información del receptor</h5>
+                        <p>Nombre: {userPackage.receiverName}</p>
+                        <p>Apellidos: {userPackage.receiverSurname}</p>
+                        <p>Ciudad: {userPackage.receiverCity}</p>
+                        <p>Calle / Barrio: {userPackage.receiverStreet}</p>
+                        <p>Teléfono: {userPackage.receiverPhone}</p>
+                        {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
+                      </div>
+                      <div>
+                        <h5>Información del paquete</h5>
+                        <p>Peso aproximado: {userPackage.weight}</p>
+                        {/* <p>Imagen: {course.description}</p> */}
+                        <p>Estado: {userPackage.state}</p>
+                        <p>Fecha de publicación: {userPackage.createdAt}</p>
+                        <p>Descripción: {userPackage.description}</p>
+                        {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </Modal>
             </Col>
           </Row>
         </div>

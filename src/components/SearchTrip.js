@@ -68,7 +68,7 @@ const SearchTrip = () => {
             <Col md="9" sm="11" xs="11">
               <div className="search_trip2">
                 <Row>
-                  <Col md="6" sm="6" xs="6">
+                  <Col md="4" sm="12" xs="12">
                     <div className="py-1">
                       <Input
                         type="text"
@@ -81,12 +81,12 @@ const SearchTrip = () => {
                       />
                     </div>
                   </Col>
-                  <Col md="6" sm="6" xs="6">
+                  <Col md="4" sm="12" xs="12">
                     <div className="py-1">
                       <Input
                         type="text"
-                        id="destiny"
-                        name="destiny"
+                        id="destination"
+                        name="destination"
                         value={searchTrip.destination}
                         onChange={handleChange}
                         placeholder="¿Cuál es la ciudad de destino?"

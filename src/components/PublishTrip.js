@@ -35,6 +35,7 @@ const PublishTrip = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
     setTravel((prevTravel) => ({
       ...prevTravel,
       [name]: value,
@@ -266,22 +267,36 @@ const PublishTrip = () => {
                     <>
                       <h2>Información de disponibilidad</h2>
                       <Row>
+                        <Col md="12" className="">
+                          <Label for="availableWeight">
+                            ¿Con cuánto peso adicional quiere viajar?
+                          </Label>
+                        </Col>
+                        <Col md="12" className="">
+                          <p className="text-size">
+                            {travel.availableWeight} kilos (
+                            {travel.availableWeight * 750} XAF)
+                          </p>
+                        </Col>
                         <Col md="12">
                           <FormGroup floating>
                             <Input
-                              type="number"
+                              type="range"
                               id="availableWeight"
                               name="availableWeight"
+                              min="5"
+                              max="20"
+                              size="lg"
+                              variant="info"
+                              tooltip="auto"
                               value={travel.availableWeight}
                               onChange={handleChange}
-                              placeholder="¿Con cuánto peso adicional puedes viajar (en quilos)?"
+                              className="text-info"
+                              placeholder="¿Con cuánto peso adicional puedes viajar (en kilos)?"
                             />
-                            <Label for="availableWeight">
-                              ¿Con cuánto peso adicional puedes viajar (en
-                              quilos)?
-                            </Label>
                           </FormGroup>
                         </Col>
+
                         <Col md="12">
                           <p className="text-danger text-center">{error}</p>
                         </Col>
