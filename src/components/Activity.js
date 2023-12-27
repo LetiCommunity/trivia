@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Card, Col, Modal, Row } from "reactstrap";
 import axios from "axios";
 import moment from "moment";
@@ -6,6 +7,7 @@ import moment from "moment";
 
 const Activity = () => {
   const token = localStorage.getItem("token");
+  let navigate = useNavigate();
   const localStoragePackage = localStorage.getItem("package");
   const localStorageTravel = localStorage.getItem("travel");
   const [packages, setPackages] = useState([]);
@@ -117,6 +119,14 @@ const Activity = () => {
     toggleTravelDetails();
   };
 
+  const handleEditPackage = (id) => {
+    return navigate(`/activity/edit-package/${id}`);
+  };
+
+  const handleEditTravel = (id) => {
+    return navigate(`/activity/edit-trip/${id}`);
+  };
+
   return (
     <Fragment>
       <div className="content">
@@ -138,12 +148,14 @@ const Activity = () => {
                         </p>
                         <Button
                           id="tooltip5456778"
-                          title="Detalles de paquete"
+                          title="Detalles del viaje"
                           type="button"
+                          color="link"
+                          outline={true}
+                          className="text-info"
                           onClick={() => handleTravelDetails(item)}
-                          className="btn-icon btn-round"
                         >
-                          <i className="tim-icons icon-simple-add" />
+                          Ver más
                         </Button>
                       </Card>
                     </div>
@@ -183,13 +195,15 @@ const Activity = () => {
                           {moment(item.createdAt).format("DD/MM/YYYY HH:mm:ss")}
                         </p>
                         <Button
-                          id="tooltip5456778"
-                          title="Detalles de paquete"
+                          id="tooltip5456779"
+                          title="Detalles del paquete"
                           type="button"
+                          color="link"
+                          outline={true}
+                          className="text-info"
                           onClick={() => handlePackageDetails(item)}
-                          className="btn-icon btn-round"
                         >
-                          <i className="tim-icons icon-simple-add" />
+                          Ver más
                         </Button>
                       </Card>
                     </div>
@@ -235,7 +249,9 @@ const Activity = () => {
                         <h5>Información del viaje</h5>
                         <p>Origen: {userTravel.origin}</p>
                         <p>Destino: {userTravel.destination}</p>
-                        <p>Fecha: {userTravel.date}</p>
+                        <p>
+                          Fecha: {moment(userTravel.date).format("DD/MM/YYYY")}
+                        </p>
                         <p>Aeropuerto: {userTravel.airport}</p>
                         <p>Terminal: {userTravel.terminal}</p>
                         <p>Compañía: {userTravel.company}</p>
@@ -247,6 +263,18 @@ const Activity = () => {
                           Disponibilidad: {userTravel.availableWeight} kilos
                         </p>
                         {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
+                      </div>
+                      <div>
+                        <Button
+                          id="tooltip545690"
+                          title="Editar Detalles del viaje"
+                          type="button"
+                          color="info"
+                          className="text-white"
+                          onClick={() => handleEditTravel(userTravel._id)}
+                        >
+                          Editar
+                        </Button>
                       </div>
                     </div>
                   )}
@@ -288,9 +316,29 @@ const Activity = () => {
                         <p>Peso aproximado: {userPackage.weight}</p>
                         {/* <p>Imagen: {course.description}</p> */}
                         <p>Estado: {userPackage.state}</p>
-                        <p>Fecha de publicación: {userPackage.createdAt}</p>
+                        <p>
+                          Fecha de publicación:{" "}
+                          {moment(userTravel.createdAt).format("DD/MM/YYYY")}
+                        </p>
+                        {/* <img
+                            className="package-image"
+                            alt={userPackage.image}
+                            src={`https://trivi4.com/api/trivia/packages/image/${userPackage.image}`}
+                          /> */}
                         <p>Descripción: {userPackage.description}</p>
                         {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
+                      </div>
+                      <div>
+                        <Button
+                          id="tooltip545670"
+                          title="Editar Detalles del paquete"
+                          type="button"
+                          color="info"
+                          className="text-white"
+                          onClick={() => handleEditPackage(userPackage._id)}
+                        >
+                          Editar
+                        </Button>
                       </div>
                     </div>
                   )}

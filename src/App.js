@@ -48,6 +48,8 @@ function App() {
             {token ? (
               <>
                 <Route path="activity" element={<Activity />} />
+                <Route path="activity/edit-trip/:id" element={<Activity />} />
+                <Route path="activity/edit-package/:id" element={<Activity />} />
                 <Route path="notifications" element={<Notification />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="edit-profile" element={<EditProfile />} />
