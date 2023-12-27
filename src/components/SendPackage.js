@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { Fragment, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   Button,
@@ -16,9 +16,11 @@ import {
 const SendPackage = () => {
   const token = localStorage.getItem("token");
   let navigate = useNavigate();
+  const { id } = useParams();
   const [section, setSection] = useState(1);
   const [imageUrl, setImageUrl] = useState(null);
   const [error, setError] = useState("");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const headers = {
     token: `${token}`,
     "Content-Type": "multipart/form-data",
@@ -32,6 +34,23 @@ const SendPackage = () => {
     receiverStreet: "",
     receiverPhone: "",
   });
+
+  useEffect(() => {
+    const getPackage = async () => {
+      if (id) {
+        try {
+          const { data } = await axios.get(
+            `https://trivi4.com/api/trivia/packages/${id}`,
+            { headers }
+          );
+          setShippingDetails(data);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    };
+    getPackage();
+  }, [headers, id]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -128,19 +147,25 @@ const SendPackage = () => {
 
     if (!token) {
       localStorage.setItem("package", JSON.stringify(data));
-      
+
       localStorage.setItem("packageImage", imageUrl.toString());
       console.log(Buffer.from(localStorage.getItem("packageImage")));
-      return //navigate("/login");
+      return; //navigate("/login");
     }
 
     try {
-      await axios.post("https://trivi4.com/api/trivia/packages", data, {
-        headers,
-      });
+      if (!id) {
+        await axios.post("https://trivi4.com/api/trivia/packages", data, {
+          headers,
+        });
+      } else {
+        await axios.put(`https://trivi4.com/api/trivia/packages/${id}`, data, {
+          headers,
+        });
+      }
       return navigate("/activity");
     } catch (error) {
-      console.error("Error", error);
+      console.error("Error", error.message);
       return;
     }
   };

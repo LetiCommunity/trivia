@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { Fragment, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   Button,
@@ -16,12 +16,15 @@ import {
 const PublishTrip = () => {
   const token = localStorage.getItem("token");
   let navigate = useNavigate();
+  const { id } = useParams();
   const [section, setSection] = useState(1);
   const [error, setError] = useState("");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const headers = {
     token: `${token}`,
     "Content-Type": "application/json",
   };
+
   const [travel, setTravel] = useState({
     origin: "Malabo",
     destination: "Malabo",
@@ -32,6 +35,23 @@ const PublishTrip = () => {
     billingTime: "",
     availableWeight: "",
   });
+
+  useEffect(() => {
+    const getTravel = async () => {
+      if (id) {
+        try {
+          const { data } = await axios.get(
+            `https://trivi4.com/api/trivia/travels/${id}`,
+            { headers }
+          );
+          setTravel(data);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    };
+    getTravel();
+  }, [headers, id]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -112,9 +132,15 @@ const PublishTrip = () => {
     }
 
     try {
-      await axios.post("https://trivi4.com/api/trivia/travels", data, {
-        headers,
-      });
+      if (!id) {
+        await axios.post("https://trivi4.com/api/trivia/travels", data, {
+          headers,
+        });
+      } else {
+        await axios.put(`https://trivi4.com/api/trivia/travels/${id}`, data, {
+          headers,
+        });
+      }
       return navigate("/activity");
     } catch (error) {
       console.error("Error", error.message);
