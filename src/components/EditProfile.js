@@ -104,7 +104,7 @@ const EditProfile = () => {
       );
       return navigate("/profile");
     } catch (error) {
-      console.error("Error", error);
+      console.error("Error", error.message);
     }
   };
 

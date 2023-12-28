@@ -81,23 +81,6 @@ const Profile = () => {
                     Editar información
                   </Button>
                 </div>
-                {/*<hr />
-                 <div>
-                  <h3>Confirmación de perfil</h3>
-                  <ul>
-                    <li>
-                      <Button
-                        type="button"
-                        onClick={toggleModal}
-                        color="link"
-                        outline={true}
-                        className="text-info"
-                      >
-                        Cambiar teléfono
-                      </Button>
-                    </li>
-                  </ul>
-                </div> */}
                 <hr />
                 <div>
                   <h3>Cuenta</h3>

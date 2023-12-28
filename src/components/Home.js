@@ -1,13 +1,22 @@
 import React, { Fragment, useState } from "react";
-import { Button, Card, Col, Form, Input, Row } from "reactstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Row,
+} from "reactstrap";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   let navigate = useNavigate();
   const [searchTrip, setSearchTrip] = useState({
-    origin: "",
-    destination: "",
+    origin: "Malabo",
+    destination: "Bata",
   });
 
   const handleChange = (event) => {
@@ -67,37 +76,55 @@ const Home = () => {
                   src={require("../assets/img/bg1.jpg")}
                 />
                 <div className="search_trip">
-                  <Card className="py-2 px-2">
+                  <Card className="px-2">
                     <Form onSubmit={handleSubmit}>
                       <Row>
                         <Col md="5">
-                          <div className="py-1">
-                            <Input
-                              type="text"
-                              id="origin"
-                              name="origin"
-                              value={searchTrip.origin}
-                              onChange={handleChange}
-                              placeholder="¿Desde qué ciudad hace el envío?"
-                              className="form-control-lg border-0 border-bottom"
-                            />
+                          <div className="pt-2">
+                            <FormGroup floating>
+                              <Input
+                                type="select"
+                                id="origin"
+                                name="origin"
+                                value={searchTrip.origin}
+                                onChange={handleChange}
+                                placeholder="¿Desde qué ciudad hace el envío?"
+                                className="form-control-lg border-0 border-bottom"
+                              >
+                                <option value="Malabo">Malabo</option>
+                                <option value="Bata">Bata</option>
+                                <option value="Madrid">Madrid</option>
+                              </Input>
+                              <Label for="origin">
+                                ¿Desde qué ciudad hace el envío?
+                              </Label>
+                            </FormGroup>
                           </div>
                         </Col>
                         <Col md="5">
-                          <div className="py-1">
-                            <Input
-                              type="text"
-                              id="destination"
-                              name="destination"
-                              value={searchTrip.destination}
-                              onChange={handleChange}
-                              placeholder="¿Cuál es la ciudad de destino?"
-                              className="form-control-lg border-0 border-bottom"
-                            />
+                          <div className="pt-2">
+                            <FormGroup floating>
+                              <Input
+                                type="select"
+                                id="destination"
+                                name="destination"
+                                value={searchTrip.destination}
+                                onChange={handleChange}
+                                placeholder="¿Cuál es la ciudad de destino?"
+                                className="form-control-lg border-0 border-bottom"
+                              >
+                                <option value="Malabo">Malabo</option>
+                                <option value="Bata">Bata</option>
+                                <option value="Madrid">Madrid</option>
+                              </Input>
+                              <Label for="destination">
+                                ¿Cuál es la ciudad de destino?
+                              </Label>
+                            </FormGroup>
                           </div>
                         </Col>
                         <Col md="2">
-                          <div className="d-grid gap-2 py-2">
+                          <div className="d-grid gap-2 py-3">
                             <Button
                               type="submit"
                               className="btn btn-info text-white form-control-lg"

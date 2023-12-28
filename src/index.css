@@ -103,6 +103,10 @@ ul {
   }
 }
 
+.search_trip_found_content {
+  margin-top: 50px;
+}
+
 @media(max-width:768px) {
   .margin-services {
     margin-top: 180px;
