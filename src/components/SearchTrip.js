@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Button,
   Card,
@@ -9,9 +10,10 @@ import {
   Label,
   Row,
 } from "reactstrap";
-import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
+
+import inicialImage from "../assets/img/user-bar.png";
 
 const SearchTrip = () => {
   const [travels, setTravels] = useState([]);
@@ -156,19 +158,21 @@ const SearchTrip = () => {
                   return (
                     <div key={travel.id}>
                       <div className="rounded bg-white text-dark p-3"></div>
-                      {/* <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                        <div className="input_wrapper">
-                          <img
-                            className="rounded-circle input_icon mt-3"
-                            alt="https://icons8.com/icon/85356/male-user"
-                            src={require("../assets/img/user-bar.png")}
-                          />
-                        </div>
-                      </Card> */}
                       <Card
-                        onClick={handleSelectedTrip(travel.traveler._id)}
+                        onClick={() => handleSelectedTrip(travel.traveler._id)}
                         className="rounded text-dark p-3 shadow-lg bg-white border-0"
                       >
+                        <div className="input_wrapper">
+                          <img
+                            alt="Imagen cargada"
+                            className="rounded-circle input_icon mt-3"
+                            src={
+                              travel.image
+                                ? `https://trivi4.com/api/trivia/profiles/image/${travel.image}`
+                                : inicialImage
+                            }
+                          />
+                        </div>
                         <p className="text-size">
                           {travel.origin} a {travel.destination}
                         </p>
