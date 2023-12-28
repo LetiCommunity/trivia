@@ -32,7 +32,7 @@ const SearchTrip = () => {
     const getTravels = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/trivia/travels/filterByCity/${origin}/${destination}`
+          `https://trivi4.com/api/trivia/travels/filterByCity/${origin}/${destination}`
         );
         setTravels(data);
       } catch (error) {
@@ -72,7 +72,7 @@ const SearchTrip = () => {
 
   const handleSelectedTrip = () => {
     return navigate(`/send-package`);
-  }
+  };
 
   return (
     <Fragment>
