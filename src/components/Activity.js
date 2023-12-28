@@ -9,6 +9,7 @@ const Activity = () => {
   const token = localStorage.getItem("token");
   let navigate = useNavigate();
   const localStoragePackage = localStorage.getItem("package");
+  const localStorageRequest = localStorage.getItem("request");
   const localStorageTravel = localStorage.getItem("travel");
   const [packages, setPackages] = useState([]);
   const [travels, setTravels] = useState([]);
@@ -65,11 +66,19 @@ const Activity = () => {
   const handleLocalStorageData = async () => {
     if (localStoragePackage) {
       try {
-        await axios.post(
-          "https://trivi4.com/api/trivia/packages",
-          JSON.parse(localStoragePackage),
-          { headers }
-        );
+        if (localStorageRequest) {
+          await axios.post(
+            `https://trivi4.com/api/trivia/packages/${localStorageRequest}`,
+            JSON.parse(localStoragePackage),
+            { headers }
+          );
+        } else {
+          await axios.post(
+            "https://trivi4.com/api/trivia/packages",
+            JSON.parse(localStoragePackage),
+            { headers }
+          );
+        }
         localStorage.removeItem("package");
       } catch (error) {
         console.error("Error", error);
@@ -91,6 +100,7 @@ const Activity = () => {
       }
     }
   };
+
   handleLocalStorageData();
 
   const handleViewMorePackages = () => {

@@ -70,7 +70,8 @@ const SearchTrip = () => {
     );
   };
 
-  const handleSelectedTrip = () => {
+  const handleSelectedTrip = (traveler) => {
+    localStorage.setItem("request", traveler);
     return navigate(`/send-package`);
   };
 
@@ -165,7 +166,7 @@ const SearchTrip = () => {
                         </div>
                       </Card> */}
                       <Card
-                        onClick={handleSelectedTrip}
+                        onClick={handleSelectedTrip(travel.traveler._id)}
                         className="rounded text-dark p-3 shadow-lg bg-white border-0"
                       >
                         <p className="text-size">
