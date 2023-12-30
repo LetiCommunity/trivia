@@ -68,10 +68,10 @@ const Home = () => {
         <div className="position-relative">
           <Row>
             <Col md="12" sm="12">
-              <div className="">
+              <div>
                 <h2 className="title">Envía fácil y rápido tu paquete</h2>
                 <img
-                  className="img-fluid w-100"
+                  className="img-fluid w-100 background"
                   alt="Trivia"
                   src={require("../assets/img/bg1.jpg")}
                 />
@@ -204,7 +204,7 @@ const Home = () => {
                   </div>
                 </Col>
                 <Col md="6">
-                  <div>
+                  <div className="main">
                     <h3>Gana dinero viajando</h3>
                     <p className="">
                       Gane dinero adicional compartiendo el espacio de su
@@ -225,7 +225,7 @@ const Home = () => {
               </Row>
               <Row className="align-items-center my-5 py-2">
                 <Col xs="12" sm="12" md="6" className="order-2 order-md-1">
-                  <div>
+                  <div className="main">
                     <h3>Envío fácil, rápido y seguro</h3>
                     <p>
                       Nuestra red de viajeros se encargan de hacer llegar su
@@ -310,7 +310,7 @@ const Home = () => {
                 <Col md="4">
                   <Card
                     onClick={() => handleSearchTrip("malabo", "bata")}
-                    className="mb-2 bg-light"
+                    className="mb-2 bg-light routes_card"
                   >
                     <p className="p-3 text-size">Malabo a Bata</p>
                   </Card>
@@ -318,7 +318,7 @@ const Home = () => {
                 <Col md="4">
                   <Card
                     onClick={() => handleSearchTrip("malabo", "madrid")}
-                    className="mb-2 bg-light"
+                    className="mb-2 bg-light routes_card"
                   >
                     <p className="p-3 text-size">Malabo a Madrid</p>
                   </Card>
@@ -326,7 +326,7 @@ const Home = () => {
                 <Col md="4">
                   <Card
                     onClick={() => handleSearchTrip("malabo", "mongomeyen")}
-                    className="mb-2 bg-light"
+                    className="mb-2 bg-light routes_card"
                   >
                     <p className="p-3 text-size">Malabo a Mongomeyen</p>
                   </Card>

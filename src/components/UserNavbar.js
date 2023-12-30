@@ -19,7 +19,7 @@ const UserNavbar = () => {
 
   return (
     <Fragment>
-      <Navbar className="fixed-top bg-light">
+      <Navbar className="fixed-top pt-2 bg-light">
         <NavbarBrand href="/home">
           <img
             className="logo"

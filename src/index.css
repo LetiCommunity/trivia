@@ -20,8 +20,9 @@ h2 {
 }
 
 .title {
+  z-index:2;
   position: absolute;
-  top: 10%;
+  top: 15%;
   left: 0;
   width: 100%;
 }
@@ -138,13 +139,29 @@ ul {
 
 @media(max-width:768px) {
   .margin-services {
-    margin-top: 180px;
+    margin-top: 250px;
   }
+
   .notification-icon {
     font-size: 0.5em;
     position: fixed;
     top: 9%;
     left: 25%;
+  }
+
+  .title {
+    color: white;
+    top: 25%;
+    left: 0;
+    width: 100%;
+  }
+
+  .background {
+    z-index:1;
+  }
+
+  .main {
+    margin-top: 15px;
   }
 }
 
@@ -162,10 +179,6 @@ ul {
     position: absolute;
     left: 10%;
     width: 80%;
-  }
-
-  .title {
-    color: white;
   }
 
   .notification-icon {
@@ -211,4 +224,8 @@ ul {
 .package-image {
   width: 200px;
   height: 100px;
+}
+
+.routes_card:hover {
+  cursor: pointer;
 }

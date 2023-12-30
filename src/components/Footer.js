@@ -14,8 +14,8 @@ const Footer = () => {
                   to={{ pathname: "/p" }}
                   className="text-white text_decoration_a left"
                 >
-                  Sobre nosotros
-                </Link>{" "}
+                  Sobre nosotros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </Link>
                 <Link
                   to={{ pathname: "/p" }}
                   className="text-white text_decoration_a left"
@@ -35,10 +35,10 @@ const Footer = () => {
             <div className="text-center">
               <a href="#p">
                 <i className="bi bi-instagram text-white"></i>
-              </a>{" "}
+              </a>&nbsp;&nbsp;
               <a href="#p">
                 <i className="bi bi-facebook text-white"></i>
-              </a>{" "}
+              </a>&nbsp;&nbsp;
               <a href="#p">
                 <i className="bi bi-whatsapp text-white"></i>
               </a>
