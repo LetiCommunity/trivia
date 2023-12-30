@@ -1,16 +1,13 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Button, Card, Col, Row } from "reactstrap";
 import axios from "axios";
-import moment from "moment";
 
-const Activity = () => {
+const Notification = () => {
   const token = localStorage.getItem("token");
-  const localStoragePackage = localStorage.getItem("package");
-  const localStorageTravel = localStorage.getItem("travel");
-  const [packages, setPackages] = useState([]);
-  //const [travels, setTravels] = useState([]);
-  const [viewMorePackages, setViewMorePackages] = useState(false);
-  //const [viewMoreTravels, setViewMoreTravels] = useState(false);
+  const [Requests, setRequests] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
+  const [viewMoreRequests, setViewMoreRequests] = useState(false);
+  const [viewMoreSuggestions, setViewMoreSuggestions] = useState(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const headers = {
     token: `${token}`,
@@ -18,81 +15,50 @@ const Activity = () => {
   };
 
   useEffect(() => {
-    const getPackages = async () => {
+    const getRequests = async () => {
       try {
         const { data } = await axios.get(
-          "https://trivi4.com/api/trivia/packages/proprietor",
+          "https://trivi4.com/api/trivia/packages/filterByTraveler",
           { headers }
         );
-        if (viewMorePackages) {
-          setPackages(data);
+        if (viewMoreRequests) {
+          setRequests(data);
         } else {
-          setPackages(data.slice(0, 3));
+          setRequests(data.slice(0, 3));
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    getRequests();
+  }, [headers, viewMoreRequests]);
+
+  useEffect(() => {
+    const getSuggestions = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://trivi4.com/api/trivia/travels/filterByMatch",
+          { headers }
+        );
+        if (viewMoreSuggestions) {
+          setSuggestions(data);
+        } else {
+          setSuggestions(data.slice(0, 3));
         }
       } catch (err) {
         console.error(err);
       }
     };
-    getPackages();
-  }, [headers, viewMorePackages]);
+    getSuggestions();
+  }, [headers, suggestions, viewMoreSuggestions]);
 
-  // useEffect(() => {
-  //   const getTravels = async () => {
-  //     try {
-  //       const { data } = await axios.get(
-  //         "https://trivi4.com/api/trivia/travels/proprietor",
-  //         { headers }
-  //       );
-  //       if (viewMoreTravels) {
-  //         setTravels(data);
-  //       } else {
-  //         setTravels(data.slice(0, 3));
-  //       }
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-  //   getTravels();
-  // }, [headers, travels, viewMoreTravels]);
-
-  const handleLocalStorageData = async () => {
-    if (localStoragePackage) {
-      try {
-        await axios.post(
-          "https://trivi4.com/api/trivia/packages",
-          JSON.parse(localStoragePackage),
-          { headers }
-        );
-        localStorage.removeItem("package");
-      } catch (error) {
-        console.error("Error", error);
-        return;
-      }
-    }
-
-    if (localStorageTravel) {
-      try {
-        await axios.post(
-          "https://trivi4.com/api/trivia/travels",
-          JSON.parse(localStorageTravel),
-          { headers }
-        );
-        localStorage.removeItem("travel");
-      } catch (error) {
-        console.error("Error", error);
-        return;
-      }
-    }
-  };
-  handleLocalStorageData();
-
-  const handleViewMorePackages = () => {
-    setViewMorePackages(!viewMorePackages);
+  const handleViewMoreRequests = () => {
+    setViewMoreRequests(!viewMoreRequests);
   };
 
-  // const handleViewMoreTravels = () => {
-  //   setViewMoreTravels(!viewMoreTravels);
-  // };
+  const handleViewMoreSuggestions = () => {
+    setViewMoreSuggestions(!viewMoreSuggestions);
+  };
 
   return (
     <Fragment>
@@ -101,8 +67,8 @@ const Activity = () => {
           <Row className="justify-content-center">
             <Col md="6" sm="10" xs="10">
               <div className="my-5 py-5">
-                <h3>Paquetes disponibles</h3>
-                {packages.map((item) => {
+                <h3>Solicitudes de envío</h3>
+                {Requests.map((item) => {
                   return (
                     <div key={item._id}>
                       <div className="rounded bg-light text-dark p-3"></div>
@@ -114,10 +80,8 @@ const Activity = () => {
                             src={`https://trivi4.com/api/trivia/packages/image/${item.image}`}
                           />
                         </div>
-                        <p className="text-size">Para: {item.receiverName}</p>
-                        <p className="text-size">Estado: {item.status}</p>
                         <p className="text-size">
-                          {moment(item.createdAt).format("DD/MM/YYYY HH:mm:ss")}
+                          Descripción: {item.description}
                         </p>
                       </Card>
                     </div>
@@ -129,9 +93,44 @@ const Activity = () => {
                     color="link"
                     outline={true}
                     className="text-info"
-                    onClick={handleViewMorePackages}
+                    onClick={handleViewMoreRequests}
                   >
-                    {viewMorePackages ? "Ver menos" : "Ver más"}
+                    {viewMoreRequests ? "Ver menos" : "Ver más"}
+                  </Button>
+                </div>
+              </div>
+            </Col>
+            <Col md="6" sm="10" xs="10">
+              <div className="my-5 py-5">
+                <h3>Sugerencias</h3>
+                {suggestions.map((item) => {
+                  return (
+                    <div key={item._id}>
+                      <div className="rounded bg-light text-dark p-3"></div>
+                      <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
+                        <div className="">
+                          <img
+                            className="package-image input_icon"
+                            alt={item.image}
+                            src={`https://trivi4.com/api/trivia/packages/image/${item.image}`}
+                          />
+                        </div>
+                        <p className="text-size">
+                          Descripción: {item.description}
+                        </p>
+                      </Card>
+                    </div>
+                  );
+                })}
+                <div>
+                  <Button
+                    type="button"
+                    color="link"
+                    outline={true}
+                    className="text-info"
+                    onClick={handleViewMoreSuggestions}
+                  >
+                    {viewMoreSuggestions ? "Ver menos" : "Ver más"}
                   </Button>
                 </div>
               </div>
@@ -143,4 +142,4 @@ const Activity = () => {
   );
 };
 
-export default Activity;
+export default Notification;

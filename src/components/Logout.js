@@ -33,18 +33,16 @@ const Logout = () => {
           <Col md="5" sm="10" xs="10" className="my-5 py-5">
             <Card className="border-0 shadow-lg bg-white">
               <CardBody>
-                <p className="text-center">
-                  ¿Quiere cerrar la sesión?
-                </p>
+                <p className="text-center">¿Quiere cerrar la sesión?</p>
                 <Row>
                   <Col md="6" sm="6" xs="6">
                     <div>
                       <Button
                         type="button"
-                        onClick={handleClose}
-                        className="btn btn-danger text-white"
+                        onClick={handleLogout}
+                        className="btn btn-info text-white"
                       >
-                        Cancelar
+                        Confirmar
                       </Button>
                     </div>
                   </Col>
@@ -52,10 +50,10 @@ const Logout = () => {
                     <div className="right">
                       <Button
                         type="button"
-                        onClick={handleLogout}
-                        className="btn btn-info text-white"
+                        onClick={handleClose}
+                        className="btn btn-danger text-white"
                       >
-                        Confirmar
+                        Cancelar
                       </Button>
                     </div>
                   </Col>

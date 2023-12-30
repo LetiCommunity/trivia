@@ -15,6 +15,7 @@ import Contact from "./components/Contact";
 import NoPage from "./components/NoPage";
 import EditProfile from "./components/EditProfile";
 import ChangePassword from "./components/ChangePassword";
+import ChangeProfileImage from "./components/ChangeProfileImage";
 import SearchTrip from "./components/SearchTrip";
 import Logout from "./components/Logout";
 import Terms from "./components/Terms";
@@ -59,6 +60,10 @@ function App() {
                 <Route path="notifications" element={<Notification />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="edit-profile" element={<EditProfile />} />
+                <Route
+                  path="change-profile-image"
+                  element={<ChangeProfileImage />}
+                />
                 <Route path="change-password" element={<ChangePassword />} />
                 <Route path="logout" element={<Logout />} />
               </>

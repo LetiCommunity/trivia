@@ -15,6 +15,7 @@ import {
 
 const SendPackage = () => {
   const token = localStorage.getItem("token");
+  const traveler = localStorage.getItem("traveler");
   let navigate = useNavigate();
   const { id } = useParams();
   const [section, setSection] = useState(1);
@@ -147,10 +148,7 @@ const SendPackage = () => {
 
     if (!token) {
       localStorage.setItem("package", JSON.stringify(data));
-
-      localStorage.setItem("packageImage", imageUrl.toString());
-      console.log(Buffer.from(localStorage.getItem("packageImage")));
-      return; //navigate("/login");
+      return;
     }
 
     try {
@@ -158,6 +156,14 @@ const SendPackage = () => {
         await axios.post("https://trivi4.com/api/trivia/packages", data, {
           headers,
         });
+      } else if (traveler) {
+        await axios.post(
+          "https://trivi4.com/api/trivia/packages/packageSendRequest",
+          data,
+          {
+            headers,
+          }
+        );
       } else {
         await axios.put(`https://trivi4.com/api/trivia/packages/${id}`, data, {
           headers,

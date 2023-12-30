@@ -12,18 +12,15 @@ import {
   Label,
   Row,
 } from "reactstrap";
-import inicialImage from "../assets/img/user.png";
 
 const EditProfile = () => {
   const token = localStorage.getItem("token");
   const userData = JSON.parse(localStorage.getItem("user"));
   let navigate = useNavigate();
-  const [imageUrl, setImageUrl] = useState("");
-  const [image, setImage] = useState(null);
   const [error, setError] = useState("");
   const headers = {
     token: `${token}`,
-    "Content-Type": "multipart/form-data",
+    "Content-Type": "application/json",
   };
   const [user, setUser] = useState({
     _id: userData._id,
@@ -35,40 +32,10 @@ const EditProfile = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setUser((prevUser) => ({
       ...prevUser,
       [name]: value,
     }));
-  };
-
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    // Checks if a file was selected
-    if (!file) {
-      return;
-    }
-
-    // Verify the file type
-    if (!file.type.startsWith("image/")) {
-      return;
-    }
-
-    // Verify the maximum size allowed (5MB)
-    const maxSize = 5 * 1024 * 1024;
-    if (file.size > maxSize) {
-      return;
-    }
-
-    setImage(file);
-    // Creates an instance of FileReader to read the file
-    const reader = new FileReader();
-    // Defines a callback function for when the reading of the file is completed.
-    reader.onloadend = () => {
-      const imageUrl = reader.result;
-      setImageUrl(imageUrl);
-    };
-    reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (event) => {
@@ -79,7 +46,6 @@ const EditProfile = () => {
       surname: user.surname,
       email: user.email,
       username: user.username,
-      image: image,
     };
 
     if (!data.name || !data.surname || !data.username) {
@@ -97,11 +63,14 @@ const EditProfile = () => {
     }
 
     try {
-      await axios.put(
+      const response = await axios.put(
         `https://trivi4.com/api/trivia/profiles/profile`,
         data,
-        { headers }
+        {
+          headers,
+        }
       );
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       return navigate("/profile");
     } catch (error) {
       console.error("Error", error.message);
@@ -117,42 +86,8 @@ const EditProfile = () => {
         <Col md="5" sm="10" xs="10" className="my-5 py-5">
           <Card className="border-0 shadow-lg bg-white">
             <CardBody>
-              <div className="text-center m-3">
-                {imageUrl.trim() ? (
-                  <img
-                    alt="Imagen cargada"
-                    className="rounded-circle profile"
-                    src={imageUrl}
-                  />
-                ) : (
-                  <img
-                    alt="Cargar imagen"
-                    className="rounded-circle"
-                    src={inicialImage}
-                  />
-                )}
-              </div>
               <div>
                 <Form onSubmit={handleSubmit}>
-                  <FormGroup floating>
-                    <Input
-                      type="hidden"
-                      id="_id"
-                      name="_id"
-                      value={user._id}
-                      onChange={handleChange}
-                      className="form-control"
-                    />
-                  </FormGroup>
-                  <FormGroup floating>
-                    <Input
-                      type="file"
-                      id="image"
-                      name="image"
-                      onChange={handleImageUpload}
-                      className="bg-light"
-                    />
-                  </FormGroup>
                   <FormGroup floating>
                     <Input
                       placeholder="Nombre"
