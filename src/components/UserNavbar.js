@@ -52,6 +52,7 @@ const UserNavbar = () => {
             />
           )}
         </Button>
+        <i className="bi bi-circle-fill text-danger notification-icon2"></i>
         <Collapse isOpen={collapseOpen} navbar className="">
           <Nav className="ml-auto" navbar>
             {!token ? (
@@ -72,7 +73,10 @@ const UserNavbar = () => {
             ) : (
               <>
                 <NavItem>
-                  <NavLink href="notifications">Notificaciones</NavLink>
+                  <NavLink href="notifications">
+                    Notificaciones
+                    <i className="bi bi-circle-fill text-danger notification-icon"></i>
+                  </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink href="activity">Actividad</NavLink>

@@ -77,6 +77,20 @@ ul {
   font-size: 2em;
 }
 
+.notification-icon {
+  font-size: 0.5em;
+  position: fixed;
+  top: 9%;
+  left: 18%;
+}
+
+.notification-icon2 {
+  font-size: 0.5em;
+  position: fixed;
+  top: 2%;
+  right: 2%;
+}
+
 .text-size {
   font-size: 1.1em;
 }

@@ -20,8 +20,8 @@ const SearchTrip = () => {
   let navigate = useNavigate();
   let location = useLocation();
   const [searchTrip, setSearchTrip] = useState({
-    origin: "",
-    destination: "",
+    origin: "Malabo",
+    destination: "Bata",
   });
 
   let queryParams = new URLSearchParams(location.search);
