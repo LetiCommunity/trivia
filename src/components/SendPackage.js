@@ -158,7 +158,7 @@ const SendPackage = () => {
         });
       } else if (traveler) {
         await axios.post(
-          "https://trivi4.com/api/trivia/packages/packageSendRequest",
+          "https://trivi4.com/api/trivia/packages/request",
           data,
           {
             headers,

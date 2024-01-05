@@ -75,7 +75,7 @@ const UserNavbar = () => {
                 <NavItem>
                   <NavLink href="notifications">
                     Notificaciones
-                    <i className="bi bi-circle-fill text-danger notification-icon"></i>
+                    {/* <i className="bi bi-circle-fill text-danger notification-icon"></i> */}
                   </NavLink>
                 </NavItem>
                 <NavItem>

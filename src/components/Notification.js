@@ -60,6 +60,36 @@ const Notification = () => {
     setViewMoreSuggestions(!viewMoreSuggestions);
   };
 
+  const handleConfirmation = async (id) => {
+    const data = {
+      state: "Aprobado",
+    };
+
+    try {
+      await axios.patch(
+        `https://trivi4.com/api/trivia/packages/confirmation/${id}`,
+        data,
+        { headers }
+      );
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+
+  const handleCancelation = async (id) => {
+    const data = {
+      state: "Rechazado",
+    };
+
+    try {
+      await axios.patch(`https://trivi4.com/api/trivia/packages/${id}`, data, {
+        headers,
+      });
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+
   return (
     <Fragment>
       <div className="content">
@@ -83,6 +113,32 @@ const Notification = () => {
                         <p className="text-size">
                           Descripción: {item.description}
                         </p>
+                        <div>
+                          <Row>
+                            <Col md="6" sm="6" xs="6">
+                              <div>
+                                <Button
+                                  type="button"
+                                  onClick={() => handleConfirmation(item._id)}
+                                  className="btn btn-info text-white"
+                                >
+                                  Confirmar
+                                </Button>
+                              </div>
+                            </Col>
+                            <Col md="6" sm="6" xs="6">
+                              <div className="right">
+                                <Button
+                                  type="button"
+                                  onClick={() => handleCancelation(item._id)}
+                                  className="btn btn-danger text-white"
+                                >
+                                  Rechazar
+                                </Button>
+                              </div>
+                            </Col>
+                          </Row>
+                        </div>
                       </Card>
                     </div>
                   );
@@ -118,6 +174,32 @@ const Notification = () => {
                         <p className="text-size">
                           Descripción: {item.description}
                         </p>
+                        <div>
+                          <Row>
+                            <Col md="6" sm="6" xs="6">
+                              <div>
+                                <Button
+                                  type="button"
+                                  onClick={() => handleConfirmation(item._id)}
+                                  className="btn btn-info text-white"
+                                >
+                                  Confirmar
+                                </Button>
+                              </div>
+                            </Col>
+                            {/* <Col md="6" sm="6" xs="6">
+                              <div className="right">
+                                <Button
+                                  type="button"
+                                  onClick={handleCancelation}
+                                  className="btn btn-danger text-white"
+                                >
+                                  Rechazar
+                                </Button>
+                              </div>
+                            </Col> */}
+                          </Row>
+                        </div>
                       </Card>
                     </div>
                   );
