@@ -76,15 +76,19 @@ const Notification = () => {
     }
   };
 
-  const handleCancelation = async (id) => {
+  const handleRejection = async (id) => {
     const data = {
       state: "Rechazado",
     };
 
     try {
-      await axios.patch(`https://trivi4.com/api/trivia/packages/${id}`, data, {
-        headers,
-      });
+      await axios.patch(
+        `https://trivi4.com/api/trivia/packages/rejection/${id}`,
+        data,
+        {
+          headers,
+        }
+      );
     } catch (error) {
       console.error("Error", error);
     }
@@ -130,7 +134,7 @@ const Notification = () => {
                               <div className="right">
                                 <Button
                                   type="button"
-                                  onClick={() => handleCancelation(item._id)}
+                                  onClick={() => handleRejection(item._id)}
                                   className="btn btn-danger text-white"
                                 >
                                   Rechazar

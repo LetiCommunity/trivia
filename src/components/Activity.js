@@ -8,9 +8,9 @@ import moment from "moment";
 const Activity = () => {
   const token = localStorage.getItem("token");
   let navigate = useNavigate();
-  const localStoragePackage = localStorage.getItem("package");
-  const localStorageRequest = localStorage.getItem("request");
-  const localStorageTravel = localStorage.getItem("travel");
+  //const localStoragePackage = localStorage.getItem("package");
+  //const localStorageRequest = localStorage.getItem("request");
+  //const localStorageTravel = localStorage.getItem("travel");
   const [packages, setPackages] = useState([]);
   const [travels, setTravels] = useState([]);
   const [viewMorePackages, setViewMorePackages] = useState(false);
@@ -63,45 +63,45 @@ const Activity = () => {
     getTravels();
   }, [headers, viewMoreTravels]);
 
-  const handleLocalStorageData = async () => {
-    if (localStoragePackage) {
-      try {
-        if (localStorageRequest) {
-          await axios.post(
-            `https://trivi4.com/api/trivia/packages/${localStorageRequest}`,
-            JSON.parse(localStoragePackage),
-            { headers }
-          );
-        } else {
-          await axios.post(
-            "https://trivi4.com/api/trivia/packages",
-            JSON.parse(localStoragePackage),
-            { headers }
-          );
-        }
-        localStorage.removeItem("package");
-      } catch (error) {
-        console.error("Error", error);
-        return;
-      }
-    }
+  // const handleLocalStorageData = async () => {
+  //   if (localStoragePackage) {
+  //     try {
+  //       if (localStorageRequest) {
+  //         await axios.post(
+  //           `https://trivi4.com/api/trivia/packages/${localStorageRequest}`,
+  //           JSON.parse(localStoragePackage),
+  //           { headers }
+  //         );
+  //       } else {
+  //         await axios.post(
+  //           "https://trivi4.com/api/trivia/packages",
+  //           JSON.parse(localStoragePackage),
+  //           { headers }
+  //         );
+  //       }
+  //       localStorage.removeItem("package");
+  //     } catch (error) {
+  //       console.error("Error", error);
+  //       return;
+  //     }
+  //   }
 
-    if (localStorageTravel) {
-      try {
-        await axios.post(
-          "https://trivi4.com/api/trivia/travels",
-          JSON.parse(localStorageTravel),
-          { headers }
-        );
-        localStorage.removeItem("travel");
-      } catch (error) {
-        console.error("Error", error);
-        return;
-      }
-    }
-  };
+  //   if (localStorageTravel) {
+  //     try {
+  //       await axios.post(
+  //         "https://trivi4.com/api/trivia/travels",
+  //         JSON.parse(localStorageTravel),
+  //         { headers }
+  //       );
+  //       localStorage.removeItem("travel");
+  //     } catch (error) {
+  //       console.error("Error", error);
+  //       return;
+  //     }
+  //   }
+  // };
 
-  handleLocalStorageData();
+  // handleLocalStorageData();
 
   const handleViewMorePackages = () => {
     setViewMorePackages(!viewMorePackages);

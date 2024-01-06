@@ -40,14 +40,14 @@ function App() {
           <Routes>
             <Route index path="/" element={<Home />} />
             <Route index path="home" element={<Home />} />
-            <Route path="send-package" element={<SendPackage />} />
-            <Route path="publish-trip" element={<PublishTrip />} />
             <Route path="search-trip" element={<SearchTrip />} />
             <Route path="contact" element={<Contact />} />
             <Route path="terms" element={<Terms />} />
             <Route path="*" element={<NoPage />} />
             {token ? (
               <>
+                <Route path="send-package" element={<SendPackage />} />
+                <Route path="publish-trip" element={<PublishTrip />} />
                 <Route path="activity" element={<Activity />} />
                 <Route
                   path="activity/edit-trip/:id"

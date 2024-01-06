@@ -146,10 +146,10 @@ const SendPackage = () => {
       return;
     }
 
-    if (!token) {
-      localStorage.setItem("package", JSON.stringify(data));
-      return;
-    }
+    // if (!token) {
+    //   localStorage.setItem("package", JSON.stringify(data));
+    //   return;
+    // }
 
     try {
       if (!id) {

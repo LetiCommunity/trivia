@@ -126,10 +126,10 @@ const PublishTrip = () => {
       return;
     }
 
-    if (!token) {
-      localStorage.setItem("travel", JSON.stringify(data));
-      return navigate("/login");
-    }
+    // if (!token) {
+    //   localStorage.setItem("travel", JSON.stringify(data));
+    //   return navigate("/login");
+    // }
 
     try {
       if (!id) {

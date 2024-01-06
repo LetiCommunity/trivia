@@ -16,6 +16,7 @@ import moment from "moment";
 import inicialImage from "../assets/img/user-bar.png";
 
 const SearchTrip = () => {
+  const token = localStorage.getItem("token");
   const [travels, setTravels] = useState([]);
   let navigate = useNavigate();
   let location = useLocation();
@@ -74,7 +75,11 @@ const SearchTrip = () => {
 
   const handleSelectedTrip = (traveler) => {
     localStorage.setItem("request", traveler);
-    return navigate(`/send-package`);
+    if (token) {
+      return navigate(`/send-package`);
+    } else {
+      return navigate(`/login`);
+    }
   };
 
   return (
