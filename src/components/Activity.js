@@ -196,7 +196,7 @@ const Activity = () => {
                           <img
                             className="package-image input_icon"
                             alt={item.image}
-                            src={`http://localhost:5000/api/trivia/packages/image/${item.image}`}
+                            src={`https://trivi4.com/api/trivia/packages/image/${item.image}`}
                           />
                         </div>
                         <p className="text-size">Para: {item.receiverName}</p>

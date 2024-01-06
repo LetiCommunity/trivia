@@ -13,6 +13,7 @@ import {
   Row,
 } from "reactstrap";
 import inicialImage from "../assets/img/user.png";
+import Compressor from "compressorjs";
 
 const ChangePassword = () => {
   const token = localStorage.getItem("token");
@@ -30,21 +31,30 @@ const ChangePassword = () => {
     const file = event.target.files[0];
     // Checks if a file was selected
     if (!file) {
+      setError("Por favor, seleccione una imagen");
       return;
     }
 
     // Verify the file type
     if (!file.type.startsWith("image/")) {
+      setError("Por favor, escoja una imagen");
       return;
     }
 
     // Verify the maximum size allowed (5MB)
     const maxSize = 5 * 1024 * 1024;
     if (file.size > maxSize) {
+      setError("El tamaño máximo de la imagen de ser de 5MB");
       return;
     }
 
-    setImage(file);
+    new Compressor(file, {
+      quality: 0.6,
+      success: (compressedResult) => {
+        setImage(compressedResult);
+      },
+    });
+
     // Creates an instance of FileReader to read the file
     const reader = new FileReader();
     // Defines a callback function for when the reading of the file is completed.

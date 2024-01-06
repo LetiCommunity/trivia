@@ -12,6 +12,7 @@ import {
   Label,
   Row,
 } from "reactstrap";
+import Compressor from "compressorjs";
 
 const SendPackage = () => {
   const token = localStorage.getItem("token");
@@ -65,20 +66,29 @@ const SendPackage = () => {
     const file = event.target.files[0];
     // Checks if a file was selected
     if (!file) {
+      setError("Por favor, seleccione una imagen");
       return;
     }
 
     // Verify the file type
     if (!file.type.startsWith("image/")) {
+      setError("Por favor, escoja una imagen");
       return;
     }
 
     // Verify the maximum size allowed (5MB)
     const maxSize = 5 * 1024 * 1024;
     if (file.size > maxSize) {
+      setError("El tamaño máximo de la imagen de ser de 5MB");
       return;
     }
-    setImageUrl(file);
+    
+    new Compressor(file, {
+      quality: 0.6,
+      success: (compressedResult) => {
+        setImageUrl(compressedResult);
+      },
+    });
   };
 
   const nextSection = () => {

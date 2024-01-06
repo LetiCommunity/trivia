@@ -20,6 +20,10 @@ const Profile = () => {
     return navigate("/edit-profile");
   };
 
+  const handleEditProfileImage = () => {
+    return navigate("/change-profile-image");
+  };
+
   const handlePasswordChange = () => {
     return navigate("/change-password");
   };
@@ -71,15 +75,28 @@ const Profile = () => {
                     />
                   )}
                   <h3>{user.username}</h3>
-                  <Button
-                    type="button"
-                    onClick={handleEditProfile}
-                    color="link"
-                    outline={true}
-                    className="text-info"
-                  >
-                    Editar información
-                  </Button>
+                  <div>
+                    <Button
+                      type="button"
+                      onClick={handleEditProfileImage}
+                      color="link"
+                      outline={true}
+                      className="text-info"
+                    >
+                      Cambiar imagen de perfil
+                    </Button>
+                  </div>
+                  <div>
+                    <Button
+                      type="button"
+                      onClick={handleEditProfile}
+                      color="link"
+                      outline={true}
+                      className="text-info"
+                    >
+                      Editar información
+                    </Button>
+                  </div>
                 </div>
                 <hr />
                 <div>
