@@ -16,6 +16,7 @@ import {
 const Login = () => {
   const localStoragePackage = localStorage.getItem("package");
   const localStorageTravel = localStorage.getItem("travel");
+  const localStorageTraveler = localStorage.getItem("request");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const headers = {
@@ -62,9 +63,11 @@ const Login = () => {
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-      if (localStoragePackage || localStorageTravel) {
+      if (localStorageTraveler || localStoragePackage) {
         //return navigate("/activities");
-        return (window.location.href = "/activity");
+        return (window.location.href = "/send-package");
+      } else if (localStorageTravel) {
+        return (window.location.href = "/publish-trip");
       }
       //return navigate("/home");
       return (window.location.href = "/home");

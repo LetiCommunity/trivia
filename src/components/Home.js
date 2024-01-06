@@ -13,6 +13,7 @@ import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const token = localStorage.getItem("token");
   let navigate = useNavigate();
   const [searchTrip, setSearchTrip] = useState({
     origin: "Malabo",
@@ -48,11 +49,21 @@ const Home = () => {
   };
 
   const handlePublishTrip = () => {
-    return navigate("/publish-trip");
+    if (token) {
+      localStorage.setItem("package", "true");
+      return navigate("/publish-trip");
+    } else {
+      return navigate("/login");
+    }
   };
 
   const handleSendPackage = () => {
-    return navigate("/send-package");
+    if (token) {
+      localStorage.setItem("travel", "true");
+      return navigate("/send-package");
+    } else {
+      return navigate("/login");
+    }
   };
 
   const handleSearchTrip = (origin, destination) => {
