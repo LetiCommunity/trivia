@@ -19,10 +19,12 @@ const Logout = () => {
         headers,
       });
     } catch (error) {
-      console.error("Error", error);
+      console.error("Error", error.message);
     }
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("travel");
+    localStorage.removeItem("package");
     return (window.location.href = "/home");
   };
 

@@ -37,6 +37,8 @@ const SendPackage = () => {
     receiverPhone: "",
   });
 
+  localStorage.removeItem("package");
+  
   useEffect(() => {
     const getPackage = async () => {
       if (id) {

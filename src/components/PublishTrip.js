@@ -27,7 +27,7 @@ const PublishTrip = () => {
 
   const [travel, setTravel] = useState({
     origin: "Malabo",
-    destination: "Malabo",
+    destination: "Bata",
     date: "",
     airport: "",
     terminal: "",
@@ -35,6 +35,8 @@ const PublishTrip = () => {
     billingTime: "",
     availableWeight: "",
   });
+
+  localStorage.removeItem("travel");
 
   useEffect(() => {
     const getTravel = async () => {
@@ -84,6 +86,11 @@ const PublishTrip = () => {
         !data.billingTime
       ) {
         setError("Por favor, rellena todos los campos");
+        return;
+      }
+
+      if (data.origin === data.destination) {
+        setError("Por favor, verifique que su origen y destino no sean el mismo");
         return;
       }
 
