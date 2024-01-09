@@ -38,7 +38,7 @@ const SendPackage = () => {
   });
 
   localStorage.removeItem("package");
-  
+
   useEffect(() => {
     const getPackage = async () => {
       if (id) {
@@ -84,7 +84,7 @@ const SendPackage = () => {
       setError("El tamaño máximo de la imagen de ser de 5MB");
       return;
     }
-    
+
     new Compressor(file, {
       quality: 0.6,
       success: (compressedResult) => {
@@ -170,12 +170,13 @@ const SendPackage = () => {
         });
       } else if (traveler) {
         await axios.post(
-          "https://trivi4.com/api/trivia/packages/request",
+          `https://trivi4.com/api/trivia/packages/request/${traveler}`,
           data,
           {
             headers,
           }
         );
+        localStorage.removeItem("request");
       } else {
         await axios.put(`https://trivi4.com/api/trivia/packages/${id}`, data, {
           headers,

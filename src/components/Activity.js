@@ -137,6 +137,32 @@ const Activity = () => {
     return navigate(`/activity/edit-trip/${id}`);
   };
 
+  const handleCancelPackage = async (id) => {
+    try {
+      await axios.get(
+        `https://trivi4.com/api/trivia/packages/cancelation/${id}`,
+        {
+          headers,
+        }
+      );
+    } catch (error) {
+      console.error("Error", error.message);
+    }
+  };
+
+  const handleCancelTravel = async (id) => {
+    try {
+      await axios.get(
+        `https://trivi4.com/api/trivia/travels/cancelation/${id}`,
+        {
+          headers,
+        }
+      );
+    } catch (error) {
+      console.error("Error", error.message);
+    }
+  };
+
   return (
     <Fragment>
       <div className="content">
@@ -278,16 +304,38 @@ const Activity = () => {
                             {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
                           </div>
                           <div>
-                            <Button
-                              id="tooltip545690"
-                              title="Editar Detalles del viaje"
-                              type="button"
-                              color="info"
-                              className="text-white"
-                              onClick={() => handleEditTravel(userTravel._id)}
-                            >
-                              Editar
-                            </Button>
+                            <Row>
+                              <Col md="6" sm="6" xs="6">
+                                <div>
+                                  <Button
+                                    id="tooltip5456906"
+                                    title="Editar Detalles del viaje"
+                                    type="button"
+                                    color="info"
+                                    className="text-white"
+                                    onClick={() =>
+                                      handleEditTravel(userTravel._id)
+                                    }
+                                  >
+                                    Editar
+                                  </Button>
+                                </div>
+                              </Col>
+                              <Col md="6" sm="6" xs="6">
+                                <div className="right">
+                                  <Button
+                                    title="Cancelar envío"
+                                    type="button"
+                                    onClick={() =>
+                                      handleCancelTravel(userTravel._id)
+                                    }
+                                    className="btn btn-danger text-white"
+                                  >
+                                    Cancelar
+                                  </Button>
+                                </div>
+                              </Col>
+                            </Row>
                           </div>
                         </div>
                       )}
@@ -354,16 +402,37 @@ const Activity = () => {
                             {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
                           </div>
                           <div>
-                            <Button
-                              id="tooltip545670"
-                              title="Editar Detalles del paquete"
-                              type="button"
-                              color="info"
-                              className="text-white"
-                              onClick={() => handleEditPackage(userPackage._id)}
-                            >
-                              Editar
-                            </Button>
+                            <Row>
+                              <Col md="6" sm="6" xs="6">
+                                <div>
+                                  <Button
+                                    id="tooltip545670"
+                                    title="Editar Detalles del paquete"
+                                    type="button"
+                                    className="btn btn-info text-white"
+                                    onClick={() =>
+                                      handleEditPackage(userPackage._id)
+                                    }
+                                  >
+                                    Editar
+                                  </Button>
+                                </div>
+                              </Col>
+                              <Col md="6" sm="6" xs="6">
+                                <div className="right">
+                                  <Button
+                                    title="Cancelar envío"
+                                    type="button"
+                                    onClick={() =>
+                                      handleCancelPackage(userPackage._id)
+                                    }
+                                    className="btn btn-danger text-white"
+                                  >
+                                    Cancelar
+                                  </Button>
+                                </div>
+                              </Col>
+                            </Row>
                           </div>
                         </div>
                       )}
