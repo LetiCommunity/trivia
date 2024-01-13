@@ -16,7 +16,7 @@ import Compressor from "compressorjs";
 
 const SendPackage = () => {
   const token = localStorage.getItem("token");
-  const traveler = localStorage.getItem("traveler");
+  const traveler = localStorage.getItem("request");
   let navigate = useNavigate();
   const { id } = useParams();
   const [section, setSection] = useState(1);
@@ -164,8 +164,8 @@ const SendPackage = () => {
     // }
 
     try {
-      if (!id) {
-        await axios.post("https://trivi4.com/api/trivia/packages", data, {
+      if (id) {
+        await axios.put(`https://trivi4.com/api/trivia/packages/${id}`, data, {
           headers,
         });
       } else if (traveler) {
@@ -178,7 +178,7 @@ const SendPackage = () => {
         );
         localStorage.removeItem("request");
       } else {
-        await axios.put(`https://trivi4.com/api/trivia/packages/${id}`, data, {
+        await axios.post("https://trivi4.com/api/trivia/packages", data, {
           headers,
         });
       }
