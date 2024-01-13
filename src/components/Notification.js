@@ -5,8 +5,8 @@ import moment from "moment";
 
 const Notification = () => {
   const token = localStorage.getItem("token");
-  const [Requests, setRequests] = useState([]);
-  const [suggestions, setSuggestions] = useState([]);
+  const [requests, setRequests] = useState();
+  const [suggestions, setSuggestions] = useState();
   const [viewMoreRequests, setViewMoreRequests] = useState(false);
   const [viewMoreSuggestions, setViewMoreSuggestions] = useState(false);
   const [requestModal, setRequestModal] = useState(false);
@@ -52,7 +52,7 @@ const Notification = () => {
           setSuggestions(data.slice(0, 3));
         }
       } catch (error) {
-        console.error(error.message);
+        console.error("Error", error.message);
       }
     };
     getSuggestions();
@@ -115,91 +115,95 @@ const Notification = () => {
       <div className="content">
         <div className="px-5">
           <Row className="justify-content-center">
-            <Col md="6" sm="10" xs="10">
-              <div className="my-5 py-5">
-                <h3>Solicitudes de envío</h3>
-                {Requests.map((item) => {
-                  return (
-                    <div key={item._id}>
-                      <div className="rounded bg-light text-dark p-3"></div>
-                      <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                        <p className="text-size">
-                          Descripción: {item.description}
-                        </p>
-                        <Button
-                          id="tooltip5456779"
-                          title="Detalles del request"
-                          type="button"
-                          color="link"
-                          outline={true}
-                          className="text-info"
-                          onClick={() => handleRequestDetails(item)}
-                        >
-                          Ver más
-                        </Button>
-                      </Card>
-                    </div>
-                  );
-                })}
-                <div>
-                  <Button
-                    type="button"
-                    color="link"
-                    outline={true}
-                    className="text-info"
-                    onClick={handleViewMoreRequests}
-                  >
-                    {viewMoreRequests ? "Ver menos" : "Ver más"}
-                  </Button>
+            {requests ? (
+              <Col md="6" sm="10" xs="10">
+                <div className="my-5 py-5">
+                  <h3>Solicitudes de envío</h3>
+                  {requests.map((item) => {
+                    return (
+                      <div key={item._id}>
+                        <div className="rounded bg-light text-dark p-3"></div>
+                        <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
+                          <p className="text-size">
+                            Descripción: {item.description}
+                          </p>
+                          <Button
+                            id="tooltip5456779"
+                            title="Detalles del request"
+                            type="button"
+                            color="link"
+                            outline={true}
+                            className="text-info"
+                            onClick={() => handleRequestDetails(item)}
+                          >
+                            Ver más
+                          </Button>
+                        </Card>
+                      </div>
+                    );
+                  })}
+                  <div>
+                    <Button
+                      type="button"
+                      color="link"
+                      outline={true}
+                      className="text-info"
+                      onClick={handleViewMoreRequests}
+                    >
+                      {viewMoreRequests ? "Ver menos" : "Ver más"}
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </Col>
-            <Col md="6" sm="10" xs="10">
-              <div className="my-5 py-5">
-                <h3>Sugerencias</h3>
-                {suggestions.map((item) => {
-                  return (
-                    <div key={item._id}>
-                      <div className="rounded bg-light text-dark p-3"></div>
-                      <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                        <div className="">
-                          <img
-                            className="package-image input_icon"
-                            alt={item.image}
-                            src={`https://trivi4.com/api/trivia/packages/image/${item.image}`}
-                          />
-                        </div>
-                        <p className="text-size">
-                          Descripción: {item.description}
-                        </p>
-                        <Button
-                          id="tooltip5456779"
-                          title="Detalles del sugerencia"
-                          type="button"
-                          color="link"
-                          outline={true}
-                          className="text-info"
-                          onClick={() => handleSuggestionsDetails(item)}
-                        >
-                          Ver más
-                        </Button>
-                      </Card>
-                    </div>
-                  );
-                })}
-                <div>
-                  <Button
-                    type="button"
-                    color="link"
-                    outline={true}
-                    className="text-info"
-                    onClick={handleViewMoreSuggestions}
-                  >
-                    {viewMoreSuggestions ? "Ver menos" : "Ver más"}
-                  </Button>
+              </Col>
+            ) : null}
+            {suggestions ? (
+              <Col md="6" sm="10" xs="10">
+                <div className="my-5 py-5">
+                  <h3>Sugerencias</h3>
+                  {suggestions.map((item) => {
+                    return (
+                      <div key={item._id}>
+                        <div className="rounded bg-light text-dark p-3"></div>
+                        <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
+                          <div className="">
+                            <img
+                              className="package-image input_icon"
+                              alt={item.image}
+                              src={`https://trivi4.com/api/trivia/packages/image/${item.image}`}
+                            />
+                          </div>
+                          <p className="text-size">
+                            Descripción: {item.description}
+                          </p>
+                          <Button
+                            id="tooltip5456779"
+                            title="Detalles del sugerencia"
+                            type="button"
+                            color="link"
+                            outline={true}
+                            className="text-info"
+                            onClick={() => handleSuggestionsDetails(item)}
+                          >
+                            Ver más
+                          </Button>
+                        </Card>
+                      </div>
+                    );
+                  })}
+                  <div>
+                    <Button
+                      type="button"
+                      color="link"
+                      outline={true}
+                      className="text-info"
+                      onClick={handleViewMoreSuggestions}
+                    >
+                      {viewMoreSuggestions ? "Ver menos" : "Ver más"}
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </Col>
+              </Col>
+            ) : null}
           </Row>
         </div>
         <div>

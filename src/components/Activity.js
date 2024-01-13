@@ -11,8 +11,8 @@ const Activity = () => {
   //const localStoragePackage = localStorage.getItem("package");
   //const localStorageRequest = localStorage.getItem("request");
   //const localStorageTravel = localStorage.getItem("travel");
-  const [packages, setPackages] = useState([]);
-  const [travels, setTravels] = useState([]);
+  const [packages, setPackages] = useState();
+  const [travels, setTravels] = useState();
   const [viewMorePackages, setViewMorePackages] = useState(false);
   const [viewMoreTravels, setViewMoreTravels] = useState(false);
   const [packageDetailsModal, setPackageDetailsModal] = useState(false);
@@ -145,119 +145,128 @@ const Activity = () => {
           headers,
         }
       );
+      togglePackageDetails();
     } catch (error) {
       console.error("Error", error.message);
     }
   };
 
-  const handleCancelTravel = async (id) => {
-    try {
-      await axios.get(
-        `https://trivi4.com/api/trivia/travels/cancelation/${id}`,
-        {
-          headers,
-        }
-      );
-    } catch (error) {
-      console.error("Error", error.message);
-    }
-  };
+  // const handleCancelTravel = async (id) => {
+  //   try {
+  //     await axios.get(
+  //       `https://trivi4.com/api/trivia/travels/cancelation/${id}`,
+  //       {
+  //         headers,
+  //       }
+  //     );
+  //     toggleTravelDetails();
+  //   } catch (error) {
+  //     console.error("Error", error.message);
+  //   }
+  // };
 
   return (
     <Fragment>
       <div className="content">
         <div className="px-5">
           <Row className="justify-content-center">
-            <Col md="6" sm="10" xs="10">
-              <div className="my-5 py-5">
-                <h3>Viajes publicados</h3>
-                {travels.map((item) => {
-                  return (
-                    <div key={item._id}>
-                      <div className="rounded bg-light text-dark p-3"></div>
-                      <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                        <p className="text-size">
-                          {item.origin} a {item.destination}
-                        </p>
-                        <p className="text-size">
-                          {moment(item.date).format("DD/MM/YYYY")}
-                        </p>
-                        <Button
-                          id="tooltip5456778"
-                          title="Detalles del viaje"
-                          type="button"
-                          color="link"
-                          outline={true}
-                          className="text-info"
-                          onClick={() => handleTravelDetails(item)}
-                        >
-                          Ver más
-                        </Button>
-                      </Card>
-                    </div>
-                  );
-                })}
-                <div>
-                  <Button
-                    type="button"
-                    color="link"
-                    outline={true}
-                    className="text-info"
-                    onClick={handleViewMoreTravels}
-                  >
-                    {viewMoreTravels ? "Ver menos" : "Ver más"}
-                  </Button>
+            {travels ? (
+              <Col md="6" sm="10" xs="10">
+                <div className="my-5 py-5">
+                  <h3>Viajes publicados</h3>
+                  {travels.map((item) => {
+                    return (
+                      <div key={item._id}>
+                        <div className="rounded bg-light text-dark p-3"></div>
+                        <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
+                          <p className="text-size">
+                            {item.origin} a {item.destination}
+                          </p>
+                          <p className="text-size">
+                            {moment(item.date).format("DD/MM/YYYY")}
+                          </p>
+                          <Button
+                            id="tooltip5456778"
+                            title="Detalles del viaje"
+                            type="button"
+                            color="link"
+                            outline={true}
+                            className="text-info"
+                            onClick={() => handleTravelDetails(item)}
+                          >
+                            Ver más
+                          </Button>
+                        </Card>
+                      </div>
+                    );
+                  })}
+                  <div>
+                    <Button
+                      type="button"
+                      color="link"
+                      outline={true}
+                      className="text-info"
+                      onClick={handleViewMoreTravels}
+                    >
+                      {viewMoreTravels ? "Ver menos" : "Ver más"}
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </Col>
-            <Col md="6" sm="10" xs="10">
-              <div className="my-5 py-5">
-                <h3>Paquetes publicados</h3>
-                {packages.map((item) => {
-                  return (
-                    <div key={item._id}>
-                      <div className="rounded bg-light text-dark p-3"></div>
-                      <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                        <div className="">
-                          <img
-                            className="package-image input_icon"
-                            alt={item.image}
-                            src={`https://trivi4.com/api/trivia/packages/image/${item.image}`}
-                          />
-                        </div>
-                        <p className="text-size">Para: {item.receiverName}</p>
-                        <p className="text-size">Estado: {item.status}</p>
-                        <p className="text-size">
-                          {moment(item.createdAt).format("DD/MM/YYYY HH:mm:ss")}
-                        </p>
-                        <Button
-                          id="tooltip5456779"
-                          title="Detalles del paquete"
-                          type="button"
-                          color="link"
-                          outline={true}
-                          className="text-info"
-                          onClick={() => handlePackageDetails(item)}
-                        >
-                          Ver más
-                        </Button>
-                      </Card>
-                    </div>
-                  );
-                })}
-                <div>
-                  <Button
-                    type="button"
-                    color="link"
-                    outline={true}
-                    className="text-info"
-                    onClick={handleViewMorePackages}
-                  >
-                    {viewMorePackages ? "Ver menos" : "Ver más"}
-                  </Button>
+              </Col>
+            ) : null}
+            {packages ? (
+              <Col md="6" sm="10" xs="10">
+                <div className="my-5 py-5">
+                  <h3>Paquetes publicados</h3>
+                  {packages.map((item) => {
+                    return (
+                      <div key={item._id}>
+                        <div className="rounded bg-light text-dark p-3"></div>
+                        <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
+                          <div className="">
+                            <img
+                              className="package-image input_icon"
+                              alt={item.image}
+                              src={`https://trivi4.com/api/trivia/packages/image/${item.image}`}
+                            />
+                          </div>
+                          <p className="text-size">Para: {item.receiverName}</p>
+                          <p className="text-size">Estado: {item.state}</p>
+                          <p className="text-size">
+                            Fecha:{" "}
+                            {moment(item.createdAt).format(
+                              "DD/MM/YYYY HH:mm:ss"
+                            )}
+                          </p>
+                          <Button
+                            id="tooltip5456779"
+                            title="Detalles del paquete"
+                            type="button"
+                            color="link"
+                            outline={true}
+                            className="text-info"
+                            onClick={() => handlePackageDetails(item)}
+                          >
+                            Ver más
+                          </Button>
+                        </Card>
+                      </div>
+                    );
+                  })}
+                  <div>
+                    <Button
+                      type="button"
+                      color="link"
+                      outline={true}
+                      className="text-info"
+                      onClick={handleViewMorePackages}
+                    >
+                      {viewMorePackages ? "Ver menos" : "Ver más"}
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </Col>
+              </Col>
+            ) : null}
           </Row>
         </div>
         <div>
@@ -317,11 +326,12 @@ const Activity = () => {
                                       handleEditTravel(userTravel._id)
                                     }
                                   >
+                                    <i className="bi bi-pencil-square"></i>{" "}
                                     Editar
                                   </Button>
                                 </div>
                               </Col>
-                              <Col md="6" sm="6" xs="6">
+                              {/* <Col md="6" sm="6" xs="6">
                                 <div className="right">
                                   <Button
                                     title="Cancelar envío"
@@ -331,10 +341,10 @@ const Activity = () => {
                                     }
                                     className="btn btn-danger text-white"
                                   >
-                                    Cancelar
+                                    <i className="bi bi-trash"></i> Cancelar
                                   </Button>
                                 </div>
-                              </Col>
+                              </Col> */}
                             </Row>
                           </div>
                         </div>
@@ -345,9 +355,6 @@ const Activity = () => {
               </Modal>
             </Col>
           </Row>
-          {/* <Row>
-            <Col md="12"></Col>
-          </Row> */}
           <Row
             className="justify-content-center align-items-center"
             style={{ height: "100vh" }}
@@ -414,6 +421,7 @@ const Activity = () => {
                                       handleEditPackage(userPackage._id)
                                     }
                                   >
+                                    <i className="bi bi-pencil-square"></i>{" "}
                                     Editar
                                   </Button>
                                 </div>
@@ -428,7 +436,7 @@ const Activity = () => {
                                     }
                                     className="btn btn-danger text-white"
                                   >
-                                    Cancelar
+                                    <i className="bi bi-trash"></i> Cancelar
                                   </Button>
                                 </div>
                               </Col>

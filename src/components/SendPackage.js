@@ -158,11 +158,6 @@ const SendPackage = () => {
       return;
     }
 
-    // if (!token) {
-    //   localStorage.setItem("package", JSON.stringify(data));
-    //   return;
-    // }
-
     try {
       if (id) {
         await axios.put(`https://trivi4.com/api/trivia/packages/${id}`, data, {
