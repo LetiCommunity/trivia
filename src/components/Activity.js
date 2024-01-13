@@ -180,7 +180,7 @@ const Activity = () => {
                           {item.origin} a {item.destination}
                         </p>
                         <p className="text-size">
-                          {moment(item.createdAt).format("DD/MM/YYYY HH:mm:ss")}
+                          {moment(item.date).format("DD/MM/YYYY")}
                         </p>
                         <Button
                           id="tooltip5456778"
@@ -345,9 +345,9 @@ const Activity = () => {
               </Modal>
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             <Col md="12"></Col>
-          </Row>
+          </Row> */}
           <Row
             className="justify-content-center align-items-center"
             style={{ height: "100vh" }}
