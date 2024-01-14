@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Button, Card, CardBody, Col, Modal, Row } from "reactstrap";
 import axios from "axios";
-import moment from "moment";
 
 const Notification = () => {
   const token = localStorage.getItem("token");
@@ -87,7 +86,19 @@ const Notification = () => {
   const handleConfirmation = async (id) => {
     try {
       await axios.get(
-        `https://trivi4.com/api/trivia/packages/confirmation/${id}`,
+        `https://trivi4.com/api/trivia/packages/requests/confirmation/${id}`,
+        { headers }
+      );
+      togglePackageDetails();
+    } catch (error) {
+      console.error("Error", error.message);
+    }
+  };
+
+  const handleAcceptance = async (id) => {
+    try {
+      await axios.get(
+        `https://trivi4.com/api/trivia/packages/suggestions/confirmation/${id}`,
         { headers }
       );
       togglePackageDetails();
@@ -99,7 +110,7 @@ const Notification = () => {
   const handleRejection = async (id) => {
     try {
       await axios.get(
-        `https://trivi4.com/api/trivia/packages/rejection/${id}`,
+        `https://trivi4.com/api/trivia/packages/requests/rejection/${id}`,
         {
           headers,
         }
@@ -217,7 +228,7 @@ const Notification = () => {
                 <Card className="border-0 shadow-lg bg-white">
                   <CardBody>
                     <div className="modal-header">
-                      <h4 className="modal-title">Detalles del viaje</h4>
+                      <h4 className="modal-title">Detalles del paquete</h4>
                       <button
                         type="button"
                         className="close"
@@ -230,28 +241,13 @@ const Notification = () => {
                       {userSuggestions && (
                         <div>
                           <div>
-                            <h5>Información del viaje</h5>
-                            <p>Origen: {userSuggestions.origin}</p>
-                            <p>Destino: {userSuggestions.destination}</p>
-                            <p>
-                              Fecha:{" "}
-                              {moment(userSuggestions.date).format(
-                                "DD/MM/YYYY"
-                              )}
-                            </p>
-                            <p>Aeropuerto: {userSuggestions.airport}</p>
-                            <p>Terminal: {userSuggestions.terminal}</p>
-                            <p>Compañía: {userSuggestions.company}</p>
-                            <p>
-                              Hora de facturación: {userSuggestions.billingTime}
-                            </p>
-                          </div>
-                          <div>
-                            <h5>Información de disponibilidad</h5>
-                            <p>
-                              Disponibilidad: {userSuggestions.availableWeight}{" "}
-                              kilos
-                            </p>
+                            <h5>Información del paquete</h5>
+                            <p>Descripción: {userSuggestions.description}</p>
+                            <img
+                              className="package-image"
+                              alt={userSuggestions.image}
+                              src={`https://trivi4.com/api/trivia/packages/image/${userSuggestions.image}`}
+                            />
                           </div>
                           <div>
                             <Row>
@@ -260,7 +256,7 @@ const Notification = () => {
                                   <Button
                                     type="button"
                                     onClick={() =>
-                                      handleConfirmation(userSuggestions._id)
+                                      handleAcceptance(userSuggestions._id)
                                     }
                                     className="btn btn-info text-white"
                                   >
@@ -268,7 +264,7 @@ const Notification = () => {
                                   </Button>
                                 </div>
                               </Col>
-                              <Col md="6" sm="6" xs="6">
+                              {/* <Col md="6" sm="6" xs="6">
                                 <div className="right">
                                   <Button
                                     type="button"
@@ -280,7 +276,7 @@ const Notification = () => {
                                     Rechazar
                                   </Button>
                                 </div>
-                              </Col>
+                              </Col> */}
                             </Row>
                           </div>
                         </div>
