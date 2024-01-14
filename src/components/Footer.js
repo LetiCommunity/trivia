@@ -10,18 +10,18 @@ const Footer = () => {
           <Col>
             <div>
               <p>
-                <Link
+                {/* <Link
                   to={{ pathname: "/p" }}
                   className="text-white text_decoration_a left"
                 >
                   Sobre nosotros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </Link>
-                <Link
+                </Link> */}
+                {/* <Link
                   to={{ pathname: "/p" }}
                   className="text-white text_decoration_a left"
                 >
                   Contáctanos
-                </Link>
+                </Link> */}
               </p>
             </div>
             <div className="copyright text-center">

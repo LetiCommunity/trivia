@@ -11,8 +11,7 @@ import Notification from "./components/Notification";
 import SendPackage from "./components/SendPackage";
 import PublishTrip from "./components/PublishTrip";
 import Profile from "./components/Profile";
-import Contact from "./components/Contact";
-import NoPage from "./components/NoPage";
+//import NoPage from "./components/NoPage";
 import EditProfile from "./components/EditProfile";
 import ChangePassword from "./components/ChangePassword";
 import ChangeProfileImage from "./components/ChangeProfileImage";
@@ -41,9 +40,8 @@ function App() {
             <Route index path="/" element={<Home />} />
             <Route index path="home" element={<Home />} />
             <Route path="search-trip" element={<SearchTrip />} />
-            <Route path="contact" element={<Contact />} />
             <Route path="terms" element={<Terms />} />
-            <Route path="*" element={<NoPage />} />
+            <Route path="*" element={<Home />} />
             {token ? (
               <>
                 <Route path="send-package" element={<SendPackage />} />

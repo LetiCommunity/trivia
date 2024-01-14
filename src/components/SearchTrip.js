@@ -68,6 +68,10 @@ const SearchTrip = () => {
       return;
     }
 
+    if (data.origin === data.destination) {
+      return;
+    }
+
     return navigate(
       `/search-trip?origin=${data.origin}&destination=${data.destination}`
     );

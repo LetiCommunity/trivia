@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Button, Card, CardBody, Col, Modal, Row } from "reactstrap";
 import axios from "axios";
 import moment from "moment";
-//import { Buffer } from 'buffer';
 
 const Activity = () => {
   const token = localStorage.getItem("token");
@@ -139,7 +138,7 @@ const Activity = () => {
 
   const handleCancelPackage = async (id) => {
     try {
-      await axios.get(
+      await axios.delete(
         `https://trivi4.com/api/trivia/packages/cancelation/${id}`,
         {
           headers,
@@ -151,19 +150,19 @@ const Activity = () => {
     }
   };
 
-  // const handleCancelTravel = async (id) => {
-  //   try {
-  //     await axios.get(
-  //       `https://trivi4.com/api/trivia/travels/cancelation/${id}`,
-  //       {
-  //         headers,
-  //       }
-  //     );
-  //     toggleTravelDetails();
-  //   } catch (error) {
-  //     console.error("Error", error.message);
-  //   }
-  // };
+  const handleCancelTravel = async (id) => {
+    try {
+      await axios.delete(
+        `https://trivi4.com/api/trivia/travels/cancelation/${id}`,
+        {
+          headers,
+        }
+      );
+      toggleTravelDetails();
+    } catch (error) {
+      console.error("Error", error.message);
+    }
+  };
 
   return (
     <Fragment>
@@ -310,7 +309,6 @@ const Activity = () => {
                             <p>
                               Disponibilidad: {userTravel.availableWeight} kilos
                             </p>
-                            {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
                           </div>
                           <div>
                             <Row>
@@ -331,7 +329,7 @@ const Activity = () => {
                                   </Button>
                                 </div>
                               </Col>
-                              {/* <Col md="6" sm="6" xs="6">
+                              <Col md="6" sm="6" xs="6">
                                 <div className="right">
                                   <Button
                                     title="Cancelar envío"
@@ -344,7 +342,7 @@ const Activity = () => {
                                     <i className="bi bi-trash"></i> Cancelar
                                   </Button>
                                 </div>
-                              </Col> */}
+                              </Col>
                             </Row>
                           </div>
                         </div>
@@ -387,12 +385,10 @@ const Activity = () => {
                             <p>Ciudad: {userPackage.receiverCity}</p>
                             <p>Calle / Barrio: {userPackage.receiverStreet}</p>
                             <p>Teléfono: {userPackage.receiverPhone}</p>
-                            {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
                           </div>
                           <div>
                             <h5>Información del paquete</h5>
                             <p>Peso aproximado: {userPackage.weight}</p>
-                            {/* <p>Imagen: {course.description}</p> */}
                             <p>Estado: {userPackage.state}</p>
                             <p>
                               Fecha de publicación:{" "}
@@ -400,13 +396,7 @@ const Activity = () => {
                                 "DD/MM/YYYY"
                               )}
                             </p>
-                            {/* <img
-                            className="package-image"
-                            alt={userPackage.image}
-                            src={`http://localhost:5000/api/trivia/packages/image/${userPackage.image}`}
-                          /> */}
                             <p>Descripción: {userPackage.description}</p>
-                            {/**<Button onClick={handlePrint}>Imprimir</Button>**/}
                           </div>
                           <div>
                             <Row>

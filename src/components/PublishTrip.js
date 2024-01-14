@@ -90,7 +90,17 @@ const PublishTrip = () => {
       }
 
       if (data.origin === data.destination) {
-        setError("Por favor, verifique que su origen y destino no sean el mismo");
+        setError(
+          "Por favor, verifique que su origen y destino no sean el mismo"
+        );
+        return;
+      }
+
+      const convertedDate = new Date(data.date);
+      const currentDate = new Date();
+
+      if (convertedDate < currentDate) {
+        setError("Por favor, verifique que la fecha sea correcta");
         return;
       }
 
@@ -129,14 +139,9 @@ const PublishTrip = () => {
     };
 
     if (!data.availableWeight) {
-      setError("Por favor, rellena todos los campos");
+      setError("Por favor, indique el peso máximo que puede viajar");
       return;
     }
-
-    // if (!token) {
-    //   localStorage.setItem("travel", JSON.stringify(data));
-    //   return navigate("/login");
-    // }
 
     try {
       if (!id) {

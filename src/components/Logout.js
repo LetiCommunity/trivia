@@ -25,6 +25,7 @@ const Logout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("travel");
     localStorage.removeItem("package");
+    localStorage.removeItem("request");
     return (window.location.href = "/home");
   };
 

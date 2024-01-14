@@ -24,7 +24,7 @@ const Notification = () => {
     const getRequests = async () => {
       try {
         const { data } = await axios.get(
-          "https://trivi4.com/api/trivia/packages/filterByTraveler",
+          "https://trivi4.com/api/trivia/packages/filterByRequest",
           { headers }
         );
         if (viewMoreRequests) {
@@ -43,7 +43,7 @@ const Notification = () => {
     const getSuggestions = async () => {
       try {
         const { data } = await axios.get(
-          "https://trivi4.com/api/trivia/travels/filterByMatch",
+          "https://trivi4.com/api/trivia/packages/filterByMatch",
           { headers }
         );
         if (viewMoreSuggestions) {

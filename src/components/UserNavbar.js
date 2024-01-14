@@ -63,12 +63,6 @@ const UserNavbar = () => {
                 <NavItem>
                   <NavLink href="registration">Registrarse</NavLink>
                 </NavItem>
-                {/* <NavItem>
-                  <NavLink href="send-package">Realizar envío</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="publish-trip">Publicar viaje</NavLink>
-                </NavItem> */}
               </>
             ) : (
               <>
