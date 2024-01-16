@@ -5,10 +5,13 @@ import axios from "axios";
 const Notification = () => {
   const token = localStorage.getItem("token");
   const [requests, setRequests] = useState();
+  const [acceptedRequest, setAcceptedRequest] = useState();
   const [suggestions, setSuggestions] = useState();
   const [viewMoreRequests, setViewMoreRequests] = useState(false);
+  const [viewMoreAcceptedRequests, setViewMoreAcceptedRequests] = useState(false);
   const [viewMoreSuggestions, setViewMoreSuggestions] = useState(false);
   const [requestModal, setRequestModal] = useState(false);
+  const [acceptedRequestModal, setAcceptedRequestModal] = useState(false);
   const [suggestionsModal, setSuggestionsModal] = useState(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const headers = {
@@ -17,6 +20,7 @@ const Notification = () => {
   };
 
   const [userRequest, setUserRequest] = useState({});
+  const [userAcceptedRequest, setUserAcceptedRequest] = useState({});
   const [userSuggestions, setUserSuggestions] = useState({});
 
   useEffect(() => {
@@ -37,6 +41,25 @@ const Notification = () => {
     };
     getRequests();
   }, [headers, viewMoreRequests]);
+
+  useEffect(() => {
+    const getAcceptedRequests = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://trivi4.com/api/trivia/packages/filterByAcceptedRequest",
+          { headers }
+        );
+        if (viewMoreAcceptedRequests) {
+          setAcceptedRequest(data);
+        } else {
+          setAcceptedRequest(data.slice(0, 3));
+        }
+      } catch (error) {
+        console.error("Error", error.message);
+      }
+    };
+    getAcceptedRequests();
+  }, [headers, viewMoreAcceptedRequests]);
 
   useEffect(() => {
     const getSuggestions = async () => {
@@ -61,12 +84,20 @@ const Notification = () => {
     setViewMoreRequests(!viewMoreRequests);
   };
 
+  const handleViewMoreAcceptedRequests = () => {
+    setViewMoreAcceptedRequests(!viewMoreAcceptedRequests);
+  };
+
   const handleViewMoreSuggestions = () => {
     setViewMoreSuggestions(!viewMoreSuggestions);
   };
 
   const togglePackageDetails = () => {
     setRequestModal(!requestModal);
+  };
+
+  const togglePackageAcceptedDetails = () => {
+    setAcceptedRequestModal(!acceptedRequestModal);
   };
 
   const toggleTravelDetails = () => {
@@ -76,6 +107,11 @@ const Notification = () => {
   const handleRequestDetails = (item) => {
     setUserRequest(item);
     togglePackageDetails();
+  };
+
+  const handleAccptedRequestDetails = (item) => {
+    setUserAcceptedRequest(item);
+    togglePackageAcceptedDetails();
   };
 
   const handleSuggestionsDetails = (item) => {
@@ -162,6 +198,47 @@ const Notification = () => {
                       onClick={handleViewMoreRequests}
                     >
                       {viewMoreRequests ? "Ver menos" : "Ver más"}
+                    </Button>
+                  </div>
+                </div>
+              </Col>
+            ) : null}
+            {acceptedRequest ? (
+              <Col md="6" sm="10" xs="10">
+                <div className="my-5 py-5">
+                  <h3>Paquetes aceptados</h3>
+                  {acceptedRequest.map((item) => {
+                    return (
+                      <div key={item._id}>
+                        <div className="rounded bg-light text-dark p-3"></div>
+                        <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
+                          <p className="text-size">
+                            Descripción: {item.description}
+                          </p>
+                          <Button
+                            id="tooltip5456779"
+                            title="Detalles del accepted request"
+                            type="button"
+                            color="link"
+                            outline={true}
+                            className="text-info"
+                            onClick={() => handleAccptedRequestDetails(item)}
+                          >
+                            Ver más
+                          </Button>
+                        </Card>
+                      </div>
+                    );
+                  })}
+                  <div>
+                    <Button
+                      type="button"
+                      color="link"
+                      outline={true}
+                      className="text-info"
+                      onClick={handleViewMoreAcceptedRequests}
+                    >
+                      {handleViewMoreAcceptedRequests ? "Ver menos" : "Ver más"}
                     </Button>
                   </div>
                 </div>
@@ -350,6 +427,49 @@ const Notification = () => {
                                 </div>
                               </Col>
                             </Row>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </CardBody>
+                </Card>
+              </Modal>
+            </Col>
+          </Row>
+          <Row
+            className="justify-content-center align-items-center"
+            style={{ height: "100vh" }}
+          >
+            <Col md="5" sm="10" xs="10" className="my-5 py-5">
+              <Modal
+                isOpen={acceptedRequestModal}
+                toggle={togglePackageAcceptedDetails}
+                backdrop={false}
+              >
+                <Card className="border-0 shadow-lg bg-white">
+                  <CardBody>
+                    <div className="modal-header">
+                      <h4 className="modal-title">Detalles del Paquete</h4>
+                      <button
+                        type="button"
+                        className="close"
+                        onClick={togglePackageAcceptedDetails}
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      {userAcceptedRequest && (
+                        <div>
+                          <div>
+                            <h5>Información del paquete</h5>
+                            <p>Descripción: {userAcceptedRequest.description}</p>
+                            <img
+                              className="package-image"
+                              alt={userAcceptedRequest.image}
+                              src={`https://trivi4.com/api/trivia/packages/image/${userAcceptedRequest.image}`}
+                            />
+                            <p>Su paquete ha sido aceptado</p>
                           </div>
                         </div>
                       )}
