@@ -10,10 +10,10 @@ const Activity = () => {
   //const localStoragePackage = localStorage.getItem("package");
   //const localStorageRequest = localStorage.getItem("request");
   //const localStorageTravel = localStorage.getItem("travel");
-  const [packages, setPackages] = useState();
-  const [travels, setTravels] = useState();
-  const [viewMorePackages, setViewMorePackages] = useState(false);
-  const [viewMoreTravels, setViewMoreTravels] = useState(false);
+  const [packages, setPackages] = useState([]);
+  const [travels, setTravels] = useState([]);
+  const [viewMorePackages, setViewMorePackages] = useState(true);
+  const [viewMoreTravels, setViewMoreTravels] = useState(true);
   const [packageDetailsModal, setPackageDetailsModal] = useState(false);
   const [travelDetailsModal, setTravelDetailsModal] = useState(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,10 +34,10 @@ const Activity = () => {
         if (viewMorePackages) {
           setPackages(data);
         } else {
-          setPackages(data.slice(0, 3));
+          setPackages([]);
         }
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error("Error", error.message);
       }
     };
     getPackages();
@@ -53,10 +53,10 @@ const Activity = () => {
         if (viewMoreTravels) {
           setTravels(data);
         } else {
-          setTravels(data.slice(0, 3));
+          setTravels([]);
         }
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error("Error", error.message);
       }
     };
     getTravels();
@@ -166,106 +166,91 @@ const Activity = () => {
 
   return (
     <Fragment>
-      <div className="content">
-        <div className="px-5">
+      <div className="content my-5">
+        <div>
           <Row className="justify-content-center">
-            {travels ? (
-              <Col md="6" sm="10" xs="10">
-                <div className="my-5 py-5">
-                  <h3>Viajes publicados</h3>
-                  {travels.map((item) => {
-                    return (
-                      <div key={item._id}>
-                        <div className="rounded bg-light text-dark p-3"></div>
-                        <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                          <p className="text-size">
-                            {item.origin} a {item.destination}
-                          </p>
-                          <p className="text-size">
-                            {moment(item.date).format("DD/MM/YYYY")}
-                          </p>
-                          <Button
-                            id="tooltip5456778"
-                            title="Detalles del viaje"
-                            type="button"
-                            color="link"
-                            outline={true}
-                            className="text-info"
+            <Col md="5" sm="11" xs="11">
+              <div className="pt-2">
+                <div>
+                  <Button
+                    type="button"
+                    color="link"
+                    outline={true}
+                    className="text-black"
+                    onClick={handleViewMoreTravels}
+                  >
+                    Viajes publicados{" "}
+                    {viewMoreTravels ? (
+                      <i className="bi bi-caret-up-fill"></i>
+                    ) : (
+                      <i className="bi bi-caret-down-fill"></i>
+                    )}
+                  </Button>
+                </div>
+                {travels ? (
+                  <div>
+                    {travels.map((item) => {
+                      return (
+                        <div key={item._id}>
+                          <div className="rounded bg-light text-dark p-1"></div>
+                          <Card
+                            className="rounded text-dark p-2 shadow-lg bg-white border-0 card_pointer"
                             onClick={() => handleTravelDetails(item)}
                           >
-                            Ver más
-                          </Button>
-                        </Card>
-                      </div>
-                    );
-                  })}
-                  <div>
-                    <Button
-                      type="button"
-                      color="link"
-                      outline={true}
-                      className="text-info"
-                      onClick={handleViewMoreTravels}
-                    >
-                      {viewMoreTravels ? "Ver menos" : "Ver más"}
-                    </Button>
+                            <p className="text-size">
+                              {item.origin} a {item.destination}
+                            </p>
+                            <p className="text-size">
+                              {moment(item.date).format("DD/MM/YYYY")}
+                            </p>
+                          </Card>
+                        </div>
+                      );
+                    })}
                   </div>
+                ) : null}
+              </div>
+            </Col>
+            <Col md="5" sm="11" xs="11">
+              <div className="pt-2">
+                <div>
+                  <Button
+                    type="button"
+                    color="link"
+                    outline={true}
+                    className="text-black"
+                    onClick={handleViewMorePackages}
+                  >
+                    Paquetes publicados{" "}
+                    {viewMorePackages ? (
+                      <i className="bi bi-caret-up-fill"></i>
+                    ) : (
+                      <i className="bi bi-caret-down-fill"></i>
+                    )}
+                  </Button>
                 </div>
-              </Col>
-            ) : null}
-            {packages ? (
-              <Col md="6" sm="10" xs="10">
-                <div className="my-5 py-5">
-                  <h3>Paquetes publicados</h3>
-                  {packages.map((item) => {
-                    return (
-                      <div key={item._id}>
-                        <div className="rounded bg-light text-dark p-3"></div>
-                        <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                          <div className="">
-                            <img
-                              className="package-image input_icon"
-                              alt={item.image}
-                              src={`https://trivi4.com/api/trivia/packages/image/${item.image}`}
-                            />
-                          </div>
-                          <p className="text-size">Para: {item.receiverName}</p>
-                          <p className="text-size">Estado: {item.state}</p>
-                          <p className="text-size">
-                            Fecha:{" "}
-                            {moment(item.createdAt).format(
-                              "DD/MM/YYYY HH:mm:ss"
-                            )}
-                          </p>
-                          <Button
-                            id="tooltip5456779"
-                            title="Detalles del paquete"
-                            type="button"
-                            color="link"
-                            outline={true}
-                            className="text-info"
+                {packages ? (
+                  <div>
+                    {packages.map((item) => {
+                      return (
+                        <div key={item._id}>
+                          <div className="rounded bg-light text-dark p-1"></div>
+                          <Card
+                            className="rounded text-dark p-2 shadow-lg bg-white border-0 card_pointer"
                             onClick={() => handlePackageDetails(item)}
                           >
-                            Ver más
-                          </Button>
-                        </Card>
-                      </div>
-                    );
-                  })}
-                  <div>
-                    <Button
-                      type="button"
-                      color="link"
-                      outline={true}
-                      className="text-info"
-                      onClick={handleViewMorePackages}
-                    >
-                      {viewMorePackages ? "Ver menos" : "Ver más"}
-                    </Button>
+                            <p className="text-size">
+                              Para: {item.receiverName}
+                            </p>
+                            <p className="text-size">Estado: {item.state}</p>
+                          </Card>
+                        </div>
+                      );
+                    })}
                   </div>
-                </div>
-              </Col>
-            ) : null}
+                ) : null}
+              </div>
+            </Col>
           </Row>
         </div>
         <div>
@@ -353,11 +338,8 @@ const Activity = () => {
               </Modal>
             </Col>
           </Row>
-          <Row
-            className="justify-content-center align-items-center"
-            style={{ height: "100vh" }}
-          >
-            <Col md="5" sm="10" xs="10" className="my-5 py-5">
+          <Row>
+            <Col>
               <Modal
                 isOpen={packageDetailsModal}
                 toggle={togglePackageDetails}
@@ -397,6 +379,13 @@ const Activity = () => {
                               )}
                             </p>
                             <p>Descripción: {userPackage.description}</p>
+                          </div>
+                          <div className="">
+                            <img
+                              className="package-image input_icon"
+                              alt={userPackage.image}
+                              src={`https://trivi4.com/api/trivia/packages/image/${userPackage.image}`}
+                            />
                           </div>
                           <div>
                             <Row>

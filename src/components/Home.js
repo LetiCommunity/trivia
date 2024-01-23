@@ -321,7 +321,7 @@ const Home = () => {
                 <Col md="4">
                   <Card
                     onClick={() => handleSearchTrip("malabo", "bata")}
-                    className="mb-2 bg-light routes_card"
+                    className="mb-2 bg-light card_pointer"
                   >
                     <p className="p-3 text-size">Malabo a Bata</p>
                   </Card>
@@ -329,7 +329,7 @@ const Home = () => {
                 <Col md="4">
                   <Card
                     onClick={() => handleSearchTrip("malabo", "madrid")}
-                    className="mb-2 bg-light routes_card"
+                    className="mb-2 bg-light card_pointer"
                   >
                     <p className="p-3 text-size">Malabo a Madrid</p>
                   </Card>
@@ -337,7 +337,7 @@ const Home = () => {
                 <Col md="4">
                   <Card
                     onClick={() => handleSearchTrip("malabo", "mongomeyen")}
-                    className="mb-2 bg-light routes_card"
+                    className="mb-2 bg-light card_pointer"
                   >
                     <p className="p-3 text-size">Malabo a Mongomeyen</p>
                   </Card>

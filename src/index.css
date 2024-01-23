@@ -226,6 +226,6 @@ ul {
   height: 100px;
 }
 
-.routes_card:hover {
+.card_pointer:hover {
   cursor: pointer;
 }

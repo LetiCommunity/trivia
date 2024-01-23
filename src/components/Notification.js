@@ -4,12 +4,13 @@ import axios from "axios";
 
 const Notification = () => {
   const token = localStorage.getItem("token");
-  const [requests, setRequests] = useState();
-  const [acceptedRequest, setAcceptedRequest] = useState();
-  const [suggestions, setSuggestions] = useState();
-  const [viewMoreRequests, setViewMoreRequests] = useState(false);
-  const [viewMoreAcceptedRequests, setViewMoreAcceptedRequests] = useState(false);
-  const [viewMoreSuggestions, setViewMoreSuggestions] = useState(false);
+  const [requests, setRequests] = useState([]);
+  const [acceptedRequest, setAcceptedRequest] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
+  const [viewMoreRequests, setViewMoreRequests] = useState(true);
+  const [viewMoreAcceptedRequests, setViewMoreAcceptedRequests] =
+    useState(true);
+  const [viewMoreSuggestions, setViewMoreSuggestions] = useState(true);
   const [requestModal, setRequestModal] = useState(false);
   const [acceptedRequestModal, setAcceptedRequestModal] = useState(false);
   const [suggestionsModal, setSuggestionsModal] = useState(false);
@@ -33,7 +34,7 @@ const Notification = () => {
         if (viewMoreRequests) {
           setRequests(data);
         } else {
-          setRequests(data.slice(0, 3));
+          setRequests([]);
         }
       } catch (error) {
         console.error("Error", error.message);
@@ -52,7 +53,7 @@ const Notification = () => {
         if (viewMoreAcceptedRequests) {
           setAcceptedRequest(data);
         } else {
-          setAcceptedRequest(data.slice(0, 3));
+          setAcceptedRequest([]);
         }
       } catch (error) {
         console.error("Error", error.message);
@@ -69,16 +70,16 @@ const Notification = () => {
           { headers }
         );
         if (viewMoreSuggestions) {
-          setSuggestions(data);
+          setSuggestions([data]);
         } else {
-          setSuggestions(data.slice(0, 3));
+          setSuggestions([]);
         }
       } catch (error) {
         console.error("Error", error.message);
       }
     };
     getSuggestions();
-  }, [headers, suggestions, viewMoreSuggestions]);
+  }, [headers, viewMoreSuggestions]);
 
   const handleViewMoreRequests = () => {
     setViewMoreRequests(!viewMoreRequests);
@@ -159,144 +160,135 @@ const Notification = () => {
 
   return (
     <Fragment>
-      <div className="content">
-        <div className="px-5">
+      <div className="content my-5">
+        <div>
           <Row className="justify-content-center">
-            {requests ? (
-              <Col md="6" sm="10" xs="10">
-                <div className="my-5 py-5">
-                  <h3>Solicitudes de envío</h3>
-                  {requests.map((item) => {
-                    return (
-                      <div key={item._id}>
-                        <div className="rounded bg-light text-dark p-3"></div>
-                        <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                          <p className="text-size">
-                            Descripción: {item.description}
-                          </p>
-                          <Button
-                            id="tooltip5456779"
-                            title="Detalles del request"
-                            type="button"
-                            color="link"
-                            outline={true}
-                            className="text-info"
+            <Col md="5" sm="11" xs="11">
+              <div className="pt-2">
+                <div>
+                  <Button
+                    type="button"
+                    color="link"
+                    outline={true}
+                    className="text-black"
+                    onClick={handleViewMoreRequests}
+                  >
+                    Solicitudes de envío
+                    {viewMoreRequests ? (
+                      <i className="bi bi-caret-up-fill"></i>
+                    ) : (
+                      <i className="bi bi-caret-down-fill"></i>
+                    )}
+                  </Button>
+                </div>
+                {requests ? (
+                  <div>
+                    {requests.map((item) => {
+                      return (
+                        <div key={item._id}>
+                          <div className="rounded bg-light text-dark p-1"></div>
+                          <Card
+                            className="rounded text-dark p-2 shadow-lg bg-white border-0 card_pointer"
                             onClick={() => handleRequestDetails(item)}
                           >
-                            Ver más
-                          </Button>
-                        </Card>
-                      </div>
-                    );
-                  })}
-                  <div>
-                    <Button
-                      type="button"
-                      color="link"
-                      outline={true}
-                      className="text-info"
-                      onClick={handleViewMoreRequests}
-                    >
-                      {viewMoreRequests ? "Ver menos" : "Ver más"}
-                    </Button>
+                            <p className="text-size">
+                              Descripción: {item.description}
+                            </p>
+                          </Card>
+                        </div>
+                      );
+                    })}
                   </div>
+                ) : null}
+              </div>
+            </Col>
+            <Col md="5" sm="11" xs="11">
+              <div className="pt-2">
+                <div>
+                  <Button
+                    type="button"
+                    color="link"
+                    outline={true}
+                    className="text-black"
+                    onClick={handleViewMoreAcceptedRequests}
+                  >
+                    Paquetes aceptados
+                    {viewMoreAcceptedRequests ? (
+                      <i className="bi bi-caret-up-fill"></i>
+                    ) : (
+                      <i className="bi bi-caret-down-fill"></i>
+                    )}
+                  </Button>
                 </div>
-              </Col>
-            ) : null}
-            {acceptedRequest ? (
-              <Col md="6" sm="10" xs="10">
-                <div className="my-5 py-5">
-                  <h3>Paquetes aceptados</h3>
-                  {acceptedRequest.map((item) => {
-                    return (
-                      <div key={item._id}>
-                        <div className="rounded bg-light text-dark p-3"></div>
-                        <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                          <p className="text-size">
-                            Descripción: {item.description}
-                          </p>
-                          <Button
-                            id="tooltip5456779"
-                            title="Detalles del accepted request"
-                            type="button"
-                            color="link"
-                            outline={true}
-                            className="text-info"
+                {acceptedRequest ? (
+                  <div>
+                    {acceptedRequest.map((item) => {
+                      return (
+                        <div key={item._id}>
+                          <div className="rounded bg-light text-dark p-1"></div>
+                          <Card
+                            className="rounded text-dark p-2 shadow-lg bg-white border-0 card_pointer"
                             onClick={() => handleAccptedRequestDetails(item)}
                           >
-                            Ver más
-                          </Button>
-                        </Card>
-                      </div>
-                    );
-                  })}
-                  <div>
-                    <Button
-                      type="button"
-                      color="link"
-                      outline={true}
-                      className="text-info"
-                      onClick={handleViewMoreAcceptedRequests}
-                    >
-                      {handleViewMoreAcceptedRequests ? "Ver menos" : "Ver más"}
-                    </Button>
+                            <p className="text-size">
+                              Descripción: {item.description}
+                            </p>
+                            <p className="text-size">Estado: {item.state}</p>
+                          </Card>
+                        </div>
+                      );
+                    })}
                   </div>
+                ) : null}
+              </div>
+            </Col>
+            <Col md="5" sm="11" xs="11">
+              <div className="pt-2">
+                <div>
+                  <Button
+                    type="button"
+                    color="link"
+                    outline={true}
+                    className="text-black"
+                    onClick={handleViewMoreSuggestions}
+                  >
+                    Sugerencias
+                    {viewMoreSuggestions ? (
+                      <i className="bi bi-caret-up-fill"></i>
+                    ) : (
+                      <i className="bi bi-caret-down-fill"></i>
+                    )}
+                  </Button>
                 </div>
-              </Col>
-            ) : null}
-            {suggestions ? (
-              <Col md="6" sm="10" xs="10">
-                <div className="my-5 py-5">
-                  <h3>Sugerencias</h3>
-                  {suggestions.map((item) => {
-                    return (
-                      <div key={item._id}>
-                        <div className="rounded bg-light text-dark p-3"></div>
-                        <Card className="rounded text-dark p-3 shadow-lg bg-white border-0">
-                          <div className="">
-                            <img
-                              className="package-image input_icon"
-                              alt={item.image}
-                              src={`https://trivi4.com/api/trivia/packages/image/${item.image}`}
-                            />
-                          </div>
-                          <p className="text-size">
-                            Descripción: {item.description}
-                          </p>
-                          <Button
-                            id="tooltip5456779"
-                            title="Detalles del sugerencia"
-                            type="button"
-                            color="link"
-                            outline={true}
-                            className="text-info"
+                {suggestions ? (
+                  <div>
+                    {suggestions.map((item) => {
+                      return (
+                        <div key={item._id}>
+                          <div className="rounded bg-light text-dark p-1"></div>
+                          <Card
+                            className="rounded text-dark p-2 shadow-lg bg-white border-0 card_pointer"
                             onClick={() => handleSuggestionsDetails(item)}
                           >
-                            Ver más
-                          </Button>
-                        </Card>
-                      </div>
-                    );
-                  })}
-                  <div>
-                    <Button
-                      type="button"
-                      color="link"
-                      outline={true}
-                      className="text-info"
-                      onClick={handleViewMoreSuggestions}
-                    >
-                      {viewMoreSuggestions ? "Ver menos" : "Ver más"}
-                    </Button>
+                            <p className="text-size">
+                              Descripción: {item.description}
+                            </p>
+                          </Card>
+                        </div>
+                      );
+                    })}
                   </div>
-                </div>
-              </Col>
-            ) : null}
+                ) : null}
+              </div>
+            </Col>
+            <Col md="5" sm="11" xs="11">
+              <div className="pt-2"></div>
+            </Col>
           </Row>
         </div>
         <div>
           <Row>
-            <Col md="12">
+            <Col>
               <Modal
                 isOpen={suggestionsModal}
                 toggle={toggleTravelDetails}
@@ -328,7 +320,7 @@ const Notification = () => {
                           </div>
                           <div>
                             <Row>
-                              <Col md="6" sm="6" xs="6">
+                              <Col>
                                 <div>
                                   <Button
                                     type="button"
@@ -364,11 +356,8 @@ const Notification = () => {
               </Modal>
             </Col>
           </Row>
-          <Row
-            className="justify-content-center align-items-center"
-            style={{ height: "100vh" }}
-          >
-            <Col md="5" sm="10" xs="10" className="my-5 py-5">
+          <Row>
+            <Col>
               <Modal
                 isOpen={requestModal}
                 toggle={togglePackageDetails}
@@ -436,11 +425,8 @@ const Notification = () => {
               </Modal>
             </Col>
           </Row>
-          <Row
-            className="justify-content-center align-items-center"
-            style={{ height: "100vh" }}
-          >
-            <Col md="5" sm="10" xs="10" className="my-5 py-5">
+          <Row>
+            <Col>
               <Modal
                 isOpen={acceptedRequestModal}
                 toggle={togglePackageAcceptedDetails}
@@ -463,7 +449,9 @@ const Notification = () => {
                         <div>
                           <div>
                             <h5>Información del paquete</h5>
-                            <p>Descripción: {userAcceptedRequest.description}</p>
+                            <p>
+                              Descripción: {userAcceptedRequest.description}
+                            </p>
                             <img
                               className="package-image"
                               alt={userAcceptedRequest.image}

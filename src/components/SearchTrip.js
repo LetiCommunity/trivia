@@ -169,7 +169,7 @@ const SearchTrip = () => {
                       <div className="rounded bg-white text-dark p-3"></div>
                       <Card
                         onClick={() => handleSelectedTrip(travel.traveler._id)}
-                        className="rounded text-dark p-3 shadow-lg bg-white border-0"
+                        className="rounded text-dark p-3 shadow-lg bg-white border-0 card_pointer"
                       >
                         <div className="input_wrapper">
                           <img
