@@ -70,7 +70,7 @@ const Notification = () => {
           { headers }
         );
         if (viewMoreSuggestions) {
-          setSuggestions([data]);
+          setSuggestions(data);
         } else {
           setSuggestions([]);
         }
