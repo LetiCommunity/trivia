@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
@@ -15,20 +15,29 @@ import {
 
 const EditProfile = () => {
   const token = localStorage.getItem("token");
-  const userData = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState({});
   let navigate = useNavigate();
   const [error, setError] = useState("");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const headers = {
     token: `${token}`,
     "Content-Type": "application/json",
   };
-  const [user, setUser] = useState({
-    _id: userData._id,
-    name: userData.name,
-    surname: userData.surname,
-    email: userData.email,
-    username: userData.username,
-  });
+  
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://trivi4.com/api/trivia/profiles/profile",
+          { headers }
+        );
+        setUser(data);
+      } catch (error) {
+        console.error("Error", error.message);
+      }
+    };
+    getUser();
+  }, [headers]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

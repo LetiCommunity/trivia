@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
@@ -17,16 +17,32 @@ import Compressor from "compressorjs";
 
 const ChangePassword = () => {
   const token = localStorage.getItem("token");
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState({});
   let navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState("");
   const [image, setImage] = useState(null);
   const [error, setError] = useState("");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const headers = {
     token: `${token}`,
     "Content-Type": "multipart/form-data",
   };
 
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://trivi4.com/api/trivia/profiles/profile",
+          { headers }
+        );
+        setUser(data);
+      } catch (error) {
+        console.error("Error", error.message);
+      }
+    };
+    getUser();
+  }, [headers]);
+  
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     // Checks if a file was selected

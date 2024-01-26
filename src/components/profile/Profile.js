@@ -1,20 +1,36 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button, Card, CardBody, Col, Row } from "reactstrap";
 import { signOut } from "firebase/auth";
 
-import auth from "./firebase";
+import auth from "../config/firebase";
 import inicialImage from "../assets/img/user.png";
 
 const Profile = () => {
   const token = localStorage.getItem("token");
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState({});
   let navigate = useNavigate();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const headers = {
     token: `${token}`,
     "Content-Type": "application/json",
   };
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://trivi4.com/api/trivia/profiles/profile",
+          { headers }
+        );
+        setUser(data);
+      } catch (error) {
+        console.error("Error", error.message);
+      }
+    };
+    getUser();
+  }, [headers]);
 
   const handleEditProfile = () => {
     return navigate("/edit-profile");
@@ -61,20 +77,24 @@ const Profile = () => {
             <Card className="border-0 bg-light">
               <CardBody>
                 <div className="text-center">
-                  {user.image ? (
-                    <img
-                      alt="Imagen cargada"
-                      className="rounded-circle profile"
-                      src={`https://trivi4.com/api/trivia/profiles/image/${user.image}`}
-                    />
-                  ) : (
-                    <img
-                      alt="Imagen cargada"
-                      className="rounded-circle profile"
-                      src={inicialImage}
-                    />
-                  )}
-                  <h3>{user.username}</h3>
+                  {user ? (
+                    <div>
+                      {user.image ? (
+                        <img
+                          alt="Imagen cargada"
+                          className="rounded-circle profile"
+                          src={`https://trivi4.com/api/trivia/profiles/image/${user.image}`}
+                        />
+                      ) : (
+                        <img
+                          alt="Imagen cargada"
+                          className="rounded-circle profile"
+                          src={inicialImage}
+                        />
+                      )}
+                      <h3>{user.username}</h3>
+                    </div>
+                  ) : null}
                   <div>
                     <Button
                       type="button"

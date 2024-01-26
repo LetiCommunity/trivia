@@ -13,7 +13,7 @@ import {
   Label,
   Row,
 } from "reactstrap";
-import auth from "./firebase";
+import auth from "../config/firebase";
 
 const Registration = () => {
   let navigate = useNavigate();

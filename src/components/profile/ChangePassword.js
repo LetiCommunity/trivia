@@ -23,7 +23,7 @@ const ChangePassword = () => {
   const [error, setError] = useState("");
   const headers = {
     token: `${token}`,
-    "Content-Type": "multipart/form-data",
+    "Content-Type": "application/json",
   };
   const [password, setPassword] = useState({
     currentPassword: "",
