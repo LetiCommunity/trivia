@@ -12,7 +12,7 @@ import {
   Label,
   Row,
 } from "reactstrap";
-import inicialImage from "../assets/img/user.png";
+import inicialImage from "../../assets/img/user.png";
 import Compressor from "compressorjs";
 
 const ChangePassword = () => {

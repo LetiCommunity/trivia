@@ -5,7 +5,7 @@ import { Button, Card, CardBody, Col, Row } from "reactstrap";
 import { signOut } from "firebase/auth";
 
 import auth from "../config/firebase";
-import inicialImage from "../assets/img/user.png";
+import inicialImage from "../../assets/img/user.png";
 
 const Profile = () => {
   const token = localStorage.getItem("token");

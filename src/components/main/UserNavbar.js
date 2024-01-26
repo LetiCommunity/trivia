@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Button,
   Collapse,
@@ -9,50 +9,123 @@ import {
   NavbarBrand,
 } from "reactstrap";
 
-import inicialImage from "../assets/img/user-bar.png";
+import inicialImage from "../../assets/img/user-bar.png";
+import axios from "axios";
 
 const UserNavbar = () => {
   const token = localStorage.getItem("token");
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState({});
   const [collapseOpen, setCollapseOpen] = useState(false);
+  const [requests, setRequests] = useState([]);
+  const [acceptedRequest, setAcceptedRequest] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const headers = {
+    token: `${token}`,
+    "Content-Type": "application/json",
+  };
   const handleToggle = () => setCollapseOpen(!collapseOpen);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://trivi4.com/api/trivia/profiles/profile",
+          { headers }
+        );
+        setUser(data);
+      } catch (error) {
+        console.error("Error", error.message);
+      }
+    };
+    getUser();
+  }, [headers]);
+
+  useEffect(() => {
+    const getRequests = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://trivi4.com/api/trivia/packages/filterByRequest",
+          { headers }
+        );
+        setRequests(data);
+      } catch (error) {
+        console.error("Error", error.message);
+      }
+    };
+    getRequests();
+  }, [headers]);
+
+  useEffect(() => {
+    const getAcceptedRequests = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://trivi4.com/api/trivia/packages/filterByAcceptedRequest",
+          { headers }
+        );
+        setAcceptedRequest(data);
+      } catch (error) {
+        console.error("Error", error.message);
+      }
+    };
+    getAcceptedRequests();
+  }, [headers]);
+
+  useEffect(() => {
+    const getSuggestions = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://trivi4.com/api/trivia/packages/filterByMatch",
+          { headers }
+        );
+        setSuggestions(data);
+      } catch (error) {
+        console.error("Error", error.message);
+      }
+    };
+    getSuggestions();
+  }, [headers]);
 
   return (
     <Fragment>
-      <Navbar className="fixed-top pt-2 bg-light">
+      <Navbar className="fixed-top bg-light">
         <NavbarBrand href="/home">
           <img
             className="logo"
             alt="Trivia"
-            src={require("../assets/img/logo3.png")}
+            src={require("../../assets/img/logo3.png")}
           />
         </NavbarBrand>
         {/* <Button onClick={handleToggle} className="navbar-toggler border-0">
           <i className="bi bi-bell"></i>
         </Button> */}
-        <Button
-          onClick={handleToggle}
-          className="navbar-toggler border-0 bg-light"
-        >
-          {user ? (
-            <img
-              alt="Imagen cargada"
-              className="rounded-circle profile-bar"
-              src={
-                user.image
-                  ? `https://trivi4.com/api/trivia/profiles/image/${user.image}`
-                  : inicialImage
-              }
-            />
-          ) : (
-            <img
-              alt="Imagen cargada"
-              className="rounded-circle profile-bar"
-              src={inicialImage}
-            />
-          )}
-        </Button>
-        <i className="bi bi-circle-fill text-danger notification-icon2"></i>
+        <div className="pr-1">
+          <Button
+            onClick={handleToggle}
+            className="navbar-toggler border-0 bg-light"
+          >
+            {user ? (
+              <img
+                alt="Imagen cargada"
+                className="rounded-circle profile-bar"
+                src={
+                  user.image
+                    ? `https://trivi4.com/api/trivia/profiles/image/${user.image}`
+                    : inicialImage
+                }
+              />
+            ) : (
+              <img
+                alt="Imagen cargada"
+                className="rounded-circle profile-bar"
+                src={inicialImage}
+              />
+            )}
+          </Button>
+          {requests.length > 0 || acceptedRequest.length > 0 || suggestions.length > 0 ? (
+            <i className="bi bi-circle-fill text-danger notification-icon2"></i>
+          ) : null}
+        </div>
         <Collapse isOpen={collapseOpen} navbar className="">
           <Nav className="ml-auto" navbar>
             {!token ? (

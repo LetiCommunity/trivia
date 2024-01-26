@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import moment from "moment";
 
-import inicialImage from "../assets/img/user-bar.png";
+import inicialImage from "../../assets/img/user-bar.png";
 
 const SearchTrip = () => {
   const token = localStorage.getItem("token");

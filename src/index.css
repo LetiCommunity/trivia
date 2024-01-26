@@ -20,7 +20,7 @@ h2 {
 }
 
 .title {
-  z-index:2;
+  z-index: 2;
   position: absolute;
   top: 15%;
   left: 0;
@@ -88,7 +88,7 @@ ul {
 .notification-icon2 {
   font-size: 0.5em;
   position: fixed;
-  top: 2%;
+  top: 1.5%;
   right: 2%;
 }
 
@@ -128,7 +128,7 @@ ul {
   .notification-icon2 {
     font-size: 0.5em;
     position: fixed;
-    top: 2%;
+    top: 1.5%;
     right: 1.3%;
   }
 }
@@ -157,7 +157,7 @@ ul {
   }
 
   .background {
-    z-index:1;
+    z-index: 1;
   }
 
   .main {
@@ -191,8 +191,16 @@ ul {
   .notification-icon2 {
     font-size: 0.5em;
     position: fixed;
-    top: 2%;
+    top: 1.5%;
     right: 2.7%;
+  }
+}
+
+/* Small screen */
+@media(max-width:450px) {
+  .title {
+    top: 30%;
+    font-size: 1.3em;
   }
 }
 

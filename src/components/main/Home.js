@@ -84,7 +84,7 @@ const Home = () => {
                 <img
                   className="img-fluid w-100 background"
                   alt="Trivia"
-                  src={require("../assets/img/bg1.jpg")}
+                  src={require("../../assets/img/bg1.jpg")}
                 />
                 <div className="search_trip">
                   <Card className="px-2">
@@ -209,7 +209,7 @@ const Home = () => {
                       <img
                         className="img-fluid shadow-lg bg-light"
                         alt="Trivia"
-                        src={require("../assets/img/win.jpg")}
+                        src={require("../../assets/img/win.jpg")}
                       />
                     </div>
                   </div>
@@ -260,7 +260,7 @@ const Home = () => {
                       <img
                         className="img-fluid shadow-lg bg-light right"
                         alt="Trivia"
-                        src={require("../assets/img/send3.jpg")}
+                        src={require("../../assets/img/send3.jpg")}
                       />
                     </div>
                   </div>
