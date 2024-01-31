@@ -64,66 +64,28 @@ const PublishTrip = () => {
     }));
   };
 
-  const nextSection = () => {
-    if (section < 2) {
-      const data = {
-        origin: travel.origin,
-        destination: travel.destination,
-        date: travel.date,
-        airport: travel.airport,
-        terminal: travel.terminal,
-        company: travel.company,
-        billingTime: travel.billingTime,
-      };
+  // const nextSection = () => {
+  //   if (section < 2) {
+  //     const data = {
+  //       origin: travel.origin,
+  //       destination: travel.destination,
+  //       date: travel.date,
+  //       airport: travel.airport,
+  //       terminal: travel.terminal,
+  //       company: travel.company,
+  //       billingTime: travel.billingTime,
+  //     };
 
-      if (
-        !data.origin ||
-        !data.destination ||
-        !data.date ||
-        !data.airport ||
-        !data.terminal ||
-        !data.company ||
-        !data.billingTime
-      ) {
-        setError("Por favor, rellena todos los campos");
-        return;
-      }
+  //     setSection(1);
+  //     setError("");
+  //   }
+  // };
 
-      if (data.origin === data.destination) {
-        setError(
-          "Por favor, verifique que su origen y destino no sean el mismo"
-        );
-        return;
-      }
-
-      const convertedDate = new Date(data.date);
-      const currentDate = new Date();
-
-      if (convertedDate < currentDate) {
-        setError("Por favor, verifique que la fecha sea correcta");
-        return;
-      }
-
-      if (
-        data.origin.trim() === "" ||
-        data.destination.trim() === "" ||
-        data.airport.trim() === "" ||
-        data.terminal.trim() === "" ||
-        data.company.trim() === ""
-      ) {
-        setError("Por favor, revisa los espacios al inicio de los textos");
-        return;
-      }
-      setSection(section + 1);
-      setError("");
-    }
-  };
-
-  const previoustSection = () => {
-    if (section > 1) {
-      setSection(section - 1);
-    }
-  };
+  // const previoustSection = () => {
+  //   if (section > 1) {
+  //     setSection(section - 1);
+  //   }
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -135,13 +97,50 @@ const PublishTrip = () => {
       terminal: travel.terminal,
       company: travel.company,
       billingTime: travel.billingTime,
-      availableWeight: travel.availableWeight,
+      availableWeight: 20,
     };
 
-    if (!data.availableWeight) {
-      setError("Por favor, indique el peso máximo que puede viajar");
+    if (
+      !data.origin ||
+      !data.destination ||
+      !data.date ||
+      !data.airport ||
+      !data.terminal ||
+      !data.company ||
+      !data.billingTime
+    ) {
+      setError("Por favor, rellena todos los campos");
       return;
     }
+
+    if (data.origin === data.destination) {
+      setError("Por favor, verifique que su origen y destino no sean el mismo");
+      return;
+    }
+
+    const convertedDate = new Date(data.date);
+    const currentDate = new Date();
+
+    if (convertedDate < currentDate) {
+      setError("Por favor, verifique que la fecha sea correcta");
+      return;
+    }
+
+    if (
+      data.origin.trim() === "" ||
+      data.destination.trim() === "" ||
+      data.airport.trim() === "" ||
+      data.terminal.trim() === "" ||
+      data.company.trim() === ""
+    ) {
+      setError("Por favor, revisa los espacios al inicio de los textos");
+      return;
+    }
+
+    // if (!data.availableWeight) {
+    //   setError("Por favor, indique el peso máximo que puede viajar");
+    //   return;
+    // }
 
     try {
       if (!id) {
@@ -153,6 +152,8 @@ const PublishTrip = () => {
           headers,
         });
       }
+      setError("");
+      setSection(1);
       return navigate("/activity");
     } catch (error) {
       console.error("Error", error.message);
@@ -172,7 +173,8 @@ const PublishTrip = () => {
               <CardBody>
                 <p className="text-center">
                   <i className="bi bi-circle-fill text-info"></i> Información de
-                  viaje <i className="bi bi-dash-lg"></i>{" "}
+                  viaje
+                  {/*  <i className="bi bi-dash-lg"></i>{" "}
                   <i
                     className={
                       section === 2
@@ -180,7 +182,7 @@ const PublishTrip = () => {
                         : "bi bi-circle-fill text-light"
                     }
                   ></i>{" "}
-                  Disponibilidad
+                  Disponibilidad */}
                 </p>
                 <Form onSubmit={handleSubmit}>
                   {section === 1 && (
@@ -301,7 +303,7 @@ const PublishTrip = () => {
                       </Row>
                     </>
                   )}
-                  {section === 2 && (
+                  {/* {section === 3 && (
                     <>
                       <h2>Información de disponibilidad</h2>
                       <Row>
@@ -340,9 +342,9 @@ const PublishTrip = () => {
                         </Col>
                       </Row>
                     </>
-                  )}
+                  )} */}
                   <Row>
-                    <Col md="6" xs="6">
+                    {/* <Col md="6" xs="6">
                       {section === 2 && (
                         <Button
                           type="button"
@@ -352,9 +354,9 @@ const PublishTrip = () => {
                           Anterior
                         </Button>
                       )}
-                    </Col>
-                    <Col md="6" xs="6" className="text-center">
-                      {section === 1 && (
+                    </Col> */}
+                    <Col md="12" xs="12" className="text-center">
+                      {/**section === 1 && (
                         <Button
                           type="button"
                           onClick={nextSection}
@@ -362,15 +364,16 @@ const PublishTrip = () => {
                         >
                           Siguiente
                         </Button>
-                      )}
-                      {section === 2 && (
-                        <Button
-                          type="submit"
-                          className="btn btn-info text-white right"
-                        >
-                          Enviar
-                        </Button>
-                      )}
+                      )**/}
+                      {/* {section === 2 && (
+                        
+                      )} */}
+                      <Button
+                        type="submit"
+                        className="btn btn-info text-white right"
+                      >
+                        Enviar
+                      </Button>
                     </Col>
                   </Row>
                 </Form>
