@@ -80,12 +80,14 @@ const Home = () => {
           <Row>
             <Col md="12" sm="12">
               <div>
-                <h2 className="title">Envía fácil y rápido tu paquete</h2>
-                <img
-                  className="img-fluid w-100 background"
-                  alt="Trivia"
-                  src={require("../../assets/img/bg1.jpg")}
-                />
+                <div className="cover">
+                  <h2 className="title">Envíe fácil y rápido su paquete</h2>
+                  <img
+                    className="img-fluid w-100 background"
+                    alt="Trivia"
+                    src={require("../../assets/img/bg.png")}
+                  />
+                </div>
                 <div className="search_trip">
                   <Card className="px-2">
                     <Form onSubmit={handleSubmit}>
