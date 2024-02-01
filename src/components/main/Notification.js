@@ -471,7 +471,12 @@ const Notification = () => {
                             />
                             <p>
                               Su paquete ha sido aceptado, por favor, diríjase a
-                              la oficina más cercana...
+                              la oficina más cercana:
+                              <ul>
+                                <li>
+                                  Malabo: Semu, rotonda Bilisa, Mercafacil
+                                </li>
+                              </ul>
                             </p>
                           </div>
                         </div>
