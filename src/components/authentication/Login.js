@@ -6,6 +6,7 @@ import {
   Card,
   CardBody,
   Col,
+  Container,
   Form,
   FormGroup,
   Input,
@@ -80,86 +81,104 @@ const Login = () => {
 
   return (
     <Fragment>
-      <div className="content">
+      <Container>
         <Row
           className="justify-content-center align-items-center"
           style={{ height: "100vh" }}
         >
-          <Col md="5" sm="10" xs="10" className="my-5 py-5">
+          <Col md="6" sm="11" xs="11" className="my-5 py-5">
             <Card className="border-0 shadow-lg bg-white">
               <CardBody>
-                <h2 className="text-center">Inicio de sesión</h2>
-                <Form onSubmit={handleSubmit}>
-                  <Row>
-                    <Col md="12">
-                      <FormGroup floating>
-                        <Input
-                          type="text"
-                          id="username"
-                          name="username"
-                          value={user.username}
-                          onChange={handleChange}
-                          placeholder="Nombre de usuario"
-                          className="bg-light"
-                        />
-                        <Label for="username">Nombre de usuario</Label>
-                      </FormGroup>
+                <div>
+                  <h2 className="text-center">Inicio de sesión</h2>
+                  <Form onSubmit={handleSubmit}>
+                    <Row xs="1" sm="1" md="1">
+                      <Col>
+                        <FormGroup floating>
+                          <Input
+                            type="text"
+                            id="username"
+                            name="username"
+                            value={user.username}
+                            onChange={handleChange}
+                            placeholder="Nombre de usuario"
+                            className="bg-light"
+                          />
+                          <Label for="username">Nombre de usuario</Label>
+                        </FormGroup>
+                      </Col>
+                      <Col>
+                        <FormGroup className="input_wrapper" floating>
+                          <Input
+                            type={showPassword ? "text" : "password"}
+                            id="password"
+                            name="password"
+                            value={user.password}
+                            onChange={handleChange}
+                            placeholder="Contraseña"
+                            className="bg-light"
+                          />
+                          <a href="#showPassword" className="text-black">
+                            <i
+                              onClick={() => setShowPassword(!showPassword)}
+                              className={
+                                showPassword
+                                  ? "bi bi-eye-slash-fill input_icon"
+                                  : "bi bi-eye-fill input_icon"
+                              }
+                            ></i>
+                          </a>
+                          <Label for="password">Contraseña</Label>
+                        </FormGroup>
+                      </Col>
+                      <Col>
+                        <p className="text-danger text-center">{error}</p>
+                      </Col>
+                      <Col>
+                        <FormGroup className="text-center">
+                          <div className="d-grid gap-2 py-1">
+                            <Button
+                              type="submit"
+                              className="btn btn-info text-white"
+                            >
+                              Iniciar sesión
+                            </Button>
+                          </div>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                  </Form>
+                </div>
+                <div>
+                  <Row xs="1" sm="2" md="2">
+                    <Col>
+                      <p>
+                        ¿No tiene cuenta?{" "}
+                        <Link
+                          to={{ pathname: "/registration" }}
+                          className="text-info text_decoration_a"
+                        >
+                          Regístrese
+                        </Link>
+                      </p>
                     </Col>
-                    <Col md="12">
-                      <FormGroup className="input_wrapper" floating>
-                        <Input
-                          type={showPassword ? "text" : "password"}
-                          id="password"
-                          name="password"
-                          value={user.password}
-                          onChange={handleChange}
-                          placeholder="Contraseña"
-                          className="bg-light"
-                        />
-                        <a href="#showPassword" className="text-black">
-                          <i
-                            onClick={() => setShowPassword(!showPassword)}
-                            className={
-                              showPassword
-                                ? "bi bi-eye-slash-fill input_icon"
-                                : "bi bi-eye-fill input_icon"
-                            }
-                          ></i>
-                        </a>
-                        <Label for="password">Contraseña</Label>
-                      </FormGroup>
-                    </Col>
-                    <Col md="12">
-                      <p className="text-danger text-center">{error}</p>
-                    </Col>
-                    <Col md="12">
-                      <FormGroup className="text-center">
-                        <div className="d-grid gap-2 py-1">
-                          <Button
-                            type="submit"
-                            className="btn btn-info text-white"
-                          >
-                            Iniciar sesión
-                          </Button>
-                        </div>
-                      </FormGroup>
+                    <Col>
+                      <p>
+                        <Link
+                          to={{ pathname: "/reset-password" }}
+                          className="text-info text_decoration_a"
+                        >
+                          Olvidé mi contraseña
+                        </Link>
+                      </p>
                     </Col>
                   </Row>
-                </Form>
-                <p>
-                  ¿No tiene cuenta?{" "}
-                  <Link
-                    to={{ pathname: "/registration" }}
-                    className="text-info text_decoration_a left"
-                  >
-                    Regístrese
-                  </Link>
-                </p>
+                </div>
               </CardBody>
             </Card>
           </Col>
         </Row>
-      </div>
+      </Container>
     </Fragment>
   );
 };

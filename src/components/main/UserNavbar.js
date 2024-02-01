@@ -88,7 +88,7 @@ const UserNavbar = () => {
 
   return (
     <Fragment>
-      <Navbar className="fixed-top bg-light">
+      <Navbar className="fixed-top bg-light shadow-lg">
         <NavbarBrand href="/home">
           <img
             className="logo"
@@ -96,9 +96,6 @@ const UserNavbar = () => {
             src={require("../../assets/img/logo3.png")}
           />
         </NavbarBrand>
-        {/* <Button onClick={handleToggle} className="navbar-toggler border-0">
-          <i className="bi bi-bell"></i>
-        </Button> */}
         <div className="pr-1">
           <Button
             onClick={handleToggle}

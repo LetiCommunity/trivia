@@ -6,6 +6,7 @@ import UserNavbar from "./components/main/UserNavbar";
 import Home from "./components/main/Home";
 import Registration from "./components/authentication/Registration";
 import Login from "./components/authentication/Login";
+import ResetPassword from "./components/authentication/ResetPassword";
 import Activity from "./components/main/Activity";
 import Notification from "./components/main/Notification";
 import SendPackage from "./components/main/SendPackage";
@@ -68,6 +69,7 @@ function App() {
               <>
                 <Route path="registration" element={<Registration />} />
                 <Route path="login" element={<Login />} />
+                <Route path="reset-password" element={<ResetPassword />} />
               </>
             )}
           </Routes>

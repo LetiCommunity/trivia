@@ -194,6 +194,9 @@ const Notification = () => {
                             <p className="text-size">
                               Descripción: {item.description}
                             </p>
+                            <p className="text-size">
+                              Gane {item.weight * 750} por envío
+                            </p>
                           </Card>
                         </div>
                       );
@@ -273,6 +276,9 @@ const Notification = () => {
                             <p className="text-size">
                               Descripción: {item.description}
                             </p>
+                            <p className="text-size">
+                              Gane {item.weight * 750} por envío
+                            </p>
                           </Card>
                         </div>
                       );
@@ -312,6 +318,9 @@ const Notification = () => {
                           <div>
                             <h5>Información del paquete</h5>
                             <p>Descripción: {userSuggestions.description}</p>
+                            <p className="text-size">
+                              Gane {userRequest.weight * 750} por el envío
+                            </p>
                             <img
                               className="package-image"
                               alt={userSuggestions.image}
@@ -381,6 +390,9 @@ const Notification = () => {
                           <div>
                             <h5>Información del paquete</h5>
                             <p>Descripción: {userRequest.description}</p>
+                            <p className="text-size">
+                              Gane {userRequest.weight * 750} por el envío
+                            </p>
                             <img
                               className="package-image"
                               alt={userRequest.image}
@@ -457,7 +469,10 @@ const Notification = () => {
                               alt={userAcceptedRequest.image}
                               src={`https://trivi4.com/api/trivia/packages/image/${userAcceptedRequest.image}`}
                             />
-                            <p>Su paquete ha sido aceptado</p>
+                            <p>
+                              Su paquete ha sido aceptado, por favor, diríjase a
+                              la oficina más cercana...
+                            </p>
                           </div>
                         </div>
                       )}
