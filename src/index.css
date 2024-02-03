@@ -27,6 +27,11 @@ h2 {
   width: 100%;
 }
 
+.search_trip_container {
+  height: 100%;
+  overflow: hidden;
+}
+
 .search_trip {
   position: absolute;
   top: 45%;
@@ -38,17 +43,31 @@ h2 {
 .search_trip2 {
   position: fixed;
   background: light;
-  top: 9%;
+  top: 11%;
   left: 10%;
   width: 80%;
   border-radius: 15%;
   z-index: 1;
 }
 
+.search_trip_found_content {
+  position: relative;
+  height: 400px;
+  overflow: auto;
+  margin-top: 16%;
+  padding-top: 1%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.search_trip_found_content::-webkit-scrollbar {
+  display: none;
+}
+
 .search_trip_found {
   position: absolute;
-  left: 20%;
-  width: 60%;
+  left: 10%;
+  width: 80%;
 }
 
 .nav_link_color {
@@ -125,16 +144,19 @@ ul {
   }
 }
 
-.search_trip_found_content {
-  margin-top: 50px;
+@media(max-width:991px) {
+  .search_trip_found_content {
+    margin-top: 30%;
+  }
 }
 
 @media(max-width:767px) {
   .search_trip {
     top: 60%;
   }
+
   .margin-services {
-    margin-top: 250px;
+    margin-top: 25%;
   }
 
   .notification-icon {
@@ -151,12 +173,20 @@ ul {
   .main {
     margin-top: 15px;
   }
+
+  .search_trip_found_content {
+    margin-top: 50%;
+  }
+
+  .search_trip_found {
+    left: 5%;
+    width: 90%;
+  }
 }
 
 /* Small screen */
 @media(max-width:500px) {
   .search_trip_found {
-    position: absolute;
     left: 10%;
     width: 80%;
   }
@@ -174,6 +204,14 @@ ul {
     top: 1.5%;
     right: 2.7%;
   }
+
+  .margin-services {
+    margin-top: 30%;
+  }
+
+  .search_trip_found_content {
+    margin-top: 55%;
+  }
 }
 
 /* Small screen */
@@ -189,6 +227,14 @@ ul {
   .search_trip {
     top: 65%;
   }
+
+  .margin-services {
+    margin-top: 50%;
+  }
+
+  .search_trip_found_content {
+    margin-top: 70%;
+  }
 }
 
 /* Small screen */
@@ -196,8 +242,15 @@ ul {
   .title {
     font-size: 1.2em;
   }
-}
 
+  .margin-services {
+    margin-top: 60%;
+  }
+
+  .search_trip_found_content {
+    margin-top: 90%;
+  }
+}
 
 .right {
   float: right;
@@ -231,4 +284,49 @@ ul {
 
 .card_pointer:hover {
   cursor: pointer;
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.loading-screen.visible {
+  opacity: 1;
+}
+
+.loading-screen.hidden {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.spinner {
+  /* Agrega aquí los estilos para tu spinner de carga (puedes usar librerías como spin.js o FontAwesome) */
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

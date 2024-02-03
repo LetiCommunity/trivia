@@ -15,6 +15,7 @@ import {
 
 const PublishTrip = () => {
   const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
   const { id } = useParams();
   const [section, setSection] = useState(1);
@@ -47,7 +48,9 @@ const PublishTrip = () => {
             { headers }
           );
           setTravel(data);
+          setLoading(false);
         } catch (err) {
+          setLoading(false);
           console.error(err);
         }
       }
@@ -57,7 +60,6 @@ const PublishTrip = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setTravel((prevTravel) => ({
       ...prevTravel,
       [name]: value,
@@ -142,6 +144,7 @@ const PublishTrip = () => {
     //   return;
     // }
 
+    setLoading(true);
     try {
       if (!id) {
         await axios.post("https://trivi4.com/api/trivia/travels", data, {
@@ -156,6 +159,7 @@ const PublishTrip = () => {
       setSection(1);
       return navigate("/activity");
     } catch (error) {
+      setLoading(false);
       console.error("Error", error.message);
       return;
     }
@@ -168,7 +172,7 @@ const PublishTrip = () => {
           className="justify-content-center align-items-center"
           style={{ height: "100vh" }}
         >
-          <Col md="5" sm="10" xs="10" className="my-5 py-5">
+          <Col md="5" sm="11" xs="11" className="my-5 py-5">
             <Card className="border-0 shadow-lg bg-white">
               <CardBody>
                 <p className="text-center">
@@ -188,8 +192,8 @@ const PublishTrip = () => {
                   {section === 1 && (
                     <>
                       <h2>Información de viaje</h2>
-                      <Row>
-                        <Col md="12">
+                      <Row xs="1" sm="1" md="1">
+                        <Col>
                           <FormGroup floating>
                             <Input
                               type="select"
@@ -202,12 +206,12 @@ const PublishTrip = () => {
                             >
                               <option value="Malabo">Malabo</option>
                               <option value="Bata">Bata</option>
-                              <option value="Madrid">Madrid</option>
+                              {/* <option value="Madrid">Madrid</option> */}
                             </Input>
                             <Label for="origin">Lugar de origen</Label>
                           </FormGroup>
                         </Col>
-                        <Col md="12">
+                        <Col>
                           <FormGroup floating>
                             <Input
                               type="select"
@@ -220,12 +224,12 @@ const PublishTrip = () => {
                             >
                               <option value="Malabo">Malabo</option>
                               <option value="Bata">Bata</option>
-                              <option value="Madrid">Madrid</option>
+                              {/* <option value="Madrid">Madrid</option> */}
                             </Input>
                             <Label for="destination">Lugar de destino</Label>
                           </FormGroup>
                         </Col>
-                        <Col md="12">
+                        <Col>
                           <FormGroup floating>
                             <Input
                               type="date"
@@ -239,7 +243,7 @@ const PublishTrip = () => {
                             <Label for="date">Fecha de viaje</Label>
                           </FormGroup>
                         </Col>
-                        <Col md="12">
+                        <Col>
                           <FormGroup floating>
                             <Input
                               type="text"
@@ -253,7 +257,7 @@ const PublishTrip = () => {
                             <Label for="airport">Aeropuerto</Label>
                           </FormGroup>
                         </Col>
-                        <Col md="12">
+                        <Col>
                           <FormGroup floating>
                             <Input
                               type="text"
@@ -267,7 +271,7 @@ const PublishTrip = () => {
                             <Label for="terminal">Terminal de destino</Label>
                           </FormGroup>
                         </Col>
-                        <Col md="12">
+                        <Col>
                           <FormGroup floating>
                             <Input
                               type="text"
@@ -283,7 +287,7 @@ const PublishTrip = () => {
                             </Label>
                           </FormGroup>
                         </Col>
-                        <Col md="12">
+                        <Col>
                           <FormGroup floating>
                             <Input
                               type="time"
@@ -297,7 +301,7 @@ const PublishTrip = () => {
                             <Label for="billingTime">Hora de facturación</Label>
                           </FormGroup>
                         </Col>
-                        <Col md="12">
+                        <Col>
                           <p className="text-danger text-center">{error}</p>
                         </Col>
                       </Row>
@@ -355,7 +359,7 @@ const PublishTrip = () => {
                         </Button>
                       )}
                     </Col> */}
-                    <Col md="12" xs="12" className="text-center">
+                    <Col>
                       {/**section === 1 && (
                         <Button
                           type="button"
@@ -381,6 +385,10 @@ const PublishTrip = () => {
             </Card>
           </Col>
         </Row>
+      </div>
+      <div className={`loading-screen ${loading ? "visible" : "hidden"}`}>
+        <div className="spinner"></div>
+        <p>Cargando...</p>
       </div>
     </Fragment>
   );

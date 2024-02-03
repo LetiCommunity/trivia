@@ -6,6 +6,7 @@ import {
   Card,
   CardBody,
   Col,
+  Container,
   Form,
   FormGroup,
   Input,
@@ -20,6 +21,7 @@ const ChangePassword = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showNewPasswordConfirmation, setShowNewPasswordConfirmation] =
     useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const headers = {
     token: `${token}`,
@@ -71,6 +73,7 @@ const ChangePassword = () => {
       newPassword: password.newPassword,
     };
 
+    setLoading(true);
     try {
       await axios.patch(
         `https://trivi4.com/api/trivia/profiles/profile/password`,
@@ -79,110 +82,132 @@ const ChangePassword = () => {
       );
       return navigate("/profile");
     } catch (error) {
+      setLoading(false);
       console.error("Error", error);
     }
   };
 
   return (
-    <div className="content">
+    <Container>
       <Row
         className="justify-content-center align-items-center"
         style={{ height: "100vh" }}
       >
-        <Col md="5" sm="10" xs="10" className="my-5 py-5">
+        <Col md="5" sm="11" xs="11" className="my-5 py-5">
           <Card className="border-0 shadow-lg bg-white">
             <CardBody>
               <div>
                 <Form onSubmit={handleSubmit}>
-                  <FormGroup className="input_wrapper" floating>
-                    <Input
-                      type={showCurrentPassword ? "text" : "password"}
-                      id="currentPassword"
-                      name="currentPassword"
-                      value={password.currentPassword}
-                      onChange={handleChange}
-                      placeholder="Contraseña"
-                      className="bg-light"
-                    />
-                    <a href="#showPassword" className="text-black">
-                      <i
-                        onClick={() =>
-                          setShowCurrentPassword(!showCurrentPassword)
-                        }
-                        className={
-                          showCurrentPassword
-                            ? "bi bi-eye-slash-fill input_icon"
-                            : "bi bi-eye-fill input_icon"
-                        }
-                      ></i>
-                    </a>
-                    <Label for="currentPassword">Contraseña actual</Label>
-                  </FormGroup>
-                  <FormGroup className="input_wrapper" floating>
-                    <Input
-                      type={showNewPassword ? "text" : "password"}
-                      id="newPassword"
-                      name="newPassword"
-                      value={password.newPassword}
-                      onChange={handleChange}
-                      placeholder="Confirmar contraseña"
-                      className="bg-light"
-                    />
-                    <a href="#showPassword" className="text-black">
-                      <i
-                        onClick={() => setShowNewPassword(!showNewPassword)}
-                        className={
-                          showNewPassword
-                            ? "bi bi-eye-slash-fill input_icon"
-                            : "bi bi-eye-fill input_icon"
-                        }
-                      ></i>
-                    </a>
-                    <Label for="newPassword">Nueva Contraseña</Label>
-                  </FormGroup>
-                  <FormGroup className="input_wrapper" floating>
-                    <Input
-                      type={showNewPasswordConfirmation ? "text" : "password"}
-                      id="confirmNewPassword"
-                      name="confirmNewPassword"
-                      value={password.confirmNewPassword}
-                      onChange={handleChange}
-                      placeholder="Confirmar contraseña"
-                      className="bg-light"
-                    />
-                    <a href="#showPassword" className="text-black">
-                      <i
-                        onClick={() =>
-                          setShowNewPasswordConfirmation(
-                            !showNewPasswordConfirmation
-                          )
-                        }
-                        className={
-                          showNewPasswordConfirmation
-                            ? "bi bi-eye-slash-fill input_icon"
-                            : "bi bi-eye-fill input_icon"
-                        }
-                      ></i>
-                    </a>
-                    <Label for="passwordConfirmation">
-                      Confirmar Contraseña
-                    </Label>
-                  </FormGroup>
-                  <Col md="12">
-                    <p className="text-danger text-center">{error}</p>
-                  </Col>
-                  <FormGroup className="text-center">
-                    <Button type="submit" className="btn btn-info text-white">
-                      Guardar
-                    </Button>
-                  </FormGroup>
+                  <Row xs="1" sm="1" md="1">
+                    <Col>
+                      <FormGroup className="input_wrapper" floating>
+                        <Input
+                          type={showCurrentPassword ? "text" : "password"}
+                          id="currentPassword"
+                          name="currentPassword"
+                          value={password.currentPassword}
+                          onChange={handleChange}
+                          placeholder="Contraseña"
+                          className="bg-light"
+                        />
+                        <a href="#showPassword" className="text-black">
+                          <i
+                            onClick={() =>
+                              setShowCurrentPassword(!showCurrentPassword)
+                            }
+                            className={
+                              showCurrentPassword
+                                ? "bi bi-eye-slash-fill input_icon"
+                                : "bi bi-eye-fill input_icon"
+                            }
+                          ></i>
+                        </a>
+                        <Label for="currentPassword">Contraseña actual</Label>
+                      </FormGroup>
+                    </Col>
+                    <Col>
+                      <FormGroup className="input_wrapper" floating>
+                        <Input
+                          type={showNewPassword ? "text" : "password"}
+                          id="newPassword"
+                          name="newPassword"
+                          value={password.newPassword}
+                          onChange={handleChange}
+                          placeholder="Confirmar contraseña"
+                          className="bg-light"
+                        />
+                        <a href="#showPassword" className="text-black">
+                          <i
+                            onClick={() => setShowNewPassword(!showNewPassword)}
+                            className={
+                              showNewPassword
+                                ? "bi bi-eye-slash-fill input_icon"
+                                : "bi bi-eye-fill input_icon"
+                            }
+                          ></i>
+                        </a>
+                        <Label for="newPassword">Nueva Contraseña</Label>
+                      </FormGroup>
+                    </Col>
+                    <Col>
+                      <FormGroup className="input_wrapper" floating>
+                        <Input
+                          type={
+                            showNewPasswordConfirmation ? "text" : "password"
+                          }
+                          id="confirmNewPassword"
+                          name="confirmNewPassword"
+                          value={password.confirmNewPassword}
+                          onChange={handleChange}
+                          placeholder="Confirmar contraseña"
+                          className="bg-light"
+                        />
+                        <a href="#showPassword" className="text-black">
+                          <i
+                            onClick={() =>
+                              setShowNewPasswordConfirmation(
+                                !showNewPasswordConfirmation
+                              )
+                            }
+                            className={
+                              showNewPasswordConfirmation
+                                ? "bi bi-eye-slash-fill input_icon"
+                                : "bi bi-eye-fill input_icon"
+                            }
+                          ></i>
+                        </a>
+                        <Label for="passwordConfirmation">
+                          Confirmar Contraseña
+                        </Label>
+                      </FormGroup>
+                    </Col>
+                    <Col>
+                      <p className="text-danger text-center">{error}</p>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <FormGroup className="text-center">
+                        <Button
+                          type="submit"
+                          className="btn btn-info text-white"
+                        >
+                          Guardar
+                        </Button>
+                      </FormGroup>
+                    </Col>
+                  </Row>
                 </Form>
               </div>
             </CardBody>
           </Card>
+          <div className={`loading-screen ${loading ? "visible" : "hidden"}`}>
+            <div className="spinner"></div>
+            <p>Cargando...</p>
+          </div>
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 };
 

@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
-import Footer from "./Footer";
-import { Card, Col, Row } from "reactstrap";
+import Footer from "../config/Footer";
+import { Card, Col, Container, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 
 const Terms = () => {
   return (
     <Fragment>
-      <div className="content">
+      <Container>
         <Row className="m-2 py-5">
-          <Col md="12" sm="12" xs="12">
+          <Col>
             <h1>Términos y Condiciones</h1>
             <Card className="p-5">
               <small>Actualizado el 22-12-2023</small>
@@ -647,7 +647,7 @@ const Terms = () => {
         </p> */}
           </Col>
         </Row>
-      </div>
+      </Container>
       <footer className="footer bg-dark text-white">
         <Footer />
       </footer>

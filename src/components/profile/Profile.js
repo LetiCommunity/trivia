@@ -1,7 +1,7 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button, Card, CardBody, Col, Row } from "reactstrap";
+import { Button, Card, CardBody, Col, Container, Row } from "reactstrap";
 import { signOut } from "firebase/auth";
 
 import auth from "../config/firebase";
@@ -67,13 +67,12 @@ const Profile = () => {
   };
 
   return (
-    <Fragment>
-      <div className="content">
+      <Container>
         <Row
           className="justify-content-center align-items-center"
           style={{ height: "100vh" }}
         >
-          <Col md="5" sm="10" xs="10" className="my-5 py-5">
+          <Col md="5" sm="11" xs="11" className="my-5 py-5">
             <Card className="border-0 bg-light">
               <CardBody>
                 <div className="text-center">
@@ -161,8 +160,7 @@ const Profile = () => {
             </Card>
           </Col>
         </Row>
-      </div>
-    </Fragment>
+      </Container>
   );
 };
 

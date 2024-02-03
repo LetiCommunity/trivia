@@ -6,7 +6,7 @@ const Notification = () => {
   const token = localStorage.getItem("token");
   const [requests, setRequests] = useState([]);
   const [acceptedRequest, setAcceptedRequest] = useState([]);
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestions, setSuggestions]  = useState([]);
   const [viewMoreRequests, setViewMoreRequests] = useState(true);
   const [viewMoreAcceptedRequests, setViewMoreAcceptedRequests] =
     useState(true);
@@ -14,6 +14,9 @@ const Notification = () => {
   const [requestModal, setRequestModal] = useState(false);
   const [acceptedRequestModal, setAcceptedRequestModal] = useState(false);
   const [suggestionsModal, setSuggestionsModal] = useState(false);
+  const [loadingRequests, setLoadingRequests] = useState(true);
+  const [loadingSuggestions, setLoadingSuggestions] = useState(true);
+  const [loadingAcceptedRequest, setLoadingAcceptedRequest] = useState(true);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const headers = {
     token: `${token}`,
@@ -33,6 +36,7 @@ const Notification = () => {
         );
         if (viewMoreRequests) {
           setRequests(data);
+          setLoadingRequests(false);
         } else {
           setRequests([]);
         }
@@ -52,6 +56,7 @@ const Notification = () => {
         );
         if (viewMoreAcceptedRequests) {
           setAcceptedRequest(data);
+          setLoadingAcceptedRequest(false);
         } else {
           setAcceptedRequest([]);
         }
@@ -71,6 +76,7 @@ const Notification = () => {
         );
         if (viewMoreSuggestions) {
           setSuggestions(data);
+          setLoadingSuggestions(false);
         } else {
           setSuggestions([]);
         }
@@ -195,7 +201,7 @@ const Notification = () => {
                               Descripción: {item.description}
                             </p>
                             <p className="text-size">
-                              Gane {item.weight * 750} por envío
+                              Gane {item.weight * 750} XAF por el envío
                             </p>
                           </Card>
                         </div>
@@ -277,7 +283,7 @@ const Notification = () => {
                               Descripción: {item.description}
                             </p>
                             <p className="text-size">
-                              Gane {item.weight * 750} por envío
+                              Gane {item.weight * 750} XAF por el envío
                             </p>
                           </Card>
                         </div>
@@ -319,15 +325,16 @@ const Notification = () => {
                             <h5>Información del paquete</h5>
                             <p>Descripción: {userSuggestions.description}</p>
                             <p className="text-size">
-                              Gane {userRequest.weight * 750} por el envío
+                              Gane {userSuggestions.weight * 750} XAF por el
+                              envío
                             </p>
                             <img
                               className="package-image"
-                              alt={userSuggestions.image}
+                              alt="paquete"
                               src={`https://trivi4.com/api/trivia/packages/image/${userSuggestions.image}`}
                             />
                           </div>
-                          <div>
+                          <div className="pt-3">
                             <Row>
                               <Col>
                                 <div>
@@ -395,13 +402,13 @@ const Notification = () => {
                             </p>
                             <img
                               className="package-image"
-                              alt={userRequest.image}
+                              alt="paquete"
                               src={`https://trivi4.com/api/trivia/packages/image/${userRequest.image}`}
                             />
                           </div>
-                          <div className="pt-2">
+                          <div className="pt-3">
                             <Row>
-                              <Col md="6" sm="6" xs="6">
+                              <Col>
                                 <div>
                                   <Button
                                     type="button"
@@ -414,7 +421,7 @@ const Notification = () => {
                                   </Button>
                                 </div>
                               </Col>
-                              <Col md="6" sm="6" xs="6">
+                              <Col>
                                 <div className="right">
                                   <Button
                                     type="button"
@@ -466,7 +473,7 @@ const Notification = () => {
                             </p>
                             <img
                               className="package-image"
-                              alt={userAcceptedRequest.image}
+                              alt="paquete"
                               src={`https://trivi4.com/api/trivia/packages/image/${userAcceptedRequest.image}`}
                             />
                             <p>
@@ -487,6 +494,16 @@ const Notification = () => {
               </Modal>
             </Col>
           </Row>
+        </div>
+        <div
+          className={`loading-screen ${
+            loadingSuggestions || loadingRequests || loadingAcceptedRequest
+              ? "visible"
+              : "hidden"
+          }`}
+        >
+          <div className="spinner"></div>
+          <p>Cargando...</p>
         </div>
       </div>
     </Fragment>

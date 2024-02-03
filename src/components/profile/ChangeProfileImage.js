@@ -6,6 +6,7 @@ import {
   Card,
   CardBody,
   Col,
+  Container,
   Form,
   FormGroup,
   Input,
@@ -21,6 +22,7 @@ const ChangePassword = () => {
   let navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState("");
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const headers = {
@@ -42,7 +44,7 @@ const ChangePassword = () => {
     };
     getUser();
   }, [headers]);
-  
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     // Checks if a file was selected
@@ -88,6 +90,7 @@ const ChangePassword = () => {
       return;
     }
 
+    setLoading(true);
     try {
       await axios.patch(
         `https://trivi4.com/api/trivia/profiles/profile/image`,
@@ -96,17 +99,18 @@ const ChangePassword = () => {
       );
       return navigate("/profile");
     } catch (error) {
+      setLoading(false);
       console.error("Error", error);
     }
   };
 
   return (
-    <div className="content">
+    <Container>
       <Row
         className="justify-content-center align-items-center"
         style={{ height: "100vh" }}
       >
-        <Col md="5" sm="10" xs="10" className="my-5 py-5">
+        <Col md="5" sm="11" xs="11" className="my-5 py-5">
           <Card className="border-0 shadow-lg bg-white">
             <CardBody>
               <div className="text-center m-3">
@@ -130,31 +134,46 @@ const ChangePassword = () => {
               </div>
               <div>
                 <Form onSubmit={handleSubmit}>
-                  <FormGroup floating>
-                    <Input
-                      type="file"
-                      id="image"
-                      name="image"
-                      onChange={handleImageUpload}
-                      className="bg-light"
-                    />
-                    <Label for="image">Imagen de perfil</Label>
-                  </FormGroup>
-                  <Col md="12">
-                    <p className="text-danger text-center">{error}</p>
-                  </Col>
-                  <FormGroup className="text-center">
-                    <Button type="submit" className="btn btn-info text-white">
-                      Guardar
-                    </Button>
-                  </FormGroup>
+                  <Row xs="1" sm="1" md="1">
+                    <Col>
+                      <FormGroup floating>
+                        <Input
+                          type="file"
+                          id="image"
+                          name="image"
+                          onChange={handleImageUpload}
+                          className="bg-light"
+                        />
+                        <Label for="image">Imagen de perfil</Label>
+                      </FormGroup>
+                    </Col>
+                    <Col>
+                      <p className="text-danger text-center">{error}</p>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <FormGroup className="text-center">
+                        <Button
+                          type="submit"
+                          className="btn btn-info text-white"
+                        >
+                          Guardar
+                        </Button>
+                      </FormGroup>
+                    </Col>
+                  </Row>
                 </Form>
               </div>
             </CardBody>
           </Card>
+          <div className={`loading-screen ${loading ? "visible" : "hidden"}`}>
+            <div className="spinner"></div>
+            <p>Cargando...</p>
+          </div>
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 };
 

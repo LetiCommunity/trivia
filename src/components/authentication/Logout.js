@@ -1,9 +1,10 @@
-import React, { Fragment } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Button, Card, CardBody, Col, Row } from "reactstrap";
+import { Button, Card, CardBody, Col, Container, Row } from "reactstrap";
 
 const Logout = () => {
   const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState(false);
   const headers = {
     token: `${token}`,
     "Content-Type": "application/json",
@@ -14,6 +15,7 @@ const Logout = () => {
   };
 
   const handleLogout = async () => {
+    setLoading(true);
     try {
       axios.post("https://trivi4.com/api/trivia/auth/signout", {
         headers,
@@ -30,43 +32,45 @@ const Logout = () => {
   };
 
   return (
-    <Fragment>
-      <div className="content">
-        <Row className="justify-content-center align-items-center">
-          <Col md="5" sm="10" xs="10" className="my-5 py-5">
-            <Card className="border-0 shadow-lg bg-white">
-              <CardBody>
-                <p className="text-center">¿Quiere cerrar la sesión?</p>
-                <Row>
-                  <Col md="6" sm="6" xs="6">
-                    <div>
-                      <Button
-                        type="button"
-                        onClick={handleLogout}
-                        className="btn btn-info text-white"
-                      >
-                        Confirmar
-                      </Button>
-                    </div>
-                  </Col>
-                  <Col md="6" sm="6" xs="6">
-                    <div className="right">
-                      <Button
-                        type="button"
-                        onClick={handleClose}
-                        className="btn btn-danger text-white"
-                      >
-                        Cancelar
-                      </Button>
-                    </div>
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </div>
-    </Fragment>
+    <Container>
+      <Row className="justify-content-center align-items-center">
+        <Col xs="11" sm="11" md="5" className="my-5 py-5">
+          <Card className="border-0 shadow-lg bg-white">
+            <CardBody>
+              <p className="text-center">¿Quiere cerrar la sesión?</p>
+              <Row>
+                <Col>
+                  <div>
+                    <Button
+                      type="button"
+                      onClick={handleLogout}
+                      className="btn btn-info text-white"
+                    >
+                      Confirmar
+                    </Button>
+                  </div>
+                </Col>
+                <Col>
+                  <div className="right">
+                    <Button
+                      type="button"
+                      onClick={handleClose}
+                      className="btn btn-danger text-white"
+                    >
+                      Cancelar
+                    </Button>
+                  </div>
+                </Col>
+              </Row>
+            </CardBody>
+          </Card>
+          <div className={`loading-screen ${loading ? "visible" : "hidden"}`}>
+            <div className="spinner"></div>
+            <p>Cargando...</p>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

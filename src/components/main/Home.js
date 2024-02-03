@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Card,
@@ -9,8 +10,7 @@ import {
   Label,
   Row,
 } from "reactstrap";
-import Footer from "./Footer";
-import { useNavigate } from "react-router-dom";
+import Footer from "../config/Footer";
 
 const Home = () => {
   const token = localStorage.getItem("token");
@@ -106,7 +106,7 @@ const Home = () => {
                               >
                                 <option value="Malabo">Malabo</option>
                                 <option value="Bata">Bata</option>
-                                <option value="Madrid">Madrid</option>
+                                {/* <option value="Madrid">Madrid</option> */}
                               </Input>
                               <Label for="origin">
                                 ¿Desde qué ciudad hace el envío?
@@ -128,7 +128,7 @@ const Home = () => {
                               >
                                 <option value="Malabo">Malabo</option>
                                 <option value="Bata">Bata</option>
-                                <option value="Madrid">Madrid</option>
+                                {/* <option value="Madrid">Madrid</option> */}
                               </Input>
                               <Label for="destination">
                                 ¿Cuál es la ciudad de destino?
@@ -330,10 +330,10 @@ const Home = () => {
                 </Col>
                 <Col md="4">
                   <Card
-                    onClick={() => handleSearchTrip("malabo", "madrid")}
+                    onClick={() => handleSearchTrip("bata", "malabo")}
                     className="mb-2 bg-light card_pointer"
                   >
-                    <p className="p-3 text-size">Malabo a Madrid</p>
+                    <p className="p-3 text-size">Bata a Malabo</p>
                   </Card>
                 </Col>
                 <Col md="4">
