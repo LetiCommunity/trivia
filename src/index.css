@@ -22,7 +22,7 @@ h2 {
 .title {
   z-index: 2;
   position: absolute;
-  top: 15%;
+  top: 10%;
   left: 0;
   width: 100%;
 }
@@ -43,7 +43,7 @@ h2 {
 .search_trip2 {
   position: fixed;
   background: light;
-  top: 11%;
+  top: 12%;
   left: 10%;
   width: 80%;
   border-radius: 15%;
@@ -54,7 +54,7 @@ h2 {
   position: relative;
   height: 400px;
   overflow: auto;
-  margin-top: 16%;
+  margin-top: 12%;
   padding-top: 1%;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -152,7 +152,7 @@ ul {
 
 @media(max-width:767px) {
   .search_trip {
-    top: 60%;
+    top: 50%;
   }
 
   .margin-services {
@@ -216,16 +216,12 @@ ul {
 
 /* Small screen */
 @media(max-width:461px) {
-  .cover {
-    margin-top: 10%;
-  }
-
   .title {
-    top: 15%;
+    top: 1%;
   }
 
   .search_trip {
-    top: 65%;
+    top: 55%;
   }
 
   .margin-services {

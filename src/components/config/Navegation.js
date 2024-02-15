@@ -99,7 +99,7 @@ const UserNavbar = () => {
 
   return (
     <BrowserRouter>
-      <Navbar className="fixed-top bg-light shadow-lg">
+      <Navbar className="sticky-top bg-light shadow-lg">
         <NavbarBrand href="/home">
           <img
             className="logo"

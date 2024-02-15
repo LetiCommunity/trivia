@@ -117,64 +117,62 @@ const SearchTrip = () => {
         <Row xs="1" sm="1" md="1" className="justify-content-center">
           <Col>
             <div className="search_trip">
-              <Card className="py-2 px-2">
-                <Form onSubmit={handleSubmit}>
-                  <div className="search_trip2">
-                    <Row xs="2" sm="2" md="3">
-                      <Col xs="6" sm="6" md="5">
-                        <div className="">
-                          <FormGroup floating>
-                            <Input
-                              type="select"
-                              id="origin"
-                              name="origin"
-                              value={searchTrip.origin}
-                              onChange={handleChange}
-                              placeholder="¿Desde qué ciudad hace el envío?"
-                              className="form-control-lg border-0 border-bottom"
-                            >
-                              <option value="Malabo">Malabo</option>
-                              <option value="Bata">Bata</option>
-                              <option value="Madrid">Madrid</option>
-                            </Input>
-                            <Label for="origin">Origen del envío</Label>
-                          </FormGroup>
-                        </div>
-                      </Col>
-                      <Col xs="6" sm="6" md="5">
-                        <div className="">
-                          <FormGroup floating>
-                            <Input
-                              type="select"
-                              id="destination"
-                              name="destination"
-                              value={searchTrip.destination}
-                              onChange={handleChange}
-                              placeholder="¿Cuál es la ciudad de destino?"
-                              className="form-control-lg border-0 border-bottom"
-                            >
-                              <option value="Malabo">Malabo</option>
-                              <option value="Bata">Bata</option>
-                              {/* <option value="Madrid">Madrid</option> */}
-                            </Input>
-                            <Label for="destination">Destino del envío</Label>
-                          </FormGroup>
-                        </div>
-                      </Col>
-                      <Col xs="12" sm="12" md="2">
-                        <div className="d-grid gap-2 pt-2">
-                          <Button
-                            type="submit"
-                            className="btn btn-info text-white form-control-lg"
+              <Form onSubmit={handleSubmit}>
+                <div className="search_trip2">
+                  <Row xs="2" sm="2" md="3">
+                    <Col xs="6" sm="6" md="5">
+                      <div className="">
+                        <FormGroup floating>
+                          <Input
+                            type="select"
+                            id="origin"
+                            name="origin"
+                            value={searchTrip.origin}
+                            onChange={handleChange}
+                            placeholder="¿Desde qué ciudad hace el envío?"
+                            className="form-control-lg border-0 border-bottom"
                           >
-                            Buscar
-                          </Button>
-                        </div>
-                      </Col>
-                    </Row>
-                  </div>
-                </Form>
-              </Card>
+                            <option value="Malabo">Malabo</option>
+                            <option value="Bata">Bata</option>
+                            <option value="Madrid">Madrid</option>
+                          </Input>
+                          <Label for="origin">Origen del envío</Label>
+                        </FormGroup>
+                      </div>
+                    </Col>
+                    <Col xs="6" sm="6" md="5">
+                      <div className="">
+                        <FormGroup floating>
+                          <Input
+                            type="select"
+                            id="destination"
+                            name="destination"
+                            value={searchTrip.destination}
+                            onChange={handleChange}
+                            placeholder="¿Cuál es la ciudad de destino?"
+                            className="form-control-lg border-0 border-bottom"
+                          >
+                            <option value="Malabo">Malabo</option>
+                            <option value="Bata">Bata</option>
+                            {/* <option value="Madrid">Madrid</option> */}
+                          </Input>
+                          <Label for="destination">Destino del envío</Label>
+                        </FormGroup>
+                      </div>
+                    </Col>
+                    <Col xs="12" sm="12" md="2">
+                      <div className="d-grid gap-2 pt-2">
+                        <Button
+                          type="submit"
+                          className="btn btn-info text-white form-control-lg"
+                        >
+                          Buscar
+                        </Button>
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+              </Form>
             </div>
           </Col>
         </Row>
