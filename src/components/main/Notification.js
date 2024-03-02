@@ -1,12 +1,12 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { Button, Card, CardBody, Col, Modal, Row } from "reactstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Card, CardBody, Col, Container, Modal, Row } from "reactstrap";
 import axios from "axios";
 
 const Notification = () => {
   const token = localStorage.getItem("token");
   const [requests, setRequests] = useState([]);
   const [acceptedRequest, setAcceptedRequest] = useState([]);
-  const [suggestions, setSuggestions]  = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const [viewMoreRequests, setViewMoreRequests] = useState(true);
   const [viewMoreAcceptedRequests, setViewMoreAcceptedRequests] =
     useState(true);
@@ -165,191 +165,189 @@ const Notification = () => {
   };
 
   return (
-    <Fragment>
-      <div className="content my-5">
-        <div>
-          <Row className="justify-content-center">
-            <Col md="5" sm="11" xs="11">
-              <div className="pt-2">
-                <div>
-                  <Button
-                    type="button"
-                    color="link"
-                    outline={true}
-                    className="text-black"
-                    onClick={handleViewMoreRequests}
-                  >
-                    Solicitudes de envío
-                    {viewMoreRequests ? (
-                      <i className="bi bi-caret-up-fill"></i>
-                    ) : (
-                      <i className="bi bi-caret-down-fill"></i>
-                    )}
-                  </Button>
-                </div>
-                {requests ? (
-                  <div>
-                    {requests.map((item) => {
-                      return (
-                        <div key={item._id}>
-                          <div className="rounded bg-light text-dark p-1"></div>
-                          <Card
-                            className="rounded text-dark p-2 shadow-lg bg-white border-0 card_pointer"
-                            onClick={() => handleRequestDetails(item)}
-                          >
-                            <p className="text-size">
-                              Descripción: {item.description}
-                            </p>
-                            <p className="text-size">
-                              Gane {item.weight * 750} XAF por el envío
-                            </p>
-                          </Card>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : null}
+    <Container>
+      <div>
+        <Row className="justify-content-center">
+          <Col md="5" sm="11" xs="11">
+            <div className="pt-2">
+              <div>
+                <Button
+                  type="button"
+                  color="link"
+                  outline={true}
+                  className="text-black"
+                  onClick={handleViewMoreRequests}
+                >
+                  Solicitudes de envío
+                  {viewMoreRequests ? (
+                    <i className="bi bi-caret-up-fill"></i>
+                  ) : (
+                    <i className="bi bi-caret-down-fill"></i>
+                  )}
+                </Button>
               </div>
-            </Col>
-            <Col md="5" sm="11" xs="11">
-              <div className="pt-2">
+              {requests ? (
                 <div>
-                  <Button
-                    type="button"
-                    color="link"
-                    outline={true}
-                    className="text-black"
-                    onClick={handleViewMoreAcceptedRequests}
-                  >
-                    Paquetes aceptados
-                    {viewMoreAcceptedRequests ? (
-                      <i className="bi bi-caret-up-fill"></i>
-                    ) : (
-                      <i className="bi bi-caret-down-fill"></i>
-                    )}
-                  </Button>
+                  {requests.map((item) => {
+                    return (
+                      <div key={item._id}>
+                        <div className="rounded bg-light text-dark p-1"></div>
+                        <Card
+                          className="rounded text-dark p-2 shadow-lg bg-white border-0 card_pointer"
+                          onClick={() => handleRequestDetails(item)}
+                        >
+                          <p className="text-size">
+                            Descripción: {item.description}
+                          </p>
+                          <p className="text-size">
+                            Gane {item.weight * 750} XAF por el envío
+                          </p>
+                        </Card>
+                      </div>
+                    );
+                  })}
                 </div>
-                {acceptedRequest ? (
-                  <div>
-                    {acceptedRequest.map((item) => {
-                      return (
-                        <div key={item._id}>
-                          <div className="rounded bg-light text-dark p-1"></div>
-                          <Card
-                            className="rounded text-dark p-2 shadow-lg bg-white border-0 card_pointer"
-                            onClick={() => handleAccptedRequestDetails(item)}
-                          >
-                            <p className="text-size">
-                              Descripción: {item.description}
-                            </p>
-                            <p className="text-size">Estado: {item.state}</p>
-                          </Card>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : null}
+              ) : null}
+            </div>
+          </Col>
+          <Col md="5" sm="11" xs="11">
+            <div className="pt-2">
+              <div>
+                <Button
+                  type="button"
+                  color="link"
+                  outline={true}
+                  className="text-black"
+                  onClick={handleViewMoreAcceptedRequests}
+                >
+                  Paquetes aceptados
+                  {viewMoreAcceptedRequests ? (
+                    <i className="bi bi-caret-up-fill"></i>
+                  ) : (
+                    <i className="bi bi-caret-down-fill"></i>
+                  )}
+                </Button>
               </div>
-            </Col>
-            <Col md="5" sm="11" xs="11">
-              <div className="pt-2">
+              {acceptedRequest ? (
                 <div>
-                  <Button
-                    type="button"
-                    color="link"
-                    outline={true}
-                    className="text-black"
-                    onClick={handleViewMoreSuggestions}
-                  >
-                    Sugerencias
-                    {viewMoreSuggestions ? (
-                      <i className="bi bi-caret-up-fill"></i>
-                    ) : (
-                      <i className="bi bi-caret-down-fill"></i>
-                    )}
-                  </Button>
+                  {acceptedRequest.map((item) => {
+                    return (
+                      <div key={item._id}>
+                        <div className="rounded bg-light text-dark p-1"></div>
+                        <Card
+                          className="rounded text-dark p-2 shadow-lg bg-white border-0 card_pointer"
+                          onClick={() => handleAccptedRequestDetails(item)}
+                        >
+                          <p className="text-size">
+                            Descripción: {item.description}
+                          </p>
+                          <p className="text-size">Estado: {item.state}</p>
+                        </Card>
+                      </div>
+                    );
+                  })}
                 </div>
-                {suggestions ? (
-                  <div>
-                    {suggestions.map((item) => {
-                      return (
-                        <div key={item._id}>
-                          <div className="rounded bg-light text-dark p-1"></div>
-                          <Card
-                            className="rounded text-dark p-2 shadow-lg bg-white border-0 card_pointer"
-                            onClick={() => handleSuggestionsDetails(item)}
-                          >
-                            <p className="text-size">
-                              Descripción: {item.description}
-                            </p>
-                            <p className="text-size">
-                              Gane {item.weight * 750} XAF por el envío
-                            </p>
-                          </Card>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : null}
+              ) : null}
+            </div>
+          </Col>
+          <Col md="5" sm="11" xs="11">
+            <div className="pt-2">
+              <div>
+                <Button
+                  type="button"
+                  color="link"
+                  outline={true}
+                  className="text-black"
+                  onClick={handleViewMoreSuggestions}
+                >
+                  Sugerencias
+                  {viewMoreSuggestions ? (
+                    <i className="bi bi-caret-up-fill"></i>
+                  ) : (
+                    <i className="bi bi-caret-down-fill"></i>
+                  )}
+                </Button>
               </div>
-            </Col>
-            <Col md="5" sm="11" xs="11">
-              <div className="pt-2"></div>
-            </Col>
-          </Row>
-        </div>
-        <div>
-          <Row>
-            <Col>
-              <Modal
-                isOpen={suggestionsModal}
-                toggle={toggleTravelDetails}
-                backdrop={false}
-              >
-                <Card className="border-0 shadow-lg bg-white">
-                  <CardBody>
-                    <div className="modal-header">
-                      <h4 className="modal-title">Detalles del paquete</h4>
-                      <button
-                        type="button"
-                        className="close"
-                        onClick={toggleTravelDetails}
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div className="modal-body">
-                      {userSuggestions && (
+              {suggestions ? (
+                <div>
+                  {suggestions.map((item) => {
+                    return (
+                      <div key={item._id}>
+                        <div className="rounded bg-light text-dark p-1"></div>
+                        <Card
+                          className="rounded text-dark p-2 shadow-lg bg-white border-0 card_pointer"
+                          onClick={() => handleSuggestionsDetails(item)}
+                        >
+                          <p className="text-size">
+                            Descripción: {item.description}
+                          </p>
+                          <p className="text-size">
+                            Gane {item.weight * 750} XAF por el envío
+                          </p>
+                        </Card>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </div>
+          </Col>
+          <Col md="5" sm="11" xs="11">
+            <div className="pt-2"></div>
+          </Col>
+        </Row>
+      </div>
+      <div>
+        <Row>
+          <Col>
+            <Modal
+              isOpen={suggestionsModal}
+              toggle={toggleTravelDetails}
+              backdrop={false}
+            >
+              <Card className="border-0 shadow-lg bg-white">
+                <CardBody>
+                  <div className="modal-header">
+                    <h4 className="modal-title">Detalles del paquete</h4>
+                    <button
+                      type="button"
+                      className="close"
+                      onClick={toggleTravelDetails}
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    {userSuggestions && (
+                      <div>
                         <div>
-                          <div>
-                            <h5>Información del paquete</h5>
-                            <p>Descripción: {userSuggestions.description}</p>
-                            <p className="text-size">
-                              Gane {userSuggestions.weight * 750} XAF por el
-                              envío
-                            </p>
-                            <img
-                              className="package-image"
-                              alt="paquete"
-                              src={`https://trivi4.com/api/trivia/packages/image/${userSuggestions.image}`}
-                            />
-                          </div>
-                          <div className="pt-3">
-                            <Row>
-                              <Col>
-                                <div>
-                                  <Button
-                                    type="button"
-                                    onClick={() =>
-                                      handleAcceptance(userSuggestions._id)
-                                    }
-                                    className="btn btn-info text-white"
-                                  >
-                                    Aceptar
-                                  </Button>
-                                </div>
-                              </Col>
-                              {/* <Col md="6" sm="6" xs="6">
+                          <h5>Información del paquete</h5>
+                          <p>Descripción: {userSuggestions.description}</p>
+                          <p className="text-size">
+                            Gane {userSuggestions.weight * 750} XAF por el envío
+                          </p>
+                          <img
+                            className="package-image"
+                            alt="paquete"
+                            src={`https://trivi4.com/api/trivia/packages/image/${userSuggestions.image}`}
+                          />
+                        </div>
+                        <div className="pt-3">
+                          <Row>
+                            <Col>
+                              <div>
+                                <Button
+                                  type="button"
+                                  onClick={() =>
+                                    handleAcceptance(userSuggestions._id)
+                                  }
+                                  className="btn btn-info text-white"
+                                >
+                                  Aceptar
+                                </Button>
+                              </div>
+                            </Col>
+                            {/* <Col md="6" sm="6" xs="6">
                                 <div className="right">
                                   <Button
                                     type="button"
@@ -362,151 +360,146 @@ const Notification = () => {
                                   </Button>
                                 </div>
                               </Col> */}
-                            </Row>
-                          </div>
+                          </Row>
                         </div>
-                      )}
-                    </div>
-                  </CardBody>
-                </Card>
-              </Modal>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Modal
-                isOpen={requestModal}
-                toggle={togglePackageDetails}
-                backdrop={false}
-              >
-                <Card className="border-0 shadow-lg bg-white">
-                  <CardBody>
-                    <div className="modal-header">
-                      <h4 className="modal-title">Detalles del Paquete</h4>
-                      <button
-                        type="button"
-                        className="close"
-                        onClick={togglePackageDetails}
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div className="modal-body">
-                      {userRequest && (
+                      </div>
+                    )}
+                  </div>
+                </CardBody>
+              </Card>
+            </Modal>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Modal
+              isOpen={requestModal}
+              toggle={togglePackageDetails}
+              backdrop={false}
+            >
+              <Card className="border-0 shadow-lg bg-white">
+                <CardBody>
+                  <div className="modal-header">
+                    <h4 className="modal-title">Detalles del Paquete</h4>
+                    <button
+                      type="button"
+                      className="close"
+                      onClick={togglePackageDetails}
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    {userRequest && (
+                      <div>
                         <div>
-                          <div>
-                            <h5>Información del paquete</h5>
-                            <p>Descripción: {userRequest.description}</p>
-                            <p className="text-size">
-                              Gane {userRequest.weight * 750} por el envío
-                            </p>
-                            <img
-                              className="package-image"
-                              alt="paquete"
-                              src={`https://trivi4.com/api/trivia/packages/image/${userRequest.image}`}
-                            />
-                          </div>
-                          <div className="pt-3">
-                            <Row>
-                              <Col>
-                                <div>
-                                  <Button
-                                    type="button"
-                                    onClick={() =>
-                                      handleConfirmation(userRequest._id)
-                                    }
-                                    className="btn btn-info text-white"
-                                  >
-                                    Confirmar
-                                  </Button>
-                                </div>
-                              </Col>
-                              <Col>
-                                <div className="right">
-                                  <Button
-                                    type="button"
-                                    onClick={() =>
-                                      handleRejection(userRequest._id)
-                                    }
-                                    className="btn btn-danger text-white"
-                                  >
-                                    Rechazar
-                                  </Button>
-                                </div>
-                              </Col>
-                            </Row>
-                          </div>
+                          <h5>Información del paquete</h5>
+                          <p>Descripción: {userRequest.description}</p>
+                          <p className="text-size">
+                            Gane {userRequest.weight * 750} por el envío
+                          </p>
+                          <img
+                            className="package-image"
+                            alt="paquete"
+                            src={`https://trivi4.com/api/trivia/packages/image/${userRequest.image}`}
+                          />
                         </div>
-                      )}
-                    </div>
-                  </CardBody>
-                </Card>
-              </Modal>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Modal
-                isOpen={acceptedRequestModal}
-                toggle={togglePackageAcceptedDetails}
-                backdrop={false}
-              >
-                <Card className="border-0 shadow-lg bg-white">
-                  <CardBody>
-                    <div className="modal-header">
-                      <h4 className="modal-title">Detalles del Paquete</h4>
-                      <button
-                        type="button"
-                        className="close"
-                        onClick={togglePackageAcceptedDetails}
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div className="modal-body">
-                      {userAcceptedRequest && (
+                        <div className="pt-3">
+                          <Row>
+                            <Col>
+                              <div>
+                                <Button
+                                  type="button"
+                                  onClick={() =>
+                                    handleConfirmation(userRequest._id)
+                                  }
+                                  className="btn btn-info text-white"
+                                >
+                                  Confirmar
+                                </Button>
+                              </div>
+                            </Col>
+                            <Col>
+                              <div className="right">
+                                <Button
+                                  type="button"
+                                  onClick={() =>
+                                    handleRejection(userRequest._id)
+                                  }
+                                  className="btn btn-danger text-white"
+                                >
+                                  Rechazar
+                                </Button>
+                              </div>
+                            </Col>
+                          </Row>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </CardBody>
+              </Card>
+            </Modal>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Modal
+              isOpen={acceptedRequestModal}
+              toggle={togglePackageAcceptedDetails}
+              backdrop={false}
+            >
+              <Card className="border-0 shadow-lg bg-white">
+                <CardBody>
+                  <div className="modal-header">
+                    <h4 className="modal-title">Detalles del Paquete</h4>
+                    <button
+                      type="button"
+                      className="close"
+                      onClick={togglePackageAcceptedDetails}
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    {userAcceptedRequest && (
+                      <div>
                         <div>
-                          <div>
-                            <h5>Información del paquete</h5>
-                            <p>
-                              Descripción: {userAcceptedRequest.description}
-                            </p>
-                            <img
-                              className="package-image"
-                              alt="paquete"
-                              src={`https://trivi4.com/api/trivia/packages/image/${userAcceptedRequest.image}`}
-                            />
-                            <p>
-                              Su paquete ha sido aceptado, por favor, diríjase a
-                              la oficina más cercana:
-                              <ul>
-                                <li>
-                                  Malabo: Semu, rotonda Bilisa, Mercafacil
-                                </li>
-                              </ul>
-                            </p>
-                          </div>
+                          <h5>Información del paquete</h5>
+                          <p>Descripción: {userAcceptedRequest.description}</p>
+                          <img
+                            className="package-image"
+                            alt="paquete"
+                            src={`https://trivi4.com/api/trivia/packages/image/${userAcceptedRequest.image}`}
+                          />
+                          <p>
+                            Su paquete ha sido aceptado, por favor, diríjase a
+                            la oficina más cercana:
+                            <ul>
+                              <li>Malabo: Semu, rotonda Bilisa, Mercafacil</li>
+                            </ul>
+                          </p>
                         </div>
-                      )}
-                    </div>
-                  </CardBody>
-                </Card>
-              </Modal>
-            </Col>
-          </Row>
-        </div>
-        <div
-          className={`loading-screen ${
-            loadingSuggestions || loadingRequests || loadingAcceptedRequest
-              ? "visible"
-              : "hidden"
-          }`}
-        >
-          <div className="spinner"></div>
-          <p>Cargando...</p>
-        </div>
+                      </div>
+                    )}
+                  </div>
+                </CardBody>
+              </Card>
+            </Modal>
+          </Col>
+        </Row>
       </div>
-    </Fragment>
+      <div
+        className={`loading-screen ${
+          loadingSuggestions || loadingRequests || loadingAcceptedRequest
+            ? "visible"
+            : "hidden"
+        }`}
+      >
+        <div className="spinner"></div>
+        <p>Cargando...</p>
+      </div>
+    </Container>
   );
 };
 

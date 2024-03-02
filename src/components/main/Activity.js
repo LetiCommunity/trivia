@@ -136,7 +136,7 @@ const Activity = () => {
   };
 
   return (
-    <Container className="my-5">
+    <Container>
       <div>
         <Row className="justify-content-center">
           <Col md="5" sm="10" xs="10">

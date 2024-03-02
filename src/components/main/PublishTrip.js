@@ -6,6 +6,7 @@ import {
   Card,
   CardBody,
   Col,
+  Container,
   Form,
   FormGroup,
   Input,
@@ -166,8 +167,8 @@ const PublishTrip = () => {
   };
 
   return (
-    <Fragment>
-      <div className="content">
+    <Container>
+      <div>
         <Row
           className="justify-content-center align-items-center"
           style={{ height: "100vh" }}
@@ -390,7 +391,7 @@ const PublishTrip = () => {
         <div className="spinner"></div>
         <p>Cargando...</p>
       </div>
-    </Fragment>
+    </Container>
   );
 };
 

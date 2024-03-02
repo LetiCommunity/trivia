@@ -169,7 +169,7 @@ const Registration = () => {
         className="justify-content-center align-items-center"
         style={{ height: "100vh" }}
       >
-        <Col xs="11" sm="11" md="5" className="my-5 py-5">
+        <Col xs="11" sm="11" md="5">
           <Card className="border-0 shadow-lg bg-white">
             <CardBody>
               <div>
@@ -419,7 +419,7 @@ const Registration = () => {
                           Siguiente
                         </Button>
                       )}
-                      {section === 3 && (
+                      {section === 3 && !otp && (
                         <Button
                           type="button"
                           id="sign-in-button"
