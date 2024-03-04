@@ -14,6 +14,7 @@ const Notification = () => {
   const [requestModal, setRequestModal] = useState(false);
   const [acceptedRequestModal, setAcceptedRequestModal] = useState(false);
   const [suggestionsModal, setSuggestionsModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [loadingRequests, setLoadingRequests] = useState(true);
   const [loadingSuggestions, setLoadingSuggestions] = useState(true);
   const [loadingAcceptedRequest, setLoadingAcceptedRequest] = useState(true);
@@ -42,6 +43,7 @@ const Notification = () => {
         }
       } catch (error) {
         console.error("Error", error.message);
+        setLoadingRequests(false);
       }
     };
     getRequests();
@@ -62,6 +64,7 @@ const Notification = () => {
         }
       } catch (error) {
         console.error("Error", error.message);
+        setLoadingAcceptedRequest(false);
       }
     };
     getAcceptedRequests();
@@ -82,6 +85,7 @@ const Notification = () => {
         }
       } catch (error) {
         console.error("Error", error.message);
+        setLoadingSuggestions(false);
       }
     };
     getSuggestions();
@@ -127,30 +131,37 @@ const Notification = () => {
   };
 
   const handleConfirmation = async (id) => {
+    setLoading(true);
     try {
       await axios.get(
         `https://trivi4.com/api/trivia/packages/requests/confirmation/${id}`,
         { headers }
       );
       togglePackageDetails();
+      setLoading(false);
     } catch (error) {
       console.error("Error", error.message);
+      setLoading(false);
     }
   };
 
   const handleAcceptance = async (id) => {
+    setLoading(true);
     try {
       await axios.get(
         `https://trivi4.com/api/trivia/packages/suggestions/confirmation/${id}`,
         { headers }
       );
       togglePackageDetails();
+      setLoading(false);
     } catch (error) {
       console.error("Error", error.message);
+      setLoading(false);
     }
   };
 
   const handleRejection = async (id) => {
+    setLoading(true);
     try {
       await axios.get(
         `https://trivi4.com/api/trivia/packages/requests/rejection/${id}`,
@@ -159,8 +170,10 @@ const Notification = () => {
         }
       );
       togglePackageDetails();
+      setLoading(false);
     } catch (error) {
       console.error("Error", error.message);
+      setLoading(false);
     }
   };
 
@@ -491,7 +504,10 @@ const Notification = () => {
       </div>
       <div
         className={`loading-screen ${
-          loadingSuggestions || loadingRequests || loadingAcceptedRequest
+          loadingSuggestions ||
+          loadingRequests ||
+          loadingAcceptedRequest ||
+          loading
             ? "visible"
             : "hidden"
         }`}
