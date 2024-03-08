@@ -20,6 +20,7 @@ const SearchTrip = () => {
   const token = localStorage.getItem("token");
   const [travels, setTravels] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingPage, setLoadingPage] = useState(true);
   const [page, setPage] = useState(1);
   //const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   let navigate = useNavigate();
@@ -41,8 +42,10 @@ const SearchTrip = () => {
         `https://trivi4.com/api/trivia/travels/filterByCity/${origin}/${destination}`
       );
       setTravels(data);
+      setLoadingPage(false);
     } catch (error) {
       console.error(error.message);
+      setLoadingPage(false);
     }
   };
   getTravels();
@@ -214,6 +217,10 @@ const SearchTrip = () => {
             </div>
           </Col>
         </Row>
+      </div>
+      <div className={`loading-screen ${loadingPage ? "visible" : "hidden"}`}>
+        <div className="spinner"></div>
+        <p>Cargando...</p>
       </div>
     </Container>
   );

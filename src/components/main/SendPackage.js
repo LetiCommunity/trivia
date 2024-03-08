@@ -297,7 +297,7 @@ const SendPackage = () => {
                 {section === 2 && (
                   <>
                     <h2>Información de paquete</h2>
-                    <Row>
+                    <Row xs="1" sm="1" md="1"> 
                       <Col>
                         <FormGroup floating>
                           <Input
