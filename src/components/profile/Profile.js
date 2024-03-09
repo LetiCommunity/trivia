@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button, Card, CardBody, Col, Container, Row } from "reactstrap";
-import { signOut } from "firebase/auth";
 
-import auth from "../config/firebase";
 import inicialImage from "../../assets/img/user.png";
 
 const Profile = () => {
@@ -44,28 +42,14 @@ const Profile = () => {
     return navigate("/change-password");
   };
 
-  const handleDeleteAccount = async () => {
-    try {
-      await axios.delete("https://trivi4.com/api/trivia/profiles/profile", {
-        headers,
-      });
-      signOut(auth)
-        .then(() => {
-          navigate("/logout");
-          return (window.location.href = "/home");
-        })
-        .catch((error) => {
-          //setImageUrl("") //Test
-        });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   const handleLogout = () => {
     return navigate("/logout");
   };
 
+  const handleDeleteAccount = async () => {
+    return navigate("/delete-account");
+  };
+  
   return (
       <Container>
         <Row

@@ -26,6 +26,7 @@ import Terms from "../main/Terms";
 import EditProfile from "../profile/EditProfile";
 import ChangeProfileImage from "../profile/ChangeProfileImage";
 import ChangePassword from "../profile/ChangePassword";
+import DeleteAccount from "../profile/DeleteAccount"
 
 const UserNavbar = () => {
   const token = localStorage.getItem("token");
@@ -233,6 +234,7 @@ const UserNavbar = () => {
             />
             <Route path="change-password" element={<ChangePassword />} />
             <Route path="logout" element={<Logout />} />
+            <Route path="delete-account" element={<DeleteAccount />} />
           </>
         ) : (
           <>
