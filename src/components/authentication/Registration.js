@@ -137,7 +137,7 @@ const Registration = () => {
     const data = {
       name: user.name,
       surname: user.surname,
-      phoneNumber: user.phoneNumber,
+      phoneNumber: user.countryCode + user.phoneNumber,
       email: user.email,
       username: user.username,
       password: user.password,
@@ -264,7 +264,7 @@ const Registration = () => {
                               placeholder="Nombre de usuario"
                               className="bg-light"
                             />
-                            <Label for="username">Username</Label>
+                            <Label for="username">Nombre de usuario</Label>
                           </FormGroup>
                         </Col>
                         <Col>
