@@ -17,7 +17,7 @@ const Logout = () => {
   const handleLogout = async () => {
     setLoading(true);
     try {
-      axios.post("https://trivi4.com/api/trivia/auth/signout", {
+      axios.post("http://localhost:5000/api/trivia/auth/signout", {
         headers,
       });
     } catch (error) {

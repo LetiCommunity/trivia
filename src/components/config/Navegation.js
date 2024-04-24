@@ -47,7 +47,7 @@ const UserNavbar = () => {
       const getUser = async () => {
         try {
           const { data } = await axios.get(
-            "https://trivi4.com/api/trivia/profiles/profile",
+            "http://localhost:5000/api/trivia/profiles/profile",
             { headers }
           );
           setUser(data);
@@ -59,7 +59,7 @@ const UserNavbar = () => {
       const getRequests = async () => {
         try {
           const { data } = await axios.get(
-            "https://trivi4.com/api/trivia/packages/filterByRequest",
+            "http://localhost:5000/api/trivia/packages/filterByRequest",
             { headers }
           );
           setRequests(data);
@@ -71,7 +71,7 @@ const UserNavbar = () => {
       const getAcceptedRequests = async () => {
         try {
           const { data } = await axios.get(
-            "https://trivi4.com/api/trivia/packages/filterByAcceptedRequest",
+            "http://localhost:5000/api/trivia/packages/filterByAcceptedRequest",
             { headers }
           );
           setAcceptedRequest(data);
@@ -83,7 +83,7 @@ const UserNavbar = () => {
       const getSuggestions = async () => {
         try {
           const { data } = await axios.get(
-            "https://trivi4.com/api/trivia/packages/filterByMatch",
+            "http://localhost:5000/api/trivia/packages/filterByMatch",
             { headers }
           );
           setSuggestions(data);
@@ -119,7 +119,7 @@ const UserNavbar = () => {
                 className="rounded-circle profile-bar"
                 src={
                   user.image
-                    ? `https://trivi4.com/api/trivia/profiles/image/${user.image}`
+                    ? `http://localhost:5000/api/trivia/profiles/image/${user.image}`
                     : inicialImage
                 }
               />

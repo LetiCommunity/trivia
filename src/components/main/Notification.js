@@ -32,7 +32,7 @@ const Notification = () => {
     const getRequests = async () => {
       try {
         const { data } = await axios.get(
-          "https://trivi4.com/api/trivia/packages/filterByRequest",
+          "http://localhost:5000/api/trivia/packages/filterByRequest",
           { headers }
         );
         if (viewMoreRequests) {
@@ -53,7 +53,7 @@ const Notification = () => {
     const getAcceptedRequests = async () => {
       try {
         const { data } = await axios.get(
-          "https://trivi4.com/api/trivia/packages/filterByAcceptedRequest",
+          "http://localhost:5000/api/trivia/packages/filterByAcceptedRequest",
           { headers }
         );
         if (viewMoreAcceptedRequests) {
@@ -74,7 +74,7 @@ const Notification = () => {
     const getSuggestions = async () => {
       try {
         const { data } = await axios.get(
-          "https://trivi4.com/api/trivia/packages/filterByMatch",
+          "http://localhost:5000/api/trivia/packages/filterByMatch",
           { headers }
         );
         if (viewMoreSuggestions) {
@@ -134,7 +134,7 @@ const Notification = () => {
     setLoading(true);
     try {
       await axios.get(
-        `https://trivi4.com/api/trivia/packages/requests/confirmation/${id}`,
+        `http://localhost:5000/api/trivia/packages/requests/confirmation/${id}`,
         { headers }
       );
       togglePackageDetails();
@@ -149,7 +149,7 @@ const Notification = () => {
     setLoading(true);
     try {
       await axios.get(
-        `https://trivi4.com/api/trivia/packages/suggestions/confirmation/${id}`,
+        `http://localhost:5000/api/trivia/packages/suggestions/confirmation/${id}`,
         { headers }
       );
       togglePackageDetails();
@@ -164,7 +164,7 @@ const Notification = () => {
     setLoading(true);
     try {
       await axios.get(
-        `https://trivi4.com/api/trivia/packages/requests/rejection/${id}`,
+        `http://localhost:5000/api/trivia/packages/requests/rejection/${id}`,
         {
           headers,
         }
@@ -342,7 +342,7 @@ const Notification = () => {
                           <img
                             className="package-image"
                             alt="paquete"
-                            src={`https://trivi4.com/api/trivia/packages/image/${userSuggestions.image}`}
+                            src={`http://localhost:5000/api/trivia/packages/image/${userSuggestions.image}`}
                           />
                         </div>
                         <div className="pt-3">
@@ -414,7 +414,7 @@ const Notification = () => {
                           <img
                             className="package-image"
                             alt="paquete"
-                            src={`https://trivi4.com/api/trivia/packages/image/${userRequest.image}`}
+                            src={`http://localhost:5000/api/trivia/packages/image/${userRequest.image}`}
                           />
                         </div>
                         <div className="pt-3">
@@ -483,7 +483,7 @@ const Notification = () => {
                           <img
                             className="package-image"
                             alt="paquete"
-                            src={`https://trivi4.com/api/trivia/packages/image/${userAcceptedRequest.image}`}
+                            src={`http://localhost:5000/api/trivia/packages/image/${userAcceptedRequest.image}`}
                           />
                           <p>
                             Su paquete ha sido aceptado, por favor, diríjase a

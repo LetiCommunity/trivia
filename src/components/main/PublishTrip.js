@@ -45,7 +45,7 @@ const PublishTrip = () => {
       if (id) {
         try {
           const { data } = await axios.get(
-            `https://trivi4.com/api/trivia/travels/${id}`,
+            `http://localhost:5000/api/trivia/travels/${id}`,
             { headers }
           );
           setTravel(data);
@@ -148,11 +148,11 @@ const PublishTrip = () => {
     setLoading(true);
     try {
       if (!id) {
-        await axios.post("https://trivi4.com/api/trivia/travels", data, {
+        await axios.post("http://localhost:5000/api/trivia/travels", data, {
           headers,
         });
       } else {
-        await axios.put(`https://trivi4.com/api/trivia/travels/${id}`, data, {
+        await axios.put(`http://localhost:5000/api/trivia/travels/${id}`, data, {
           headers,
         });
       }

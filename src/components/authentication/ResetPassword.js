@@ -108,7 +108,7 @@ const Registration = () => {
 
     setLoading(true);
     try {
-      axios.patch("https://trivi4.com/api/trivia/auth/resetPassword", data, {
+      axios.patch("http://localhost:5000/api/trivia/auth/resetPassword", data, {
         headers,
       });
       return navigate("/login");

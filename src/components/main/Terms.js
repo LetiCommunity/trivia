@@ -367,22 +367,27 @@ const Terms = () => {
                 Acuerdo) de cualquiera de sus obligaciones en virtud del
                 presente Acuerdo.
               </p>
+              <h2>Duración y Terminación</h2>
+              <p>
+                Este Acuerdo permanecerá en vigor hasta que usted o Trivia lo
+                rescindan. Trivia puede, a su entera discreción, en cualquier
+                momento y por cualquier motivo o sin él: suspender o rescindir
+                este Acuerdo con o sin previo aviso. Este Acuerdo terminará
+                inmediatamente, sin previo aviso de presupuesto, en caso de que
+                no cumpla con alguna de las disposiciones de este Acuerdo.
+                También puede rescindir este Acuerdo eliminando la plataforma y
+                todas las copias del mismo de su computadora. Tras la rescisión
+                de este Acuerdo, deberá dejar de utilizar la plataforma y
+                eliminar todas las copias de la plataforma de su computadora. La
+                rescisión de este Acuerdo no limitará ninguno de los derechos o
+                recursos de presupuesto por ley o en equidad en caso de
+                incumplimiento por su parte (durante la vigencia de este
+                Acuerdo) de cualquiera de sus obligaciones en virtud del
+                presente Acuerdo.
+              </p>
             </Card>
             {/* <p>
-          Duración y Terminación Este Acuerdo permanecerá en vigor hasta que
-          usted o Trivia lo rescindan. Trivia puede, a su entera discreción, en
-          cualquier momento y por cualquier motivo o sin él: suspender o
-          rescindir este Acuerdo con o sin previo aviso Este Acuerdo terminará
-          inmediatamente, sin previo aviso de presupuesto, en caso de que no
-          cumpla con alguna de las disposiciones de este Acuerdo_ También puede
-          rescindir este Acuerdo eliminando la plataforma y todas las copias del
-          mismo de su computadora. Tras la rescisión de este Acuerdo, deberá
-          dejar de utilizar la plataforma y eliminar todas las copias de la
-          plataforma de su computadora La rescisión de este Acuerdo no limitará
-          ninguno de los derechos o recursos de presupuesto por ley o en equidad
-          en caso de incumplimiento por su parte (durante la vigencia de este
-          Acuerdo) de cualquiera de sus obligaciones en virtud del presente
-          Acuerdo. Aviso de infracción de Derechos de Autor Si usted es
+            Aviso de infracción de Derechos de Autor Si usted es
           propietario de los derechos de autor o el agente de dicho propietano y
           cree que cualquier material de nuestra plataforma constituye una
           infracción de sus derechos de autor, comuníquese con nosotros y

@@ -31,7 +31,7 @@ const Activity = () => {
     const getPackages = async () => {
       try {
         const { data } = await axios.get(
-          "https://trivi4.com/api/trivia/packages/proprietor",
+          "http://localhost:5000/api/trivia/packages/proprietor",
           { headers }
         );
         if (viewMorePackages) {
@@ -51,7 +51,7 @@ const Activity = () => {
     const getTravels = async () => {
       try {
         const { data } = await axios.get(
-          "https://trivi4.com/api/trivia/travels/proprietor",
+          "http://localhost:5000/api/trivia/travels/proprietor",
           { headers }
         );
         if (viewMoreTravels) {
@@ -105,7 +105,7 @@ const Activity = () => {
     setLoading(true);
     try {
       await axios.delete(
-        `https://trivi4.com/api/trivia/packages/cancelation/${id}`,
+        `http://localhost:5000/api/trivia/packages/cancelation/${id}`,
         {
           headers,
         }
@@ -122,7 +122,7 @@ const Activity = () => {
     setLoading(true);
     try {
       await axios.delete(
-        `https://trivi4.com/api/trivia/travels/cancelation/${id}`,
+        `http://localhost:5000/api/trivia/travels/cancelation/${id}`,
         {
           headers,
         }
@@ -349,7 +349,7 @@ const Activity = () => {
                           <img
                             className="package-image input_icon"
                             alt={userPackage.image}
-                            src={`https://trivi4.com/api/trivia/packages/image/${userPackage.image}`}
+                            src={`http://localhost:5000/api/trivia/packages/image/${userPackage.image}`}
                           />
                         </div>
                         {(userPackage.state === "Publicado" ||

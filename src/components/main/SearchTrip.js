@@ -39,7 +39,7 @@ const SearchTrip = () => {
   const getTravels = async () => {
     try {
       const { data } = await axios.get(
-        `https://trivi4.com/api/trivia/travels/filterByCity/${origin}/${destination}`
+        `http://localhost:5000/api/trivia/travels/filterByCity/${origin}/${destination}`
       );
       setTravels(data);
       setLoadingPage(false);
@@ -198,7 +198,7 @@ const SearchTrip = () => {
                             className="rounded-circle input_icon mt-3"
                             src={
                               travel.image
-                                ? `https://trivi4.com/api/trivia/profiles/image/${travel.image}`
+                                ? `http://localhost:5000/api/trivia/profiles/image/${travel.image}`
                                 : inicialImage
                             }
                           />

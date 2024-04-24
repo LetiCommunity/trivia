@@ -29,7 +29,7 @@ const EditProfile = () => {
     const getUser = async () => {
       try {
         const { data } = await axios.get(
-          "https://trivi4.com/api/trivia/profiles/profile",
+          "http://localhost:5000/api/trivia/profiles/profile",
           { headers }
         );
         setUser(data);
@@ -75,7 +75,7 @@ const EditProfile = () => {
     setLoading(true);
     try {
       const response = await axios.put(
-        `https://trivi4.com/api/trivia/profiles/profile`,
+        `http://localhost:5000/api/trivia/profiles/profile`,
         data,
         {
           headers,

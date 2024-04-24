@@ -20,7 +20,7 @@ const DeleteAccount = () => {
   const handleDeleteAccount = async () => {
     setLoading(true);
     try {
-      await axios.delete("https://trivi4.com/api/trivia/profiles/profile", {
+      await axios.delete("http://localhost:5000/api/trivia/profiles/profile", {
         headers,
       });
       signOut(auth)
