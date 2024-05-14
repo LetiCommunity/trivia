@@ -47,7 +47,7 @@ const UserNavbar = () => {
       const getUser = async () => {
         try {
           const { data } = await axios.get(
-            "http://localhost:5000/api/trivia/profiles/profile",
+            "https://api.trivi4.com/api/trivia/profiles/profile",
             { headers }
           );
           setUser(data);
