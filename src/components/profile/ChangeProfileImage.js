@@ -34,7 +34,7 @@ const ChangePassword = () => {
     const getUser = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/trivia/profiles/profile",
+          "https://api.trivi4.com/api/trivia/profiles/profile",
           { headers }
         );
         setUser(data);
@@ -93,7 +93,7 @@ const ChangePassword = () => {
     setLoading(true);
     try {
       await axios.patch(
-        `http://localhost:5000/api/trivia/profiles/profile/image`,
+        `https://api.trivi4.com/api/trivia/profiles/profile/image`,
         { image },
         { headers }
       );
@@ -126,7 +126,7 @@ const ChangePassword = () => {
                     className="rounded-circle profile"
                     src={
                       user.image
-                        ? `http://localhost:5000/api/trivia/profiles/image/${user.image}`
+                        ? `https://api.trivi4.com/api/trivia/profiles/image/${user.image}`
                         : inicialImage
                     }
                   />

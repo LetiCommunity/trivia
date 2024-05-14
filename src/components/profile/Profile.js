@@ -19,7 +19,7 @@ const Profile = () => {
     const getUser = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/trivia/profiles/profile",
+          "https://api.trivi4.com/api/trivia/profiles/profile",
           { headers }
         );
         setUser(data);
@@ -66,7 +66,7 @@ const Profile = () => {
                         <img
                           alt="Imagen cargada"
                           className="rounded-circle profile"
-                          src={`http://localhost:5000/api/trivia/profiles/image/${user.image}`}
+                          src={`https://api.trivi4.com/api/trivia/profiles/image/${user.image}`}
                         />
                       ) : (
                         <img

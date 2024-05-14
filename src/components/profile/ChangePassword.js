@@ -76,7 +76,7 @@ const ChangePassword = () => {
     setLoading(true);
     try {
       await axios.patch(
-        `http://localhost:5000/api/trivia/profiles/profile/password`,
+        `https://api.trivi4.com/api/trivia/profiles/profile/password`,
         data,
         { headers }
       );

@@ -46,7 +46,7 @@ const SendPackage = () => {
       if (id) {
         try {
           const { data } = await axios.get(
-            `http://localhost:5000/api/trivia/packages/${id}`,
+            `https://api.trivi4.com/api/trivia/packages/${id}`,
             { headers }
           );
           setShippingDetails(data);
@@ -163,12 +163,12 @@ const SendPackage = () => {
     setLoading(true);
     try {
       if (id) {
-        await axios.put(`http://localhost:5000/api/trivia/packages/${id}`, data, {
+        await axios.put(`https://api.trivi4.com/api/trivia/packages/${id}`, data, {
           headers,
         });
       } else if (traveler) {
         await axios.post(
-          `http://localhost:5000/api/trivia/packages/requests/${traveler}`,
+          `https://api.trivi4.com/api/trivia/packages/requests/${traveler}`,
           data,
           {
             headers,
@@ -176,7 +176,7 @@ const SendPackage = () => {
         );
         localStorage.removeItem("request");
       } else {
-        await axios.post("http://localhost:5000/api/trivia/packages", data, {
+        await axios.post("https://api.trivi4.com/api/trivia/packages", data, {
           headers,
         });
       }
